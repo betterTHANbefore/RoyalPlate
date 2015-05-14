@@ -26,6 +26,7 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
     Context context;
     HostessActivity hostessActivity;
     Set<String> waiternameSet;
+    String waitername;
     
 
     public WaiterAdapter(Context context, List<WaiterData> objects,HostessActivity hostessActivity) {
@@ -65,21 +66,19 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
 
                     final boolean isChecked = waitercheckbox.isChecked();
                     if(isChecked) {
-                        String waitername = waitercheckbox.getText().toString();
+
+                       waitername = waitercheckbox.getText().toString();
                         waiternameSet.add(waitername);
-
-                      //  hostessActivity.saveTableNumber(waitername);
-
-                       // Log.i("Tag", "WaiterAdapter: table no  " + waitername);
 
 
                         Log.i("Tag", " set  " + waiternameSet);
 
                     }
-                    hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
                 }
             });
-        //  hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
+        hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
+        Log.i("Tag", " set  " + waiternameSet);
+
 
 //
 //                for(int i=0; i<waiterListview.getChildCount(); i++){

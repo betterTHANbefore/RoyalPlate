@@ -55,9 +55,9 @@ public class SelectActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // AssignedTableActivity bypass
-                Intent waiterIntent = new Intent(getApplicationContext(), AssignedTableActivity.class);
+              //  Intent waiterIntent = new Intent(getApplicationContext(), AssignedTableActivity.class);
                 // Below Intent initialization for normal flow
-//                Intent  waiterIntent = new Intent(getApplicationContext(), SignupOrLoginActivity.class);
+                Intent  waiterIntent = new Intent(getApplicationContext(), SignupOrLoginActivity.class);
 //                Below line is for login bypass
 //                Intent  waiterIntent = new Intent(getApplicationContext(), MenuActivity.class);
                 startActivity(waiterIntent);

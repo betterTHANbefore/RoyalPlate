@@ -2,11 +2,13 @@ package royalplate2.royalplate;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -38,12 +40,14 @@ public class HostessActivity extends Activity implements OnClickListener{
 
     TableAdapter tableAdapter;
     WaiterAdapter waiterAdapter;
-    Button assignedButton;
+    Button confirmButton;
     SharedPreferences sharedtable;
     SharedPreferences sharedwaiter;
     SharedPreferences.Editor waitereditor;
     SharedPreferences.Editor tableeditor;
     Map<String, Set<String>> waitertables;
+    ParseObject waitertable;
+
 
 
     @Override
@@ -116,8 +120,8 @@ public class HostessActivity extends Activity implements OnClickListener{
 
 
 
-        assignedButton = (Button) findViewById(R.id.assignedBtn);
-        assignedButton.setOnClickListener(this);
+        confirmButton = (Button) findViewById(R.id.confirmedBtn);
+        confirmButton.setOnClickListener(this);
 
 //        assignedButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -263,11 +267,7 @@ public class HostessActivity extends Activity implements OnClickListener{
 
 //        SharedPreferences.Editor waitereditor = sharedwaiter.edit();
         waitereditor = sharedwaiter.edit();
-
-
-
         waitereditor.putStringSet("WaiterName", waiternameset);
-        //waitereditor.clear();
         waitereditor.apply();
 
     }
@@ -276,17 +276,19 @@ public class HostessActivity extends Activity implements OnClickListener{
     @Override
     public void onClick(View v) {
 
+        Log.i("tag", "confirm assigned");
 
+        waitertable = new ParseObject("WaiterTable");
         /**************************************************************
          * Initialize all the values. Unchecked all the checkboxes
          **************************************************************/
-
-        EditText guestnameTextview = (EditText) findViewById(R.id.guestnameEdit);
-        EditText noofpeopleTextview = (EditText) findViewById(R.id.guestnoEdit);
-
-        guestnameTextview.setText(" ");
-        noofpeopleTextview.setText("");
-
+//
+//        EditText guestnameTextview = (EditText) findViewById(R.id.guestnameEdit);
+//        EditText noofpeopleTextview = (EditText) findViewById(R.id.guestnoEdit);
+//
+//        guestnameTextview.setText(" ");
+//        noofpeopleTextview.setText("");
+//
 
 
         /**************************************************************
@@ -300,11 +302,6 @@ public class HostessActivity extends Activity implements OnClickListener{
 //        popupwindow.setFocusable(true);
 //
 //
-
-
-
-
-//        Log.i("Tag", "HA:  " + sharedtable.getStringSet("TableNo", new HashSet<String>()).size());
 
         Log.i("Tag", "HA:  " + sharedtable.getStringSet("TableNo", new HashSet<String>()));
 
@@ -330,7 +327,6 @@ public class HostessActivity extends Activity implements OnClickListener{
 
 
         // Use Parse Relations
-        ParseObject waitertable = new ParseObject("WaiterTable");
         for(String waiter : waiterSet){
             for(String table : tableSet) {
 
@@ -340,8 +336,9 @@ public class HostessActivity extends Activity implements OnClickListener{
 
             }
 
-            waitertable.saveInBackground();
+
         }
+        waitertable.saveInBackground();
 
 
 

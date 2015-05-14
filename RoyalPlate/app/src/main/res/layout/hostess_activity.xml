@@ -96,6 +96,7 @@
         <LinearLayout
             android:layout_weight="3"
             android:orientation="horizontal"
+            android:background="@drawable/draw_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <!-- Right side -->
@@ -120,13 +121,13 @@
 
 
                   <Button
-                      android:id="@+id/assignedBtn"
-                      android:text="Assigned"
-                      android:textSize="30dp"
+                      android:id="@+id/assigntableBtn"
+                      android:text="Assign Table"
+                      android:textSize="20dp"
                       android:textStyle="bold"
+                     android:layout_centerInParent="true"
                       android:layout_below="@+id/tablelist_left"
-
-                      android:background="@drawable/rounded_corner"
+                      android:background="@drawable/checkbox_background"
                       android:layout_margin="20dp"
                       android:paddingLeft="100dp"
                       android:paddingRight="100dp"
@@ -137,8 +138,25 @@
                       android:layout_height="wrap_content" />
 
 
+                  <Button
+                      android:id="@+id/confirmedBtn"
+                      android:text="Confirm"
+                      android:textSize="20dp"
+                      android:textStyle="bold"
+                      android:layout_centerInParent="true"
+                      android:layout_below="@+id/assigntableBtn"
+                      android:background="@drawable/checkbox_background"
+                      android:layout_margin="20dp"
+                      android:paddingLeft="100dp"
+                      android:paddingRight="100dp"
 
-            </RelativeLayout>
+                      android:textColor="@color/marron"
+                      android:layout_width="wrap_content"
+
+                      android:layout_height="wrap_content" />
+
+
+              </RelativeLayout>
 
 
             <LinearLayout
@@ -147,14 +165,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ListView
-                    android:id="@+id/waiterslist_right"
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ListView
+                        android:id="@+id/waiterslist_right"
 
-                    android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+
+                        android:id="@+id/assignwaiterBtn"
+                        android:text="Assign Waiter"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:background="@drawable/checkbox_background"
+                        android:layout_margin="10dp"
+
+
+                        android:textColor="@color/antiquewhite"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
             </LinearLayout>
+
 
         </LinearLayout>
     </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_pressed="true">
+    <item android:state_checked="true">
 
         <shape
 
@@ -26,11 +26,11 @@
                 android:bottom="4dp"    >
             </padding>
 
-                <gradient
-                    android:startColor="@color/brown"
-                    android:centerColor="@color/chocolate"
-                    android:endColor="@color/brown"
-                    android:angle="270" />
+            <gradient
+                android:startColor="@color/brown"
+                android:centerColor="@color/chocolate"
+                android:endColor="@color/brown"
+                android:angle="270" />
 
             <!-- Here is the corner radius -->
             <corners
@@ -40,7 +40,7 @@
         </shape>
     </item>
 
-    <item android:state_pressed="false">
+    <item android:state_checked="false">
 
         <shape
             android:shape="rectangle">

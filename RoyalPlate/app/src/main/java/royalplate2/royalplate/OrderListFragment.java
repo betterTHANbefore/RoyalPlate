@@ -44,13 +44,13 @@ public class OrderListFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_orderlist, container, false);
 
-        ParseObject poTest = new ParseObject("Table1");
-        poTest.put("Test", "Mange Juice");
-        poTest.put("Test", "Mil Juice");
-        poTest.put("Test", "other Juice");
-        poTest.put("Test", "barley Juice");
+//        ParseObject poTest = new ParseObject("Table1");
+//        poTest.put("Test", "Mange Juice");
+//        poTest.put("Test", "Mil Juice");
+//        poTest.put("Test", "other Juice");
+//        poTest.put("Test", "barley Juice");
 
-        poTest.saveInBackground();
+//        poTest.saveInBackground();
 
         tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
 
