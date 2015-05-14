@@ -1,0 +1,24 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/hostesspage"
+        android:icon="@drawable/ic_royalplate"
+        android:title="Hostess"
+
+        android:showAsAction="ifRoom" />
+    <!-- Settings, should always be in the overflow -->
+    <item android:id="@+id/waiterpage"
+        android:title="Waiter"
+        android:showAsAction="ifRoom" />
+    <item android:id="@+id/chefpage"
+        android:title="Chef"
+        android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/managerpage"
+        android:title="Manager"
+        android:showAsAction="ifRoom" />
+
+
+</menu>

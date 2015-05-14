@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape
+            android:shape="oval">
+
+            <!-- view background color -->
+            <solid
+                android:height="1.0dip"
+                android:width="1.0dip"
+                android:color="@color/marron" >
+            </solid>
+
+            <!-- view border color and width -->
+            <stroke
+                android:width="3dp"
+                android:color="@color/darkOrange" >
+            </stroke>
+
+
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape
+            android:shape="oval">
+
+            <!-- view background color -->
+            <solid
+                android:height="1.0dip"
+                android:width="1.0dip"
+                android:color="@color/darkOrange" >
+            </solid>
+
+            <!-- view border color and width -->
+            <stroke
+                android:width="3dp"
+                android:color="@color/darkRed" >
+            </stroke>
+
+
+        </shape>
+    </item>
+    <!-- Here is the corner radius -->
+    <corners
+        android:bottomLeftRadius="45dp"
+        android:bottomRightRadius="45dp"
+        android:radius="45dp"
+        android:topLeftRadius="45dp"
+        android:topRightRadius="45dp">
+    </corners>
+
+
+ </selector>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- #of Items -->
+    <TextureView
+        android:id="@+id/noOfItems"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Item Name -->
+    <TextureView
+        android:id="@+id/itemName"
+        android:layout_alignRight="@+id/noOfItems"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Price -->
+    <TextureView
+        android:id="@+id/itemPrice"
+        android:layout_alignRight="@+id/itemName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+</RelativeLayout>

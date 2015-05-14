@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<item-->
+        <!--android:id="@+id/action_search"-->
+        <!--android:icon="@drawable/ic_royalplate"-->
+        <!--android:title="@string/app_name"-->
+        <!--android:showAsAction="ifRoom" />-->
+    <!--&lt;!&ndash; Settings, should always be in the overflow &ndash;&gt;-->
+    <!--<item android:id="@+id/title"-->
+        <!--android:title="@string/app_name"-->
+        <!--android:showAsAction="never" />-->
+
+</menu>

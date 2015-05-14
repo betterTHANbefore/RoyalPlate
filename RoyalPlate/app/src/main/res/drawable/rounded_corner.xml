@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+
+        <shape
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+
+            <!-- view background color -->
+            <solid
+                android:color="@color/brown" >
+            </solid>
+
+            <!-- view border color and width -->
+            <stroke
+                android:width="3dp"
+                android:color="@color/marron" >
+            </stroke>
+
+            <!-- If you want to add some padding -->
+            <padding
+                android:left="4dp"
+                android:top="4dp"
+                android:right="4dp"
+                android:bottom="4dp"    >
+            </padding>
+
+                <gradient
+                    android:startColor="@color/brown"
+                    android:centerColor="@color/chocolate"
+                    android:endColor="@color/brown"
+                    android:angle="270" />
+
+            <!-- Here is the corner radius -->
+            <corners
+                android:radius="10dp"   >
+            </corners>
+
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+
+        <shape
+            android:shape="rectangle">
+
+            <!-- view background color -->
+            <solid
+                android:color="@color/darkOrange" >
+            </solid>
+
+            <!-- view border color and width -->
+            <stroke
+                android:width="3dp"
+                android:color="@color/marron" >
+            </stroke>
+
+            <!-- If you want to add some padding -->
+            <padding
+                android:left="4dp"
+                android:top="4dp"
+                android:right="4dp"
+                android:bottom="4dp"    >
+            </padding>
+
+            <gradient
+                android:startColor="@color/brown"
+                android:centerColor="@color/chocolate"
+                android:endColor="@color/brown"
+                android:angle="270" />
+
+            <!-- Here is the corner radius -->
+            <corners
+                android:radius="10dp"   >
+            </corners>
+
+        </shape>
+    </item>
+
+
+
+
+
+
+
+</selector>

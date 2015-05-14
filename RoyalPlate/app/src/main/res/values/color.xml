@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="antiquewhite">#FAEBD7</color>
+    <color name="brown">#A52A2A</color>
+    <color name="darkRed">#8B0000</color>
+    <color name="darkOrange">#FF8C00</color>
+    <color name="chocolate">#D2691E</color>
+    <color name="marron">#800000</color>
+    <color name="sienna">#A0522D</color>
+    <color name="saddlebrown">#8B4513</color>
+    <color name="transBrown">#50A52A2A</color>
+    <color name="transOrange">#70FF8C00</color>
+    <color name="golden">#FFD700</color>
+    <color name="orange">#FFA500</color>
+
+
+</resources>

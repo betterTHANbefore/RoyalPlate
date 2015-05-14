@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- App background setup -->
+
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+
+
+
+    <gradient
+        android:startColor="@color/darkOrange"
+        android:gradientRadius="10dp"
+        android:centerColor="@color/golden"
+        android:endColor="@color/darkOrange"
+        android:angle="90"/>
+
+    <corners
+        android:bottomRightRadius="1dp"
+        android:bottomLeftRadius="1dp"
+        android:topLeftRadius="1dp"
+        android:topRightRadius="1dp"/>
+
+
+</shape>

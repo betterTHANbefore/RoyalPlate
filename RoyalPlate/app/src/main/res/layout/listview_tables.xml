@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <CheckBox
+                android:id="@+id/tableBtn"
+                android:textSize="30dp"
+                android:background="@drawable/rounded_corner"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                 android:gravity="center"
+                android:padding="15dp"
+                android:textColor="@color/darkOrange"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+
+         </CheckBox>
+        <!--<Button-->
+            <!--android:id="@+id/tableBtn"-->
+            <!--android:textSize="30dp"-->
+            <!--android:background="@drawable/rounded_corner"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:focusable="true"-->
+            <!--android:clickable="true"-->
+            <!--android:padding="15dp"-->
+            <!--android:textColor="@color/darkOrange"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="90dp">-->
+
+        <!--</Button>-->
+    </RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:background="@color/transOrange"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/waiterchkbox"-->
+            <!--android:textSize="20dp"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@drawable/rounded_corner"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textColor="@color/antiquewhite"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp">-->
+
+        <!--</CheckBox>-->
+
+
+    <!--</RelativeLayout>-->
+</LinearLayout>
+
+

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/draw_background"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!-- topbar -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="8"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- Icon 1 -->
+        <LinearLayout
+            android:layout_margin="20dp"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageLeft_icon"
+                android:layout_weight="2"
+                android:layout_gravity="center_horizontal"
+
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <!-- Submenu Title Appears here -->
+        <RelativeLayout
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/submenuTitle_textview"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textSize="65sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tableNumber"
+                android:layout_below="@+id/submenuTitle_textview"
+                android:layout_gravity="center"
+                android:textColor="@color/antiquewhite"
+                android:textSize="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+        <!-- Icon 2 -->
+        <LinearLayout
+            android:layout_margin="20dp"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageRight_icon"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Big Panle - list of items and ordered item panels - 3 panels-->
+    <LinearLayout
+        android:background="@drawable/draw_background"
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/itemlist"
+                android:layout_marginLeft="50dp"
+                android:descendantFocusability="afterDescendants"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+            <!--<Button-->
+                <!--android:id="@+id/mainMenuBtn"-->
+                <!--android:text="@string/mainMenu_button"-->
+                <!--android:textSize="20sp"-->
+                <!--android:layout_below="@+id/itemlist"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:textColor="@color/antiquewhite"-->
+                <!--android:background="@drawable/rounded_corner"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+
+        </RelativeLayout>
+
+         <!--ordered items list appears here with Order button-->
+        <RelativeLayout
+
+            android:id="@+id/fragmentContainer"
+            android:layout_weight="2"
+            android:layout_margin="10dp"
+            android:background="@drawable/draw_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <!--<FrameLayout-->
+                <!--android:id="@+id/where_i_want_my_fragment"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+
+                <!--<fragment-->
+                    <!--android:id="@+id/fragmentOrderList"-->
+                    <!--android:name="com.royalplate.royalplate.OrderListFragment"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent" ></fragment>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/orderedID"-->
+                <!--android:text="@string/orderedItems_textview"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:textAlignment="center"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/antiquewhite"-->
+                <!--android:textSize="35sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+
+            <!--<ScrollView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<TextView-->
+                    <!--android:id="@+id/name"-->
+                    <!--android:text="HTEafadsf"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_toRightOf="@+id/namelabel"-->
+                    <!--android:textSize="25sp" />-->
+
+
+            <!--</ScrollView>-->
+
+            <!--</FrameLayout>-->
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

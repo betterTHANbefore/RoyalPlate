@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="royalplate2.royalplate" >
+
+    <!-- give permission to Internet to communicate -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:name=".ParseApplication"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_royalplate"
+        android:theme="@style/AppTheme"
+        >
+        <!--android:icon="@mipmap/ic_royalplate"-->
+
+
+        <activity
+            android:name=".WelcomeActivity"
+            android:label="@string/app_name"
+            android:background="@drawable/draw_background">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AccountActivity"></activity>
+        <activity android:name=".ChefActivity"></activity>
+        <activity android:name=".HostessActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".SelectActivity" ></activity>
+        <activity android:name=".ServingtableActivity"></activity>
+        <activity android:name=".SignupOrLoginActivity"></activity>
+
+        <activity android:name=".SubMenuActivity"></activity>
+
+
+        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SendOrder"></activity>
+        <activity android:name=".AssignedTableActivity"></activity>
+        <activity android:name=".OrderSucceedActivity"></activity>
+        <activity android:name=".WaiterActivity"></activity>
+
+    </application>
+
+</manifest>

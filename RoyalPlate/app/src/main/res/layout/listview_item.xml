@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   android:orientation="horizontal"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <!-- shows item name and price -->
+    <!-- Item ID -->
+
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/itemId"
+            android:textColor="@color/darkOrange"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Item Name -->
+        <TextView
+            android:id="@+id/itemName"
+            android:textColor="@color/antiquewhite"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+        </TextView>
+        <!-- Item Price -->
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_below="@+id/itemName"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:textSize="20sp" >
+
+        </TextView>
+
+    </RelativeLayout>
+
+    <!-- shows number picker -->
+    <RelativeLayout
+        android:layout_margin="12dp"
+        android:layout_width="50dp"
+        android:layout_height="match_parent">
+
+        <NumberPicker
+            android:id="@+id/numberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"  />
+
+
+        <!--<EditText-->
+            <!--android:id="@+id/noOfItems_editText"-->
+            <!--android:background="@color/brown"-->
+            <!--android:textSize="20dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="@color/antiquewhite"-->
+            <!--android:inputType="number"-->
+            <!--android:ems="3"-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+             <!--<requestFocus/>-->
+
+
+        <!--<Button-->
+            <!--android:id="@+id/plusBtn"-->
+            <!--android:background="@drawable/add_delete"-->
+            <!--android:text="@string/plus_sign"-->
+            <!--android:textSize="30dp"-->
+            <!--android:textColor="@color/brown"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="45dp" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/minusBtn"-->
+            <!--android:background="@drawable/add_delete"-->
+            <!--android:layout_toRightOf="@+id/plusBtn"-->
+            <!--android:text="@string/minus_sign"-->
+            <!--android:textSize="30dp"-->
+            <!--android:textColor="@color/brown"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="45dp" />-->
+
+    </RelativeLayout>
+
+
+    <!-- show total price and no of items ordered -->
+
+    <RelativeLayout
+        android:layout_weight="2"
+        android:background="@drawable/draw_background"
+        android:layout_margin="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/cost"
+            android:hint="$"
+            android:textSize="25dp"
+            android:layout_margin="9dp"
+            android:textColor="@color/marron"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/no_of_items"
+            android:textStyle="bold"
+android:focusable="true"
+            android:editable="false"
+
+android:inputType="number"
+android:imeOptions="actionDone"
+            android:layout_margin="9dp"
+            android:paddingTop="4dp"
+            android:textSize="25dp"
+            android:textColor="@color/antiquewhite"
+
+            android:layout_below="@+id/cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</LinearLayout>

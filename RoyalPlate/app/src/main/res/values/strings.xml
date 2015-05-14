@@ -1,0 +1,91 @@
+<resources>
+
+    <!-- strings for parse login -->
+    <string name="parse_app_id">GaNHssA9Jj7Cc5mgce8hblF8qCkFpMFxEpkkk3mj</string>
+    <string name="parse_client_id">LnxTuJMavYFV7VS4YCVcspAIfDEbBDyqaGW5P1q5</string>
+
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_again">Password Again</string>
+    <string name="action_sign_in_register"><b>Sign in</b> or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_forgot_password">Recover lost password</string>
+    <string name="login_progress_signing_in">Signing in&#8230;</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_intro">"Please "</string>
+    <string name="error_blank_username">enter a username</string>
+    <string name="error_blank_password">enter a password</string>
+    <string name="error_mismatched_passwords">enter the same password twice</string>
+    <string name="error_join">", and "</string>
+    <string name="error_end">.</string>
+
+
+    <!-- strings for all activity -->
+
+    <string name="app_name">RoyalPlate</string>
+
+    <!--<color name="antiquewhite">#FAEBD7</color>-->
+    <!--<color name="brown">#A52A2A</color>-->
+    <!--<color name="darkRed">#8B0000</color>-->
+   <!--<color name="darkOrange">#FF8C00</color>-->
+    <!--<color name="chocolate">#D2691E</color>-->
+    <!--<color name="marron">#800000</color>-->
+    <!--<color name="sienna">#A0522D</color>-->
+    <!--<color name="saddlebrown">#8B4513</color>-->
+
+    <!-- strings for welcome to royalplate -->
+
+    <string name="logo">RoyalPlate LOGO</string>
+
+
+    <!-- strings for first activity -->
+    <string name="hostess">HOSTESS</string>
+    <string name="waiter">WAITER</string>
+    <string name="chef">CHEF</string>
+    <string name="manager">MANAGER</string>
+    <!-- end first activity -->
+
+     <!--strings for Menu Activity -->
+    <string name="haveItAll">HAVE IT ALL</string>
+    <string name="beverages">BEVERAGES </string>
+    <string name="freshSalads">FRESH SALADS </string>
+    <string name="burgers">BURGERS </string>
+    <string name="desserts"> DESSERTS </string>
+    <string name="sandwichis">SANDWICHIS</string>
+    <string name="kidsmenu"> KIDS</string>
+    <string name="specials"> SPECIAL </string>
+    <string name="lunchCombos"> LUNCH COMBOS </string>
+    <string name="entriees"> ENTREES </string>
+    <string name="twoFor20">2 FOR $20</string>
+      <!--end Menu Activity -->
+
+
+    <!-- submenu -->
+    <string name="orderedItems_textview"><u>Ordered Items </u></string>
+    <string name="order_button">Order</string>
+    <string name="mainMenu_button">Main Menu</string>
+
+    <string name="waitress_number">Waitress</string>
+    <string name="title_activity_main">Parse Simple ListView</string>
+
+
+    <string name="menu_button">Go to Menu</string>
+    <string name="user_name">user name</string>
+    <string name="pass_word">pass word</string>
+    <string name="sign_up">Sign Up</string>
+    <!-- end waiter activity -->
+
+    <string name="plus_sign">+</string>
+    <string name="minus_sign">-</string>
+
+
+    <!-- login_activity -->
+    <string name="sign_in">Sign In</string>
+    <string name="log_in">Log In</string>
+
+    <!-- account activity -->
+    <string name="bill">Bill</string>
+</resources>

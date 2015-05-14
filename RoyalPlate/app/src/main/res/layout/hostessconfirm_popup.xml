@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background_popup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!-- title -->
+    <TextView
+        android:id="@+id/welcometitle"
+        android:padding="20dp"
+        android:textSize="20dp"
+        android:textStyle="bold|italic"
+        android:background="@color/marron"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+   <!-- big panel -->
+    <LinearLayout
+        android:layout_below="@+id/welcometitle"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Right side -->
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+        <!-- center -->
+        <RelativeLayout
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/noofpeople_popup"
+                android:textColor="@color/marron"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+            <TextView
+                android:id="@+id/tableno_popup"
+                android:layout_below="@+id/noofpeople_popup"
+                android:textColor="@color/marron"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/waitername_popup"
+                android:layout_below="@+id/tableno_popup"
+                android:textColor="@color/marron"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:text="Confirm"
+                android:textSize="20dp"
+                android:textColor="@color/antiquewhite"
+                android:background="@drawable/rounded_corner"
+                android:layout_below="@id/waitername_popup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+
+
+
+        </RelativeLayout>
+
+        <!-- left side -->
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
