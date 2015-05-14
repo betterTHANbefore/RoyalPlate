@@ -6,18 +6,27 @@
     android:layout_height="match_parent">
 
 <!-- title -->
+    <LinearLayout
+        android:layout_weight="3"
+        android:id="@+id/titleview"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/welcometitle"
         android:padding="20dp"
         android:textSize="20dp"
+        android:text="Welcome"
         android:textStyle="bold|italic"
         android:background="@color/marron"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    </LinearLayout>
 
    <!-- big panel -->
     <LinearLayout
-        android:layout_below="@+id/welcometitle"
+        android:id="@+id/displaylayout"
+        android:layout_below="@+id/titleview"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,9 +41,16 @@
 
         <!-- center -->
         <RelativeLayout
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/guestname_popup"
+                android:textColor="@color/marron"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/noofpeople_popup"
@@ -51,7 +67,8 @@
                 android:textColor="@color/marron"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
 
 
             <TextView
@@ -61,17 +78,6 @@
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-            <Button
-                android:text="Confirm"
-                android:textSize="20dp"
-                android:textColor="@color/antiquewhite"
-                android:background="@drawable/rounded_corner"
-                android:layout_below="@id/waitername_popup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
 
 
 
@@ -85,6 +91,24 @@
             android:layout_height="match_parent">
 
         </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:text="Confirm"
+            android:textSize="20dp"
+            android:textColor="@color/antiquewhite"
+            android:background="@drawable/rounded_corner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" />
+
 
 
 

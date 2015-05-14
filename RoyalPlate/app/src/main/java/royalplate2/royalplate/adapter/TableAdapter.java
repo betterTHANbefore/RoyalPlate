@@ -29,7 +29,7 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
     Context context;
     HostessActivity hostessActivity;
     Set<String> tablenolist;
-    String tableno = null;
+  //  String tableno = null;
 
 //    public TableAdapter(Context context, List<TablesData> objects) {
 //        super(context, R.layout.listview_tables, objects);
@@ -63,9 +63,9 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
 //        final Button assigntablebtn = (Button) view.findViewById(R.id.assigntableBtn);
 //        assigntablebtn.setOnClickListener(this);
 
-        tablecheckbox.setText(tableslist.get(position).getTable().toString());
+        tablecheckbox.setText(tableslist.get(position).getTable());
 
-        final boolean isChecked = tablecheckbox.isChecked();
+      //  final boolean isChecked = tablecheckbox.isChecked();
         //String tableno = tableButton.getText().toString();
 //
 //        assigntablebtn.setOnClickListener(new View.OnClickListener() {
@@ -84,72 +84,30 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
 
 
 
-//        tableButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-////                Log.i("Tag", "clicked");
-//
-//                final boolean isChecked = tableButton.isChecked();
-//                String tableno = tableButton.getText().toString();
-//                int index;
-//
-//                // do somthing here
-//                if (isChecked) {
-//
-//                    tablenolist.add(tableno);
-//                    //      index = tableButton.getId();
-//
-//                    //  Log.i("Tag", "TableAdapter: table no  " + tableno);
-//
-//                    tableButton.toggle();
-//                    Log.i("Tag", " set  " + tablenolist);
-//
-//
-//                }
-//
-//
-//            }
-//        });
-//        hostessActivity.saveTableNumber((HashSet<String>) tablenolist);
+        tablecheckbox.setOnClickListener(new View.OnClickListener() {
 
-        tablecheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-             @Override
-             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            @Override
+            public void onClick(View v) {
 
-               //  String tableno = null;
-                 // do somthing here
-               if (isChecked) {
+                final boolean isChecked = tablecheckbox.isChecked();
 
-                  tableno = tablecheckbox.getText().toString();
+                // do somthing here
+                if (isChecked) {
+                    String tableno = tablecheckbox.getText().toString();
 
                     tablenolist.add(tableno);
-//                    //      index = tableButton.getId();
-//
-//                    //  Log.i("Tag", "TableAdapter: table no  " + tableno);
-//
-//                   // tableButton.toggle();
-                    Log.i("Tag", " set  " + tablenolist);
-//
+
+                 //   Log.i("Tag", " set  " + tablenolist);
+
                 }
 
-             }
+                hostessActivity.saveTableNumber((HashSet<String>) tablenolist);
+            }
 
-            });
-
-        hostessActivity.saveTableNumber((HashSet<String>) tablenolist);
+        });
 
         return view;
     }
 
-//
-//    @Override
-//    public void onClick(View v) {
-//        Log.i("Tag", "Assign Table Got Clicked ");
-//        tablenolist.add(tableNostring);
-//        hostessActivity.saveTableNumber((HashSet<String>) tablenolist);
-//       // tablecheckbox.setChecked(false);
-//
-//
-//    }
+
 }

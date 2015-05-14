@@ -62,7 +62,7 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
             waitercheckbox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.i("Tag", "clickedW");
+                    Log.i("Tag", "clickedW ");
 
                     final boolean isChecked = waitercheckbox.isChecked();
                     if(isChecked) {
@@ -71,14 +71,13 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
                         waiternameSet.add(waitername);
 
 
-                        Log.i("Tag", " set  " + waiternameSet);
+                     //   Log.i("Tag", " set  " + waiternameSet);
 
                     }
+                    hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
+
                 }
             });
-        hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
-        Log.i("Tag", " set  " + waiternameSet);
-
 
 //
 //                for(int i=0; i<waiterListview.getChildCount(); i++){

@@ -5,13 +5,18 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.SyncStateContract;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -47,6 +52,11 @@ public class HostessActivity extends Activity implements OnClickListener{
     SharedPreferences.Editor tableeditor;
     Map<String, Set<String>> waitertables;
     ParseObject waitertable;
+    TextView displayGuestName;
+    TextView displayNoofGuest;
+    TextView displayTableNo;
+    TextView displayWaiterName;
+
 
 
 
@@ -276,32 +286,18 @@ public class HostessActivity extends Activity implements OnClickListener{
     @Override
     public void onClick(View v) {
 
-        Log.i("tag", "confirm assigned");
+       displayGuestName = (TextView) findViewById(R.id.guestname_popup);
+       displayNoofGuest = (TextView) findViewById(R.id.noofpeople_popup);
+       displayTableNo = (TextView) findViewById(R.id.tableno_popup);
+       displayWaiterName = (TextView) findViewById(R.id.waitername_popup);
+
+
 
         waitertable = new ParseObject("WaiterTable");
         /**************************************************************
          * Initialize all the values. Unchecked all the checkboxes
          **************************************************************/
-//
-//        EditText guestnameTextview = (EditText) findViewById(R.id.guestnameEdit);
-//        EditText noofpeopleTextview = (EditText) findViewById(R.id.guestnoEdit);
-//
-//        guestnameTextview.setText(" ");
-//        noofpeopleTextview.setText("");
-//
 
-
-        /**************************************************************
-         * Popup Window
-         **************************************************************/
-//
-//        View popupView = getLayoutInflater().inflate(R.layout.hostessconfirm_popup,null);
-//        final PopupWindow popupwindow = new PopupWindow(popupView);
-//
-//        popupwindow.showAtLocation(v, Gravity.CENTER, 0,0);
-//        popupwindow.setFocusable(true);
-//
-//
 
         Log.i("Tag", "HA:  " + sharedtable.getStringSet("TableNo", new HashSet<String>()));
 
@@ -311,6 +307,38 @@ public class HostessActivity extends Activity implements OnClickListener{
         Set<String> waiterSet = sharedwaiter.getStringSet("WaiterName", new HashSet<String>());
 
 
+        /**************************************************************
+         * Popup Window
+         **************************************************************/
+//
+        View popupView = getLayoutInflater().inflate(R.layout.hostessconfirm_popup,null);
+        final PopupWindow popupwindow = new PopupWindow(popupView, 300, 370, true);
+//
+        popupwindow.showAtLocation(v, Gravity.CENTER, 0,0);
+        popupwindow.setTouchable(true);
+        popupwindow.setFocusable(true);
+        popupwindow.setOutsideTouchable(true);
+
+        ((TextView)popupwindow.getContentView().findViewById(R.id.guestname_popup)).setText("hello there");
+
+
+
+        //the pop-up will be dismissed if touch event occurs anywhere outside its window
+                        popupwindow.setTouchInterceptor(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                    popupwindow.dismiss();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
+
+    //
+//
         int waitersetSize = sharedwaiter.getStringSet("WaiterName", new HashSet<String>()).size();
         int tablesetSize = sharedtable.getStringSet("TableNo", new HashSet<String>()).size();
 
@@ -324,7 +352,8 @@ public class HostessActivity extends Activity implements OnClickListener{
         // each waiter from the watierset get the set of tables she has been assigned
         // outer for loop reads watierset and inner reads tableset
 
-
+CheckBox tablecheckBox = (CheckBox) findViewById(R.id.tableBtn);
+        CheckBox waitercheckBox = (CheckBox) findViewById(R.id.waiterchkbox);
 
         // Use Parse Relations
         for(String waiter : waiterSet){
@@ -340,22 +369,11 @@ public class HostessActivity extends Activity implements OnClickListener{
         }
         waitertable.saveInBackground();
 
+        tablecheckBox.setChecked(false);
+        waitercheckBox.setChecked(false);
+        tableAdapter.notifyDataSetChanged();
+        waiterAdapter.notifyDataSetChanged();
 
-
-//        for (Map.Entry<String,Set<String>> entry : waitertables.entrySet()) {
-//            String key = entry.getKey();
-////            for(String table : tableSet) {
-////                Log.i("Tag", "TSet " +key + "   " + table);
-////            }
-//        }
-
-//        for(String key : waitertables.keySet()){
-//            Log.i("tag", key +  "  " + waitertables.get(key));
-//        }
-//        for  (Map.Entry<String, String> e : waitertables.entrySet()) {
-//           Log.i("Tag" , e.getKey()+"="+e.getValue());
-//        }
-      //  Log.i("Tag", "Map size" + waitertables.size());
 
     }
 

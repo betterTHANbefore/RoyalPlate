@@ -9,10 +9,14 @@
     <color name="marron">#800000</color>
     <color name="sienna">#A0522D</color>
     <color name="saddlebrown">#8B4513</color>
-    <color name="transBrown">#50A52A2A</color>
-    <color name="transOrange">#70FF8C00</color>
+
     <color name="golden">#FFD700</color>
     <color name="orange">#FFA500</color>
+
+    <color name="transBrown">#50A52A2A</color>
+    <color name="transOrange">#70FF8C00</color>
+    <color name="transmarron">#60800000</color>
+
 
 
 </resources>
