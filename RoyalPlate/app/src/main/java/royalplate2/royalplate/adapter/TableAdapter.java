@@ -50,7 +50,6 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
     public View getView(final int position, final View convertView, final ViewGroup parent){
 
 
-
          tablenolist = new HashSet<String>();
 
 
@@ -60,29 +59,8 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
 
 //        final CheckBox tableButton = (CheckBox) parent.getChildAt(position).findViewById(R.id.tableBtn);
        final CheckBox tablecheckbox = (CheckBox) view.findViewById((R.id.tableBtn));
-//        final Button assigntablebtn = (Button) view.findViewById(R.id.assigntableBtn);
-//        assigntablebtn.setOnClickListener(this);
 
         tablecheckbox.setText(tableslist.get(position).getTable());
-
-      //  final boolean isChecked = tablecheckbox.isChecked();
-        //String tableno = tableButton.getText().toString();
-//
-//        assigntablebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////
-//                tablenolist.add(tableNostring);
-//                hostessActivity.saveTableNumber((HashSet<String>) tablenolist);
-//                tablecheckbox.setChecked(false);
-//
-//
-//            }
-//        });
-
-
-
-
 
         tablecheckbox.setOnClickListener(new View.OnClickListener() {
 
@@ -96,8 +74,6 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
                     String tableno = tablecheckbox.getText().toString();
 
                     tablenolist.add(tableno);
-
-                 //   Log.i("Tag", " set  " + tablenolist);
 
                 }
 

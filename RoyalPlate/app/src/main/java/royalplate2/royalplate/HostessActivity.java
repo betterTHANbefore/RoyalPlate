@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -56,7 +57,10 @@ public class HostessActivity extends Activity implements OnClickListener{
     TextView displayNoofGuest;
     TextView displayTableNo;
     TextView displayWaiterName;
-
+    EditText guestNameedit;
+    EditText gutestNoedit;
+    String getguestname;
+    String getnoOfguest;
 
 
 
@@ -124,10 +128,8 @@ public class HostessActivity extends Activity implements OnClickListener{
 //
 //            }
 //        });
-
-        Log.i("TAg", "Assignedbutton got NOT clicked");
-
-
+        guestNameedit = (EditText) findViewById(R.id.guestnameEdit);
+        gutestNoedit = (EditText) findViewById(R.id.guestnoEdit);
 
 
         confirmButton = (Button) findViewById(R.id.confirmedBtn);
@@ -292,6 +294,11 @@ public class HostessActivity extends Activity implements OnClickListener{
        displayWaiterName = (TextView) findViewById(R.id.waitername_popup);
 
 
+        getguestname = guestNameedit.getText().toString();
+        getnoOfguest = gutestNoedit.getText().toString();
+
+        Log.i("Tag", "name and no  " + getguestname + " "+ getnoOfguest);
+
 
         waitertable = new ParseObject("WaiterTable");
         /**************************************************************
@@ -319,15 +326,30 @@ public class HostessActivity extends Activity implements OnClickListener{
         popupwindow.setFocusable(true);
         popupwindow.setOutsideTouchable(true);
 
-        ((TextView)popupwindow.getContentView().findViewById(R.id.guestname_popup)).setText("hello there");
-
-
+        ((TextView)popupwindow.getContentView().findViewById(R.id.guestname_popup)).setText("Name:  "+getguestname);
+        ((TextView)popupwindow.getContentView().findViewById(R.id.noofpeople_popup)).setText("No:  "+getnoOfguest);
 
         //the pop-up will be dismissed if touch event occurs anywhere outside its window
-                        popupwindow.setTouchInterceptor(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                    popupwindow.dismiss();
+//            popupwindow.getContentView().setTouchInterceptor(new View.OnTouchListener() {
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+//                        popupwindow.dismiss();
+//                        return true;
+//                    }
+//                    return false;
+//                }
+//            });
+
+        popupwindow.getContentView().setFocusableInTouchMode(true);
+        popupView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_MENU &&
+                        event.getRepeatCount() == 0 &&
+                        event.getAction() == KeyEvent.ACTION_DOWN) {
+
+
+                    // ... payload action here. e.g. popupMenu.dismiss();
                     return true;
                 }
                 return false;
@@ -344,31 +366,40 @@ public class HostessActivity extends Activity implements OnClickListener{
 
         for(String table : tableSet) {
             Log.i("Tag", "TSet " + table);
+
+            ((TextView)popupwindow.getContentView().findViewById(R.id.tableno_popup)).setText("Table No:  "+table);
+
         }
         for(String waiter : waiterSet) {
             Log.i("Tag", "WSet " + waiter);
+            ((TextView)popupwindow.getContentView().findViewById(R.id.waitername_popup)).setText("Waiter:  "+ waiter);
+
         }
 
         // each waiter from the watierset get the set of tables she has been assigned
         // outer for loop reads watierset and inner reads tableset
 
-CheckBox tablecheckBox = (CheckBox) findViewById(R.id.tableBtn);
-        CheckBox waitercheckBox = (CheckBox) findViewById(R.id.waiterchkbox);
 
         // Use Parse Relations
-        for(String waiter : waiterSet){
-            for(String table : tableSet) {
+//        for(String waiter : waiterSet){
+//            for(String table : tableSet) {
+//
+//
+//                waitertable.put("WaiterName", waiter);
+//                waitertable.put("TableNo", table);
+//
+//            }
+//
+//
+//        }
+ //       waitertable.saveInBackground();
 
 
-                waitertable.put("WaiterName", waiter);
-                waitertable.put("TableNo", table);
-
-            }
-
-
-        }
-        waitertable.saveInBackground();
-
+    /************************************************************
+     * set checkbox to unchecked in both the adapters
+ ***********************************************************/
+        CheckBox tablecheckBox = (CheckBox) findViewById(R.id.tableBtn);
+        CheckBox waitercheckBox = (CheckBox) findViewById(R.id.waiterchkbox);
         tablecheckBox.setChecked(false);
         waitercheckBox.setChecked(false);
         tableAdapter.notifyDataSetChanged();
