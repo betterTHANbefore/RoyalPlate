@@ -76,82 +76,35 @@ public class HostessActivity extends Activity implements OnClickListener{
 
        // loaddata();
 
+        /************************************************************
+         * Tables GridView
+         **********************************************************/
         tablelistview = (GridView) findViewById(R.id.tablelist_left);
 
-
-        /********************
-         * CheckBox listener
-         ******************/
-
-
+        /************************************************************
+         * Waiters GridView
+         **********************************************************/
         waiterlistview = (ListView) findViewById(R.id.waiterslist_right);
 
-        /********************
-         * CheckBox listener
-         ******************/
 
-
+        /************************************************************
+         * EditText to enter guest name and no of guest
+         **********************************************************/
         guestNameedit = (EditText) findViewById(R.id.guestnameEdit);
         gutestNoedit = (EditText) findViewById(R.id.guestnoEdit);
 
-
+        /************************************************************
+         *  Assigned Button will bring up the Popup Window with
+         *  all guest info.
+         **********************************************************/
         assignedButton = (Button) findViewById(R.id.assignedBtn);
         assignedButton.setOnClickListener(this);
 
-//        assignedButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                /***********************************************************************************
-//                 * if assigned button is clicked, store data values from the checkboxes
-//                 **********************************************************************************/
-//              String  table = getIntent().getExtras().getString("TableNo");
-//
-//
-//
-//            Log.i("TAg", "Assignedbutton got clicked");
-//             Log.i("Tag", "Table no " + table);
-//
-//
-//
-//
-//
-//
-//            }
-//        });
-
-//
-//        findViewById(R.id.table1).setOnTouchListener(this);
-//        findViewById(R.id.table2).setOnTouchListener(this);
-//        findViewById(R.id.table3).setOnTouchListener(this);
-//
-//        findViewById(R.id.top_container).setOnDragListener(this);
-//        findViewById(R.id.bottom_container).setOnDragListener(this);
     }
 
-//    @Override
-//    public boolean onTouch(View v, MotionEvent e) {
-//        if (e.getAction() == MotionEvent.ACTION_DOWN) {
-//            DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
-//            v.startDrag(null, shadowBuilder, v, 0);
-//            v.setVisibility(View.INVISIBLE);
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//
-//    @Override
-//    public boolean onDrag(View v, DragEvent e) {
-//        if (e.getAction() == DragEvent.ACTION_DROP) {
-//            View view = (View) e.getLocalState();
-//            ViewGroup from = (ViewGroup) view.getParent();
-//            from.removeView(view);
-//            LinearLayout to = (LinearLayout) v;
-//            to.addView(view);
-//            view.setVisibility(View.VISIBLE);
-//        }
-//        return true;
-//    }
+    /************************************************************
+     * Load Waiters data from the Parse. Set n WaiterAdapter to view
+     **********************************************************/
 
     private void loadWaiters(){
         //final  ParseQuery<WaiterData> waiters = ParseQuery.getQuery("User");
@@ -168,7 +121,9 @@ public class HostessActivity extends Activity implements OnClickListener{
             }
         });
     }
-
+    /************************************************************
+     * Load Tables data from the Parse. Set a TableAdapter to view
+     **********************************************************/
     private void loadTables() {
 
         final ParseQuery<TablesData> tables = ParseQuery.getQuery("TablesParse");
@@ -213,10 +168,16 @@ public class HostessActivity extends Activity implements OnClickListener{
 //            });
 //   }
 
+    /************************************************************
+     * Constructor
+     **********************************************************/
     public HostessActivity(){
 
     }
 
+    /************************************************************
+     * Retrieve data values from the TableAdapter class
+     **********************************************************/
     public void saveTableNumber(HashSet<String> tablelist){
 
 //       sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
@@ -225,16 +186,14 @@ public class HostessActivity extends Activity implements OnClickListener{
 
 //        SharedPreferences.Editor tableeditor = sharedtable.edit();
         tableeditor = sharedtable.edit();
-        //tableeditor.clear();
         tableeditor.putStringSet("TableNo", tablelist);
-       // tableeditor.clear();
 
         tableeditor.apply();
-       // tableeditor.commit();
     }
 
-
-
+    /************************************************************
+     * Retrieve data values from the WaiterAdapter class
+     **********************************************************/
 
     public void saveWaiterName(HashSet<String> waiternameset){
 
@@ -247,6 +206,9 @@ public class HostessActivity extends Activity implements OnClickListener{
 
     }
 
+    /************************************************************
+     * Assigned Button Listener
+     **********************************************************/
 
     @Override
     public void onClick(View v) {
@@ -278,12 +240,12 @@ public class HostessActivity extends Activity implements OnClickListener{
 
 
         /**************************************************************
-         * Popup Window
+         * Popup Window display new assigned guest information
          **************************************************************/
-//
+
         View popupView = getLayoutInflater().inflate(R.layout.hostessconfirm_popup,null);
         final PopupWindow popupwindow = new PopupWindow(popupView, 330, 400, true);
-//
+
         popupwindow.showAtLocation(v, Gravity.CENTER, 0,0);
       //  popupwindow.setTouchable(true);
         popupwindow.setFocusable(true);
@@ -292,17 +254,6 @@ public class HostessActivity extends Activity implements OnClickListener{
 
         ((TextView)popupwindow.getContentView().findViewById(R.id.guestname_popup)).setText("Name:  "+getguestname);
         ((TextView)popupwindow.getContentView().findViewById(R.id.noofpeople_popup)).setText("No:  "+getnoOfguest);
-
-        //the pop-up will be dismissed if touch event occurs anywhere outside its window
-//            popupwindow.getContentView().setTouchInterceptor(new View.OnTouchListener() {
-//                public boolean onTouch(View v, MotionEvent event) {
-//                    if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-//                        popupwindow.dismiss();
-//                        return true;
-//                    }
-//                    return false;
-//                }
-//            });
 
 //            popupwindow.setTouchInterceptor(new View.OnTouchListener() {
 //                @Override
@@ -333,6 +284,10 @@ public class HostessActivity extends Activity implements OnClickListener{
 
         }
 
+
+        /************************************************************
+         * Confirm Button listener from the PopupWindow
+         **********************************************************/
         Button confirmPopupButton = (Button) popupView.findViewById(R.id.confirmBtn_popup);
 
         confirmPopupButton.setOnClickListener(new Button.OnClickListener() {
@@ -362,7 +317,7 @@ public class HostessActivity extends Activity implements OnClickListener{
                 guestNameedit.setText("");
                 gutestNoedit.setText(" ");
 
-            popupwindow.dismiss();
+                popupwindow.dismiss();
 
             }
 
@@ -375,28 +330,9 @@ public class HostessActivity extends Activity implements OnClickListener{
 
 
 
-        // each waiter from the watierset get the set of tables she has been assigned
-        // outer for loop reads watierset and inner reads tableset
-
-
-        // Use Parse Relations
-//        for(String waiter : waiterSet){
-//            for(String table : tableSet) {
-//
-//
-//                waitertable.put("WaiterName", waiter);
-//                waitertable.put("TableNo", table);
-//
-//            }
-//
-//
-//        }
- //       waitertable.saveInBackground();
-
-
     /************************************************************
      * set checkbox to unchecked in both the adapters
- ***********************************************************/
+    ***********************************************************/
         CheckBox tablecheckBox = (CheckBox) findViewById(R.id.tableBtn);
         CheckBox waitercheckBox = (CheckBox) findViewById(R.id.waiterchkbox);
         tablecheckBox.setChecked(false);
@@ -406,7 +342,5 @@ public class HostessActivity extends Activity implements OnClickListener{
 
 
     }
-
-
 
 }
