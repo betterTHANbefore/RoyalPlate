@@ -1,6 +1,7 @@
 package royalplate2.royalplate;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -63,13 +65,10 @@ public class HostessActivity extends Activity implements OnClickListener{
     String getguestname;
     String getnoOfguest;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hostess_activity);
-        // setContentView(R.layout.testing_waiter);
 
         loadTables();
         loadWaiters();
@@ -99,6 +98,20 @@ public class HostessActivity extends Activity implements OnClickListener{
          **********************************************************/
         assignedButton = (Button) findViewById(R.id.assignedBtn);
         assignedButton.setOnClickListener(this);
+
+        /************************************************************
+         * ImageView leads to previous activity (SelectActivity)
+         **********************************************************/
+        ImageView goToPrevious = (ImageView) findViewById(R.id.previousImageview);
+
+        goToPrevious.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent hostessIntent = new Intent(HostessActivity.this,SelectActivity.class);
+                startActivity(hostessIntent);
+            }
+        });
+
 
     }
 
@@ -134,7 +147,6 @@ public class HostessActivity extends Activity implements OnClickListener{
                //tableAdapter = new TableAdapter(HostessActivity.this, tables);
 
                 tableAdapter = new TableAdapter(getBaseContext(), tables, HostessActivity.this);
-
                 tablelistview.setAdapter(tableAdapter);
 
             }
@@ -167,6 +179,10 @@ public class HostessActivity extends Activity implements OnClickListener{
 //                }
 //            });
 //   }
+
+
+
+
 
     /************************************************************
      * Constructor
@@ -272,6 +288,9 @@ public class HostessActivity extends Activity implements OnClickListener{
 //                }
 //            });
 
+        /*******************************************************
+         * Display tableSet and waiterSet on popup Window
+         *****************************************************/
         for(String table : tableSet) {
             Log.i("Tag", "TSet " + table);
 
@@ -318,17 +337,9 @@ public class HostessActivity extends Activity implements OnClickListener{
                 gutestNoedit.setText(" ");
 
                 popupwindow.dismiss();
-
             }
 
         });
-
-
-//
-//        int waitersetSize = sharedwaiter.getStringSet("WaiterName", new HashSet<String>()).size();
-//        int tablesetSize = sharedtable.getStringSet("TableNo", new HashSet<String>()).size();
-
-
 
     /************************************************************
      * set checkbox to unchecked in both the adapters
@@ -339,7 +350,6 @@ public class HostessActivity extends Activity implements OnClickListener{
         waitercheckBox.setChecked(false);
         tableAdapter.notifyDataSetChanged();
         waiterAdapter.notifyDataSetChanged();
-
 
     }
 

@@ -81,11 +81,11 @@ public class SelectActivity extends ActionBarActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menuItem) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_royalplate, menuItem);
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menuItem) {
+//        // Inflate the menu items for use in the action bar
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_royalplate, menuItem);
 
 
 
@@ -131,9 +131,9 @@ public class SelectActivity extends ActionBarActivity {
 //            }
 
 //        }
-
-        return super.onCreateOptionsMenu(menuItem);
-    }
+//
+//        return super.onCreateOptionsMenu(menuItem);
+//    }
 
 //public boolean onOptionsItemSeletected(MenuItem item) {
 //

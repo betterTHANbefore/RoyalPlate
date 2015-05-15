@@ -12,6 +12,17 @@
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ImageView
+            android:maxWidth="@dimen/abc_action_bar_default_height_material"
+            android:id="@+id/previousImageview"
+            android:src="@drawable/previous_icon1"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_horizontal"
+
+            android:adjustViewBounds="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 
         <ImageView
             android:id="@+id/logotitle"
@@ -148,11 +159,23 @@
                       android:layout_margin="20dp"
                       android:paddingLeft="100dp"
                       android:paddingRight="100dp"
-                        android:layout_below="@+id/tablelist_left"
+                      android:layout_below="@+id/tablelist_left"
                       android:textColor="@color/marron"
                       android:layout_width="wrap_content"
-
                       android:layout_height="wrap_content" />
+
+                  <!-- go to previous activity -->
+
+                  <!--<ImageView-->
+                      <!--android:id="@+id/previousActivity"-->
+                      <!--android:layout_below="@id/assignedBtn"-->
+                      <!--android:src="@drawable/previous_icon1"-->
+<!--android:layout_alignParentLeft="true"-->
+                      <!--android:layout_gravity="center_horizontal"-->
+
+                      <!--android:adjustViewBounds="true"-->
+                      <!--android:layout_width="wrap_content"-->
+                      <!--android:layout_height="wrap_content" />-->
 
 
               </RelativeLayout>
