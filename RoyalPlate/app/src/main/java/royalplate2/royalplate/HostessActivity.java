@@ -3,6 +3,7 @@ package royalplate2.royalplate;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
@@ -46,7 +47,7 @@ public class HostessActivity extends Activity implements OnClickListener{
 
     TableAdapter tableAdapter;
     WaiterAdapter waiterAdapter;
-    Button confirmButton;
+    Button assignedButton;
     SharedPreferences sharedtable;
     SharedPreferences sharedwaiter;
     SharedPreferences.Editor waitereditor;
@@ -83,24 +84,6 @@ public class HostessActivity extends Activity implements OnClickListener{
          ******************/
 
 
-//
-//        tablelistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-//
-//            // to pass the text from that button to other UI or parse
-//
-//                CheckBox tableButton = (CheckBox) parent.getChildAt(position).findViewById(R.id.tableBtn);
-//                final String tableno = tableButton.getText().toString();
-//                Log.i("Tag", "table no  "+ tableno);
-////
-////                Intent tablelistviewIntent = new Intent(HostessActivity.this,HostessActivity.class);
-////                tablelistviewIntent.putExtra("hostess", tableno);
-////                startActivity(tablelistviewIntent);
-//
-//            }
-//        });
         waiterlistview = (ListView) findViewById(R.id.waiterslist_right);
 
         /********************
@@ -108,32 +91,12 @@ public class HostessActivity extends Activity implements OnClickListener{
          ******************/
 
 
-
-
-
-//
-//        waiterlistview = (ListView) findViewById(R.id.waiterslist_right);
-//        waiterlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            //  listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                Button waiterButton = (Button) parent.getChildAt(position).findViewById(R.id.waiterBtn);
-//                final String waitername = waiterButton.getText().toString();
-//
-//                Intent tablelistviewIntent = new Intent(HostessActivity.this,HostessActivity.class);
-//                tablelistviewIntent.putExtra("hostess", waitername);
-//                startActivity(tablelistviewIntent);
-//
-//            }
-//        });
         guestNameedit = (EditText) findViewById(R.id.guestnameEdit);
         gutestNoedit = (EditText) findViewById(R.id.guestnoEdit);
 
 
-        confirmButton = (Button) findViewById(R.id.confirmedBtn);
-        confirmButton.setOnClickListener(this);
+        assignedButton = (Button) findViewById(R.id.assignedBtn);
+        assignedButton.setOnClickListener(this);
 
 //        assignedButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -310,8 +273,8 @@ public class HostessActivity extends Activity implements OnClickListener{
 
         Log.i("Tag", "HA:  " + sharedwaiter.getStringSet("WaiterName", new HashSet<String>()));
 
-        Set<String> tableSet = sharedtable.getStringSet("TableNo", new HashSet<String>());
-        Set<String> waiterSet = sharedwaiter.getStringSet("WaiterName", new HashSet<String>());
+        final Set<String> tableSet = sharedtable.getStringSet("TableNo", new HashSet<String>());
+        final Set<String> waiterSet = sharedwaiter.getStringSet("WaiterName", new HashSet<String>());
 
 
         /**************************************************************
@@ -319,12 +282,13 @@ public class HostessActivity extends Activity implements OnClickListener{
          **************************************************************/
 //
         View popupView = getLayoutInflater().inflate(R.layout.hostessconfirm_popup,null);
-        final PopupWindow popupwindow = new PopupWindow(popupView, 300, 370, true);
+        final PopupWindow popupwindow = new PopupWindow(popupView, 330, 400, true);
 //
         popupwindow.showAtLocation(v, Gravity.CENTER, 0,0);
-        popupwindow.setTouchable(true);
+      //  popupwindow.setTouchable(true);
         popupwindow.setFocusable(true);
         popupwindow.setOutsideTouchable(true);
+        popupwindow.setContentView(popupView);
 
         ((TextView)popupwindow.getContentView().findViewById(R.id.guestname_popup)).setText("Name:  "+getguestname);
         ((TextView)popupwindow.getContentView().findViewById(R.id.noofpeople_popup)).setText("No:  "+getnoOfguest);
@@ -340,29 +304,22 @@ public class HostessActivity extends Activity implements OnClickListener{
 //                }
 //            });
 
-        popupwindow.getContentView().setFocusableInTouchMode(true);
-        popupView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_MENU &&
-                        event.getRepeatCount() == 0 &&
-                        event.getAction() == KeyEvent.ACTION_DOWN) {
-
-
-                    // ... payload action here. e.g. popupMenu.dismiss();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-
-
-
-    //
+//            popupwindow.setTouchInterceptor(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
 //
-        int waitersetSize = sharedwaiter.getStringSet("WaiterName", new HashSet<String>()).size();
-        int tablesetSize = sharedtable.getStringSet("TableNo", new HashSet<String>()).size();
+//
+//                    if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+//
+//                        popupwindow.dismiss();
+//
+//                        return true;
+//
+//                    }
+//
+//                    return false;
+//                }
+//            });
 
         for(String table : tableSet) {
             Log.i("Tag", "TSet " + table);
@@ -375,6 +332,48 @@ public class HostessActivity extends Activity implements OnClickListener{
             ((TextView)popupwindow.getContentView().findViewById(R.id.waitername_popup)).setText("Waiter:  "+ waiter);
 
         }
+
+        Button confirmPopupButton = (Button) popupView.findViewById(R.id.confirmBtn_popup);
+
+        confirmPopupButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Tag", "after confirm");
+//
+                for(String waiter : waiterSet){
+                    for(String table : tableSet) {
+
+                        waitertable.put("WaiterName", waiter);
+                        waitertable.put("TableNo", table);
+
+                     }
+                }
+                waitertable.saveInBackground();
+
+//                String getguestname = displayGuestName.getText().toString();
+//                String getnoofguest = displayNoofGuest.getText().toString();
+//                String getwaitername = displayWaiterName.getText().toString();
+//                String gettableno = displayTableNo.getText().toString();
+//
+//                waitertable.put("WaiterName", getwaitername);
+//                waitertable.put("TableNo", gettableno);
+//                waitertable.saveInBackground();
+
+                guestNameedit.setText("");
+                gutestNoedit.setText(" ");
+
+            popupwindow.dismiss();
+
+            }
+
+        });
+
+
+//
+//        int waitersetSize = sharedwaiter.getStringSet("WaiterName", new HashSet<String>()).size();
+//        int tablesetSize = sharedtable.getStringSet("TableNo", new HashSet<String>()).size();
+
+
 
         // each waiter from the watierset get the set of tables she has been assigned
         // outer for loop reads watierset and inner reads tableset

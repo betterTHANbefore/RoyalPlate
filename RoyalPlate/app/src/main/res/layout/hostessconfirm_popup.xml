@@ -113,6 +113,7 @@
         android:layout_height="match_parent">
         <Button
             android:text="Confirm"
+            android:id="@+id/confirmBtn_popup"
             android:textSize="20dp"
             android:textColor="@color/antiquewhite"
             android:background="@drawable/rounded_corner"
