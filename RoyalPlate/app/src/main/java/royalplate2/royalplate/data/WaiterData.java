@@ -8,6 +8,8 @@ import com.parse.ParseObject;
  */
 //@ParseClassName("User")
 @ParseClassName("WaiterParse")
+//@ParseClassName("WaiterAssignedTables")
+
 
 public class WaiterData extends ParseObject{
 

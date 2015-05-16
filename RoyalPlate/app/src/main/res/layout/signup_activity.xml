@@ -25,6 +25,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:text="Waiter Singup form"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:textColor="@color/orange"
+            android:textStyle="italic"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/userName"
 

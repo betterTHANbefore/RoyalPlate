@@ -112,7 +112,6 @@ public class HostessActivity extends Activity implements OnClickListener{
             }
         });
 
-
     }
 
     /************************************************************
@@ -121,7 +120,9 @@ public class HostessActivity extends Activity implements OnClickListener{
 
     private void loadWaiters(){
         //final  ParseQuery<WaiterData> waiters = ParseQuery.getQuery("User");
-        final ParseQuery<WaiterData> waiters = ParseQuery.getQuery("WaiterParse");
+        //final ParseQuery<WaiterData> waiters = ParseQuery.getQuery("WaiterAssignedTables");
+
+      final ParseQuery<WaiterData> waiters = ParseQuery.getQuery("WaiterParse");
         waiters.findInBackground(new FindCallback<WaiterData>() {
 
             @Override

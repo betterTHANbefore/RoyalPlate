@@ -85,6 +85,8 @@
     <!-- login_activity -->
     <string name="sign_in">Sign In</string>
     <string name="log_in">Log In</string>
+    <string name="reset">Reset</string>
+
 
     <!-- account activity -->
     <string name="bill">Bill</string>

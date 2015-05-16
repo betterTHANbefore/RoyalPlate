@@ -21,10 +21,10 @@ public class SelectActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_activity);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_royalplate);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-//        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setLogo(R.mipmap.ic_royalplate);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+////        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 //
 
         hostessButton = (Button) findViewById(R.id.hostess_button);

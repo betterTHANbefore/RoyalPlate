@@ -57,21 +57,18 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
             waiterListview = (ListView) view.findViewById(R.id.waiterslist);
 
             final CheckBox waitercheckbox = (CheckBox) view.findViewById((R.id.waiterchkbox));
-            waitercheckbox.setText(waiterslist.get(position).getWaiter());
+           waitercheckbox.setText(waiterslist.get(position).getWaiter());
+//        waitercheckbox.setText(waiterslist.get(position).getUser());
 
-            waitercheckbox.setOnClickListener(new View.OnClickListener() {
+
+        waitercheckbox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.i("Tag", "clickedW ");
-
                     final boolean isChecked = waitercheckbox.isChecked();
                     if(isChecked) {
 
                        waitername = waitercheckbox.getText().toString();
                         waiternameSet.add(waitername);
-
-
-                     //   Log.i("Tag", " set  " + waiternameSet);
 
                     }
                     hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
@@ -79,15 +76,8 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
                 }
             });
 
-//
-//                for(int i=0; i<waiterListview.getChildCount(); i++){
-//                    waitercheckbox.setChecked(false);
-//
-//                }
         return view;
     }
-
-
 
 }
 
