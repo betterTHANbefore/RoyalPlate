@@ -24,7 +24,7 @@ public class MainMenuAdapter extends ArrayAdapter<MainMenuData> {
 // Context is the SubMenuActivity
     // objects is the list of items
     public MainMenuAdapter(Context context, List<MainMenuData> objects) {
-        super(context, R.layout.listview_mainmenu, objects);
+        super(context, R.layout.listview_table_button, objects);
         this.context = context;
         this.mainMenuItems = objects;
     }
@@ -34,7 +34,7 @@ public class MainMenuAdapter extends ArrayAdapter<MainMenuData> {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.listview_mainmenu, parent, false);
+        View view = inflater.inflate(R.layout.listview_table_button, parent, false);
 
         Button menuButton = (Button) view.findViewById((R.id.mainmenu));
         menuButton.setText(mainMenuItems.get(position).getMenuName());

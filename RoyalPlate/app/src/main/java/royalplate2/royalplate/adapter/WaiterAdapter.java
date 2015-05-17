@@ -25,7 +25,8 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
     ListView waiterListview;
     Context context;
     HostessActivity hostessActivity;
-    Set<String> waiternameSet;
+   // Set<String> waiternameSet;
+    String waiternameSet;
     String waitername;
     
 
@@ -48,7 +49,7 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
 
       //  final ArrayList<String> waitername = new ArrayList<String>();
 
-      waiternameSet = new HashSet<String>();
+     // waiternameSet = new HashSet<String>();
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,11 +68,15 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
                     final boolean isChecked = waitercheckbox.isChecked();
                     if(isChecked) {
 
-                       waitername = waitercheckbox.getText().toString();
-                        waiternameSet.add(waitername);
+                      String waiter = waitercheckbox.getText().toString();
+                     //   waiternameSet.add(waitername);
+                        waitername = waiter;
+
 
                     }
-                    hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
+                    hostessActivity.saveWaiterName(waitername);
+
+                    //    hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
 
                 }
             });

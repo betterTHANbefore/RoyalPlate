@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -31,6 +32,7 @@ public class LoginActivity extends Activity {
     private Button resetBtn;
     WaiterData waitertables;
 
+    String username;
     @Override
     public void onCreate(Bundle savedInstanceState ) {
 
@@ -95,35 +97,48 @@ public class LoginActivity extends Activity {
                             // Below is for without table assignment
 //                            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
 
-                           final String username = usernameView.getText().toString();
+                          username = usernameView.getText().toString();
                             /***************************
                              * store username on parse
                              *****************************/
 
 
-                       // ParseQuery<ParseObject> query = ParseQuery.getQuery("WaiterParse");
-                            ParseQuery<ParseUser> query = ParseUser.getQuery();
+
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("WaiterParse");
+                         //   ParseQuery<ParseUser> query = ParseUser.getQuery();
                             query.whereEqualTo("WaiterName", username);
-                        query.findInBackground(new FindCallback<ParseUser>() {
+//
+                        query.findInBackground(new FindCallback<ParseObject>() {
 
                             @Override
-                            public void done(List<ParseUser> parseObjects, ParseException e) {
-                                if(e != null) {
+                            public void done(List<ParseObject> waiternamelist, ParseException e) {
 
-                                    // username does not exist
-                                    // so add
+                                if(e!= null || waiternamelist.size()==0) {
+
+//                                    for(int i=0; i<waiternamelist.size(); i++){
+//                                        if(username != waiternamelist.get(i).toString()){
+
+////                                    // username does not exist
+////                                    // so add
+//                                            waitertables = new WaiterData();
+//                                            waitertables.setWaiter(username);
+//                                            waitertables.saveInBackground();
+//                                         //   Toast.makeText(LoginActivity.this, username + " added!", Toast.LENGTH_LONG).show();
+
+                                       // }
+                                  //  }
+
+
+                                   // username does not exist
+//                                    // so add
                                     waitertables = new WaiterData();
-
                                     waitertables.setWaiter(username);
                                     waitertables.saveInBackground();
-                                    Log.i("tag", "Does not exist");
-
-
-                                }else{
-                                    Toast.makeText(LoginActivity.this, username + " already exist!", Toast.LENGTH_LONG).show();
+                                  Toast.makeText(LoginActivity.this, username + " added!", Toast.LENGTH_LONG).show();
                                 }
-
+//
                             }
+
                         });
 
 
@@ -133,6 +148,7 @@ public class LoginActivity extends Activity {
                             startActivity(intent);
                         }
                     }
+
                 });
             }
         });

@@ -4,21 +4,18 @@
     android:orientation="vertical"
     android:background="@drawable/draw_background"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <!-- Title Logo image -->
     <RelativeLayout
-        android:layout_weight="6"
-        android:layout_margin="10dp"
+        android:layout_weight="4"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
-            android:maxWidth="@dimen/abc_action_bar_default_height_material"
-            android:id="@+id/previousImageview"
-            android:src="@drawable/previous_icon1"
-            android:layout_alignParentLeft="true"
+         android:id="@+id/previousImageview"
+            android:src="@drawable/previous_icon2"
             android:layout_gravity="center_horizontal"
-
+            android:maxHeight="@dimen/abc_text_size_display_3_material"
             android:adjustViewBounds="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -26,7 +23,7 @@
 
         <ImageView
             android:id="@+id/logotitle"
-            android:src="@drawable/royalplate_logo4"
+            android:src="@drawable/royalplate_welcome"
             android:layout_gravity="center_horizontal"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
@@ -52,6 +49,7 @@
                 android:id="@+id/guestname"
                 android:text="Guest Name: "
                 android:textSize="20dp"
+                android:textStyle="bold"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
@@ -59,6 +57,8 @@
             <EditText
                 android:id="@+id/guestnameEdit"
                 android:hint="First Last"
+                android:textSize="20dp"
+
                 android:layout_toRightOf="@+id/guestname"
                 android:textStyle="bold|italic"
                 android:textColor="@color/marron"
@@ -70,6 +70,7 @@
                 android:id="@+id/guestno"
                 android:layout_below="@+id/guestname"
                 android:text="No of People: "
+                android:textStyle="bold"
                 android:textSize="20dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="10dp"
@@ -80,6 +81,7 @@
 
                 android:layout_toRightOf="@+id/guestno"
                 android:textStyle="bold|italic"
+                android:textSize="20dp"
                 android:textColor="@color/marron"
                 android:focusable="true"
                 android:singleLine="true"
@@ -105,7 +107,7 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:orientation="horizontal"
             android:background="@drawable/draw_background"
             android:layout_width="match_parent"
@@ -151,7 +153,7 @@
                   <Button
                       android:id="@+id/assignedBtn"
                       android:text="Assigned"
-                      android:textSize="15dp"
+                      android:textSize="20dp"
                       android:textStyle="bold"
                       android:layout_centerInParent="true"
                       android:background="@drawable/checkbox_background"
@@ -159,7 +161,7 @@
                       android:paddingLeft="100dp"
                       android:paddingRight="100dp"
                       android:layout_below="@+id/tablelist_left"
-                      android:textColor="@color/marron"
+                      android:textColor="@color/antiquewhite"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content" />
 

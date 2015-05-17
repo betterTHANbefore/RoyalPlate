@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ import royalplate2.royalplate.adapter.TableAdapter;
 import royalplate2.royalplate.adapter.WaiterAdapter;
 import royalplate2.royalplate.data.TablesData;
 import royalplate2.royalplate.data.WaiterData;
+import royalplate2.royalplate.data.WaiterTableData;
 
 import java.util.HashSet;
 import java.util.List;
@@ -55,7 +57,7 @@ public class HostessActivity extends Activity implements OnClickListener{
     SharedPreferences.Editor waitereditor;
     SharedPreferences.Editor tableeditor;
     Map<String, Set<String>> waitertables;
-    ParseObject waitertable;
+    //ParseObject waitertable;
     TextView displayGuestName;
     TextView displayNoofGuest;
     TextView displayTableNo;
@@ -64,6 +66,10 @@ public class HostessActivity extends Activity implements OnClickListener{
     EditText gutestNoedit;
     String getguestname;
     String getnoOfguest;
+
+    String tableno;
+    String waitername;
+    WaiterTableData waitertable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,7 +201,9 @@ public class HostessActivity extends Activity implements OnClickListener{
     /************************************************************
      * Retrieve data values from the TableAdapter class
      **********************************************************/
-    public void saveTableNumber(HashSet<String> tablelist){
+//    public void saveTableNumber(HashSet<String> tablelist){
+    public void saveTableNumber(String tablelist){
+
 
 //       sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
         sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
@@ -203,7 +211,8 @@ public class HostessActivity extends Activity implements OnClickListener{
 
 //        SharedPreferences.Editor tableeditor = sharedtable.edit();
         tableeditor = sharedtable.edit();
-        tableeditor.putStringSet("TableNo", tablelist);
+        tableeditor.putString("TableNo", tablelist);
+       // tableeditor.putStringSet("TableNo", tablelist);
 
         tableeditor.apply();
     }
@@ -212,13 +221,17 @@ public class HostessActivity extends Activity implements OnClickListener{
      * Retrieve data values from the WaiterAdapter class
      **********************************************************/
 
-    public void saveWaiterName(HashSet<String> waiternameset){
+//    public void saveWaiterName(HashSet<String> waiternameset){
+    public void saveWaiterName(String waiternameset){
+
 
         sharedwaiter = PreferenceManager.getDefaultSharedPreferences(this);
 
 //        SharedPreferences.Editor waitereditor = sharedwaiter.edit();
         waitereditor = sharedwaiter.edit();
-        waitereditor.putStringSet("WaiterName", waiternameset);
+//        waitereditor.putStringSet("WaiterName", waiternameset);
+        waitereditor.putString("WaiterName", waiternameset);
+
         waitereditor.apply();
 
     }
@@ -242,25 +255,31 @@ public class HostessActivity extends Activity implements OnClickListener{
         Log.i("Tag", "name and no  " + getguestname + " "+ getnoOfguest);
 
 
-        waitertable = new ParseObject("WaiterTable");
         /**************************************************************
          * Initialize all the values. Unchecked all the checkboxes
          **************************************************************/
+        Log.i("Tag", "HA:  " + sharedtable.getString("TableNo", null));
+//
+       Log.i("Tag", "HA:  " + sharedwaiter.getString("WaiterName", null));
+//
 
+//        Log.i("Tag", "HA:  " + sharedtable.getStringSet("TableNo", new HashSet<String>()));
+//
+//        Log.i("Tag", "HA:  " + sharedwaiter.getStringSet("WaiterName", new HashSet<String>()));
+//
+//        final Set<String> tableSet = sharedtable.getStringSet("TableNo", new HashSet<String>());
+//        final Set<String> waiterSet = sharedwaiter.getStringSet("WaiterName", new HashSet<String>());
 
-        Log.i("Tag", "HA:  " + sharedtable.getStringSet("TableNo", new HashSet<String>()));
-
-        Log.i("Tag", "HA:  " + sharedwaiter.getStringSet("WaiterName", new HashSet<String>()));
-
-        final Set<String> tableSet = sharedtable.getStringSet("TableNo", new HashSet<String>());
-        final Set<String> waiterSet = sharedwaiter.getStringSet("WaiterName", new HashSet<String>());
-
+//        tableno = sharedtable.getString("TableNo",null);
+//
+//       waitername = sharedwaiter.getString("WaiterName",null);
 
         /**************************************************************
          * Popup Window display new assigned guest information
          **************************************************************/
 
         View popupView = getLayoutInflater().inflate(R.layout.hostessconfirm_popup,null);
+     //   popupView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.popup_anim));
         final PopupWindow popupwindow = new PopupWindow(popupView, 330, 400, true);
 
         popupwindow.showAtLocation(v, Gravity.CENTER, 0,0);
@@ -269,7 +288,7 @@ public class HostessActivity extends Activity implements OnClickListener{
         popupwindow.setOutsideTouchable(true);
         popupwindow.setContentView(popupView);
 
-        ((TextView)popupwindow.getContentView().findViewById(R.id.guestname_popup)).setText("Name:  "+getguestname);
+        ((TextView)popupwindow.getContentView().findViewById(R.id.guestname_popup)).setText("Name:  " + getguestname);
         ((TextView)popupwindow.getContentView().findViewById(R.id.noofpeople_popup)).setText("No:  "+getnoOfguest);
 
 //            popupwindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -292,17 +311,20 @@ public class HostessActivity extends Activity implements OnClickListener{
         /*******************************************************
          * Display tableSet and waiterSet on popup Window
          *****************************************************/
-        for(String table : tableSet) {
-            Log.i("Tag", "TSet " + table);
+       ((TextView)popupwindow.getContentView().findViewById(R.id.tableno_popup)).setText("Table No:  "+sharedtable.getString("TableNo", null));
+     ((TextView)popupwindow.getContentView().findViewById(R.id.waitername_popup)).setText("Waiter:  "+sharedwaiter.getString("WaiterName", null));
 
-            ((TextView)popupwindow.getContentView().findViewById(R.id.tableno_popup)).setText("Table No:  "+table);
-
-        }
-        for(String waiter : waiterSet) {
-            Log.i("Tag", "WSet " + waiter);
-            ((TextView)popupwindow.getContentView().findViewById(R.id.waitername_popup)).setText("Waiter:  "+ waiter);
-
-        }
+//        for(String table : tableSet) {
+//            Log.i("Tag", "TSet " + table);
+//
+//            ((TextView)popupwindow.getContentView().findViewById(R.id.tableno_popup)).setText("Table No:  "+table);
+//
+//        }
+//        for(String waiter : waiterSet) {
+//            Log.i("Tag", "WSet " + waiter);
+//            ((TextView)popupwindow.getContentView().findViewById(R.id.waitername_popup)).setText("Waiter:  "+ waiter);
+//
+//        }
 
 
         /************************************************************
@@ -315,15 +337,11 @@ public class HostessActivity extends Activity implements OnClickListener{
             public void onClick(View v) {
                 Log.i("Tag", "after confirm");
 //
-                for(String waiter : waiterSet){
-                    for(String table : tableSet) {
+                    waitertable = new WaiterTableData();
+                    waitertable.setWaiter(sharedwaiter.getString("WaiterName", null));
+                    waitertable.setTable(sharedtable.getString("TableNo", null));
+                    waitertable.saveInBackground();
 
-                        waitertable.put("WaiterName", waiter);
-                        waitertable.put("TableNo", table);
-
-                     }
-                }
-                waitertable.saveInBackground();
 
 //                String getguestname = displayGuestName.getText().toString();
 //                String getnoofguest = displayNoofGuest.getText().toString();

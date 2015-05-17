@@ -19,7 +19,7 @@
 
         <ImageView
 
-            android:src="@drawable/royalplate_logo4"
+            android:src="@drawable/royalplate_welcome"
             android:layout_weight="2"
             android:layout_gravity="center_horizontal"
 

@@ -21,6 +21,7 @@ import royalplate2.royalplate.data.SandwichMenuData;
 import royalplate2.royalplate.data.TablesData;
 import royalplate2.royalplate.data.TwoTwentyData;
 import royalplate2.royalplate.data.WaiterData;
+import royalplate2.royalplate.data.WaiterTableData;
 
 /**
  * Created by operamac on 4/14/15.
@@ -55,6 +56,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(TwoTwentyData.class);
         ParseObject.registerSubclass(TablesData.class);
         ParseObject.registerSubclass(WaiterData.class);
+        ParseObject.registerSubclass(WaiterTableData.class);
 
         Log.i("Application", "Initialized");
     }

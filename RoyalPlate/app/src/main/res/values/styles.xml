@@ -12,6 +12,10 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+        <style name="AnimationPopup">
+            <item name="@android:windowEnterAnimation">@anim/popup_anim</item>
+            <item name="@android:windowExitAnimation">@anim/popup_disappear_anim</item>
+        </style>
     <!-- for number picker -->
     <!--<style name="SampleTheme" parent="android:Theme">-->
         <!--<item name="numberPickerStyle">@style/NPWidget.Holo.NumberPicker</item>-->

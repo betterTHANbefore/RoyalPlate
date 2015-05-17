@@ -28,8 +28,13 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
     List<TablesData> tableslist;
     Context context;
     HostessActivity hostessActivity;
-    Set<String> tablenolist;
-  //  String tableno = null;
+//    Set<String> tablenolist;
+    String tablenolist;
+
+
+
+
+    //  String tableno = null;
 
 //    public TableAdapter(Context context, List<TablesData> objects) {
 //        super(context, R.layout.listview_tables, objects);
@@ -50,7 +55,7 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
     public View getView(final int position, final View convertView, final ViewGroup parent){
 
 
-         tablenolist = new HashSet<String>();
+        // tablenolist = new HashSet<String>();
 
 
         LayoutInflater inflater = (LayoutInflater) context
@@ -73,11 +78,15 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
                 if (isChecked) {
                     String tableno = tablecheckbox.getText().toString();
 
-                    tablenolist.add(tableno);
+//                    tablenolist.add(tableno);
+                    tablenolist= tableno;
+
 
                 }
+                hostessActivity.saveTableNumber(tablenolist);
 
-                hostessActivity.saveTableNumber((HashSet<String>) tablenolist);
+
+//                hostessActivity.saveTableNumber((HashSet<String>) tablenolist);
             }
 
         });
