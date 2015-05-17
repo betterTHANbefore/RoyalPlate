@@ -30,7 +30,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
     ListView listview;
     SubMenuAdapter menuAdapter;
-    String tableNumber;
+    String tableNo;
     String itemName;
     String noOfItems;
 
@@ -60,14 +60,15 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
         if (direction == SimpleGestureFilter.SWIPE_RIGHT) {
 
-//            itemName = getIntent().getExtras().getString("Item Name");
-//            noOfItems = getIntent().getExtras().getString("No of Items");
+            itemName = getIntent().getExtras().getString("Item Name");
+            noOfItems = getIntent().getExtras().getString("No of Items");
+            tableNo = getIntent().getExtras().getString("tableNo");
 
 
             Intent intent = new Intent(this, MenuActivity.class);
-            intent.putExtra("tableNo", "1");
-            intent.putExtra("iniPrice" , 0);
-            intent.putExtra("iniNoOfItem", 0);
+            intent.putExtra("tableNo", tableNo);
+//            intent.putExtra("iniPrice" , 0);
+//            intent.putExtra("iniNoOfItem", 0);
 
             intent.putExtra("Item Name", itemName );
             intent.putExtra("No of Items", noOfItems);
@@ -107,7 +108,7 @@ Log.i("LOG", itemName +  "   " + noOfItems);
         subMenuTitle.setText(getIntent().getExtras().getString("title"));
 //        subMenuTitle.setText(getIntent().getExtras().getString("title") + "    "+ getIntent().getExtras().getString("tableNo"));
 
-        tableNumber = getIntent().getExtras().getString("tableNo"); // pass table no to adapter
+     //   tableNo = getIntent().getExtras().getString("tableNo"); // pass table no to adapter
 
         ImageView icon_right = (ImageView) findViewById(R.id.imageRight_icon);
         ImageView icon_left = (ImageView) findViewById(R.id.imageLeft_icon);
@@ -246,7 +247,7 @@ Log.i("LOG", itemName +  "   " + noOfItems);
             @Override
             public void done(List<ParseObject> items, ParseException e) {
                // menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items, itemCost, tableNumber );
-                menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items, itemCost, tableNumber, SubMenuActivity.this );
+                menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items, itemCost, tableNo, SubMenuActivity.this );
 
                 listview.setAdapter(menuAdapter);
             }

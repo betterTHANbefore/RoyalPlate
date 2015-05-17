@@ -89,7 +89,7 @@ public class OrderListFragment extends Fragment {
 //        listOfitemsTextview.setText(itemName);
 
         tv = (TextView) v.findViewById(R.id.tableNo_textview);
-        tv.setText("Table " + tableNumStr);
+        tv.setText(tableNumStr);
 
 
         /* Textview to display item name and no dinamically added to Scrollview
@@ -101,7 +101,7 @@ public class OrderListFragment extends Fragment {
 
        // TextView displayList = new TextView(getActivity());
         displayList = new TextView(getActivity());
-        displayList.setTextSize(25);
+        displayList.setTextSize(15);
         displayList.setTextColor(getResources().getColor(R.color.antiquewhite));
         displayList.setTypeface(null,Typeface.BOLD);
 

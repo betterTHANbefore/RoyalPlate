@@ -59,22 +59,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_weight="3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
 
-        </LinearLayout>
 
         <LinearLayout
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
             <LinearLayout
+
                 android:layout_weight="2"
+                android:layout_margin="40dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+             >
                 <GridView
                     android:id="@+id/waitertable_gridview"
                     android:columnWidth="10dp"
@@ -103,12 +103,6 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_weight="3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-        </LinearLayout>
 
     </LinearLayout>
 

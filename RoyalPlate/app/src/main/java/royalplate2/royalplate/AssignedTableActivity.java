@@ -2,9 +2,13 @@ package royalplate2.royalplate;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,64 +27,76 @@ import royalplate2.royalplate.data.WaiterTableData;
  * Created by operamac on 5/1/15.
  */
 public class AssignedTableActivity extends Activity {
-
-
     // temporaly, 3 table buttons statically.
-  //  private Button[] tableButtons = new Button[3];
+    //  private Button[] tableButtons = new Button[3];
 //    private Button tb;
 
-//    private ListView lv;
-     String username;
+    //    private ListView lv;
+    String username;
     TextView usernameTextView;
     ImageButton refreshbutton;
     GridView assignedtableGridview;
     WaiterTableAdapter waiterTableAdapter;
     Intent intent;
+    SharedPreferences sharedtable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.assigned_table_activity);
         setContentView(R.layout.assigned_tables_activity);
-       username = getIntent().getExtras().getString("userName");
+
+
+        /***************************************************************
+         * Waiter UserName appear into usernameTextview after login to account
+         ***************************************************************/
+        username = getIntent().getExtras().getString("userName");
+        usernameTextView = (TextView) findViewById(R.id.waitername_textview);
+        usernameTextView.setText(username);
 
         Log.i("Tag", "username  " + username);
 
-        assignedtableGridview = (GridView) findViewById(R.id.waitertable_gridview);
-
-        usernameTextView = (TextView) findViewById(R.id.waitername_textview);
-
-        usernameTextView.setText(username);
+        /***************************************************************
+         * Load assignd tables
+         ***************************************************************/
         loadtables();
-        /***********************************************************
-         * match username with the parse object and load the tables
-         **********************************************************/
+
+        /************************************************************************
+         * Each table listener to go MainMenu. Passing tableno through Intent
+         ************************************************************************/
+        assignedtableGridview = (GridView) findViewById(R.id.waitertable_gridview);
+        assignedtableGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent tablegridIntent = new Intent(AssignedTableActivity.this, MenuActivity.class);
+
+                Button assignedtableBtn = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
+
+                String tableno = assignedtableBtn.getText().toString();
+                tablegridIntent.putExtra("tableNo", tableno);
+                startActivity(tablegridIntent);
+            }
+        });
 
 
 
 
-
-
-
-
-
-
-        /************************************************************
+        /*********************************************************************
          * ImageView leads to previous activity (SelectActivity)
-         **********************************************************/
+         *******************************************************************/
         ImageView goToPrevious = (ImageView) findViewById(R.id.previousImageview);
 
-        goToPrevious.setOnClickListener(new View.OnClickListener(){
+        goToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-               intent = new Intent(AssignedTableActivity.this,SelectActivity.class);
+            public void onClick(View v) {
+                intent = new Intent(AssignedTableActivity.this, SelectActivity.class);
                 startActivity(intent);
             }
         });
 
-        /************************************************************
-        * Refresh (ImageButton) will refresh the current activity
-        **********************************************************/
+        /*********************************************************************
+         * Refresh (ImageButton) will refresh the current activity
+         *******************************************************************/
 
         refreshbutton = (ImageButton) findViewById(R.id.refreshBtn);
 //        refreshbutton.setOnClickListener(new View.OnClickListener() {
@@ -146,24 +162,33 @@ public class AssignedTableActivity extends Activity {
 //        });
 
 
-
-
-
     }
 
 
+    /*********************************************************************
+     *
+     * USE ParseRelation where WaiterParse relates to WaiterTables
+     * Find waitername from the WaiterParse, relate waitername in
+     * WaiterTable class and laod all the tables.
+     *
+     *
+     *
+     *
+     *
+     *  Query ParseObject "WaiterTable", load all tables for that user only
+     *******************************************************************/
     private void loadtables() {
 
         final ParseQuery<WaiterTableData> waitertables = ParseQuery.getQuery("WaiterTable");
 
-       // waitertables.whereEqualTo("WaiterName", ParseUser.getCurrentUser());
+        // waitertables.whereEqualTo("WaiterName", ParseUser.getCurrentUser());
         waitertables.findInBackground(new FindCallback<WaiterTableData>() {
 
             @Override
             public void done(List<WaiterTableData> waitertables, ParseException e) {
                 //tableAdapter = new TableAdapter(HostessActivity.this, tables);
 
-                waiterTableAdapter = new WaiterTableAdapter(AssignedTableActivity.this, waitertables);
+                waiterTableAdapter = new WaiterTableAdapter(AssignedTableActivity.this, waitertables, AssignedTableActivity.this);
                 assignedtableGridview.setAdapter(waiterTableAdapter);
 
             }
@@ -172,4 +197,36 @@ public class AssignedTableActivity extends Activity {
 
 
     }
+
+
+    /**
+     * *********************************************************
+     * Constructor
+     * ********************************************************
+     */
+    public AssignedTableActivity() {
+
+    }
+
+    /**
+     * *********************************************************
+     * Retrieve data values from the TableAdapter class
+     * ********************************************************
+     */
+//    public void saveTableNumber(String tablelist){
+//
+//
+////       sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
+//        sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
+//
+//
+//        SharedPreferences.Editor tableeditor = sharedtable.edit();
+//     //   tableeditor = sharedtable.edit();
+//        tableeditor.putString("TableNo", tablelist);
+//
+//        tableeditor.apply();
+//    }
+
+
+
 }
