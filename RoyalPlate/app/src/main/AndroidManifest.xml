@@ -42,7 +42,14 @@
 
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".SendOrder"></activity>
-        <activity android:name=".AssignedTableActivity"></activity>
+        <!-- should receice message from other activity-->
+        <activity android:name=".AssignedTableActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"></action>
+                <category android:name="android.intent.category.default"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".OrderSucceedActivity"></activity>
         <activity android:name=".WaiterActivity"></activity>
 

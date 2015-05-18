@@ -83,6 +83,10 @@ public class HostessActivity extends Activity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hostess_activity);
 
+        sharedwaiter = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
+
+
         loadTables();
         loadWaiters();
 
@@ -267,7 +271,7 @@ public class HostessActivity extends Activity implements OnClickListener{
 
 
 //       sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
+//        sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
 
 
        SharedPreferences.Editor tableeditor = sharedtable.edit();
@@ -286,7 +290,7 @@ public class HostessActivity extends Activity implements OnClickListener{
     public void saveWaiterName(String waiternameset){
 
 
-        sharedwaiter = PreferenceManager.getDefaultSharedPreferences(this);
+
 
         SharedPreferences.Editor waitereditor = sharedwaiter.edit();
        // waitereditor = sharedwaiter.edit();

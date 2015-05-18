@@ -1,5 +1,12 @@
 package royalplate2.royalplate;
 
+
+/*******************************************************************
+ * USER EXPLICITE Intent to send the notification to Waiter Activity
+ *
+ *******************************************************************/
+
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;

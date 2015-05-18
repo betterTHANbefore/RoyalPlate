@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -108,10 +109,10 @@ public class AssignedTableActivity extends Activity {
 //            @Override
 //            public void onClick(View v) {
 //                 intent = new Intent(getApplicationContext(),AssignedTableActivity.class);
-//                overridePendingTransition(0,0);
-//                refreshIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                 finish();
-//                overridePendingTransition(0,0);
+////                overridePendingTransition(0,0);
+////                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+////                 finish();
+////                overridePendingTransition(0,0);
 //                startActivity(intent);
 //
 //            }
@@ -131,18 +132,25 @@ public class AssignedTableActivity extends Activity {
                 Toast.makeText(AssignedTableActivity.this, "You are signed out!",Toast.LENGTH_LONG).show();
 
 
-                final ParseQuery<WaiterData> query =  ParseQuery.getQuery("WaiterParse");
-                query.whereEqualTo("WaiterParse", username);
-                query.findInBackground(new FindCallback<WaiterData>() {
+                final ParseQuery query =  new ParseQuery("WaiterParse");
+                query.whereEqualTo("WaiterName", username);
+                query.findInBackground(new FindCallback<ParseObject>() {
                     @Override
-                    public void done(List<WaiterData> waiterData, ParseException e) {
-                        if(e == null){
+                    public void done(List<ParseObject> waiterData, ParseException e) {
+                        if(e == null || waiterData.size() >0){
                             for (int i=0; i<waiterData.size(); i++){
-                                if(waiterData.get(i).equals(username)){
-                                    WaiterData waitername = waiterData.get(i);
-                                    waitername.deleteInBackground();
+                         Log.i("TAG", "Deleted  " + username + "   "+ waiterData.get(i));
+
+                                    ParseObject waitername = waiterData.get(i);
+                    //waitername.remove(username);
+                                try {
+                                    waitername.delete();
+                                } catch (ParseException e1) {
+                                    Log.e("TAG", e1.getMessage(), e1);
                                 }
-                            }
+                                //waitername.deleteInBackground();
+                                }
+
                         }
                         else{
                             Log.d("Tag", "Error: "+ e.getMessage());
