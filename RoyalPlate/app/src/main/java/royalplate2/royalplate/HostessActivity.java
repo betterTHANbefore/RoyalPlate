@@ -1,13 +1,18 @@
 package royalplate2.royalplate;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -22,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -36,6 +42,7 @@ import royalplate2.royalplate.data.WaiterTableData;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import static android.view.View.OnClickListener;
@@ -54,8 +61,8 @@ public class HostessActivity extends Activity implements OnClickListener{
     Button assignedButton;
     SharedPreferences sharedtable;
     SharedPreferences sharedwaiter;
-    SharedPreferences.Editor waitereditor;
-    SharedPreferences.Editor tableeditor;
+//    SharedPreferences.Editor waitereditor;
+//    SharedPreferences.Editor tableeditor;
     Map<String, Set<String>> waitertables;
     //ParseObject waitertable;
     TextView displayGuestName;
@@ -85,25 +92,79 @@ public class HostessActivity extends Activity implements OnClickListener{
          * Tables GridView
          **********************************************************/
         tablelistview = (GridView) findViewById(R.id.tablelist_left);
+       // tablelistview.setEnabled(false);
 
         /************************************************************
          * Waiters GridView
          **********************************************************/
         waiterlistview = (ListView) findViewById(R.id.waiterslist_right);
+      //  waiterlistview.setEnabled(false);
+
+        assignedButton = (Button) findViewById(R.id.assignedBtn);
+
+        /************************************************
+         * Disabling guestNoeditbox and AssignedBtn
+         ***********************************************/
+      //  gutestNoedit.setEnabled(false);
+        assignedButton.setEnabled(false);
+        assignedButton.setBackgroundColor(Color.DKGRAY);
+        assignedButton.setPadding(80,0,80,0);
 
 
+
+        // assignedButton.setBackgroundColor(Color.DKGRAY);
         /************************************************************
          * EditText to enter guest name and no of guest
          **********************************************************/
         guestNameedit = (EditText) findViewById(R.id.guestnameEdit);
+        guestNameedit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+           }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (s.length()==0) {
+                    assignedButton.setEnabled(false);
+                    assignedButton.setBackgroundColor(Color.DKGRAY);
+                    assignedButton.setPadding(80, 0, 80, 0);
+
+                    guestNameedit.setFocusable(true);
+                    gutestNoedit.setEnabled(false);
+                }
+                else {
+                    assignedButton.setEnabled(true);
+//                    tablelistview.setEnabled(true);
+                   // waiterlistview.setEnabled(true);
+                    assignedButton.setBackgroundResource(R.drawable.checkbox_background);
+                    assignedButton.setPadding(80,0,80,0);
+                    gutestNoedit.setEnabled(true);
+
+                }
+
+
+            }
+        });
+        assignedButton.setOnClickListener(this);
+
+
         gutestNoedit = (EditText) findViewById(R.id.guestnoEdit);
+      //  assignedButton.setOnClickListener(this);
+
 
         /************************************************************
          *  Assigned Button will bring up the Popup Window with
          *  all guest info.
          **********************************************************/
-        assignedButton = (Button) findViewById(R.id.assignedBtn);
-        assignedButton.setOnClickListener(this);
+
+
+
 
         /************************************************************
          * ImageView leads to previous activity (SelectActivity)
@@ -209,8 +270,8 @@ public class HostessActivity extends Activity implements OnClickListener{
         sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
 
 
-//        SharedPreferences.Editor tableeditor = sharedtable.edit();
-        tableeditor = sharedtable.edit();
+       SharedPreferences.Editor tableeditor = sharedtable.edit();
+        //tableeditor = sharedtable.edit();
         tableeditor.putString("TableNo", tablelist);
        // tableeditor.putStringSet("TableNo", tablelist);
 
@@ -227,8 +288,8 @@ public class HostessActivity extends Activity implements OnClickListener{
 
         sharedwaiter = PreferenceManager.getDefaultSharedPreferences(this);
 
-//        SharedPreferences.Editor waitereditor = sharedwaiter.edit();
-        waitereditor = sharedwaiter.edit();
+        SharedPreferences.Editor waitereditor = sharedwaiter.edit();
+       // waitereditor = sharedwaiter.edit();
 //        waitereditor.putStringSet("WaiterName", waiternameset);
         waitereditor.putString("WaiterName", waiternameset);
 
@@ -243,24 +304,33 @@ public class HostessActivity extends Activity implements OnClickListener{
     @Override
     public void onClick(View v) {
 
-       displayGuestName = (TextView) findViewById(R.id.guestname_popup);
-       displayNoofGuest = (TextView) findViewById(R.id.noofpeople_popup);
-       displayTableNo = (TextView) findViewById(R.id.tableno_popup);
-       displayWaiterName = (TextView) findViewById(R.id.waitername_popup);
+
+        displayGuestName = (TextView) findViewById(R.id.guestname_popup);
+        displayNoofGuest = (TextView) findViewById(R.id.noofpeople_popup);
+        displayTableNo = (TextView) findViewById(R.id.tableno_popup);
+        displayWaiterName = (TextView) findViewById(R.id.waitername_popup);
 
 
         getguestname = guestNameedit.getText().toString();
         getnoOfguest = gutestNoedit.getText().toString();
+        final String waitrename_shared = sharedwaiter.getString("WaiterName", null);
+        final String tableno_shared = sharedtable.getString("TableNo", null);
 
-        Log.i("Tag", "name and no  " + getguestname + " "+ getnoOfguest);
-
-
-        /**************************************************************
-         * Initialize all the values. Unchecked all the checkboxes
-         **************************************************************/
-        Log.i("Tag", "HA:  " + sharedtable.getString("TableNo", null));
+//         if(waitrename_shared.equals(null) || tableno_shared.equals(null)){
 //
-       Log.i("Tag", "HA:  " + sharedwaiter.getString("WaiterName", null));
+//             Toast.makeText(HostessActivity.this, "Table or Waiter entry is empty.", Toast.LENGTH_LONG).show();
+//
+//         }
+//         else {
+             // Log.i("Tag", "name and no  " + getguestname + " " + getnoOfguest);
+
+
+             /**************************************************************
+              * Initialize all the values. Unchecked all the checkboxes
+              **************************************************************/
+             //  Log.i("Tag", "HA:  " + sharedtable.getString("TableNo", null));
+//
+             //    Log.i("Tag", "HA:  " + sharedwaiter.getString("WaiterName", null));
 //
 
 //        Log.i("Tag", "HA:  " + sharedtable.getStringSet("TableNo", new HashSet<String>()));
@@ -274,45 +344,35 @@ public class HostessActivity extends Activity implements OnClickListener{
 //
 //       waitername = sharedwaiter.getString("WaiterName",null);
 
-        /**************************************************************
-         * Popup Window display new assigned guest information
-         **************************************************************/
+             /**************************************************************
+              * Popup Window display new assigned guest information
+              **************************************************************/
 
-        View popupView = getLayoutInflater().inflate(R.layout.hostessconfirm_popup,null);
-     //   popupView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.popup_anim));
-        final PopupWindow popupwindow = new PopupWindow(popupView, 330, 400, true);
+             View popupView = getLayoutInflater().inflate(R.layout.hostessconfirm_popup, null);
+             final PopupWindow popupwindow = new PopupWindow(popupView, 330, 400, true);
 
-        popupwindow.showAtLocation(v, Gravity.CENTER, 0,0);
-      //  popupwindow.setTouchable(true);
-        popupwindow.setFocusable(true);
-        popupwindow.setOutsideTouchable(true);
-        popupwindow.setContentView(popupView);
+             popupwindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+             //  popupwindow.setTouchable(true);
+             popupwindow.setFocusable(true);
+             popupwindow.setOutsideTouchable(true);
+             popupwindow.setContentView(popupView);
 
-        ((TextView)popupwindow.getContentView().findViewById(R.id.guestname_popup)).setText("Name:  " + getguestname);
-        ((TextView)popupwindow.getContentView().findViewById(R.id.noofpeople_popup)).setText("No:  "+getnoOfguest);
+             /*******************************************************
+              * Display Guest Name and no of guest on popup Window
+              *****************************************************/
+             ((TextView) popupwindow.getContentView().findViewById(R.id.guestname_popup))
+                     .setText("Name:  " + getguestname);
+             ((TextView) popupwindow.getContentView().findViewById(R.id.noofpeople_popup))
+                     .setText("No:  " + getnoOfguest);
 
-//            popupwindow.setTouchInterceptor(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View v, MotionEvent event) {
 //
-//
-//                    if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-//
-//                        popupwindow.dismiss();
-//
-//                        return true;
-//
-//                    }
-//
-//                    return false;
-//                }
-//            });
-
-        /*******************************************************
-         * Display tableSet and waiterSet on popup Window
-         *****************************************************/
-       ((TextView)popupwindow.getContentView().findViewById(R.id.tableno_popup)).setText("Table No:  "+sharedtable.getString("TableNo", null));
-     ((TextView)popupwindow.getContentView().findViewById(R.id.waitername_popup)).setText("Waiter:  "+sharedwaiter.getString("WaiterName", null));
+             /*******************************************************
+              * Display tableSet and waiterSet on popup Window
+              *****************************************************/
+             ((TextView) popupwindow.getContentView().findViewById(R.id.tableno_popup))
+                     .setText("Table No:  " + tableno_shared);
+             ((TextView) popupwindow.getContentView().findViewById(R.id.waitername_popup))
+                     .setText("Waiter:  " + waitrename_shared);
 
 //        for(String table : tableSet) {
 //            Log.i("Tag", "TSet " + table);
@@ -327,49 +387,76 @@ public class HostessActivity extends Activity implements OnClickListener{
 //        }
 
 
-        /************************************************************
-         * Confirm Button listener from the PopupWindow
-         **********************************************************/
-        Button confirmPopupButton = (Button) popupView.findViewById(R.id.confirmBtn_popup);
+             /************************************************************
+              * Confirm Button listener from the PopupWindow
+              **********************************************************/
+             Button confirmPopupButton = (Button) popupView.findViewById(R.id.confirmBtn_popup);
 
-        confirmPopupButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("Tag", "after confirm");
+             confirmPopupButton.setOnClickListener(new Button.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+
+//                     if (((TextView) popupwindow.getContentView().findViewById(R.id.guestname_popup))
+//                             .getText().equals(null) ||
+//                             ((TextView) popupwindow.getContentView().findViewById(R.id.waitername_popup))
+//                                     .getText().equals(null)) {
+//                         Toast.makeText(HostessActivity.this, "Table or Waiter entry is empty.", Toast.LENGTH_LONG).show();
 //
-                    waitertable = new WaiterTableData();
-                    waitertable.setWaiter(sharedwaiter.getString("WaiterName", null));
-                    waitertable.setTable(sharedtable.getString("TableNo", null));
-                    waitertable.saveInBackground();
-
-
-//                String getguestname = displayGuestName.getText().toString();
-//                String getnoofguest = displayNoofGuest.getText().toString();
-//                String getwaitername = displayWaiterName.getText().toString();
-//                String gettableno = displayTableNo.getText().toString();
 //
-//                waitertable.put("WaiterName", getwaitername);
-//                waitertable.put("TableNo", gettableno);
-//                waitertable.saveInBackground();
+//                     } else {
 
-                guestNameedit.setText("");
-                gutestNoedit.setText(" ");
+                         /*****************************************
+                          * Store data on WaiterTable class on parse
+                          *****************************************/
+                         waitertable = new WaiterTableData();
+                         waitertable.setWaiter(waitrename_shared);
+                         waitertable.setTable(tableno_shared);
+                         waitertable.saveInBackground();
 
-                popupwindow.dismiss();
-            }
+                  //   }
+                     guestNameedit.setText("");
+                     gutestNoedit.setText(" ");
 
-        });
+                     popupwindow.dismiss();
 
-    /************************************************************
-     * set checkbox to unchecked in both the adapters
-    ***********************************************************/
-        CheckBox tablecheckBox = (CheckBox) findViewById(R.id.tableBtn);
-        CheckBox waitercheckBox = (CheckBox) findViewById(R.id.waiterchkbox);
-        tablecheckBox.setChecked(false);
-        waitercheckBox.setChecked(false);
-        tableAdapter.notifyDataSetChanged();
-        waiterAdapter.notifyDataSetChanged();
+                     sharedwaiter.edit().clear().apply();
+                     sharedtable.edit().clear().apply();
 
-    }
+                 }
+
+
+             });
+             /************************************************************
+              * Cancle Button listener from the PopupWindow
+              **********************************************************/
+             Button canclePopupButton = (Button) popupView.findViewById(R.id.cancleBtn_popup);
+
+             canclePopupButton.setOnClickListener(new OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+
+                     Toast.makeText(HostessActivity.this, "Guest entry cancled.", Toast.LENGTH_LONG).show();
+
+                     guestNameedit.setText("");
+                     gutestNoedit.setText(" ");
+
+                     popupwindow.dismiss();
+                     sharedwaiter.edit().clear().apply();
+                     sharedtable.edit().clear().apply();
+                 }
+             });
+       //  }
+            /************************************************************
+             * set checkbox to unchecked in both the adapters
+             ***********************************************************/
+            CheckBox tablecheckBox = (CheckBox) findViewById(R.id.tableBtn);
+            CheckBox waitercheckBox = (CheckBox) findViewById(R.id.waiterchkbox);
+            tablecheckBox.setChecked(false);
+            waitercheckBox.setChecked(false);
+            tableAdapter.notifyDataSetChanged();
+            waiterAdapter.notifyDataSetChanged();
+
+        }
+
 
 }

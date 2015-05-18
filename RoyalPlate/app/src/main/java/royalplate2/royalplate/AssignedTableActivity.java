@@ -13,14 +13,18 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
+import royalplate2.royalplate.adapter.WaiterAdapter;
 import royalplate2.royalplate.adapter.WaiterTableAdapter;
+import royalplate2.royalplate.data.WaiterData;
 import royalplate2.royalplate.data.WaiterTableData;
 
 /**
@@ -35,6 +39,7 @@ public class AssignedTableActivity extends Activity {
     String username;
     TextView usernameTextView;
     ImageButton refreshbutton;
+    Button signoutbutton;
     GridView assignedtableGridview;
     WaiterTableAdapter waiterTableAdapter;
     Intent intent;
@@ -112,6 +117,50 @@ public class AssignedTableActivity extends Activity {
 //            }
 //        });
 
+        /*********************************************************************
+         * Sign Out button will not display waiter's name in the serving list in
+         * Hostess Activity.(means waiter is done for the day or on break)
+         *******************************************************************/
+         signoutbutton = (Button) findViewById(R.id.signoutBtn);
+        signoutbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.i("tag", "signout clicked");
+
+                Toast.makeText(AssignedTableActivity.this, "You are signed out!",Toast.LENGTH_LONG).show();
+
+
+                final ParseQuery<WaiterData> query =  ParseQuery.getQuery("WaiterParse");
+                query.whereEqualTo("WaiterParse", username);
+                query.findInBackground(new FindCallback<WaiterData>() {
+                    @Override
+                    public void done(List<WaiterData> waiterData, ParseException e) {
+                        if(e == null){
+                            for (int i=0; i<waiterData.size(); i++){
+                                if(waiterData.get(i).equals(username)){
+                                    WaiterData waitername = waiterData.get(i);
+                                    waitername.deleteInBackground();
+                                }
+                            }
+                        }
+                        else{
+                            Log.d("Tag", "Error: "+ e.getMessage());
+                        }
+
+                    }
+                });
+
+
+
+            }
+        });
+
+
+
+
+
+
 
 //        String tableNumStr = getText().toString().
         // FIX IT this may need to be grid or list rather than buttons
@@ -172,7 +221,7 @@ public class AssignedTableActivity extends Activity {
      * WaiterTable class and laod all the tables.
      *
      *
-     *
+     *              1:n (Relation)(WaiterParse->WaiterTable
      *
      *
      *  Query ParseObject "WaiterTable", load all tables for that user only
@@ -181,12 +230,14 @@ public class AssignedTableActivity extends Activity {
 
         final ParseQuery<WaiterTableData> waitertables = ParseQuery.getQuery("WaiterTable");
 
-        // waitertables.whereEqualTo("WaiterName", ParseUser.getCurrentUser());
+       // waitertables.whereExists("WaiterName");
+        waitertables.whereEqualTo("WaiterName", username);
+     //  waitertables.include("WaiterParse");
         waitertables.findInBackground(new FindCallback<WaiterTableData>() {
 
             @Override
             public void done(List<WaiterTableData> waitertables, ParseException e) {
-                //tableAdapter = new TableAdapter(HostessActivity.this, tables);
+
 
                 waiterTableAdapter = new WaiterTableAdapter(AssignedTableActivity.this, waitertables, AssignedTableActivity.this);
                 assignedtableGridview.setAdapter(waiterTableAdapter);

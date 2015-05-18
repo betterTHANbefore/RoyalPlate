@@ -19,7 +19,7 @@ public class OrderSucceedActivity extends Activity {
         setContentView(R.layout.order_succeed_activity);
 
         tv = (TextView) findViewById(R.id.table_num_view);
-        tv.setText("Table " + getIntent().getExtras().getString("tableNo"));
+        tv.setText(getIntent().getExtras().getString("tableNo"));
 
         lv = (ListView) findViewById(R.id.menulist_left);
 

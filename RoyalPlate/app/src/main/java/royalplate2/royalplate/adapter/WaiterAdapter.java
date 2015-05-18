@@ -27,7 +27,7 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
     HostessActivity hostessActivity;
    // Set<String> waiternameSet;
     String waiternameSet;
-    String waitername;
+    String waitername = null;
     
 
     public WaiterAdapter(Context context, List<WaiterData> objects,HostessActivity hostessActivity) {
@@ -71,15 +71,18 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
                       String waiter = waitercheckbox.getText().toString();
                      //   waiternameSet.add(waitername);
                         waitername = waiter;
+                        hostessActivity.saveWaiterName(waitercheckbox.getText().toString());
 
 
                     }
-                    hostessActivity.saveWaiterName(waitername);
+//                    hostessActivity.saveWaiterName(waitername);
+
 
                     //    hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
 
                 }
             });
+
 
         return view;
     }

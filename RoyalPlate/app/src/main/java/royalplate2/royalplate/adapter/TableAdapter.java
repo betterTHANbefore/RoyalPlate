@@ -29,7 +29,7 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
     Context context;
     HostessActivity hostessActivity;
 //    Set<String> tablenolist;
-    String tablenolist;
+    String tablenolist = null;
 
 
 
@@ -80,16 +80,16 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
 
 //                    tablenolist.add(tableno);
                     tablenolist= tableno;
+                    hostessActivity.saveTableNumber(tablecheckbox.getText().toString());
 
 
                 }
-                hostessActivity.saveTableNumber(tablenolist);
-
 
 //                hostessActivity.saveTableNumber((HashSet<String>) tablenolist);
             }
 
         });
+//        hostessActivity.saveTableNumber(tablenolist);
 
         return view;
     }

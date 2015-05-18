@@ -15,7 +15,7 @@
     <TextView
         android:id="@+id/welcometitle"
         android:padding="20dp"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:text="Assigned Guest"
         android:textColor="@color/darkOrange"
         android:textStyle="bold|italic"
@@ -43,6 +43,7 @@
         <!-- center -->
         <RelativeLayout
             android:layout_weight="3"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
@@ -61,6 +62,7 @@
                 android:layout_below="@+id/guestname_popup"
                 android:textColor="@color/orange"
                 android:layout_marginTop="15dp"
+                android:layout_marginLeft="5dp"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -74,6 +76,8 @@
                 android:textColor="@color/orange"
                 android:layout_marginTop="15dp"
                 android:textSize="25dp"
+                android:layout_marginLeft="5dp"
+
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,10 +91,40 @@
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
+                android:layout_marginLeft="5dp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@+id/waitername_popup"
+                android:layout_centerHorizontal="true">
+                <Button
+                    android:text="Confirm"
+                    android:id="@+id/confirmBtn_popup"
+                    android:textSize="20dp"
+                    android:textColor="@color/antiquewhite"
+                    android:background="@drawable/rounded_corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/cancleBtn_popup"
+                     />
+                <Button
 
+                    android:id="@+id/cancleBtn_popup"
+                    android:text="Cancle"
+                    android:textSize="20dp"
+                    android:textColor="@color/antiquewhite"
+                    android:background="@drawable/rounded_corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentBottom="true"
+                   />
+
+            </RelativeLayout>
 
 
         </RelativeLayout>
@@ -107,23 +141,5 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:text="Confirm"
-            android:id="@+id/confirmBtn_popup"
-            android:textSize="20dp"
-            android:textColor="@color/antiquewhite"
-            android:background="@drawable/rounded_corner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom" />
-
-
-
-
-    </LinearLayout>
 
 </RelativeLayout>

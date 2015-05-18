@@ -29,6 +29,7 @@
     <LinearLayout
         android:layout_weight="1"
         android:orientation="horizontal"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -45,74 +46,94 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/titletextview"
+
                     android:text="Login To Account"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
                     android:textColor="@color/orange"
                     android:textStyle="italic"
                     android:textSize="25sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <EditText
-                    android:id="@+id/userName"
-                    android:layout_below="@id/titletextview"
-                    android:hint="Username"
+
+                <RelativeLayout
+                    android:id="@+id/editboxlayout"
                     android:layout_margin="20dp"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <EditText
-                    android:id="@+id/passWord"
-                    android:layout_below="@id/userName"
-                    android:hint="Password"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="Sign In"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <Button
-                    android:id="@+id/action_button"
-                    android:text="@string/sign_in"
-                    android:background="@drawable/rounded_corner"
-                    android:textColor="@color/antiquewhite"
-                    android:textSize="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:paddingLeft="32dp"
-                    android:paddingRight="32dp"
+                    android:layout_below="@id/titletextview"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/passWord"
-                    android:layout_toLeftOf="@+id/reset_button"
-                    android:layout_toStartOf="@+id/reset_button"
-                    android:layout_marginRight="28dp"
-                    android:layout_marginEnd="28dp" />
-                <Button
-                    android:id="@+id/reset_button"
-                    android:text="@string/reset"
-                    android:background="@drawable/rounded_corner"
-                    android:textColor="@color/antiquewhite"
-                    android:textSize="20dp"
-                    android:layout_gravity="center"
-                    android:paddingLeft="32dp"
-                    android:paddingRight="32dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/userName"
+                        android:hint="Username"
+                        android:textSize="20dp"
+                        android:textColor="@color/antiquewhite"
+                        android:layout_margin="20dp"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:id="@+id/passWord"
+                        android:layout_below="@id/userName"
+                        android:hint="Password"
+                        android:textSize="20dp"
+                        android:textColor="@color/antiquewhite"
+
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:imeActionId="@+id/login"
+                        android:imeActionLabel="Sign In"
+                        android:imeOptions="actionUnspecified"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_below="@+id/editboxlayout"
+
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/action_button"
-                    android:layout_alignRight="@+id/passWord"
-                    android:layout_alignEnd="@+id/passWord" />
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/action_button"
+                       android:text="@string/sign_in"
+                        android:background="@drawable/rounded_corner"
+                        android:textColor="@color/antiquewhite"
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:paddingLeft="32dp"
+                        android:paddingRight="32dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/reset_button"
+                        android:layout_toStartOf="@+id/reset_button"
+                        android:layout_marginRight="28dp"
+                        android:layout_marginEnd="28dp" />
+                    <Button
+                        android:id="@+id/reset_button"
+                        android:text="@string/reset"
+                        android:background="@drawable/rounded_corner"
+                        android:textColor="@color/antiquewhite"
+                        android:textSize="20dp"
+                        android:layout_gravity="center"
+                        android:paddingLeft="32dp"
+                        android:paddingRight="32dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/action_button"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+                </RelativeLayout>
 
             </RelativeLayout>
 
