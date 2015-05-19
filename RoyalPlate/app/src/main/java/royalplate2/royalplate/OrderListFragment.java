@@ -44,14 +44,6 @@ public class OrderListFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_orderlist, container, false);
 
-//        ParseObject poTest = new ParseObject("Table1");
-//        poTest.put("Test", "Mange Juice");
-//        poTest.put("Test", "Mil Juice");
-//        poTest.put("Test", "other Juice");
-//        poTest.put("Test", "barley Juice");
-
-//        poTest.saveInBackground();
-
         tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
 
 //        TextView tv = (TextView) v.findViewById(R.id.tableNo_textview);
@@ -116,7 +108,14 @@ public class OrderListFragment extends Fragment {
         ll.addView(displayList);
 
 
-
+//        SharedPreferences sharedPreferences;
+//
+//
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        Set<String> orderedItemList = sharedPreferences.getStringSet("OrderedItemList", new HashSet<String>());
+//
+//        JSONArray jsonArray = (JSONArray) orderedItemList;
+//
 
 
         final Button orderBtn = (Button) v.findViewById(R.id.orderbutton);
