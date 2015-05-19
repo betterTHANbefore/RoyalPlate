@@ -51,19 +51,33 @@
         <!---->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content" />-->
-
-    <ScrollView
-        android:layout_below="@id/tableNo_textview"
-        android:layout_margin="15dp"
+    <LinearLayout
+        android:id="@+id/ordereditemlayout"
+        android:layout_below="@+id/tableNo_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/linearlayout"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
 
-        </LinearLayout>
+        <ListView
+            android:id="@+id/ordereditems_listview"
+            android:layout_width="match_parent"
+            android:layout_height="182dp">
+
+        </ListView>
+    </LinearLayout>
+
+    <!--<ScrollView-->
+        <!--android:layout_below="@id/tableNo_textview"-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearlayout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_height="wrap_content">-->
+
+        <!--</LinearLayout>-->
 
 
 
@@ -96,7 +110,7 @@
 
         <!--</RelativeLayout>-->
 
-    </ScrollView>
+    <!--</ScrollView>-->
 
     <Button
         android:id="@+id/orderbutton"

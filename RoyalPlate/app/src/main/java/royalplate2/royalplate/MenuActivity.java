@@ -29,7 +29,6 @@ import java.util.List;
  */
 public class MenuActivity extends Activity implements SimpleGestureFilter.SimpleGestureListener {
 
-    ListView listview;
     GridView gridview;
     MainMenuAdapter mainMenuAdapter;
 
@@ -68,9 +67,8 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             // putExtra params need to be set up correctly accordingly what we need to pass
             intent.putExtra("title", "menuItemName");
             intent.putExtra("tableNo", "tableNum");
-
-           intent.putExtra("Item Name", itemName);
-           intent.putExtra("No of Items", noOfItems);
+            intent.putExtra("Item Name", itemName);
+            intent.putExtra("No of Items", noOfItems);
 
             startActivity(intent);
         }
@@ -88,17 +86,23 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
        // tableNumView = (TextView) findViewById(R.id.table_num_view);
 
+        /********************************************************
+         * Loads MainMenu Items name from parse using MenuAdapter
+         ********************************************************/
         loadMainMenuItems();
+
+
+
         SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
         itemName = shared.getString("Item Name", "");
         noOfItems = shared.getString("No of Items", "");
 
-        Log.i("Test1", "MenuActivit  "   + itemName + "   "+ noOfItems);
+        Log.i("Tag", "MenuActivity  "   + itemName + "   "+ noOfItems);
 
         gridview = (GridView) findViewById(R.id.menulist_right);
+
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-      //  listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -113,15 +117,14 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
                 gridviewIntent.putExtra("title", menuItemName);
                 gridviewIntent.putExtra("tableNo", tableNum);
-
                 gridviewIntent.putExtra("Item Name", itemName);
                 gridviewIntent.putExtra("No of Items", noOfItems);
 
                 startActivity(gridviewIntent);
 
-                Log.v("value ", "result is " + menuItemName);
+                Log.v("tag ", "result is " + menuItemName);
 
-                Log.i("Test1", "MenuActivit  "   + itemName + "   "+ noOfItems);
+                Log.i("Tag", "MenuActivit_2  "   + itemName + "   "+ noOfItems);
 
             }
         });

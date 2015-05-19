@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.ParseObject;
@@ -25,7 +26,7 @@ public class OrderListFragment extends Fragment {
     private View v;
     private TextView tv;
     TextView displayList;
-//    ListView lv;
+    ListView ordereditemslistview;
 
 
     //String tableNumStr;
@@ -44,6 +45,9 @@ public class OrderListFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_orderlist, container, false);
 
+        tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
+
+
 //        ParseObject poTest = new ParseObject("Table1");
 //        poTest.put("Test", "Mange Juice");
 //        poTest.put("Test", "Mil Juice");
@@ -52,7 +56,6 @@ public class OrderListFragment extends Fragment {
 
 //        poTest.saveInBackground();
 
-        tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
 
 //        TextView tv = (TextView) v.findViewById(R.id.tableNo_textview);
 //        tv.setText("Table " + tableNumStr);
@@ -96,25 +99,25 @@ public class OrderListFragment extends Fragment {
 
 
          */
-        LinearLayout ll = (LinearLayout) v.findViewById(R.id.linearlayout);
+       // LinearLayout ll = (LinearLayout) v.findViewById(R.id.linearlayout);
 
 
        // TextView displayList = new TextView(getActivity());
-        displayList = new TextView(getActivity());
-        displayList.setTextSize(15);
-        displayList.setTextColor(getResources().getColor(R.color.antiquewhite));
-        displayList.setTypeface(null,Typeface.BOLD);
-
-        privous = displayList.getText().toString();
-
-      //  if(!privous.equals(null) && )
-
-
-
-        displayList.setText(noOfItems+ "     " + itemName );
-
-        ll.addView(displayList);
-
+//        displayList = new TextView(getActivity());
+//        displayList.setTextSize(15);
+//        displayList.setTextColor(getResources().getColor(R.color.antiquewhite));
+//        displayList.setTypeface(null,Typeface.BOLD);
+//
+//        privous = displayList.getText().toString();
+//
+//      //  if(!privous.equals(null) && )
+//
+//
+//
+//        displayList.setText(noOfItems+ "     " + itemName );
+//
+//        ll.addView(displayList);
+//
 
 
 
@@ -130,6 +133,16 @@ public class OrderListFragment extends Fragment {
                 orderBtnIntent.putExtra("tableNo", tableNumStr);
 
 //                orderBtnIntent.putExtra("table no", 1);
+
+
+
+
+                // pass whole list to CHEF
+
+
+
+
+
                 String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
                 orderBtnIntent.putExtra("table no", tableNum);
 

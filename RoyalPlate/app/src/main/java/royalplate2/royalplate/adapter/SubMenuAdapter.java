@@ -29,10 +29,10 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
 
     Context context;
     List<ParseObject> menuItems;
-    double itemcost;
-    String tableNo;
     SubMenuActivity subMenuActivity;
 
+    double itemcost;
+    String tableNo;
     //TextView noOfItemsTextview;
 //  EditText noOfItemsEditText;
     List<OrderedItem> orderedList;
@@ -46,7 +46,7 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
     public SubMenuAdapter(Context context, List<ParseObject> objects, double itemcost, String tableNo, SubMenuActivity subMenuActivity) {
 //public SubMenuAdapter(Context context, List<ParseObject> objects, double itemcost, String tableNo) {
 
-            super(context, R.layout.listview_item, objects);
+         super(context, R.layout.listview_item, objects);
         this.context = context;
         this.menuItems = objects;
         this.itemcost = itemcost;
@@ -67,11 +67,11 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.listview_item, parent, false);
-//                        final View view = inflater.inflate(R.layout.listview_item, parent, false);
 
         }
         // view id
         final TextView itemIdTextView = (TextView) view.findViewById(R.id.itemId);
+
         getItemID = Integer.toString(((SubMenuData) (menuItems.get(position))).getID());
         itemIdTextView.setText(getItemID);
 
@@ -143,8 +143,9 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
 
                 final TextView itempriceTextview = (TextView) finalView.findViewById(R.id.cost);
                 double eachItemcost = price * noofitems;
+                final String itemcost = String.format("%.2f", eachItemcost);
 
-                itempriceTextview.setText(String.format("%.2f", eachItemcost));
+                itempriceTextview.setText(itemcost);
 
                 // store Table 1, item name, price and no of items
 
@@ -177,25 +178,15 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
                             String itemName = itemNameTextView.getText().toString();
                             String noOfItem = s.toString();
 
-                            Log.i("test1 " , "SubAdapter   " + itemName + "    " + noOfItem);
-                            subMenuActivity.saveOrderedList(itemName, noOfItem);
+                            Log.i("tag" , "SubAdapter   " + noOfItem  + "    " + itemName+ "  " + itemcost);
+
+                            subMenuActivity.saveOrderedList( noOfItem, itemName, itemcost);
 
 
                         }
 
                     }
                 });
-
-
-
-
-
-
-
-
-
-
-
 
             }
 

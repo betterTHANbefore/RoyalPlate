@@ -30,6 +30,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
     ListView listview;
     SubMenuAdapter menuAdapter;
+    SharedPreferences shared;
     String tableNo;
     String itemName;
     String noOfItems;
@@ -91,6 +92,9 @@ Log.i("LOG", itemName +  "   " + noOfItems);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.submenu_activity);
         listview = (ListView) findViewById(R.id.itemlist);
+
+        shared = PreferenceManager.getDefaultSharedPreferences(this);
+
 
         TextView subMenuTitle;
         TextView tableNo;
@@ -211,14 +215,6 @@ Log.i("LOG", itemName +  "   " + noOfItems);
                 subMenuTitle.setText(getIntent().getExtras().getString("To go Main Manu"));
         }
 
-//        goToMenuBtn = (Button) findViewById(R.id.mainMenuBtn);
-//        goToMenuBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent goToMenuIntent = new Intent(getApplicationContext(), MenuActivity.class);
-//                startActivity(goToMenuIntent);
-//            }
-//        });
 
         // this contains OrderListFragment class
         FragmentManager fm = getFragmentManager();
@@ -260,25 +256,17 @@ Log.i("LOG", itemName +  "   " + noOfItems);
     public SubMenuActivity(){}
 
 
-    public void saveOrderedList(String itemname, String noOfItems){
+    public void saveOrderedList( String noOfItems,String itemname, String itemcost){
 
         // getting data value from SubMenuAdapter
         // passing data value to OrderListFragment class
-        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
 
         SharedPreferences.Editor editor = shared.edit();
-        editor.putString("Item Name", itemname);
         editor.putString("No of Items", noOfItems);
-        editor.apply();
+        editor.putString("Item Name", itemname);
+        editor.putString("Item Cost", itemcost);
 
-//
-//        Intent intent = new Intent(this, MenuActivity.class);
-//        intent.putExtra("Item Name", itemname);
-//        intent.putExtra("No of Items", noOfItems);
-//
-//        startActivity(intent);
-//        this.itemName = itemname;
-//        this.noOfItems = noOfItems;
+        editor.apply();
 
 
     }

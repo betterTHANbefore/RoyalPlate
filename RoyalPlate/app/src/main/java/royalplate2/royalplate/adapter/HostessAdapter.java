@@ -26,7 +26,7 @@ public class HostessAdapter extends ArrayAdapter<ParseObject> {
     List<ParseObject> hostessData;
 
     public HostessAdapter(Context context, List<ParseObject> objects){
-//        super(context, R.layout.listview_tables,objects);
+//        super(context, R.layout.listview_tablescheckbox,objects);
         super(context, 0,objects);
 
         this.context = context;
@@ -49,7 +49,7 @@ public class HostessAdapter extends ArrayAdapter<ParseObject> {
 
             // 0 --> table no
             if(getItemViewType(position)== 0) {
-               view = inflater.inflate(R.layout.listview_tables,null, false);
+               view = inflater.inflate(R.layout.listview_tablescheckbox,null, false);
 
 
                 final Button tableButton = (Button) view.findViewById((R.id.tableBtn));
