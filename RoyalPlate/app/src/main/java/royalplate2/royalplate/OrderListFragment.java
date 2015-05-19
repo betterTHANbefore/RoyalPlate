@@ -56,7 +56,6 @@ public class OrderListFragment extends Fragment {
 
 //        poTest.saveInBackground();
 
-
 //        TextView tv = (TextView) v.findViewById(R.id.tableNo_textview);
 //        tv.setText("Table " + tableNumStr);
 
@@ -119,7 +118,14 @@ public class OrderListFragment extends Fragment {
 //        ll.addView(displayList);
 //
 
-
+//        SharedPreferences sharedPreferences;
+//
+//
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        Set<String> orderedItemList = sharedPreferences.getStringSet("OrderedItemList", new HashSet<String>());
+//
+//        JSONArray jsonArray = (JSONArray) orderedItemList;
+//
 
 
         final Button orderBtn = (Button) v.findViewById(R.id.orderbutton);
