@@ -48,7 +48,6 @@ public class TableListFragment extends Fragment {
     private void loadTables() {
         final ParseQuery<ParseObject> tables = ParseQuery.getQuery("WaiterTable");
 //        final ParseQuery<ParseObject> tables = ParseQuery.getQuery("TablesParse");
-//        Log.i("TableListFragment", "Working");
         tables.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> tables, ParseException e) {

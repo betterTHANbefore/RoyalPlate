@@ -1,28 +1,28 @@
 package royalplate2.royalplate;
 
-        import android.app.Application;
-        import android.util.Log;
+import android.app.Application;
+import android.util.Log;
 
-        import com.parse.Parse;
-        import com.parse.ParseObject;
-        import royalplate2.royalplate.data.AppertizerMenuData;
-        import royalplate2.royalplate.data.BurgerMenuData;
-        import royalplate2.royalplate.data.ChefSideOrderedListData;
-        import royalplate2.royalplate.data.DessertsMenuData;
-        import royalplate2.royalplate.data.DrinkMenuData;
-        import royalplate2.royalplate.data.EntreesMainData;
-        import royalplate2.royalplate.data.EntreesMenuData;
-        import royalplate2.royalplate.data.FreshSaladsData;
-        import royalplate2.royalplate.data.HaveitallMenuData;
-        import royalplate2.royalplate.data.KidsMenuData;
-        import royalplate2.royalplate.data.LunchComboMenuData;
-        import royalplate2.royalplate.data.MainMenuData;
-        import royalplate2.royalplate.data.NewBarMenuData;
-        import royalplate2.royalplate.data.SandwichMenuData;
-        import royalplate2.royalplate.data.TablesData;
-        import royalplate2.royalplate.data.TwoTwentyData;
-        import royalplate2.royalplate.data.WaiterData;
-        import royalplate2.royalplate.data.WaiterTableData;
+import com.parse.Parse;
+import com.parse.ParseObject;
+import royalplate2.royalplate.data.AppertizerMenuData;
+import royalplate2.royalplate.data.BurgerMenuData;
+import royalplate2.royalplate.data.ChefSideOrderedListData;
+import royalplate2.royalplate.data.DessertsMenuData;
+import royalplate2.royalplate.data.DrinkMenuData;
+import royalplate2.royalplate.data.EntreesMainData;
+import royalplate2.royalplate.data.EntreesMenuData;
+import royalplate2.royalplate.data.FreshSaladsData;
+import royalplate2.royalplate.data.HaveitallMenuData;
+import royalplate2.royalplate.data.KidsMenuData;
+import royalplate2.royalplate.data.LunchComboMenuData;
+import royalplate2.royalplate.data.MainMenuData;
+import royalplate2.royalplate.data.NewBarMenuData;
+import royalplate2.royalplate.data.SandwichMenuData;
+import royalplate2.royalplate.data.TablesData;
+import royalplate2.royalplate.data.TwoTwentyData;
+import royalplate2.royalplate.data.WaiterData;
+import royalplate2.royalplate.data.WaiterTableData;
 
 /**
  * Created by operamac on 4/14/15.

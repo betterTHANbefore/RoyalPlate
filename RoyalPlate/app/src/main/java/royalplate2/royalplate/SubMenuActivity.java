@@ -73,7 +73,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
             intent.putExtra("Item Name", itemName );
             intent.putExtra("No of Items", noOfItems);
 
-Log.i("LOG", itemName +  "   " + noOfItems);
+            Log.i("LOG", itemName +  "   " + noOfItems);
 
 
             startActivity(intent);

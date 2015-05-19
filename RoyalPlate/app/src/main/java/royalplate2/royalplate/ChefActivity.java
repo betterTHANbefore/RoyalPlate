@@ -29,15 +29,14 @@ public class ChefActivity extends ActionBarActivity  {
         // this contains OrderListFragment class
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.fragmentContainer_chef, new TableListFragment()).commit();
-
     }
 
-    public void updateTableInfo(String tableId) {
-        loadOrderedItems(tableId);
+    public void updateTableInfo(String tableNum) {
+        loadOrderedItems(tableNum);
     }
 
-    private void loadOrderedItems(String str) {
-        final ParseQuery<ParseObject> orderedItems = ParseQuery.getQuery(str);
+    private void loadOrderedItems(String tableNum) {
+        final ParseQuery<ParseObject> orderedItems = ParseQuery.getQuery(tableNum);
         orderedItems.findInBackground(new FindCallback<ParseObject>() {
 
             @Override
