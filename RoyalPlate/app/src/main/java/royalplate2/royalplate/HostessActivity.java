@@ -61,8 +61,7 @@ public class HostessActivity extends Activity implements OnClickListener{
     Button assignedButton;
     SharedPreferences sharedtable;
     SharedPreferences sharedwaiter;
-//    SharedPreferences.Editor waitereditor;
-//    SharedPreferences.Editor tableeditor;
+
     Map<String, Set<String>> waitertables;
     //ParseObject waitertable;
     TextView displayGuestName;
@@ -144,19 +143,15 @@ public class HostessActivity extends Activity implements OnClickListener{
                 }
                 else {
                     assignedButton.setEnabled(true);
-//                    tablelistview.setEnabled(true);
-                   // waiterlistview.setEnabled(true);
                     assignedButton.setBackgroundResource(R.drawable.checkbox_background);
                     assignedButton.setPadding(80,0,80,0);
                     gutestNoedit.setEnabled(true);
 
                 }
 
-
             }
         });
         assignedButton.setOnClickListener(this);
-
 
         gutestNoedit = (EditText) findViewById(R.id.guestnoEdit);
       //  assignedButton.setOnClickListener(this);
@@ -190,16 +185,13 @@ public class HostessActivity extends Activity implements OnClickListener{
      **********************************************************/
 
     private void loadWaiters(){
-        //final  ParseQuery<WaiterData> waiters = ParseQuery.getQuery("User");
-        //final ParseQuery<WaiterData> waiters = ParseQuery.getQuery("WaiterAssignedTables");
 
       final ParseQuery<WaiterData> waiters = ParseQuery.getQuery("WaiterParse");
         waiters.findInBackground(new FindCallback<WaiterData>() {
 
             @Override
             public void done(List<WaiterData> waiters, ParseException e) {
-//                waiterAdapter = new WaiterAdapter(HostessActivity.this, waiters,getBaseContext());
-                waiterAdapter = new WaiterAdapter(getBaseContext(), waiters,HostessActivity.this);
+                waiterAdapter = new WaiterAdapter(getBaseContext(), waiters, HostessActivity.this);
 
                 waiterlistview.setAdapter(waiterAdapter);
 
@@ -216,8 +208,6 @@ public class HostessActivity extends Activity implements OnClickListener{
 
             @Override
             public void done(List<TablesData> tables, ParseException e) {
-               //tableAdapter = new TableAdapter(HostessActivity.this, tables);
-
                 tableAdapter = new TableAdapter(getBaseContext(), tables, HostessActivity.this);
                 tablelistview.setAdapter(tableAdapter);
 
@@ -266,35 +256,23 @@ public class HostessActivity extends Activity implements OnClickListener{
     /************************************************************
      * Retrieve data values from the TableAdapter class
      **********************************************************/
-//    public void saveTableNumber(HashSet<String> tablelist){
     public void saveTableNumber(String tablelist){
 
-
-//       sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
-//        sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
-
-
        SharedPreferences.Editor tableeditor = sharedtable.edit();
-        //tableeditor = sharedtable.edit();
-        tableeditor.putString("TableNo", tablelist);
-       // tableeditor.putStringSet("TableNo", tablelist);
 
-        tableeditor.apply();
+            tableeditor.putString("TableNo", tablelist);
+
+            tableeditor.apply();
     }
 
     /************************************************************
      * Retrieve data values from the WaiterAdapter class
      **********************************************************/
 
-//    public void saveWaiterName(HashSet<String> waiternameset){
     public void saveWaiterName(String waiternameset){
 
+     SharedPreferences.Editor waitereditor = sharedwaiter.edit();
 
-
-
-        SharedPreferences.Editor waitereditor = sharedwaiter.edit();
-       // waitereditor = sharedwaiter.edit();
-//        waitereditor.putStringSet("WaiterName", waiternameset);
         waitereditor.putString("WaiterName", waiternameset);
 
         waitereditor.apply();
@@ -320,33 +298,6 @@ public class HostessActivity extends Activity implements OnClickListener{
         final String waitrename_shared = sharedwaiter.getString("WaiterName", null);
         final String tableno_shared = sharedtable.getString("TableNo", null);
 
-//         if(waitrename_shared.equals(null) || tableno_shared.equals(null)){
-//
-//             Toast.makeText(HostessActivity.this, "Table or Waiter entry is empty.", Toast.LENGTH_LONG).show();
-//
-//         }
-//         else {
-             // Log.i("Tag", "name and no  " + getguestname + " " + getnoOfguest);
-
-
-             /**************************************************************
-              * Initialize all the values. Unchecked all the checkboxes
-              **************************************************************/
-             //  Log.i("Tag", "HA:  " + sharedtable.getString("TableNo", null));
-//
-             //    Log.i("Tag", "HA:  " + sharedwaiter.getString("WaiterName", null));
-//
-
-//        Log.i("Tag", "HA:  " + sharedtable.getStringSet("TableNo", new HashSet<String>()));
-//
-//        Log.i("Tag", "HA:  " + sharedwaiter.getStringSet("WaiterName", new HashSet<String>()));
-//
-//        final Set<String> tableSet = sharedtable.getStringSet("TableNo", new HashSet<String>());
-//        final Set<String> waiterSet = sharedwaiter.getStringSet("WaiterName", new HashSet<String>());
-
-//        tableno = sharedtable.getString("TableNo",null);
-//
-//       waitername = sharedwaiter.getString("WaiterName",null);
 
              /**************************************************************
               * Popup Window display new assigned guest information
@@ -356,7 +307,6 @@ public class HostessActivity extends Activity implements OnClickListener{
              final PopupWindow popupwindow = new PopupWindow(popupView, 330, 400, true);
 
              popupwindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-             //  popupwindow.setTouchable(true);
              popupwindow.setFocusable(true);
              popupwindow.setOutsideTouchable(true);
              popupwindow.setContentView(popupView);
@@ -378,18 +328,6 @@ public class HostessActivity extends Activity implements OnClickListener{
              ((TextView) popupwindow.getContentView().findViewById(R.id.waitername_popup))
                      .setText("Waiter:  " + waitrename_shared);
 
-//        for(String table : tableSet) {
-//            Log.i("Tag", "TSet " + table);
-//
-//            ((TextView)popupwindow.getContentView().findViewById(R.id.tableno_popup)).setText("Table No:  "+table);
-//
-//        }
-//        for(String waiter : waiterSet) {
-//            Log.i("Tag", "WSet " + waiter);
-//            ((TextView)popupwindow.getContentView().findViewById(R.id.waitername_popup)).setText("Waiter:  "+ waiter);
-//
-//        }
-
 
              /************************************************************
               * Confirm Button listener from the PopupWindow
@@ -400,31 +338,22 @@ public class HostessActivity extends Activity implements OnClickListener{
                  @Override
                  public void onClick(View v) {
 
-//                     if (((TextView) popupwindow.getContentView().findViewById(R.id.guestname_popup))
-//                             .getText().equals(null) ||
-//                             ((TextView) popupwindow.getContentView().findViewById(R.id.waitername_popup))
-//                                     .getText().equals(null)) {
-//                         Toast.makeText(HostessActivity.this, "Table or Waiter entry is empty.", Toast.LENGTH_LONG).show();
-//
-//
-//                     } else {
+                 /*****************************************
+                  * Store data on WaiterTable class on parse
+                  *****************************************/
+                 waitertable = new WaiterTableData();
+                 waitertable.setWaiter(waitrename_shared);
+                 waitertable.setTable(tableno_shared);
+                 waitertable.saveInBackground();
 
-                         /*****************************************
-                          * Store data on WaiterTable class on parse
-                          *****************************************/
-                         waitertable = new WaiterTableData();
-                         waitertable.setWaiter(waitrename_shared);
-                         waitertable.setTable(tableno_shared);
-                         waitertable.saveInBackground();
+                 popupwindow.dismiss();
 
-                  //   }
-                     guestNameedit.setText("");
-                     gutestNoedit.setText(" ");
+                 guestNameedit.setText("");
+                 gutestNoedit.setText(" ");
 
-                     popupwindow.dismiss();
 
-                     sharedwaiter.edit().clear().apply();
-                     sharedtable.edit().clear().apply();
+                 sharedwaiter.edit().clear().apply();
+                 sharedtable.edit().clear().apply();
 
                  }
 
@@ -449,7 +378,7 @@ public class HostessActivity extends Activity implements OnClickListener{
                      sharedtable.edit().clear().apply();
                  }
              });
-       //  }
+
             /************************************************************
              * set checkbox to unchecked in both the adapters
              ***********************************************************/
