@@ -39,6 +39,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
     private String tableNum;
     private String itemName;
     private String noOfItems;
+    private String itemCost;
 
     private SimpleGestureFilter detector;
     private boolean leftSwipeFlag = false;
@@ -94,10 +95,12 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
 
         SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
-        itemName = shared.getString("Item Name", "");
         noOfItems = shared.getString("No of Items", "");
+        itemName = shared.getString("Item Name", "");
+        itemCost = shared.getString("Item Cost","");
 
-        Log.i("Tag", "MenuActivity  "   + itemName + "   "+ noOfItems);
+
+        Log.i("Tag", "MenuActivity  "   + itemName + "   "+ noOfItems + " " + itemCost);
 
         gridview = (GridView) findViewById(R.id.menulist_right);
 
@@ -119,12 +122,13 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
                 gridviewIntent.putExtra("tableNo", tableNum);
                 gridviewIntent.putExtra("Item Name", itemName);
                 gridviewIntent.putExtra("No of Items", noOfItems);
+                gridviewIntent.putExtra("Item Cost", itemCost);
 
                 startActivity(gridviewIntent);
 
-                Log.v("tag ", "result is " + menuItemName);
 
-                Log.i("Tag", "MenuActivit_2  "   + itemName + "   "+ noOfItems);
+                Log.i("Tag", "MenuActivit_2  "    + itemName + "   "+ noOfItems + " " + itemCost);
+
 
             }
         });

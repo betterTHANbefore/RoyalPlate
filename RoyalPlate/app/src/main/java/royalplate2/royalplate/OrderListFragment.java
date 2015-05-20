@@ -35,6 +35,7 @@ public class OrderListFragment extends Fragment {
 
     String itemName;
     String noOfItems;
+    String itemCost;
 
     private String tableNumStr;
     private String privous = null;
@@ -43,9 +44,14 @@ public class OrderListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
+        ordereditemslistview = (ListView) getActivity().findViewById(R.id.ordereditems_listview);
         v = inflater.inflate(R.layout.fragment_orderlist, container, false);
 
         tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
+        itemName = getActivity().getIntent().getExtras().getString("Item Name");
+        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
+        itemCost =  getActivity().getIntent().getExtras().getString("Item Cost");
 
 
 //        ParseObject poTest = new ParseObject("Table1");
@@ -79,13 +85,20 @@ public class OrderListFragment extends Fragment {
 //     String   noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
 //        Bundle arg = getArguments();
 //        Log.i("ARGUMENT", arg.toString() );
-        itemName = getActivity().getIntent().getExtras().getString("Item Name");
-        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
+//        itemName = getActivity().getIntent().getExtras().getString("Item Name");
+//        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
+//
+
+
+
+
+
+
 
 //        itemName = getActivity().getIntent().getExtras().getString("tableNo");
 //        noOfItems = getActivity().getIntent().getExtras().getString("title");
 
-        Log.i("OF", itemName + "  "+ noOfItems);
+        Log.i("OF", itemName + "  "+ noOfItems + " "+  itemCost);
 
 //        noOfitemsTextview.setText(noOfItems);
 //        listOfitemsTextview.setText(itemName);
@@ -135,6 +148,7 @@ public class OrderListFragment extends Fragment {
 
                 // temporaly going back to MenuActivity
                 Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
+            //    Intent orderBtnIntent = new Intent(v.getContext(), ChefActivity.class);
 
                 orderBtnIntent.putExtra("tableNo", tableNumStr);
 

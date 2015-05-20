@@ -31,25 +31,31 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
     List<ParseObject> menuItems;
     SubMenuActivity subMenuActivity;
 
-    double itemcost;
+    double itemcost_db;
+    String itemcost_st;
     String tableNo;
     //TextView noOfItemsTextview;
 //  EditText noOfItemsEditText;
     List<OrderedItem> orderedList;
-//    TextView itemTextView;
+    TextView itemIdTextView;
+    TextView itemNameTextView;
+    TextView itemPriceTextView;
+
+    TextView itemCostTextView;
+    EditText noOfItemEditText;
 
 
     //Map<String, Ordered> noOfItems = new HashMap<String, Ordered>();
 
     // Context is the SubMenuActivity
     // objects is the list of items
-    public SubMenuAdapter(Context context, List<ParseObject> objects, double itemcost, String tableNo, SubMenuActivity subMenuActivity) {
+    public SubMenuAdapter(Context context, List<ParseObject> objects, String tableNo, SubMenuActivity subMenuActivity) {
+//public SubMenuAdapter(Context context, List<ParseObject> objects, double itemcost, String tableNo) {
 //public SubMenuAdapter(Context context, List<ParseObject> objects, double itemcost, String tableNo) {
 
          super(context, R.layout.listview_item, objects);
         this.context = context;
         this.menuItems = objects;
-        this.itemcost = itemcost;
         this.tableNo = tableNo;
         this.subMenuActivity = subMenuActivity;
     }
@@ -60,7 +66,7 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
 
         final String getItemPrice;
         String getItemID;
-        final TextView itemNameTextView;
+       // final TextView itemNameTextView;
 
         View view = convertView;
         if(convertView == null ) {
@@ -70,10 +76,10 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
 
         }
         // view id
-        final TextView itemIdTextView = (TextView) view.findViewById(R.id.itemId);
+        itemIdTextView = (TextView) view.findViewById(R.id.itemId);
 
-        getItemID = Integer.toString(((SubMenuData) (menuItems.get(position))).getID());
-        itemIdTextView.setText(getItemID);
+            getItemID = Integer.toString(((SubMenuData) (menuItems.get(position))).getID());
+            itemIdTextView.setText(getItemID);
 
         // view ItemName
 
@@ -81,43 +87,10 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
 
         itemNameTextView.setText(((SubMenuData) (menuItems.get(position))).getName());
 
-        final TextView priceTextView = (TextView) view.findViewById(R.id.itemPrice);
+        itemPriceTextView = (TextView) view.findViewById(R.id.itemPrice);
         getItemPrice = Double.toString(((SubMenuData) (menuItems.get(position))).getPrice());
-        priceTextView.setText(getItemPrice);
+        itemPriceTextView.setText(getItemPrice);
 
-
-//        final EditText noOfItemsEditText = (EditText) view.findViewById(R.id.no_of_items);
-//
-//            noOfItemsEditText.setText(String.valueOf(0));
-//            noOfItemsEditText.addTextChangedListener(new TextWatcher() {
-//            private String lastText;
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-//            //
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//              /*
-//                if privious is not equal to last then only update esle NOOOO
-//                 */
-//                if (lastText != s.toString()){
-//
-//
-//                    String itemName = itemNameTextView.getText().toString();
-//                    String noOfItem = s.toString();
-//
-//                    Log.i("test1 " , "SubAdapter   " + itemName + "    " + noOfItem);
-//                    subMenuActivity.saveOrderedList(itemName, noOfItem);
-//
-//
-//                }
-//
-//            }
-//        });
-//
 
         /******
          * select no of items from the number picker
@@ -125,68 +98,59 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
         NumberPicker np = (NumberPicker) view.findViewById(R.id.numberPicker);
 
         np.setMinValue(0);
-        np.setMaxValue(10);
+        np.setMaxValue(20);
         np.setWrapSelectorWheel(false);
 
         final View finalView = view;
         np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                final EditText noOfItemsEditText = (EditText) finalView.findViewById(R.id.no_of_items);
-                noOfItemsEditText.setText(String.valueOf(newVal));
+
+            final EditText noOfItemsEditText = (EditText) finalView.findViewById(R.id.no_of_items);
+            noOfItemsEditText.setText(String.valueOf(newVal));
 
 
-                int noofitems = Integer.parseInt(noOfItemsEditText.getText().toString());
-                double price = Double.parseDouble(getItemPrice); // give 2 decimal places
+            int noofitems = Integer.parseInt(noOfItemsEditText.getText().toString());
+            double price = Double.parseDouble(getItemPrice); // give 2 decimal places
 
-                //set the item price = (price * no of items)
+            //set the item price = (price * no of items)
 
-                final TextView itempriceTextview = (TextView) finalView.findViewById(R.id.cost);
-                double eachItemcost = price * noofitems;
-                final String itemcost = String.format("%.2f", eachItemcost);
+          //  final TextView itempriceTextview = (TextView) finalView.findViewById(R.id.cost);
+            double eachItemcost = price * noofitems;
+            final String cost = String.format("%.2f", eachItemcost);
+            itemCostTextView = (TextView) finalView.findViewById(R.id.itemcosttextview);
 
-                itempriceTextview.setText(itemcost);
-
-                // store Table 1, item name, price and no of items
-
-                // into HashMap
-                // display the list here
+            itemCostTextView.setText(cost);
 
 
-                // creates dynamic scrollView in SubmenuActivity to display
+            noOfItemsEditText.addTextChangedListener(new TextWatcher() {
+                private String lastText;
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                //
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                    if (!s.toString().equals(null)){
 
 
+                        String itemName = itemNameTextView.getText().toString();
+                        String noOfItem = s.toString();
+                        String itemcost =  itemCostTextView.getText().toString();
 
-             //   noOfItemsEditText.setText(String.valueOf(0));
-                noOfItemsEditText.addTextChangedListener(new TextWatcher() {
-                    private String lastText;
+                        Log.i("tag" , "SubAdapter   " + noOfItem  + "    " + itemName+ "  " + itemcost);
 
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                    //
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) { }
+                        subMenuActivity.saveOrderedList( noOfItem, itemName, itemcost);
 
-                    @Override
-                    public void afterTextChanged(Editable s) {
-              /*
-                if privious is not equal to last then only update esle NOOOO
-                 */
-                        if (!s.toString().equals(null)){
-
-
-                            String itemName = itemNameTextView.getText().toString();
-                            String noOfItem = s.toString();
-
-                            Log.i("tag" , "SubAdapter   " + noOfItem  + "    " + itemName+ "  " + itemcost);
-
-                            subMenuActivity.saveOrderedList( noOfItem, itemName, itemcost);
-
-
-                        }
 
                     }
-                });
+
+                }
+            });
 
             }
 

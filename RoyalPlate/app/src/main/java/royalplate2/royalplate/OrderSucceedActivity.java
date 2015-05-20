@@ -56,7 +56,7 @@ public class OrderSucceedActivity extends Activity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         orderedItemList = sharedPreferences.getStringSet("OrderedItemSet", new HashSet<String>());
 //        ArrayList<String> listBack = new ArrayList<String>(orderedItemList);
-
+//        {{str, str}, (str, sr)}
 //        for (String s: orderedItemList)
         Log.i("JSON in OrderLaLa", orderedItemList.toString());
 
