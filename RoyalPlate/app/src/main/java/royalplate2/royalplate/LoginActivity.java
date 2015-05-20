@@ -30,9 +30,15 @@ public class LoginActivity extends Activity {
     private EditText usernameView;
     private EditText passwordView;
     private Button resetBtn;
+    private Button hostessButton;
+    private Button waiterButton;
+    private Button chefButton;
+    Intent intent;
+
     WaiterData waitertables;
 
     String username;
+
     @Override
     public void onCreate(Bundle savedInstanceState ) {
 
@@ -42,6 +48,11 @@ public class LoginActivity extends Activity {
         // Set up the login form.
         usernameView = (EditText) findViewById(R.id.userName);
         passwordView = (EditText) findViewById(R.id.passWord);
+
+        /***************************************************************************
+         * Reset button will reset username and password field.
+         **************************************************************************/
+
         resetBtn = (Button) findViewById(R.id.reset_button);
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +61,11 @@ public class LoginActivity extends Activity {
                 passwordView.setText("");
             }
         });
-        // Set up the submit button click handler
+
+        /***************************************************************************
+         * Set up the submit button click handler
+         **************************************************************************/
+
         findViewById(R.id.action_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // Validate the log in data
@@ -70,19 +85,28 @@ public class LoginActivity extends Activity {
                 }
                 validationErrorMessage.append(getResources().getString(R.string.error_end));
 
-                // If there is a validation error, display the error
+                /***************************************************************************
+                 * If there is a validation error, display the error
+                 **************************************************************************/
+
                 if (validationError) {
                     Toast.makeText(LoginActivity.this, validationErrorMessage.toString(), Toast.LENGTH_LONG)
                             .show();
                     return;
                 }
+                /***************************************************************************
+                 * Set up progress dialog
+                 **************************************************************************/
 
-                // Set up a progress dialog
                 final ProgressDialog dlg = new ProgressDialog(LoginActivity.this);
                 dlg.setTitle("Please wait.");
                 dlg.setMessage("Logging in.  Please wait.");
                 dlg.show();
-                // Call the Parse login method
+
+                /***************************************************************************
+                 * Call the Parse login method
+                 **************************************************************************/
+
                 ParseUser.logInInBackground(usernameView.getText().toString(), passwordView.getText()
                         .toString(), new LogInCallback() {
 
@@ -98,16 +122,15 @@ public class LoginActivity extends Activity {
 //                            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
 
                           username = usernameView.getText().toString();
-                            /***************************
-                             * store username on parse
-                             *****************************/
-
-
+                        /***************************************************************************
+                         * If Username exists on WaiterParse Class then only it will add to
+                         * WaiterTable Class on parse.
+                         **************************************************************************/
 
                         ParseQuery<ParseObject> query = ParseQuery.getQuery("WaiterParse");
-                         //   ParseQuery<ParseUser> query = ParseUser.getQuery();
-                            query.whereEqualTo("WaiterName", username);
-//
+
+                        query.whereEqualTo("WaiterName", username);
+
                         query.findInBackground(new FindCallback<ParseObject>() {
 
                             @Override
@@ -115,28 +138,12 @@ public class LoginActivity extends Activity {
 
                                 if(e!= null || waiternamelist.size()==0) {
 
-//                                    for(int i=0; i<waiternamelist.size(); i++){
-//                                        if(username != waiternamelist.get(i).toString()){
-
-////                                    // username does not exist
-////                                    // so add
-//                                            waitertables = new WaiterData();
-//                                            waitertables.setWaiter(username);
-//                                            waitertables.saveInBackground();
-//                                         //   Toast.makeText(LoginActivity.this, username + " added!", Toast.LENGTH_LONG).show();
-
-                                       // }
-                                  //  }
-
-
-                                   // username does not exist
-//                                    // so add
                                     waitertables = new WaiterData();
                                     waitertables.setWaiter(username);
                                     waitertables.saveInBackground();
-                                  Toast.makeText(LoginActivity.this, username + " added!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, username + " added!", Toast.LENGTH_LONG).show();
                                 }
-//
+
                             }
 
                         });
@@ -150,6 +157,40 @@ public class LoginActivity extends Activity {
                     }
 
                 });
+            }
+        });
+
+        /*******************************************************************************************
+         *  H = Hostess, W= Waiter, C= Chef nevigate buttons
+         /******************************************************************************************/
+
+        hostessButton = (Button) findViewById(R.id.h_hostessbtn);
+        hostessButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                intent = new Intent(getApplicationContext(), HostessActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        waiterButton = (Button) findViewById(R.id.w_waitersbtn);
+        waiterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                intent = new Intent(getApplicationContext(),  SignupOrLoginActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        chefButton = (Button) findViewById(R.id.c_chefbtn);
+        chefButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), ChefActivity.class);
+                startActivity(intent);
             }
         });
     }

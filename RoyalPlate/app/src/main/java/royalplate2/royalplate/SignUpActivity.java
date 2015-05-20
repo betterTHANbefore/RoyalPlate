@@ -22,6 +22,10 @@ public class SignUpActivity extends Activity {
     private EditText usernameView;
     private EditText passwordView;
     private EditText passwordAgainView;
+    private Button hostessButton;
+    private Button waiterButton;
+    private Button chefButton;
+    Intent intent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,12 +103,46 @@ public class SignUpActivity extends Activity {
             }
         });
 
-        Button loginBtn = (Button) findViewById(R.id.LoginButton);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+//        Button loginBtn = (Button) findViewById(R.id.LoginButton);
+//        loginBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent loginBtnIntent = new Intent(getApplicationContext(), LoginActivity.class);
+//                startActivity(loginBtnIntent);
+//            }
+//        });
+
+        /*******************************************************************************************
+         *  H = Hostess, W= Waiter, C= Chef nevigate buttons
+         /******************************************************************************************/
+
+        hostessButton = (Button) findViewById(R.id.h_hostessbtn);
+        hostessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginBtnIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(loginBtnIntent);
+
+                intent = new Intent(getApplicationContext(), HostessActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        waiterButton = (Button) findViewById(R.id.w_waitersbtn);
+        waiterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                intent = new Intent(getApplicationContext(),  SignupOrLoginActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        chefButton = (Button) findViewById(R.id.c_chefbtn);
+        chefButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), ChefActivity.class);
+                startActivity(intent);
             }
         });
     }

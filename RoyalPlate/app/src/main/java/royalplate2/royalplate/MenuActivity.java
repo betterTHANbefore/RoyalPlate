@@ -41,6 +41,8 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
     private String itemName;
     private String noOfItems;
     private String itemCost;
+    SharedPreferences shared;// = PreferenceManager.getDefaultSharedPreferences(this);
+
 
     private SimpleGestureFilter detector;
     private boolean leftSwipeFlag = false;
@@ -93,12 +95,11 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
          ********************************************************/
         loadMainMenuItems();
 
+        shared = PreferenceManager.getDefaultSharedPreferences(this);
 
-
-//        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
-//        noOfItems = shared.getString("No of Items", "");
-//        itemName = shared.getString("Item Name", "");
-//        itemCost = shared.getString("Item Cost","");
+            noOfItems = shared.getString("No of Items", "");
+            itemName = shared.getString("Item Name", "");
+            itemCost = shared.getString("Item Cost","");
 
 
         Log.i("Tag", "MenuActivity  "   + itemName + "   "+ noOfItems + " " + itemCost);
@@ -144,7 +145,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
         previousImageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AssignedTableActivity.class);
+                Intent intent = new Intent(MenuActivity.this, AssignedTableActivity.class);
                 startActivity(intent);
             }
         });

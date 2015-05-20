@@ -58,7 +58,6 @@ public class OrderListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
         v = inflater.inflate(R.layout.fragment_orderlist, container, false);
 
         ordereditemslistview = (ListView) v.findViewById(R.id.ordereditems_listview);
@@ -68,16 +67,16 @@ public class OrderListFragment extends Fragment {
          * Retrieving data values from MenuActivity through SharedPreferences and Intent.
          ******************************************************************************************/
 
-
-        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        noOfItems = shared.getString("No of Items", "");
-        itemName = shared.getString("Item Name", "");
-        itemCost = shared.getString("Item Cost","");
+//
+//        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        noOfItems = shared.getString("No of Items", "");
+//        itemName = shared.getString("Item Name", "");
+//        itemCost = shared.getString("Item Cost","");
 
         tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
-//        itemName = getActivity().getIntent().getExtras().getString("Item Name");
-//        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
-//        itemCost =  getActivity().getIntent().getExtras().getString("Item Cost");
+        itemName = getActivity().getIntent().getExtras().getString("Item Name");
+        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
+        itemCost =  getActivity().getIntent().getExtras().getString("Item Cost");
 
         /*******************************************************************************************
          * Set Table No as a title in Ordered item list
@@ -98,10 +97,12 @@ public class OrderListFragment extends Fragment {
             orderedListData.saveInBackground();
 
         Log.i("OF2", itemName + "  " + noOfItems + " " + itemCost);
-        shared.edit().clear().apply();
+      //  shared.edit().clear().apply();
 
-
-        loadOrderedList();
+        /*******************************************************************************************
+         * OrderedList gets loaded
+         ******************************************************************************************/
+         loadOrderedList();
 
         Log.i("Tag", "Load Ordered List");
 //        ParseObject poTest = new ParseObject("Table1");
@@ -185,7 +186,9 @@ public class OrderListFragment extends Fragment {
 
 //        JSONArray jsonArray = (JSONArray) orderedItemList;
 //
-
+        /*******************************************************************************************
+         * OrderBtn will confirm the orderlist and then send it Parse for Chef to load
+         ******************************************************************************************/
 
         final Button orderBtn = (Button) v.findViewById(R.id.orderbutton);
         orderBtn.setOnClickListener(new View.OnClickListener() {
@@ -194,7 +197,7 @@ public class OrderListFragment extends Fragment {
 
                 // temporaly going back to MenuActivity
               //  Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
-            //    Intent orderBtnIntent = new Intent(v.getContext(), ChefActivity.class);
+              //  Intent orderBtnIntent = new Intent(v.getContext(), ChefActivity.class);
             // temporaly going back to MenuActivity
             Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
 
@@ -204,9 +207,6 @@ public class OrderListFragment extends Fragment {
 
             String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
             orderBtnIntent.putExtra("table no", tableNum);
-
-
-
 
             startActivity(orderBtnIntent);
             }
@@ -238,18 +238,7 @@ public class OrderListFragment extends Fragment {
     }
 
 
-//    private void loadMainMenuItems() {
-//        final ParseQuery<MainMenuData> mainMenuItems = ParseQuery.getQuery("MenuParse");
-//        mainMenuItems.findInBackground(new FindCallback<MainMenuData>() {
-//
-//            @Override
-//            public void done(List<MainMenuData> mainMenuItems, ParseException e) {
-//                mainMenuAdapter = new MainMenuAdapter(MenuActivity.this, mainMenuItems);
-//                gridview.setAdapter(mainMenuAdapter);
-//
-//            }
-//        });
-//    }
+
 
 //    @Override
 //    public void onActivityCreated(Bundle savedInstanceState) {
@@ -287,16 +276,6 @@ public class OrderListFragment extends Fragment {
     }
 
 
-//    public void setItemName(String itemName) {
-//        this.itemName = itemName;
-//    }
-//
-//    public String getItemName() {
-//        return itemName;
-//    }
-//
-//    public void setNoOfItems(String noOfItems) {
-//        this.noOfItems = noOfItems;
-//    }
+
 
 }

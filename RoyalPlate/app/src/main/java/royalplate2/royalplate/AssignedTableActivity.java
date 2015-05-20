@@ -47,7 +47,7 @@ public class AssignedTableActivity extends Activity {
          * Waiter UserName appear into usernameTextview after login to account
          ***************************************************************/
         username = getIntent().getExtras().getString("userName");
-        usernameTextView = (TextView) findViewById(R.id.waitername_textview);
+        usernameTextView = (TextView) findViewById(R.id.waiternametextviewid);
         usernameTextView.setText(username);
 
         /***************************************************************

@@ -48,8 +48,8 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/waitername_textview"
-            android:hint="Hello"
+            android:id="@+id/waiternametextviewid"
+            android:hint="Waiter Name"
             android:textSize="40dp"
             android:textColor="@color/darkOrange"
             android:textAllCaps="true"
