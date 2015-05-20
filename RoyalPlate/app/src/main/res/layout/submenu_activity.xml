@@ -89,9 +89,10 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/submenuitemlistid">
 
             <ListView
                 android:id="@+id/itemlist"
@@ -122,7 +123,7 @@
         <RelativeLayout
 
             android:id="@+id/fragmentContainer"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_margin="10dp"
             android:background="@drawable/draw_background"
             android:layout_width="match_parent"

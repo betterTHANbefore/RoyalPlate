@@ -18,6 +18,7 @@ import royalplate2.royalplate.data.KidsMenuData;
 import royalplate2.royalplate.data.LunchComboMenuData;
 import royalplate2.royalplate.data.MainMenuData;
 import royalplate2.royalplate.data.NewBarMenuData;
+import royalplate2.royalplate.data.OrderedListData;
 import royalplate2.royalplate.data.SandwichMenuData;
 import royalplate2.royalplate.data.TablesData;
 import royalplate2.royalplate.data.TwoTwentyData;
@@ -59,6 +60,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(WaiterData.class);
         ParseObject.registerSubclass(ChefSideOrderedListData.class);
         ParseObject.registerSubclass(WaiterTableData.class);
+        ParseObject.registerSubclass(OrderedListData.class);
 
         Log.i("Application", "Initialized");
     }
