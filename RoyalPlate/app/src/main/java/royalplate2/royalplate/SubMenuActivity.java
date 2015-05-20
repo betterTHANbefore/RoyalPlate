@@ -19,9 +19,15 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import royalplate2.royalplate.adapter.SubMenuAdapter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hetu on 4/11/15.
@@ -38,6 +44,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
     private SimpleGestureFilter detector;
     private boolean rightSwipeFlag = false;
+    Set<String> orderedItemList = new HashSet<String>();
 
     @Override
     public void onSwipe(int direction) {
@@ -88,6 +95,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
             intent.putExtra("Item Cost", itemCost);
 
             Log.i("LOG", itemName +  "   " + noOfItems  + " "+ itemCost);
+            Log.i("LOG", itemName +  "   " + noOfItems);
 
 
             startActivity(intent);
@@ -248,7 +256,96 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
 
 
+        JSONObject tempJSON = new JSONObject();
+        try {
+            tempJSON.put("itemName", "Sue");
+            tempJSON.put("itemPrice", 2.99);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        addItemToSet(tempJSON);
+
+        JSONObject tempJSON2 = new JSONObject();
+        try {
+            tempJSON2.put("itemName", "lolo");
+            tempJSON2.put("itemPrice", 3.99);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        addItemToSet(tempJSON2);
+        updateOrderedList();
+
+
     }
+
+    void updateOrderedList() {
+//        private void addItemToSet(Pair pair) {
+//            try {
+//                tempJsonObj.put("itemName", "Barley Juice" );
+//                tempJsonObj.put("itemPrice", 2.99);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+////            orderedItemList.add(pair);
+//        }
+//
+//        private void removeItemFromSet(Pair pair) {
+//            orderedItemList.remove(pair);
+//        }
+
+//        JSONObject tempJsonObj = new JSONObject(
+//
+//        );
+
+//        @Override
+//        protected String doInBackground(String... params) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//            SharedPreferences preferences = getSharedPreferences("OrderedItemSet", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+//        editor.put
+//            JSONObject tempJsonObj = new JSONObject();
+
+//            try {
+//                tempJsonObj.put("itemName", "Barley Juice" );
+//                tempJsonObj.put("itemPrice", 2.99);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+////            }
+//            orderedItemList.add("Sue");
+//            orderedItemList.add("jeong");
+//            orderedItemList.add("ha");
+//            orderedItemList.add("what");
+//            editor.putStringSet("Item Set", orderedItemList.toString());
+        editor.putStringSet("OrderedItemSet", orderedItemList);
+//            editor.putString
+        editor.apply();
+
+//            Set<String> test = shared.getStringSet("OrderedItemSet", new HashSet<String>());
+//            Log.i("OrderedItemSet", test.toString());
+//            Log.i("Item Name", itemName);
+//            Log.i("No of Items", noOfItems);
+//            return null;
+//        }
+    }
+
+    public void saveOrderedList(String itemName, String numItems){
+
+        // getting data value from SubMenuAdapter
+        // passing data value to OrderListFragment class
+        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = shared.edit();
+//        editor.put
+        editor.putString("Item Name", itemName);
+        editor.putString("No of Items", noOfItems);
+        editor.apply();
+        Log.i("Item Name", itemName);
+        Log.i("No of Items", noOfItems);
+
+
+    }
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -343,6 +440,54 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 //
 //
 //    }
+//        outState.putCharSequence("savedItemPrice", (CharSequence) noofitemedittext);
+//        outState.putCharSequence("savedNoItem", (CharSequence) itempricetextview);
+
+//        String itemprice = itempricetextview.getText().toString();
+//        String noofitems= noofitemedittext.getText().toString();
+//        outState.putString("Price", itemprice);
+//        outState.putString("NoItem", noofitems);
+//        Log.i("TAG", " saveed  "  + itemprice);
+
+
+
+   // }
+
+    private void addItemToSet(JSONObject jsonObject) {
+//        orderedItemList.add(jsonObject);
+//        try {
+//            tempJsonObj.put("itemName", "Barley Juice" );
+//            tempJsonObj.put("itemPrice", 2.99);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        orderedItemList.add(jsonObject.toString());
+        Log.i("JSON", orderedItemList.toString());
+    }
+
+    private void removeItemFromSet(JSONObject jsonObject) {
+        orderedItemList.remove(jsonObject);
+    }
+
+
+    //
+    @Override
+    protected void onRestoreInstanceState(Bundle savedState) {
+        super.onRestoreInstanceState(savedState);
+
+        Log.i("TAG", "onRestore");
+        final  TextView itemnametextview = (TextView) findViewById(R.id.itemcosttextview);
+        final EditText noofitemedittext = (EditText) findViewById(R.id.no_of_items);
+
+
+        CharSequence textview = savedState.getCharSequence("savedItemPrice");
+        CharSequence edittext = savedState.getCharSequence("savedNoofItems");
+
+        itemnametextview.setText(textview);
+        noofitemedittext.setText(edittext);
+
+
+    }
 
 }
 

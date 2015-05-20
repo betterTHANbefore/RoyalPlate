@@ -16,10 +16,10 @@
         <TextView
             android:id="@+id/noofitemsId"
             android:hint="no"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             android:layout_alignParentLeft="true"
             android:textColor="@color/darkOrange"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -28,15 +28,18 @@
 
         <!-- Item Name -->
         <TextView
-            android:id="@+id/itemName"
+            android:id="@+id/itemNameid"
             android:hint="item name"
-            android:layout_margin="20dp"
-            android:layout_toRightOf="@id/noofitemsId"
             android:textColor="@color/antiquewhite"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:layout_marginLeft="15dp"
+            android:layout_alignTop="@+id/noofitemsId"
+            android:layout_toRightOf="@+id/noofitemsId"
+            android:layout_toEndOf="@+id/noofitemsId"
+            android:layout_marginStart="35dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
         </TextView>
         <!-- Item Price -->
@@ -44,30 +47,34 @@
 
 
         <TextView
-            android:id="@+id/itemPrice"
-            android:layout_toRightOf="@+id/itemName"
+            android:id="@+id/itemPriceid"
             android:hint="item price"
-            android:layout_margin="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" >
+            android:textSize="20sp"
+            android:layout_marginRight="41dp"
+            android:layout_alignTop="@+id/itemNameid"
+            android:layout_toLeftOf="@+id/cancleBtnid"
+            android:layout_toStartOf="@+id/cancleBtnid"
+            android:layout_marginEnd="41dp">
 
         </TextView>
 
 
 
         <Button
-            android:id="@+id/cacleBtn"
+            android:id="@+id/cancleBtnid"
             android:background="@drawable/add_delete"
             android:text="@string/plus_sign"
-            android:textSize="30dp"
+            android:textSize="15dp"
             android:textColor="@color/brown"
             android:layout_gravity="center"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/itemPriceid"
+            android:layout_alignBottom="@+id/itemPriceid" />
 
 
     </RelativeLayout>

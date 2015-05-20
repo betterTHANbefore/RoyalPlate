@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
     GridView gridview;
     MainMenuAdapter mainMenuAdapter;
-
+    ImageView previousImageview;
     private Button orderedButton;
     private TextView tableNumView;
 
@@ -70,7 +71,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             intent.putExtra("tableNo", "tableNum");
             intent.putExtra("Item Name", itemName);
             intent.putExtra("No of Items", noOfItems);
-
+            intent.putExtra("Item Cost", itemCost);
             startActivity(intent);
         }
     }
@@ -94,10 +95,10 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
 
 
-        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
-        noOfItems = shared.getString("No of Items", "");
-        itemName = shared.getString("Item Name", "");
-        itemCost = shared.getString("Item Cost","");
+//        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
+//        noOfItems = shared.getString("No of Items", "");
+//        itemName = shared.getString("Item Name", "");
+//        itemCost = shared.getString("Item Cost","");
 
 
         Log.i("Tag", "MenuActivity  "   + itemName + "   "+ noOfItems + " " + itemCost);
@@ -135,6 +136,20 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
         // Detect touched area
         detector = new SimpleGestureFilter(this,this);
+        /**********************************************************************************************
+         * Previous Image Icon go back to Assigned table activity. (List of assigned Tables)
+         **********************************************************************************************/
+
+        previousImageview = (ImageView) findViewById(R.id.previousImageviewid);
+        previousImageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AssignedTableActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 
@@ -145,11 +160,14 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
     }
 
 
-    /*************************************************************************************
+
+
+
+    /***********************************************************************************************
      * This function loads the data from the parse, where the class is
      * called "MenuParse". It uses MainMenuAdapter. And Listview to
      * display the data.
-     **************************************************************************************/
+     **********************************************************************************************/
     private void loadMainMenuItems() {
         final ParseQuery<MainMenuData> mainMenuItems = ParseQuery.getQuery("MenuParse");
         mainMenuItems.findInBackground(new FindCallback<MainMenuData>() {
