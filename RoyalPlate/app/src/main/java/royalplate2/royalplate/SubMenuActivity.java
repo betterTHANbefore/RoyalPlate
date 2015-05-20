@@ -102,7 +102,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
         shared = PreferenceManager.getDefaultSharedPreferences(this);
 
-
         TextView subMenuTitle;
         TextView tableNo;
         Button goToMenuBtn;
@@ -128,9 +127,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
          ***************************************************************/
         Log.i("Test1", " SubActivit  "   + itemName + "   "+ noOfItems);
 
-
         title = getIntent().getExtras().getString("title");
-
 
         final ListView list = (ListView) findViewById(R.id.itemlist);
         list.post(new Runnable() {
@@ -222,7 +219,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
                 subMenuTitle.setText(getIntent().getExtras().getString("To go Main Manu"));
         }
 
-
         // this contains OrderListFragment class
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.fragmentContainer, new OrderListFragment()).commit();
@@ -231,7 +227,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         detector = new SimpleGestureFilter(this,this);
 
 //        Intent backIntent = new Intent(this, OrderListFragment.class);
-
 
 
         JSONObject tempJSON = new JSONObject();
@@ -254,8 +249,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
         addItemToSet(tempJSON2);
         updateOrderedList();
-
-
     }
 
     void updateOrderedList() {
@@ -320,8 +313,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         editor.apply();
         Log.i("Item Name", itemName);
         Log.i("No of Items", noOfItems);
-
-
     }
 
 
@@ -370,7 +361,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
     @Override
     protected void onStop() {
         super.onStop();
-
     }
 
     @Override
@@ -393,8 +383,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         outState.putString("Price", itemprice);
         outState.putString("NoItem", noofitems);
         Log.i("TAG", " saveed  "  + itemprice);
-
-
 
     }
 
@@ -424,14 +412,11 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         final  TextView itemnametextview = (TextView) findViewById(R.id.cost);
         final EditText noofitemedittext = (EditText) findViewById(R.id.no_of_items);
 
-
         CharSequence textview = savedState.getCharSequence("savedItemPrice");
         CharSequence edittext = savedState.getCharSequence("savedNoofItems");
 
         itemnametextview.setText(textview);
         noofitemedittext.setText(edittext);
-
-
     }
 
 }
