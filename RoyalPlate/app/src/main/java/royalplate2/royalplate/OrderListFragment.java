@@ -1,5 +1,6 @@
 package royalplate2.royalplate;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,28 +41,45 @@ public class OrderListFragment extends Fragment {
 
     private View v;
     private TextView tv;
-    TextView displayList;
+    private TextView displayList;
+    private ImageView refreshImageview;
     ListView ordereditemslistview;
     OrderedListAdapter orderedListAdapter;
+    SharedPreferences shared;
 
     //String tableNumStr;
 //    String itemName;
 //    String noOfItems;
 
-    String itemName;
-    String noOfItems;
-    String itemCost;
+//    String itemName;
+//    String noOfItems;
+//    String itemCost;
 
     private String tableNumStr;
+    private String tableno;
     private String privous = null;
+    public static final String ASSIGNEDTABLESHARED = "assignedtablesSharedPreferences";
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_orderlist, container, false);
+        shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+
+
+
+        int mode = Activity.MODE_PRIVATE;
+        SharedPreferences assignedtablesSharedPreferences = getActivity().getSharedPreferences(ASSIGNEDTABLESHARED, mode);
+        tableno = assignedtablesSharedPreferences.getString("tableNo", "");
+
+
 
         ordereditemslistview = (ListView) v.findViewById(R.id.ordereditems_listview);
+
+        tv = (TextView) v.findViewById(R.id.tableNo_textview);
 
 
         /*******************************************************************************************
@@ -72,32 +91,39 @@ public class OrderListFragment extends Fragment {
 //        noOfItems = shared.getString("No of Items", "");
 //        itemName = shared.getString("Item Name", "");
 //        itemCost = shared.getString("Item Cost","");
+//
+//        tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
+//        itemName = getActivity().getIntent().getExtras().getString("Item Name");
+//        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
+//        itemCost =  getActivity().getIntent().getExtras().getString("Item Cost");
 
-        tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
-        itemName = getActivity().getIntent().getExtras().getString("Item Name");
-        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
-        itemCost =  getActivity().getIntent().getExtras().getString("Item Cost");
+//        /*******************************************************************************************
+//         * Set Table No as a title in Ordered item list
+//         ******************************************************************************************/
+//
+            tv = (TextView) v.findViewById(R.id.tableNo_textview);
+           //   tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
+        //tableNumStr = shared.getString("tableNo", "");
+              //  tv.setText(tableNumStr);
 
-        /*******************************************************************************************
-         * Set Table No as a title in Ordered item list
-         ******************************************************************************************/
-
-        tv = (TextView) v.findViewById(R.id.tableNo_textview);
-        tv.setText(tableNumStr);
+        tv.setText(tableno);
 
 
         /*******************************************************************************************
          * Set Data values to Parse Class(OrderedListParse) through OrderListData java class
          ******************************************************************************************/
-        OrderedListData orderedListData = new OrderedListData();
-            orderedListData.setItemName(itemName);
-            orderedListData.setItemPrice(itemCost);
-            orderedListData.setTableNo(tableNumStr);
-            orderedListData.setNoOfItems(noOfItems);
-            orderedListData.saveInBackground();
 
-        Log.i("OF2", itemName + "  " + noOfItems + " " + itemCost);
-      //  shared.edit().clear().apply();
+            storeDataOnParse();
+//
+//        OrderedListData orderedListData = new OrderedListData();
+//            orderedListData.setItemName(itemName);
+//            orderedListData.setItemPrice(itemCost);
+//            orderedListData.setTableNo(tableNumStr);
+//            orderedListData.setNoOfItems(noOfItems);
+//            orderedListData.saveInBackground();
+//
+//        Log.i("OF2", itemName + "  " + noOfItems + " " + itemCost);
+//      //  shared.edit().clear().apply();
 
         /*******************************************************************************************
          * OrderedList gets loaded
@@ -149,7 +175,7 @@ public class OrderListFragment extends Fragment {
 //        itemName = getActivity().getIntent().getExtras().getString("tableNo");
 //        noOfItems = getActivity().getIntent().getExtras().getString("title");
 
-        Log.i("OF", itemName + "  "+ noOfItems + " "+  itemCost);
+       // Log.i("OF", itemName + "  "+ noOfItems + " "+  itemCost);
 
 //        noOfitemsTextview.setText(noOfItems);
 //        listOfitemsTextview.setText(itemName);
@@ -195,6 +221,11 @@ public class OrderListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+
+                /*******
+                 * tableno is comming from assignedtablesharedpreference table from AssignedTableActivity
+                 */
+
                 // temporaly going back to MenuActivity
               //  Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
               //  Intent orderBtnIntent = new Intent(v.getContext(), ChefActivity.class);
@@ -206,13 +237,55 @@ public class OrderListFragment extends Fragment {
 //                orderBtnIntent.putExtra("table no", 1);
 
             String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
-            orderBtnIntent.putExtra("table no", tableNum);
+                //String tableNum = shared.getString("tableNo","");
+
+                orderBtnIntent.putExtra("table no", tableNum);
 
             startActivity(orderBtnIntent);
             }
         });
+        /*******************************************************************************************
+         * Refresh Button will load again updated orderedlist from Parse
+         ******************************************************************************************/
+
+        refreshImageview = (ImageView) v.findViewById(R.id.orderedlist_refreshid);
+        refreshImageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                storeDataOnParse();
+                loadOrderedList();
+            }
+        });
+
 
         return v;
+    }
+    /*******************************************************************************************
+     * Set Data values to Parse Class(OrderedListParse) through OrderListData java class
+     ******************************************************************************************/
+    private void storeDataOnParse() {
+        /*******************************************************************************************
+         * Set Table No as a title in Ordered item list
+         ******************************************************************************************/
+//        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        tableNumStr = shared.getString("tableNo","");
+        String noOfItems = shared.getString("No of Items", "");
+        String itemName = shared.getString("Item Name", "");
+        String itemCost = shared.getString("Item Cost","");
+
+//        itemName = getActivity().getIntent().getExtras().getString("Item Name");
+//        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
+//        itemCost =  getActivity().getIntent().getExtras().getString("Item Cost");
+
+        OrderedListData orderedListData = new OrderedListData();
+        orderedListData.setItemName(itemName);
+        orderedListData.setItemPrice(itemCost);
+        orderedListData.setTableNo(tableNumStr);
+        orderedListData.setNoOfItems(noOfItems);
+        orderedListData.saveInBackground();
+
+        Log.i("OF2", itemName + "  " + noOfItems + " " + itemCost);
+          shared.edit().clear().apply();
     }
 
     /***********************************************************************************************
@@ -269,6 +342,8 @@ public class OrderListFragment extends Fragment {
 
 
         super.onCreate(savedInstanceState);
+      //  SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
 
 //
 //        Bundle arg = getArguments();

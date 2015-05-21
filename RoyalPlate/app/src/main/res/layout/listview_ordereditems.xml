@@ -14,8 +14,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/noofitemsId"
-            android:hint="no"
+            android:id="@+id/orded_noofitemsid"
             android:layout_margin="5dp"
             android:layout_alignParentLeft="true"
             android:textColor="@color/darkOrange"
@@ -28,15 +27,14 @@
 
         <!-- Item Name -->
         <TextView
-            android:id="@+id/itemNameid"
-            android:hint="item name"
+            android:id="@+id/orded_itemNameid"
             android:textColor="@color/antiquewhite"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginLeft="15dp"
-            android:layout_alignTop="@+id/noofitemsId"
-            android:layout_toRightOf="@+id/noofitemsId"
-            android:layout_toEndOf="@+id/noofitemsId"
+            android:layout_alignTop="@+id/orded_noofitemsid"
+            android:layout_toRightOf="@+id/orded_noofitemsid"
+            android:layout_toEndOf="@+id/orded_noofitemsid"
             android:layout_marginStart="35dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -47,21 +45,20 @@
 
 
         <TextView
-            android:id="@+id/itemPriceid"
-            android:hint="item price"
+            android:id="@+id/orded_itemPriceid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:textSize="20sp"
             android:layout_marginRight="41dp"
-            android:layout_below="@+id/itemNameid">
+            android:layout_below="@+id/orded_itemNameid">
 
         </TextView>
 
 
 
         <Button
-            android:id="@+id/cancleBtnid"
+            android:id="@+id/orded_cancleBtnid"
             android:background="@drawable/add_delete"
             android:text="@string/plus_sign"
             android:textSize="15dp"
@@ -71,8 +68,8 @@
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/itemPriceid"
-            android:layout_alignBottom="@+id/itemPriceid" />
+            android:layout_alignTop="@+id/orded_itemPriceid"
+            android:layout_alignBottom="@+id/orded_itemPriceid" />
 
 
     </RelativeLayout>

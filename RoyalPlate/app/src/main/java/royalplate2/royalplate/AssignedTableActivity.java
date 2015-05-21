@@ -2,7 +2,9 @@ package royalplate2.royalplate;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,7 +37,9 @@ public class AssignedTableActivity extends Activity {
     GridView assignedtableGridview;
     WaiterTableAdapter waiterTableAdapter;
     Intent intent;
+    public static final String LOGINSHARED = "loginSharedPreferences";
 
+    public static final String ASSIGNEDTABLESHARED = "assignedtablesSharedPreferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,18 @@ public class AssignedTableActivity extends Activity {
         /***************************************************************
          * Waiter UserName appear into usernameTextview after login to account
          ***************************************************************/
-        username = getIntent().getExtras().getString("userName");
+      //  username = "cs";
+
+
+        int mode = Activity.MODE_PRIVATE;
+        SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
+        username = loginSharedPreferences.getString("userName", "");
+
+
+       // final SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
+
+//        username = shared.getString("userName", "");
+     //   username = getIntent().getExtras().getString("userName");
         usernameTextView = (TextView) findViewById(R.id.waiternametextviewid);
         usernameTextView.setText(username);
 
@@ -62,12 +77,36 @@ public class AssignedTableActivity extends Activity {
         assignedtableGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            Button assignedtableBtn = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
+
+            String tableno = assignedtableBtn.getText().toString();
+
+                int mode = Activity.MODE_PRIVATE;
+                SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
+
+
+                //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                SharedPreferences.Editor editor = assignedtablesSharedPreferences.edit();
+                editor.putString("tableNo", tableno);
+
+                editor.apply();
+
+
+
+
+
+
                 Intent tablegridIntent = new Intent(AssignedTableActivity.this, MenuActivity.class);
 
-                Button assignedtableBtn = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
+                // tablegridIntent.putExtra("tableNo", tableno);
 
-                String tableno = assignedtableBtn.getText().toString();
-                tablegridIntent.putExtra("tableNo", tableno);
+
+
+
+
+
+
                 startActivity(tablegridIntent);
             }
         });
@@ -137,6 +176,9 @@ public class AssignedTableActivity extends Activity {
         });
     }
 
+    /*********************************************************************
+     * Refresh Button will relaod all the tables from the Parse
+     *******************************************************************/
     private void refreshActivity() {
         loadtables();
     }

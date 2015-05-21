@@ -3,7 +3,9 @@ package royalplate2.royalplate;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +36,8 @@ public class LoginActivity extends Activity {
     private Button waiterButton;
     private Button chefButton;
     Intent intent;
+    public static final String LOGINSHARED = "loginSharedPreferences";
+
 
     WaiterData waitertables;
 
@@ -45,7 +49,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        // Set up the login form.
+       // Set up the login form.
         usernameView = (EditText) findViewById(R.id.userName);
         passwordView = (EditText) findViewById(R.id.passWord);
 
@@ -149,10 +153,25 @@ public class LoginActivity extends Activity {
                         });
 
 
+
                             Intent intent = new Intent(LoginActivity.this, AssignedTableActivity.class);
-                            intent.putExtra("userName", username);
+                          //  intent.putExtra("userName", username);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
+
+                            int mode = Activity.MODE_PRIVATE;
+                            SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
+
+
+                            //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                            SharedPreferences.Editor editor = loginSharedPreferences.edit();
+                            editor.putString("userName", username);
+
+                            editor.apply();
+
+
+
+
                         }
                     }
 

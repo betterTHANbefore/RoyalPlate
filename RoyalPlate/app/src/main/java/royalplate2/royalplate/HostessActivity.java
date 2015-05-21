@@ -269,11 +269,11 @@ public class HostessActivity extends Activity implements OnClickListener{
      * Retrieve data values from the WaiterAdapter class
      **********************************************************/
 
-    public void saveWaiterName(String waiternameset){
+    public void saveWaiterName(String waitername){
 
      SharedPreferences.Editor waitereditor = sharedwaiter.edit();
 
-        waitereditor.putString("WaiterName", waiternameset);
+        waitereditor.putString("WaiterName", waitername);
 
         waitereditor.apply();
 

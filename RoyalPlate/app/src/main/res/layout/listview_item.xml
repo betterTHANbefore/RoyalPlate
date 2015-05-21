@@ -29,7 +29,7 @@
 
         <!-- Item Name -->
         <TextView
-            android:id="@+id/itemName"
+            android:id="@+id/itemNameid"
             android:textColor="@color/antiquewhite"
             android:textSize="20sp"
             android:textAlignment="center"
@@ -39,8 +39,8 @@
         </TextView>
         <!-- Item Price -->
         <TextView
-            android:id="@+id/itemPrice"
-            android:layout_below="@+id/itemName"
+            android:id="@+id/itemPriceid"
+            android:layout_below="@+id/itemNameid"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:textSize="20sp" >
@@ -56,7 +56,7 @@
         android:layout_height="match_parent">
 
         <NumberPicker
-            android:id="@+id/numberPicker"
+            android:id="@+id/numberPickerid"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"  />
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/itemcosttextview"
+            android:id="@+id/itemcost_textviewid"
             android:hint="$"
             android:textSize="20dp"
             android:layout_margin="9dp"
@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/no_of_items"
+            android:id="@+id/noOfitem_edittextid"
             android:textStyle="bold"
             android:focusable="true"
             android:editable="false"
@@ -96,7 +96,7 @@
             android:textSize="20dp"
             android:textColor="@color/antiquewhite"
 
-            android:layout_below="@+id/itemcosttextview"
+            android:layout_below="@+id/itemcost_textviewid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -33,19 +33,25 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
     GridView gridview;
     MainMenuAdapter mainMenuAdapter;
     ImageView previousImageview;
+    ImageView nextImageview;
     private Button orderedButton;
     private TextView tableNumView;
 
     private String menuItemName;
-    private String tableNum;
-    private String itemName;
-    private String noOfItems;
-    private String itemCost;
-    SharedPreferences shared;// = PreferenceManager.getDefaultSharedPreferences(this);
-
+    String tableNum;
+    String itemName;
+    String noOfItems;
+    String itemCost;
+    String username;
+    String tableno;
+   // SharedPreferences shared;// = PreferenceManager.getDefaultSharedPreferences(this);
+    //Intent intent;
 
     private SimpleGestureFilter detector;
     private boolean leftSwipeFlag = false;
+    public static final String LOGINSHARED = "loginSharedPreferences";
+
+    public static final String ASSIGNEDTABLESHARED = "assignedtablesSharedPreferences";
 
     @Override
     public void onSwipe(int direction) {
@@ -64,16 +70,20 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
         }
 
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+        /******************************************************************************************
+         * We only care about left swipe that intents to go to MainMenuActivity
+         ******************************************************************************************/
 
-        // We only care about left swipe that intents to go to SubMenuActivity
         if (direction == SimpleGestureFilter.SWIPE_LEFT) {
-            Intent intent = new Intent(this, SubMenuActivity.class);
+
+          Intent  intent = new Intent(this, SubMenuActivity.class);
             // putExtra params need to be set up correctly accordingly what we need to pass
             intent.putExtra("title", "menuItemName");
-            intent.putExtra("tableNo", "tableNum");
+            intent.putExtra("tableNo", tableNum);
             intent.putExtra("Item Name", itemName);
             intent.putExtra("No of Items", noOfItems);
             intent.putExtra("Item Cost", itemCost);
+            intent.putExtra("userName", username);
             startActivity(intent);
         }
     }
@@ -90,17 +100,27 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
        // tableNumView = (TextView) findViewById(R.id.table_num_view);
 
-        /********************************************************
+        /******************************************************************************************
          * Loads MainMenu Items name from parse using MenuAdapter
-         ********************************************************/
+         ******************************************************************************************/
         loadMainMenuItems();
 
-        shared = PreferenceManager.getDefaultSharedPreferences(this);
+        int mode = Activity.MODE_PRIVATE;
+        SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
+        username = loginSharedPreferences.getString("userName", "");
 
-            noOfItems = shared.getString("No of Items", "");
-            itemName = shared.getString("Item Name", "");
-            itemCost = shared.getString("Item Cost","");
+        SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
+        tableno = assignedtablesSharedPreferences.getString("tableNo", "");
 
+
+
+        // shared = PreferenceManager.getDefaultSharedPreferences(this);
+//
+//            noOfItems = shared.getString("No of Items", "");
+//            itemName = shared.getString("Item Name", "");
+//            itemCost = shared.getString("Item Cost","");
+//            tableNum = shared.getString("tableNo", "");
+//
 
         Log.i("Tag", "MenuActivity  "   + itemName + "   "+ noOfItems + " " + itemCost);
 
@@ -111,37 +131,67 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent gridviewIntent = new Intent(MenuActivity.this, SubMenuActivity.class);
+            Intent    intent = new Intent(MenuActivity.this, SubMenuActivity.class);
 
-                Button listBtn  = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
+            Button listBtn  = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
                 menuItemName = listBtn.getText().toString();
-                tableNum = getIntent().getExtras().getString("tableNo");
+               // tableNum = getIntent().getExtras().getString("tableNo");
 
 //                itemName = getIntent().getExtras().getString("Item Name");
 //                noOfItems = getIntent().getExtras().getString("No of Items");
 
-                gridviewIntent.putExtra("title", menuItemName);
-                gridviewIntent.putExtra("tableNo", tableNum);
-                gridviewIntent.putExtra("Item Name", itemName);
-                gridviewIntent.putExtra("No of Items", noOfItems);
-                gridviewIntent.putExtra("Item Cost", itemCost);
+//                gridviewIntent.putExtra("title", menuItemName);
+//                gridviewIntent.putExtra("tableNo", tableNum);
+//                gridviewIntent.putExtra("Item Name", itemName);
+//                gridviewIntent.putExtra("No of Items", noOfItems);
+//                gridviewIntent.putExtra("Item Cost", itemCost);
 
-                startActivity(gridviewIntent);
+                //startActivity(gridviewIntent);
+             //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(MenuActivity.this);
+
+//                SharedPreferences.Editor editor = shared.edit();
+//                editor.putString("title", menuItemName);
+//                editor.putString("tableNo", tableNum);
+//                editor.putString("Item Name", itemName);
+//                editor.putString("No of Items", noOfItems);
+//                editor.putString("Item Cost", itemCost);
+
+//                editor.apply();
+
+                intent.putExtra("title", menuItemName);
+                intent.putExtra("tableNo", tableno);
+//                intent.putExtra("tableNo", tableNum);
 
 
+                intent.putExtra("Item Name", itemName);
+                intent.putExtra("No of Items", noOfItems);
+                intent.putExtra("Item Cost", itemCost);
+//                noOfItems = shared.getString("No of Items", "");
+//
+//                itemName = shared.getString("Item Name", "");
+//                itemCost = shared.getString("Item Cost","");
+//                tableNum = shared.getString("tableNo", "");
+
+
+                startActivity(intent);
                 Log.i("Tag", "MenuActivit_2  "    + itemName + "   "+ noOfItems + " " + itemCost);
 
 
             }
         });
 
-        // Detect touched area
+        /**********************************************************************************************
+         * Detect touched area
+         **********************************************************************************************/
+
         detector = new SimpleGestureFilter(this,this);
+
         /**********************************************************************************************
          * Previous Image Icon go back to Assigned table activity. (List of assigned Tables)
          **********************************************************************************************/
 
         previousImageview = (ImageView) findViewById(R.id.previousImageviewid);
+
         previousImageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,7 +200,19 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             }
         });
 
+    /**********************************************************************************************
+     * Next Image Icon go back to Submeuactivity.
+     **********************************************************************************************/
 
+//        nextImageview = (ImageView) findViewById(R.id.nextImageviewid);
+//
+//        nextImageview.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MenuActivity.this, SubMenuActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 

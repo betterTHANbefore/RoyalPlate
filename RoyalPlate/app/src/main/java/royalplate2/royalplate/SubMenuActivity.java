@@ -37,10 +37,17 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
     ListView listview;
     SubMenuAdapter menuAdapter;
     SharedPreferences shared;
+    SharedPreferences preferences;
     String tableNo;
     String itemName;
     String noOfItems;
+    String title;
     String itemCost;
+//    String submenutitle;
+//    TextView subMenuTitle;
+    TextView tableNoTextview;
+    Intent intent;
+
 
     private SimpleGestureFilter detector;
     private boolean rightSwipeFlag = false;
@@ -81,18 +88,19 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
             noOfItems = shared.getString("No of Items", "");
             itemName = shared.getString("Item Name", "");
             itemCost = shared.getString("Item Cost", " ");
+            tableNo = shared.getString("tableNo", "");
 
 
 
 
 
-            Intent intent = new Intent(this, MenuActivity.class);
+            intent = new Intent(this, MenuActivity.class);
             intent.putExtra("tableNo", tableNo);
 //            intent.putExtra("iniPrice" , 0);
 //            intent.putExtra("iniNoOfItem", 0);
-            intent.putExtra("No of Items", noOfItems);
-            intent.putExtra("Item Name", itemName );
-            intent.putExtra("Item Cost", itemCost);
+//            intent.putExtra("No of Items", noOfItems);
+//            intent.putExtra("Item Name", itemName );
+//            intent.putExtra("Item Cost", itemCost);
 
             Log.i("LOG", itemName +  "   " + noOfItems  + " "+ itemCost);
             Log.i("LOG", itemName +  "   " + noOfItems);
@@ -115,12 +123,14 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         listview = (ListView) findViewById(R.id.itemlist);
 
         shared = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 
         TextView subMenuTitle;
         TextView tableNo;
         Button goToMenuBtn;
         String title;
+
         /*****************************************************************
          * subMenuTitle TextView set the title according to which button
          * is pressed.
@@ -130,8 +140,12 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
         subMenuTitle = (TextView) findViewById(R.id.submenuTitle_textview);
         // TO DO : below need to be made pretty
+
         subMenuTitle.setText(getIntent().getExtras().getString("title"));
 
+//        final SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
+//        subMenutitle = shared.getString("title", "");
+//        subMenuTitle.setText( subMenutitle);
      //   tableNo = getIntent().getExtras().getString("tableNo"); // pass table no to adapter
 
         ImageView icon_right = (ImageView) findViewById(R.id.imageRight_icon);
@@ -145,13 +159,19 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         itemCost = shared.getString("Item Cost", " ");
 
 
+
+
+
+        // saveOrderedList("hello", "2","2.00");
+//        noOfItems = shared.getString("No of Items", null);
+//        itemName = shared.getString("Item Name",null);
+//        itemCost = shared.getString("Item Cost", null);
+//
+
 //        shared.edit().clear().apply();
 
 
-        Log.i("Tag", " SubActivity  "   + itemName + "   "+ noOfItems + " "+ itemCost);
-
-
-        title = getIntent().getExtras().getString("title");
+        Log.i("Tag", " SubActivity  ++"   + itemName + "   "+ noOfItems + " "+ itemCost);
 
 
         final ListView list = (ListView) findViewById(R.id.itemlist);
@@ -162,6 +182,8 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
             }
         });
 
+        title = getIntent().getExtras().getString("title");
+   // title = shared.getString("title", null);
 
         switch (title) {
             case "APPETIZER":
@@ -241,7 +263,9 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
                 break;
 
             default:
-                subMenuTitle.setText(getIntent().getExtras().getString("To go Main Manu"));
+                intent = new Intent(getApplicationContext(), MenuActivity.class);
+                startActivity(intent);
+               // subMenuTitle.setText(getIntent().getExtras().getString("To go Main Manu"));
         }
 
 
@@ -253,18 +277,24 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         detector = new SimpleGestureFilter(this,this);
 
 //        Intent backIntent = new Intent(this, OrderListFragment.class);
-
-
-
         JSONObject tempJSON = new JSONObject();
         try {
-            tempJSON.put("itemName", "Sue");
-            tempJSON.put("itemPrice", 2.99);
+            tempJSON.put("itemName", itemName);
+            tempJSON.put("itemPrice", itemCost);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         addItemToSet(tempJSON);
+
+//        JSONObject tempJSON = new JSONObject();
+//        try {
+//            tempJSON.put("itemName", "Sue");
+//            tempJSON.put("itemPrice", 2.99);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+
 
         JSONObject tempJSON2 = new JSONObject();
         try {
@@ -301,7 +331,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
 //        @Override
 //        protected String doInBackground(String... params) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 //            SharedPreferences preferences = getSharedPreferences("OrderedItemSet", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 //        editor.put
@@ -328,22 +358,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 //            Log.i("No of Items", noOfItems);
 //            return null;
 //        }
-    }
-
-    public void saveOrderedList(String itemName, String numItems){
-
-        // getting data value from SubMenuAdapter
-        // passing data value to OrderListFragment class
-        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = shared.edit();
-//        editor.put
-        editor.putString("Item Name", itemName);
-        editor.putString("No of Items", noOfItems);
-        editor.apply();
-        Log.i("Item Name", itemName);
-        Log.i("No of Items", noOfItems);
-
-
     }
 
 
@@ -375,20 +389,22 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
     public SubMenuActivity(){}
 
 
-    public void saveOrderedList( String noOfItems,String itemname, String itemcost){
+    public void saveOrderedList( String noOfItems, String itemName, String itemcost){
 
         // getting data value from SubMenuAdapter
         // passing data value to OrderListFragment class
 
         SharedPreferences.Editor editor = shared.edit();
+//        editor.put
+        editor.putString("Item Name", itemName);
         editor.putString("No of Items", noOfItems);
-        editor.putString("Item Name", itemname);
         editor.putString("Item Cost", itemcost);
-
         editor.apply();
 
+        Log.i("tag" , "SubMenuActivity saveorder  " + noOfItems  + "    " + itemName+ "  " + itemcost);
 
     }
+
 
     @Override
     protected void onStop() {
@@ -471,23 +487,23 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
 
     //
-    @Override
-    protected void onRestoreInstanceState(Bundle savedState) {
-        super.onRestoreInstanceState(savedState);
-
-        Log.i("TAG", "onRestore");
-        final  TextView itemnametextview = (TextView) findViewById(R.id.itemcosttextview);
-        final EditText noofitemedittext = (EditText) findViewById(R.id.no_of_items);
-
-
-        CharSequence textview = savedState.getCharSequence("savedItemPrice");
-        CharSequence edittext = savedState.getCharSequence("savedNoofItems");
-
-        itemnametextview.setText(textview);
-        noofitemedittext.setText(edittext);
-
-
-    }
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedState) {
+//        super.onRestoreInstanceState(savedState);
+//
+//        Log.i("TAG", "onRestore");
+//        final  TextView itemnametextview = (TextView) findViewById(R.id.itemcosttextview);
+//        final EditText noofitemedittext = (EditText) findViewById(R.id.no_of_items);
+//
+//
+//        CharSequence textview = savedState.getCharSequence("savedItemPrice");
+//        CharSequence edittext = savedState.getCharSequence("savedNoofItems");
+//
+//        itemnametextview.setText(textview);
+//        noofitemedittext.setText(edittext);
+//
+//
+//    }
 
 }
 

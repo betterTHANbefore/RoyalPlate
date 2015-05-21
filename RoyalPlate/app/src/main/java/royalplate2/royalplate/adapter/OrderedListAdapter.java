@@ -41,16 +41,16 @@ public class OrderedListAdapter extends ArrayAdapter<OrderedListData> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.listview_ordereditems, parent, false);
 
-        noofItemTextview = (TextView) view.findViewById(R.id.noofitemsId);
+        noofItemTextview = (TextView) view.findViewById(R.id.orded_noofitemsid);
         noofItemTextview.setText(orderedItemsList.get(position).getNoOfItems());
 
-        itemnameTextview = (TextView) view.findViewById(R.id.itemNameid);
+        itemnameTextview = (TextView) view.findViewById(R.id.orded_itemNameid);
         itemnameTextview.setText(orderedItemsList.get(position).getItemName());
 
-        itempriceTextview = (TextView) view.findViewById(R.id.itemPriceid);
+        itempriceTextview = (TextView) view.findViewById(R.id.orded_itemPriceid);
         itempriceTextview.setText(orderedItemsList.get(position).getItemPrice());
 
-        cacleitembutton = (Button) view.findViewById(R.id.cancleBtnid);
+        cacleitembutton = (Button) view.findViewById(R.id.orded_cancleBtnid);
         //cacleitembutton.setText(view.findViewById());
 
         return view;

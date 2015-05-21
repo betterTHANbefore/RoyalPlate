@@ -27,6 +27,7 @@ public class WaiterTableData extends ParseObject {
             put("WaiterName",waiterName);
         }
         public String getTable(){
+
             return getString("TableNo");
         }
         public void setTable(String table){
