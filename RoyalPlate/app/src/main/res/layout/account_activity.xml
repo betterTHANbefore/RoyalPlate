@@ -1,73 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-android:background="@drawable/simplebackground"
+    android:orientation="vertical"
+    android:background="@drawable/simplebackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_weight="2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_weight="3"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="20">
+
+        <ImageView
+            android:id="@+id/royalplate_title"
+            android:src="@drawable/royalplate_welcome"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
+    <!-- need watier name, guest no, table no, date, time -->
 
-    <!-- middle panel -->
+
     <RelativeLayout
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
 
-        android:layout_width="wrap_content"
+        android:layout_weight="7"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
 
-        <!-- Show the Table #    -->
-        <TextView
-            android:id="@+id/tablenoid"
-            android:hint="Table #"
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <!-- Bill -->
 
-        <TextView
-            android:id="@+id/billid"
-            android:layout_below="@+id/tablenoid"
-            android:text="@string/bill"
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!--<ListView-->
-            <!--android:id="@+id/account_view"-->
-            <!--android:layout_below="@+id/noOfItems"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-
-        <!--</ListView>-->
-
-        <!-- TOtal -->
-        <!--<TextView-->
-            <!--android:id="@+id/total"-->
-            <!--android:text="Total"-->
-            <!--android:layout_below="@+id/account_view"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" />-->
 
 
     </RelativeLayout>
 
 
+    <!-- need list view, subtotal, tax, and grand total -->
 
-
-    <LinearLayout
-        android:layout_weight="2"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_weight="9"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </LinearLayout>
+        <!-- for Ordered Items Litview -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ListView>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Textview to show subtotal and tax -->
+
+            <!-- subtotal -->
+
+            <TextView
+                android:id="@+id/subotalid"
+                android:hint="subtotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- tax -->
+            <TextView
+                android:id="@+id/taxid"
+                android:layout_below="@+id/subotalid"
+                android:hint="tax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- grand total -->
+
+            <TextView
+                android:id="@+id/grandtotalid"
+                android:layout_below="@+id/taxid"
+                android:hint="grand total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center_horizontal"-->
+
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+
+
+        <!--&lt;!&ndash; Show the Table #    &ndash;&gt;-->
+        <!--<TextView-->
+            <!--android:id="@+id/tablenoid"-->
+            <!--android:hint="Table #"-->
+            <!--android:textSize="20dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--&lt;!&ndash; Bill &ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/billid"-->
+            <!--android:layout_below="@+id/tablenoid"-->
+            <!--android:text="@string/bill"-->
+            <!--android:textSize="20dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+
+       <!---->
+
+
+    <!--</RelativeLayout>-->
+
+
+
+
 
 </LinearLayout>
