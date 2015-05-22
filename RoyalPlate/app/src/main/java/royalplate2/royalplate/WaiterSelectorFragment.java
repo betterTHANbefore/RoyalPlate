@@ -26,24 +26,6 @@ public class WaiterSelectorFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_orderlist, container, false);
         Log.i("FRAGMET", "WAITER LIST");
 
-//        ParseObject poTest = new ParseObject("Table1");
-//        poTest.put("Test", "Mange Juice");
-//        poTest.put("Test", "Mil Juice");
-//        poTest.put("Test", "other Juice");
-//        poTest.put("Test", "barley Juice");
-//
-//        poTest.saveInBackground();
-
-//        ParseQuery pq = new ParseQuery("Table1");
-//        pq.findInBackground(new FindCallback() {
-//
-//
-//            @Override
-//            public void done(Object o, Throwable throwable) {
-//
-//            }
-//        });
-
         final Button orderBtn = (Button) v.findViewById(R.id.orderbutton);
         orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
