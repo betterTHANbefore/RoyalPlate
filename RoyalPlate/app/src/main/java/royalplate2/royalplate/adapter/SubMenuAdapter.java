@@ -38,8 +38,10 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
     TextView itemIdTextView;
     TextView itemNameTextView;
     TextView initialPriceTextView;
-
     TextView itemCostTextView;
+    String itemName;
+    String noofItem;
+    String itemcost;
    // EditText noOfItemEditText;
 
 
@@ -66,6 +68,10 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+//        TextView itemNameTextView;
+//        TextView initialPriceTextView;
+//        TextView itemCostTextView;
+
 
         View view = convertView;
 
@@ -87,14 +93,14 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
         /***********************************************
          * Item Name appears in TextView
          **********************************************/
-        itemNameTextView = (TextView) view.findViewById((R.id.itemNameid));
+         itemNameTextView = (TextView) view.findViewById((R.id.itemNameid));
 
             itemNameTextView.setText(((SubMenuData) (menuItems.get(position))).getName());
 
         /***********************************************
          * Item initial price appears in TextView
          **********************************************/
-        initialPriceTextView= (TextView) view.findViewById(R.id.itemPriceid);
+         initialPriceTextView= (TextView) view.findViewById(R.id.itemPriceid);
            String getItemPrice = Double.toString(((SubMenuData) (menuItems.get(position))).getPrice());
            initialPriceTextView.setText(getItemPrice);
 
@@ -152,11 +158,12 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
                     @Override
                     public void afterTextChanged(Editable s) {
 
-                        if (!s.toString().equals(null)){
 
-                            String itemName = itemNameTextView.getText().toString();
-                            String noofItem = s.toString();
-                            String itemcost =  itemCostTextView.getText().toString();
+                        if (!s.toString().equals(null) | !s.toString().equals("0")){
+
+                            itemName = itemNameTextView.getText().toString();
+                            noofItem = s.toString();
+                            itemcost =  itemCostTextView.getText().toString();
 
                             Log.i("tag" , "SubAdapter   " + noofItem  + "    " + itemName+ "  " + itemcost);
                             /***************************************************************************

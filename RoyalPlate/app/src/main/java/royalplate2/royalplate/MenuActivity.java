@@ -52,6 +52,8 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
     public static final String LOGINSHARED = "loginSharedPreferences";
 
     public static final String ASSIGNEDTABLESHARED = "assignedtablesSharedPreferences";
+    public static final String ORDEREDLISTSHARED = "orderedlistSharedPreferences";
+
 
     @Override
     public void onSwipe(int direction) {
@@ -113,14 +115,12 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
         tableno = assignedtablesSharedPreferences.getString("tableNo", "");
 
 
+        SharedPreferences orderedlistSharedPreferences = getSharedPreferences(ORDEREDLISTSHARED, mode);
+            noOfItems = orderedlistSharedPreferences.getString("No of Items", "");
+            itemName = orderedlistSharedPreferences.getString("Item Name", "");
+            itemCost = orderedlistSharedPreferences.getString("Item Cost","");
+          //  tableNum = orderedlistSharedPreferences.getString("tableNo", "");
 
-        // shared = PreferenceManager.getDefaultSharedPreferences(this);
-//
-//            noOfItems = shared.getString("No of Items", "");
-//            itemName = shared.getString("Item Name", "");
-//            itemCost = shared.getString("Item Cost","");
-//            tableNum = shared.getString("tableNo", "");
-//
 
         Log.i("Tag", "MenuActivity  "   + itemName + "   "+ noOfItems + " " + itemCost);
 
@@ -159,13 +159,13 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 //                editor.apply();
 
                 intent.putExtra("title", menuItemName);
-                intent.putExtra("tableNo", tableno);
+              //  intent.putExtra("tableNo", tableno);
 //                intent.putExtra("tableNo", tableNum);
 
 
-                intent.putExtra("Item Name", itemName);
-                intent.putExtra("No of Items", noOfItems);
-                intent.putExtra("Item Cost", itemCost);
+//                intent.putExtra("Item Name", itemName);
+//                intent.putExtra("No of Items", noOfItems);
+//                intent.putExtra("Item Cost", itemCost);
 //                noOfItems = shared.getString("No of Items", "");
 //
 //                itemName = shared.getString("Item Name", "");

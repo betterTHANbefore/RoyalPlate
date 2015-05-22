@@ -1,5 +1,6 @@
 package royalplate2.royalplate;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,6 +48,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 //    TextView subMenuTitle;
     TextView tableNoTextview;
     Intent intent;
+    public static final String ORDEREDLISTSHARED = "orderedlistSharedPreferences";
 
 
     private SimpleGestureFilter detector;
@@ -121,6 +123,13 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.submenu_activity);
         listview = (ListView) findViewById(R.id.itemlist);
+
+        /*****************
+         * Create orderedlistSharedPreferences table to store
+         * no of items, itemname and price
+         */
+
+
 
         shared = PreferenceManager.getDefaultSharedPreferences(this);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -357,20 +366,20 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 //        }
     }
 
-
-    public void saveOrderedList(String itemName, String numItems){
-
-        // getting data value from SubMenuAdapter
-        // passing data value to OrderListFragment class
-        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = shared.edit();
-//        editor.put
-        editor.putString("Item Name", itemName);
-        editor.putString("No of Items", noOfItems);
-        editor.apply();
-        Log.i("Item Name", itemName);
-        Log.i("No of Items", noOfItems);
-    }
+//
+//    public void saveOrderedList(String itemName, String numItems){
+//
+//        // getting data value from SubMenuAdapter
+//        // passing data value to OrderListFragment class
+//        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
+//        SharedPreferences.Editor editor = shared.edit();
+////        editor.put
+//        editor.putString("Item Name", itemName);
+//        editor.putString("No of Items", noOfItems);
+//        editor.apply();
+//        Log.i("Item Name", itemName);
+//        Log.i("No of Items", noOfItems);
+//    }
 
 
     @Override
@@ -405,13 +414,24 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
         // getting data value from SubMenuAdapter
         // passing data value to OrderListFragment class
+        int mode = Activity.MODE_PRIVATE;
+        SharedPreferences orderedlistSharedPreferences = getSharedPreferences(ORDEREDLISTSHARED, mode);
 
-        SharedPreferences.Editor editor = shared.edit();
-//        editor.put
-        editor.putString("Item Name", itemName);
+
+
+        SharedPreferences.Editor editor = orderedlistSharedPreferences.edit();
+     //   editor.putString("tableNo", tableno);
         editor.putString("No of Items", noOfItems);
+        editor.putString("Item Name", itemName);
         editor.putString("Item Cost", itemcost);
         editor.apply();
+
+//        SharedPreferences.Editor editor = shared.edit();
+////        editor.put
+//        editor.putString("Item Name", itemName);
+//        editor.putString("No of Items", noOfItems);
+//        editor.putString("Item Cost", itemcost);
+//        editor.apply();
 
         Log.i("tag" , "SubMenuActivity saveorder  " + noOfItems  + "    " + itemName+ "  " + itemcost);
 
