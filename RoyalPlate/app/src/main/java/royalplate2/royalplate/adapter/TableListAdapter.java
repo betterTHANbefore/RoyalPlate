@@ -1,22 +1,17 @@
 package royalplate2.royalplate.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.parse.Parse;
 import com.parse.ParseObject;
 
-import java.text.ParseException;
 import java.util.List;
 
 import royalplate2.royalplate.R;
-import royalplate2.royalplate.TableListFragment;
-import royalplate2.royalplate.data.TablesData;
 import royalplate2.royalplate.data.WaiterTableData;
 
 /**

@@ -7,15 +7,15 @@ import com.parse.ParseObject;
 /**
  * Created by sh on 5/17/15.
  */
-@ParseClassName("Table1")
-public class ChefSideOrderedListData extends ParseObject {
-    public ChefSideOrderedListData() {}
+//@ParseClassName("Table1")
+public class TableItemData extends ParseObject {
+    public TableItemData() {}
 
     public String getName() {
-        return getString("Test");
+        return getString("ItemName");
     }
     public void setName(String itemName) {
-        put("Test", itemName);
+        put("ItemName", itemName);
     }
 }
 

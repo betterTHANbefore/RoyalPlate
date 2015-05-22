@@ -7,14 +7,7 @@ import com.parse.ParseObject;
  * Created by hetu on 5/16/15.
  */
 @ParseClassName("WaiterTable")
-
-
 public class WaiterTableData extends ParseObject {
-
-    /**
-     * Created by hetu on 5/2/15.
-     */
-
 
         public WaiterTableData(){}
 
