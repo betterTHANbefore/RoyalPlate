@@ -9,14 +9,18 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -76,6 +80,59 @@ public class OrderListFragment extends Fragment {
 
         ordereditemslistview = (ListView) v.findViewById(R.id.ordereditems_listview);
 
+        ordereditemslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                final ParseQuery query = new ParseQuery("OrderedListParse");
+
+                query.whereEqualTo("TableNo", tableno);
+                query.whereEqualTo("ItemName",itemName );
+//                //query.whereEqualTo("NoOfItem", noofitem);
+//
+//                query.findInBackground(new FindCallback<ParseObject>() {
+//                    @Override
+//                    public void done(List<ParseObject> orderedlist, ParseException e) {
+//                        if(e == null || orderedlist.size() >0){
+//
+//// iterate over all messages and delete them
+//                            for(ParseObject ol : orderedlist)
+//                            {
+//                                ol.deleteInBackground();
+//                            }
+//                        }
+//                        else {
+//                                    Log.e("TAG", e.getMessage(), e);
+//                        }
+//
+//
+//
+//                            //for (int i=0; i<orderedlist.size(); i++) {
+//
+////                                ParseObject itemName = orderedlist.get(i);
+////                                //ParseObject tableNo = orderedlist.get(i);
+//////                                try {
+////                                    itemName.deleteInBackground();
+////                                    //tableNo.delete();
+////
+//////                                } catch (ParseException e1) {
+//////                                    Log.e("TAG", e1.getMessage(), e1);
+//////                                }
+//
+//                          // }
+//                        }
+//
+//                    //}
+//
+//                });
+//
+//
+//
+//            }
+
+            }
+        });
 
 
         int mode = Activity.MODE_PRIVATE;
@@ -248,7 +305,8 @@ public class OrderListFragment extends Fragment {
         refreshImageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  RetrieveSharedData();
+                RetrieveSharedData();
+                storeDataOnParse();
                 loadOrderedList();
             }
 
@@ -299,6 +357,7 @@ public class OrderListFragment extends Fragment {
 
         Log.i("OF2",tableno+ " "+ itemName + "  " + noofItem + " " + itemcost);
         //  shared.edit().clear().apply();
+
     }
 
     /***********************************************************************************************
@@ -315,7 +374,7 @@ public class OrderListFragment extends Fragment {
         orderedlist.findInBackground(new FindCallback<OrderedListData>() {
             @Override
             public void done(List<OrderedListData> orderedlist, ParseException e) {
-                orderedListAdapter = new OrderedListAdapter(getActivity().getApplicationContext(), orderedlist);
+                orderedListAdapter = new OrderedListAdapter(getActivity().getApplicationContext(), orderedlist, tableno);
                 ordereditemslistview.setAdapter(orderedListAdapter);
 
             }

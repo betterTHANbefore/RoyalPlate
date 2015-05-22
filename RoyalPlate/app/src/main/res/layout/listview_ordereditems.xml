@@ -9,7 +9,8 @@
     <!-- Item ID -->
 
     <RelativeLayout
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/simpleborader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -58,11 +59,12 @@
 
 
         <Button
-            android:id="@+id/orded_cancleBtnid"
+            android:id="@+id/orded_deleteBtnid"
             android:background="@drawable/add_delete"
             android:text="@string/plus_sign"
             android:textSize="15dp"
             android:textColor="@color/brown"
+            android:clickable="false"
             android:layout_gravity="center"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -70,6 +72,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/orded_itemPriceid"
             android:layout_alignBottom="@+id/orded_itemPriceid" />
+
 
 
     </RelativeLayout>

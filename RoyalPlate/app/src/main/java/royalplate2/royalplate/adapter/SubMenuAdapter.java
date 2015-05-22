@@ -39,10 +39,14 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
     TextView itemNameTextView;
     TextView initialPriceTextView;
     TextView itemCostTextView;
+    EditText noOfItemsEditText;
+    NumberPicker np;
     String itemName;
     String noofItem;
     String itemcost;
-   // EditText noOfItemEditText;
+    int noofitems;
+    double price;
+    // EditText noOfItemEditText;
 
 
     //Map<String, Ordered> noOfItems = new HashMap<String, Ordered>();
@@ -108,28 +112,29 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
         /************************************************
          * select no of items from the number picker
          ************************************************/
-        NumberPicker np = (NumberPicker) view.findViewById(R.id.numberPickerid);
+        np = (NumberPicker) view.findViewById(R.id.numberPickerid);
 
             np.setMinValue(0);
             np.setMaxValue(20);
             np.setWrapSelectorWheel(false);
 
             final View finalView = view;
+
             np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
 
-                final EditText noOfItemsEditText = (EditText) finalView.findViewById(R.id.noOfitem_edittextid);
+                noOfItemsEditText = (EditText) finalView.findViewById(R.id.noOfitem_edittextid);
                 noOfItemsEditText.setText(String.valueOf(newVal));
 
                 /*******************************************************************************
                  * get the no of items from the edittext and convert from string to int
                  *******************************************************************************/
-                int noofitems = Integer.parseInt(noOfItemsEditText.getText().toString());
+                 noofitems = Integer.parseInt(noOfItemsEditText.getText().toString());
                 /*******************************************************************************
                  * get each item initial price from the inititialTextview. Convet to double.
                  *******************************************************************************/
-                double price = Double.parseDouble(initialPriceTextView.getText().toString());
+                price = Double.parseDouble(initialPriceTextView.getText().toString());
 
 
                 /***********************************************************************************
@@ -165,7 +170,7 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
                             noofItem = s.toString();
                             itemcost =  itemCostTextView.getText().toString();
 
-                            Log.i("tag" , "SubAdapter   " + noofItem  + "    " + itemName+ "  " + itemcost);
+                            Log.i("tag" , "SubAdapter-->   " + noofItem  + "    " + itemName+ "  " + itemcost);
                             /***************************************************************************
                              * send noofItem, itemName and itemcost to subMenuActivity
                              **************************************************************************/
