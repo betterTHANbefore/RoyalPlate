@@ -72,34 +72,43 @@ public class OrderedListAdapter extends ArrayAdapter<OrderedListData> {
 
                 //remove item
                 Log.i("Remove", "Cancle clicked");
-
-
-                Integer index = (Integer) view.getTag();
-                orderedItemsList.remove(position);
-               // orderedItemsList.set(position, orderedItemsList.remove(index.intValue()));
-              //  orderedItemsList.remove(index.intValue());
+//
+//
+//                Integer index = (Integer) view.getTag();
+                orderedItemsList.remove(position); // just remove from that position
                 notifyDataSetChanged();
 
-//                final ParseQuery query = new ParseQuery("OrderedListParse");
+
+                // orderedItemsList.set(position, orderedItemsList.remove(index.intValue()));
+                //  orderedItemsList.remove(index.intValue());
+
+
+                final ParseQuery query = new ParseQuery("OrderedListParse");
 //
-//                query.whereEqualTo("TableNo", tableno);
-//                query.whereEqualTo("ItemName",itemName );
+                query.whereEqualTo("TableNo", tableno);
+                query.whereEqualTo("ItemName", itemName);
                 //query.whereEqualTo("NoOfItem", noofitem);
 
-//                query.findInBackground(new FindCallback<ParseObject>() {
-//                    @Override
-//                    public void done(List<ParseObject> orderedlist, ParseException e) {
-//                        if(e == null || orderedlist.size() >0){
-//
-//// iterate over all messages and delete them
-//                            for(ParseObject ol : orderedlist)
-//                            {
-//                                ol.deleteInBackground();
-//                            }
-//                        }
-//                        else {
-//                                    Log.e("TAG", e.getMessage(), e);
-//                        }
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> orderedlist, ParseException e) {
+                        if (e == null || orderedlist.size() > 0) {
+
+// iterate over all messages and delete them
+                            for (ParseObject ol : orderedlist) {
+                                try {
+                                    ol.delete();
+                                } catch (ParseException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                        } else {
+                            Log.e("TAG", e.getMessage(), e);
+                        }
+                    }
+                });
+            }
+        });
 //
 //
 //
@@ -116,16 +125,7 @@ public class OrderedListAdapter extends ArrayAdapter<OrderedListData> {
 //////                                }
 //
 //                          // }
-//                        }
-//
-//                    //}
-//
-//                });
 
-
-
-            }
-        });
 
         return view;
     }

@@ -6,12 +6,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +73,8 @@ public class AssignedTableActivity extends Activity {
         loadtables();
 
         /************************************************************************
-         * Each table listener to go MainMenu. Passing tableno through Intent
+         * Each table listener to go MainMenu. Popup window opens. Waiter either
+         * Order or Pay.
          ************************************************************************/
         assignedtableGridview = (GridView) findViewById(R.id.waitertable_gridview);
         assignedtableGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -89,25 +92,48 @@ public class AssignedTableActivity extends Activity {
                 //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                 SharedPreferences.Editor editor = assignedtablesSharedPreferences.edit();
                 editor.putString("tableNo", tableno);
-
                 editor.apply();
 
+                View popupView = getLayoutInflater().inflate(R.layout.order_pay_popup, null);
+
+                final PopupWindow popupwindow = new PopupWindow(popupView, 330, 300, true);
+                    popupwindow.showAtLocation(view, Gravity.CENTER,0,0);
+                    popupwindow.setFocusable(true);
+                    popupwindow.setOutsideTouchable(true);
+                    popupwindow.setContentView(popupView);
+
+
+                    Button orderButton = (Button) popupView.findViewById(R.id.orderbuttonid);
+
+                    orderButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                           intent = new Intent(AssignedTableActivity.this, MenuActivity.class);
+
+                            // tablegridIntent.putExtra("tableNo", tableno);
+
+                            startActivity(intent);
+
+                        }
+                    });
+
+                    Button payButton = (Button) popupView.findViewById(R.id.paybuttonid);
+
+                    payButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            intent = new Intent(AssignedTableActivity.this, AccountActivity.class);
+
+                            // tablegridIntent.putExtra("tableNo", tableno);
+
+                            startActivity(intent);
+
+                        }
+                    });
 
 
 
 
-
-                Intent tablegridIntent = new Intent(AssignedTableActivity.this, MenuActivity.class);
-
-                // tablegridIntent.putExtra("tableNo", tableno);
-
-
-
-
-
-
-
-                startActivity(tablegridIntent);
             }
         });
 
