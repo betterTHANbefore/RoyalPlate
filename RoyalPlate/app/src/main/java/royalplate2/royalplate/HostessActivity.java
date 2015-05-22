@@ -346,6 +346,14 @@ public class HostessActivity extends Activity implements OnClickListener{
                  waitertable.setTable(tableno_shared);
                  waitertable.saveInBackground();
 
+
+
+                     // store data for manager
+
+
+
+
+
                  popupwindow.dismiss();
 
                  guestNameedit.setText("");

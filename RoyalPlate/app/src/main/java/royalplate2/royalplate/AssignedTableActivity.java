@@ -131,6 +131,21 @@ public class AssignedTableActivity extends Activity {
                         }
                     });
 
+                /************************************************************
+                 * Cancle Button listener from the PopupWindow. Goes back to
+                 * Assigned Activity.
+                 **********************************************************/
+                Button cancleButton = (Button) popupView.findViewById(R.id.canclebuttonid);
+
+                cancleButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupwindow.dismiss();
+//                        sharedwaiter.edit().clear().apply();
+//                        sharedtable.edit().clear().apply();
+                    }
+                });
+
 
 
 

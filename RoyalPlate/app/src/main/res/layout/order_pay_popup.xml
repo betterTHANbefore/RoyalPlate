@@ -8,6 +8,7 @@
 <!-- title -->
     <LinearLayout
         android:id="@+id/titleview"
+        android:weightSum="3"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -25,14 +26,6 @@
         android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <RelativeLayout
-
-        android:id="@+id/holdbuttonlayout"
-        android:layout_below="@+id/titleview"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-></RelativeLayout>
 
     <Button
         android:id="@+id/orderbuttonid"
@@ -44,12 +37,13 @@
         android:gravity="center"
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
-        android:layout_margin="10dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    />
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/titleview"/>
     <Button
         android:id="@+id/paybuttonid"
         android:text="Pay"
@@ -85,8 +79,6 @@
         android:layout_centerHorizontal="true" />
 
 
-
-    <!-- big panel -->
 
 
 </RelativeLayout>
