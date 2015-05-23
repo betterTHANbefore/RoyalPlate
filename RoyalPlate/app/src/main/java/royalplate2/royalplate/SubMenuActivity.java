@@ -136,7 +136,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
         TextView subMenuTitle;
         TextView tableNo;
-        Button goToMenuBtn;
         String title;
 
         /*****************************************************************
@@ -180,7 +179,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
 
         Log.i("Tag", " SubActivity  ++"   + itemName + "   "+ noOfItems + " "+ itemCost);
-        title = getIntent().getExtras().getString("title");
 
         final ListView list = (ListView) findViewById(R.id.itemlist);
         list.post(new Runnable() {
@@ -191,7 +189,9 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         });
 
         title = getIntent().getExtras().getString("title");
-   // title = shared.getString("title", null);
+        Log.i("Tag", " SubActivity title"   + title);
+
+        // title = shared.getString("title", null);
 
         switch (title) {
             case "APPETIZER":
@@ -273,7 +273,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
             default:
                 intent = new Intent(getApplicationContext(), MenuActivity.class);
                 startActivity(intent);
-               // subMenuTitle.setText(getIntent().getExtras().getString("To go Main Manu"));
+//               subMenuTitle.setText(getIntent().getExtras().getString("To go Main Manu"));
         }
 
         // this contains OrderListFragment class
@@ -517,25 +517,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         orderedItemList.remove(jsonObject);
     }
 
-
-    //
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedState) {
-//        super.onRestoreInstanceState(savedState);
-//
-//        Log.i("TAG", "onRestore");
-//        final  TextView itemnametextview = (TextView) findViewById(R.id.itemcosttextview);
-//        final EditText noofitemedittext = (EditText) findViewById(R.id.no_of_items);
-//
-//
-//        CharSequence textview = savedState.getCharSequence("savedItemPrice");
-//        CharSequence edittext = savedState.getCharSequence("savedNoofItems");
-//
-//        itemnametextview.setText(textview);
-//        noofitemedittext.setText(edittext);
-//
-//
-//    }
     @Override
     protected void onRestoreInstanceState(Bundle savedState) {
         super.onRestoreInstanceState(savedState);

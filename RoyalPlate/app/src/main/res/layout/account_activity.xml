@@ -6,12 +6,16 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_weight="4"
+        android:layout_weight="1"
         android:gravity="center"
         android:layout_margin="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="20dp">
+=======
+        android:layout_height="90dp">
+>>>>>>> 1285981aeefd8c19cf8b4c9a4fe2b933b96d3f8a
 
         <ImageView
             android:id="@+id/royalplate_title"
@@ -24,51 +28,80 @@
     </LinearLayout>
     <!-- need watier name, guest no, table no, date, time -->
 
+
     <LinearLayout
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_margin="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/bill_guestnameid"
+                android:hint="Guest Name"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/marron"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/bill_noOfguestid"
+                android:hint="no of guest "
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/bill_guestnameid"
+                android:textColor="@color/marron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/bill_tablenoid"
+                android:hint="Table #"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/marron"
+                android:layout_below="@+id/bill_noOfguestid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_margin="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/bill_waiternameid"
                 android:hint="Waiter "
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/marron"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/bill_tablenoid"
-                android:hint="Table #"
-                android:layout_below="@+id/bill_waiternameid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/bill_guestid"
-                android:hint="Guest Name"
-                android:layout_below="@+id/bill_tablenoid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
             <TextView
                 android:id="@+id/bill_dateid"
                 android:hint="Date "
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/bill_waiternameid"
+                android:textColor="@color/marron"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/bill_timeid"
-                android:hint="Table #"
+                android:hint="Time"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/marron"
                 android:layout_below="@+id/bill_dateid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -82,24 +115,38 @@
 
         <!-- for Ordered Items Litview -->
         <LinearLayout
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
 
             <ListView
                 android:id="@+id/bill_listviewid"
-                android:layout_width="match_parent"
+                android:layout_width="377dp"
                 android:layout_height="280dp">
 
             </ListView>
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
 
         <RelativeLayout
-            android:layout_weight="1"
-            
-            android:layout_margin="10dp"
+            android:layout_weight="2"
+
+            android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -110,6 +157,9 @@
             <TextView
                 android:id="@+id/subotalid"
                 android:hint="subtotal"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/marron"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -118,6 +168,9 @@
                 android:id="@+id/taxid"
                 android:layout_below="@+id/subotalid"
                 android:hint="tax"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/marron"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -127,12 +180,12 @@
                 android:id="@+id/grandtotalid"
                 android:layout_below="@+id/taxid"
                 android:hint="grand total"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/marron"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </RelativeLayout>
-
-
-
 
 </LinearLayout>

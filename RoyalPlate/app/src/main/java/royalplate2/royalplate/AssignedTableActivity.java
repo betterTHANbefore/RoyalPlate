@@ -49,9 +49,9 @@ public class AssignedTableActivity extends Activity {
         setContentView(R.layout.assigned_tables_activity);
 
 
-        /***************************************************************
+        /******************************************************************************************
          * Waiter UserName appear into usernameTextview after login to account
-         ***************************************************************/
+         ******************************************************************************************/
       //  username = "cs";
 
 
@@ -67,9 +67,9 @@ public class AssignedTableActivity extends Activity {
         usernameTextView = (TextView) findViewById(R.id.waiternametextviewid);
         usernameTextView.setText(username);
 
-        /***************************************************************
+        /*******************************************************************************************
          * Load assignd tables
-         ***************************************************************/
+         ******************************************************************************************/
         loadtables();
 
         /************************************************************************
@@ -110,7 +110,7 @@ public class AssignedTableActivity extends Activity {
                         public void onClick(View v) {
                            intent = new Intent(AssignedTableActivity.this, MenuActivity.class);
 
-                            // tablegridIntent.putExtra("tableNo", tableno);
+                           //  intent.putExtra("tableNo", tableno);
 
                             startActivity(intent);
 
@@ -131,20 +131,23 @@ public class AssignedTableActivity extends Activity {
                         }
                     });
 
-                /************************************************************
-                 * Cancle Button listener from the PopupWindow. Goes back to
-                 * Assigned Activity.
-                 **********************************************************/
-                Button cancleButton = (Button) popupView.findViewById(R.id.canclebuttonid);
+                    /******************************************************************************
+                     * Cancle Button listener from the PopupWindow. Goes back to
+                     * Assigned Activity.
+                     ******************************************************************************/
+                    Button cancleButton = (Button) popupView.findViewById(R.id.canclebuttonid);
 
-                cancleButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupwindow.dismiss();
-//                        sharedwaiter.edit().clear().apply();
-//                        sharedtable.edit().clear().apply();
-                    }
-                });
+                    cancleButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupwindow.dismiss();
+
+
+
+    //                        sharedwaiter.edit().clear().apply();
+    //                        sharedtable.edit().clear().apply();
+                        }
+                    });
 
 
 
@@ -152,9 +155,9 @@ public class AssignedTableActivity extends Activity {
             }
         });
 
-        /*********************************************************************
+        /*******************************************************************************************
          * ImageView leads to previous activity (SelectActivity)
-         *******************************************************************/
+         ******************************************************************************************/
         ImageView goToPrevious = (ImageView) findViewById(R.id.previousImageview);
 
         goToPrevious.setOnClickListener(new View.OnClickListener() {
