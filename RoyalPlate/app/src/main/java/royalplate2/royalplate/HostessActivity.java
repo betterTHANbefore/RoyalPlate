@@ -35,10 +35,17 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import royalplate2.royalplate.adapter.TableAdapter;
 import royalplate2.royalplate.adapter.WaiterAdapter;
+import royalplate2.royalplate.data.GuestBillData;
+import royalplate2.royalplate.data.TableItemData1;
+import royalplate2.royalplate.data.TableItemData2;
 import royalplate2.royalplate.data.TablesData;
 import royalplate2.royalplate.data.WaiterData;
 import royalplate2.royalplate.data.WaiterTableData;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +70,7 @@ public class HostessActivity extends Activity implements OnClickListener{
     SharedPreferences sharedwaiter;
 
     Map<String, Set<String>> waitertables;
-    //ParseObject waitertable;
+
     TextView displayGuestName;
     TextView displayNoofGuest;
     TextView displayTableNo;
@@ -73,14 +80,35 @@ public class HostessActivity extends Activity implements OnClickListener{
     String getguestname;
     String getnoOfguest;
 
-    String tableno;
-    String waitername;
+    private String tableno;
+    private String waitername;
+    String guestname;
+    String noofguest;
+
     WaiterTableData waitertable;
+    GuestBillData guestBillData;
+
+    public static final String GUESTINFOSHARED = "guestInfoSharedPreferences";
+    public static final String LOGINSHARED = "loginSharedPreferences";
+    public static final String ASSIGNEDTABLESHARED = "assignedtablesSharedPreferences";
+    DateFormat dateFormat;
+    DateFormat timeFormat;
+    Date date;
+    Date time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hostess_activity);
+
+        /***********************************************************
+         * To Stamp current date and time
+         *********************************************************/
+        date = new Date();
+        time = new Date();
+
+        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        timeFormat = new SimpleDateFormat("HH:mm:ss");
 
         sharedwaiter = PreferenceManager.getDefaultSharedPreferences(this);
         sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
@@ -120,6 +148,7 @@ public class HostessActivity extends Activity implements OnClickListener{
          * EditText to enter guest name and no of guest
          **********************************************************/
         guestNameedit = (EditText) findViewById(R.id.guestnameEdit);
+       // guestname = guestNameedit.getText().toString();
         guestNameedit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -154,7 +183,7 @@ public class HostessActivity extends Activity implements OnClickListener{
         assignedButton.setOnClickListener(this);
 
         gutestNoedit = (EditText) findViewById(R.id.guestnoEdit);
-      //  assignedButton.setOnClickListener(this);
+        //noofguest = gutestNoedit.getText().toString();
 
 
         /************************************************************
@@ -293,10 +322,10 @@ public class HostessActivity extends Activity implements OnClickListener{
         displayWaiterName = (TextView) findViewById(R.id.waitername_popup);
 
 
-        getguestname = guestNameedit.getText().toString();
-        getnoOfguest = gutestNoedit.getText().toString();
-        final String waitrename_shared = sharedwaiter.getString("WaiterName", null);
-        final String tableno_shared = sharedtable.getString("TableNo", null);
+        guestname = guestNameedit.getText().toString();
+        noofguest = gutestNoedit.getText().toString();
+        waitername = sharedwaiter.getString("WaiterName", null);
+        tableno = sharedtable.getString("TableNo", null);
 
 
              /**************************************************************
@@ -315,18 +344,18 @@ public class HostessActivity extends Activity implements OnClickListener{
               * Display Guest Name and no of guest on popup Window
               *****************************************************/
              ((TextView) popupwindow.getContentView().findViewById(R.id.guestname_popup))
-                     .setText("Name:  " + getguestname);
+                     .setText("Name:  " + guestname);
              ((TextView) popupwindow.getContentView().findViewById(R.id.noofpeople_popup))
-                     .setText("No:  " + getnoOfguest);
+                     .setText("No:  " + noofguest);
 
 //
              /*******************************************************
               * Display tableSet and waiterSet on popup Window
               *****************************************************/
              ((TextView) popupwindow.getContentView().findViewById(R.id.tableno_popup))
-                     .setText("Table No:  " + tableno_shared);
+                     .setText("Table No:  " + tableno);
              ((TextView) popupwindow.getContentView().findViewById(R.id.waitername_popup))
-                     .setText("Waiter:  " + waitrename_shared);
+                     .setText("Waiter:  " + waitername);
 
 
              /************************************************************
@@ -342,13 +371,48 @@ public class HostessActivity extends Activity implements OnClickListener{
                   * Store data on WaiterTable class on parse
                   *****************************************/
                  waitertable = new WaiterTableData();
-                 waitertable.setWaiter(waitrename_shared);
-                 waitertable.setTable(tableno_shared);
+                 waitertable.setWaiter(waitername);
+                 waitertable.setTable(tableno);
                  waitertable.saveInBackground();
 
+                 guestBillData = new GuestBillData();
+                     guestBillData.setGuestName(guestname);
+                     guestBillData.setNoOfGuest(noofguest);
+                     guestBillData.setTableNo(tableno);
+                     guestBillData.setWaiterName(waitername);
+                     guestBillData.setDate(dateFormat.format(date));
+                     guestBillData.setTime(timeFormat.format(time));
+                 guestBillData.saveInBackground();
 
 
-                     // store data for manager
+                     // store Guest infor for billing and manager
+
+//                 dateFormat.format(date);
+//                 timeFormat.format(time);
+                 // storeGuestInfo(tableno);
+
+                 int mode = Activity.MODE_PRIVATE;
+
+                 SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
+                 waitername = loginSharedPreferences.getString("userName", "");
+
+                 SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
+                 tableno =  assignedtablesSharedPreferences.getString("tableNo", "");
+
+
+                 SharedPreferences guestInfoSharedPreferences = getSharedPreferences(GUESTINFOSHARED, mode);
+                 SharedPreferences.Editor editor = guestInfoSharedPreferences.edit();
+                 editor.putString("userName", waitername);
+                 editor.putString("guestName", guestname);
+                 editor.putString("tableNo", tableno);
+                 editor.putString("noOfGuest", noofguest);
+                 editor.putString("time", timeFormat.format(time));
+                 editor.putString("date",dateFormat.format(date));
+                 editor.apply();
+
+//
+//
+
 
 
 
@@ -399,5 +463,65 @@ public class HostessActivity extends Activity implements OnClickListener{
 
         }
 
+//    private void storeGuestInfo() {
+//
+//        int mode = Activity.MODE_PRIVATE;
+//
+//        SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
+//        waitername = loginSharedPreferences.getString("userName", "");
+//
+//        SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
+//        tableno =  assignedtablesSharedPreferences.getString("tableNo", "");
+//
+//
+//        SharedPreferences guestInfoSharedPreferences = getSharedPreferences(GUESTINFOSHARED, mode);
+//        SharedPreferences.Editor editor = guestInfoSharedPreferences.edit();
+//
+//        editor.putString("guestName", guestname);
+//        editor.putString("noOfGuest", noofguest);
+//        editor.putString("tableNo", tableno);
+//
+//        editor.putString("userName", waitername);
+//        editor.putString("date",dateFormat.format(date));
+//        editor.putString("time", timeFormat.format(time));
+//
+//        editor.apply();
+//
+//    }
+private void storeGuestInfo(String tableno) {
+
+
+//    if(tableno.equals("Table3")){
+//
+//    }
+//    if(tableno.equals("Table4")){
+//
+//    }
+
+//    int mode = Activity.MODE_PRIVATE;
+//
+//    SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
+//    waitername = loginSharedPreferences.getString("userName", "");
+//
+//    SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
+//    tableno =  assignedtablesSharedPreferences.getString("tableNo", "");
+//
+//
+//    SharedPreferences guestInfoSharedPreferences = getSharedPreferences(GUESTINFOSHARED, mode);
+//    SharedPreferences.Editor editor = guestInfoSharedPreferences.edit();
+//
+//    editor.putString("guestName", guestname);
+//    editor.putString("noOfGuest", noofguest);
+//    editor.putString("tableNo", tableno);
+//
+//    editor.putString("userName", waitername);
+//    editor.putString("date",dateFormat.format(date));
+//    editor.putString("time", timeFormat.format(time));
+//
+//    editor.apply();
+//
+//
+
+}
 
 }

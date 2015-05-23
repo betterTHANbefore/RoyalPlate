@@ -84,12 +84,12 @@ public class OrderListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
-                final ParseQuery query = new ParseQuery("OrderedListParse");
-
-                query.whereEqualTo("TableNo", tableno);
-                query.whereEqualTo("ItemName",itemName );
-//                //query.whereEqualTo("NoOfItem", noofitem);
+//
+//                final ParseQuery query = new ParseQuery("OrderedListParse");
+//
+//                query.whereEqualTo("TableNo", tableno);
+//                query.whereEqualTo("ItemName",itemName );
+////                //query.whereEqualTo("NoOfItem", noofitem);
 //
 //                query.findInBackground(new FindCallback<ParseObject>() {
 //                    @Override

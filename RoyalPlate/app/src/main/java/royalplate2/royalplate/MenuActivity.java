@@ -81,7 +81,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
           Intent  intent = new Intent(this, SubMenuActivity.class);
             // putExtra params need to be set up correctly accordingly what we need to pass
             intent.putExtra("title", "menuItemName");
-            intent.putExtra("tableNo", tableNum);
+            intent.putExtra("tableNo", "tableno");
             intent.putExtra("Item Name", itemName);
             intent.putExtra("No of Items", noOfItems);
             intent.putExtra("Item Cost", itemCost);
@@ -131,7 +131,6 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            Intent    intent = new Intent(MenuActivity.this, SubMenuActivity.class);
 
             Button listBtn  = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
                 menuItemName = listBtn.getText().toString();
@@ -157,6 +156,8 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 //                editor.putString("Item Cost", itemCost);
 
 //                editor.apply();
+                Intent    intent = new Intent(MenuActivity.this, SubMenuActivity.class);
+
 
                 intent.putExtra("title", menuItemName);
               //  intent.putExtra("tableNo", tableno);
@@ -174,7 +175,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
 
                 startActivity(intent);
-                Log.i("Tag", "MenuActivit_2  "    + itemName + "   "+ noOfItems + " " + itemCost);
+//                Log.i("Tag", "MenuActivit_2  "    + itemName + "   "+ noOfItems + " " + itemCost);
 
 
             }
