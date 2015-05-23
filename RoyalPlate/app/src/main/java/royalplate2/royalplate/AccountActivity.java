@@ -27,7 +27,8 @@ public class AccountActivity extends Activity{
         SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
         tableno = assignedtablesSharedPreferences.getString("tableNo", "");
 
-        tablenoTextview = (TextView) findViewById(R.id.tablenoid);
+        tablenoTextview = (TextView) findViewById(R.id.bill_tablenoid);
+//        tablenoTextview = (TextView) findViewById(R.id.tablenoid);
         tablenoTextview.setText(tableno);
 
 

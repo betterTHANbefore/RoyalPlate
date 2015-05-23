@@ -11,7 +11,7 @@
         android:layout_margin="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="20">
+        android:layout_height="20dp">
 
         <ImageView
             android:id="@+id/royalplate_title"
