@@ -109,12 +109,6 @@ public class AccountActivity extends Activity {
 
         });
 
-<<<<<<< HEAD
-        tablenoTextview = (TextView) findViewById(R.id.bill_tablenoid);
-//        tablenoTextview = (TextView) findViewById(R.id.tablenoid);
-        tablenoTextview.setText(tableno);
-=======
->>>>>>> 1285981aeefd8c19cf8b4c9a4fe2b933b96d3f8a
 
 
     }

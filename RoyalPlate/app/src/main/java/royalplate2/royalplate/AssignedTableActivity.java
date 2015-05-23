@@ -52,7 +52,7 @@ public class AssignedTableActivity extends Activity {
         /******************************************************************************************
          * Waiter UserName appear into usernameTextview after login to account
          ******************************************************************************************/
-      //  username = "cs";
+        //  username = "cs";
 
 
         int mode = Activity.MODE_PRIVATE;
@@ -60,10 +60,10 @@ public class AssignedTableActivity extends Activity {
         username = loginSharedPreferences.getString("userName", "");
 
 
-       // final SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
+        // final SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
 
 //        username = shared.getString("userName", "");
-     //   username = getIntent().getExtras().getString("userName");
+        //   username = getIntent().getExtras().getString("userName");
         usernameTextView = (TextView) findViewById(R.id.waiternametextviewid);
         usernameTextView.setText(username);
 
@@ -81,9 +81,9 @@ public class AssignedTableActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            Button assignedtableBtn = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
+                Button assignedtableBtn = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
 
-            String tableno = assignedtableBtn.getText().toString();
+                String tableno = assignedtableBtn.getText().toString();
 
                 int mode = Activity.MODE_PRIVATE;
                 SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
@@ -97,57 +97,57 @@ public class AssignedTableActivity extends Activity {
                 View popupView = getLayoutInflater().inflate(R.layout.order_pay_popup, null);
 
                 final PopupWindow popupwindow = new PopupWindow(popupView, 330, 300, true);
-                    popupwindow.showAtLocation(view, Gravity.CENTER,0,0);
-                    popupwindow.setFocusable(true);
-                    popupwindow.setOutsideTouchable(true);
-                    popupwindow.setContentView(popupView);
+                popupwindow.showAtLocation(view, Gravity.CENTER,0,0);
+                popupwindow.setFocusable(true);
+                popupwindow.setOutsideTouchable(true);
+                popupwindow.setContentView(popupView);
 
 
-                    Button orderButton = (Button) popupView.findViewById(R.id.orderbuttonid);
+                Button orderButton = (Button) popupView.findViewById(R.id.orderbuttonid);
 
-                    orderButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                           intent = new Intent(AssignedTableActivity.this, MenuActivity.class);
+                orderButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent = new Intent(AssignedTableActivity.this, MenuActivity.class);
 
-                           //  intent.putExtra("tableNo", tableno);
+                        //  intent.putExtra("tableNo", tableno);
 
-                            startActivity(intent);
+                        startActivity(intent);
 
-                        }
-                    });
+                    }
+                });
 
-                    Button payButton = (Button) popupView.findViewById(R.id.paybuttonid);
+                Button payButton = (Button) popupView.findViewById(R.id.paybuttonid);
 
-                    payButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            intent = new Intent(AssignedTableActivity.this, AccountActivity.class);
+                payButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent = new Intent(AssignedTableActivity.this, AccountActivity.class);
 
-                            // tablegridIntent.putExtra("tableNo", tableno);
+                        // tablegridIntent.putExtra("tableNo", tableno);
 
-                            startActivity(intent);
+                        startActivity(intent);
 
-                        }
-                    });
+                    }
+                });
 
-                    /******************************************************************************
-                     * Cancle Button listener from the PopupWindow. Goes back to
-                     * Assigned Activity.
-                     ******************************************************************************/
-                    Button cancleButton = (Button) popupView.findViewById(R.id.canclebuttonid);
+                /******************************************************************************
+                 * Cancle Button listener from the PopupWindow. Goes back to
+                 * Assigned Activity.
+                 ******************************************************************************/
+                Button cancleButton = (Button) popupView.findViewById(R.id.canclebuttonid);
 
-                    cancleButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            popupwindow.dismiss();
+                cancleButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupwindow.dismiss();
 
 
 
-    //                        sharedwaiter.edit().clear().apply();
-    //                        sharedtable.edit().clear().apply();
-                        }
-                    });
+                        //                        sharedwaiter.edit().clear().apply();
+                        //                        sharedtable.edit().clear().apply();
+                    }
+                });
 
 
 
@@ -176,7 +176,7 @@ public class AssignedTableActivity extends Activity {
         refreshbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 refreshActivity();
+                refreshActivity();
 
             }
         });
@@ -200,12 +200,12 @@ public class AssignedTableActivity extends Activity {
                         if(e == null || waiterData.size() >0){
                             for (int i=0; i<waiterData.size(); i++){
 
-                                  ParseObject waitername = waiterData.get(i);
-                                        try {
-                                            waitername.delete();
-                                        } catch (ParseException e1) {
-                                            Log.e("TAG", e1.getMessage(), e1);
-                                        }
+                                ParseObject waitername = waiterData.get(i);
+                                try {
+                                    waitername.delete();
+                                } catch (ParseException e1) {
+                                    Log.e("TAG", e1.getMessage(), e1);
+                                }
                             }
 
                         }
