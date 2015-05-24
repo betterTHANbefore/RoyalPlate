@@ -108,7 +108,7 @@ public class HostessActivity extends Activity implements OnClickListener{
         time = new Date();
 
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        timeFormat = new SimpleDateFormat("HH:mm:ss");
+        timeFormat = new SimpleDateFormat("hh:mm:ss");
 
         sharedwaiter = PreferenceManager.getDefaultSharedPreferences(this);
         sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
@@ -175,6 +175,7 @@ public class HostessActivity extends Activity implements OnClickListener{
                     assignedButton.setBackgroundResource(R.drawable.checkbox_background);
                     assignedButton.setPadding(80,0,80,0);
                     gutestNoedit.setEnabled(true);
+
                 }
 
             }
@@ -369,6 +370,8 @@ public class HostessActivity extends Activity implements OnClickListener{
                 /*****************************************
                  * Store data on WaiterTable class on parse
                  *****************************************/
+                waitertable = new WaiterTableData();
+
                 waitertable.setGuestName(guestname);
                 waitertable.setNoOfGuest(noofguest);
                 waitertable.setTable(tableno);
@@ -428,7 +431,6 @@ public class HostessActivity extends Activity implements OnClickListener{
 
                 sharedwaiter.edit().clear().apply();
                 sharedtable.edit().clear().apply();
-                guestInfoSharedPreferences.edit().apply();
 
             }
 

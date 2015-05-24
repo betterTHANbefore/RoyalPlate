@@ -14,6 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!-- Icon 1 -->
+        <ImageView
+            android:id="@+id/previousImageviewid"
+            android:src="@drawable/previous_icon2"
+            android:maxHeight="@dimen/abc_text_size_display_3_material"
+            android:adjustViewBounds="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
         <LinearLayout
             android:layout_margin="20dp"
             android:layout_weight="2"
@@ -47,13 +55,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/orderedList"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:textSize="65sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--<TextView-->
+                <!--android:id="@+id/orderedList"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:gravity="center"-->
+                <!--android:textSize="65sp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
 
         </LinearLayout>
 
@@ -86,24 +94,34 @@
 
 
         <RelativeLayout
+            android:id="@+id/orderedlistlayout"
             android:layout_weight="1"
+            android:layout_margin="20dp"
             android:layout_width="fill_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/doneButton"
-                android:layout_weight="1"
-                android:text="DONE"
-                android:textSize="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <!--<Button-->
+                <!--android:id="@+id/doneButton"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="DONE"-->
+                <!--android:textSize="20dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
 
             <ListView
 
                 android:id="@+id/itemlist"
                 android:layout_marginLeft="100dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/doneButton"
+                android:background="@drawable/rounded_corner"
+                android:text="DONE"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
 
             <!--<Button-->
@@ -121,7 +139,6 @@
             <!--android:layout_height="wrap_content" />-->
 
         </RelativeLayout>
-
 
 
         <RelativeLayout

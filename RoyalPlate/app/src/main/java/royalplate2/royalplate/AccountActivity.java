@@ -1,10 +1,12 @@
 package royalplate2.royalplate;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -44,6 +46,8 @@ public class AccountActivity extends Activity {
     TextView waiternameTextview;
     TextView dateTextview;
     TextView timeTextview;
+
+    Button finishedbutton;
 
 
     @Override
@@ -149,7 +153,14 @@ public class AccountActivity extends Activity {
 
         });
 
-
+        finishedbutton = (Button) findViewById(R.id.finisedbtnid);
+        finishedbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),AssignedTableActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
