@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   android:orientation="vertical"
+    android:background="@drawable/simpleborader"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <!-- shows item name and price -->
+    <!-- Item ID -->
+
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Item Name -->
+        <TextView
+            android:id="@+id/itemNameid"
+            android:hint="dfas"
+            android:textColor="@color/antiquewhite"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_margin="10dp"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+        </TextView>
+        <!-- No of Items -->
+        <TextView
+            android:id="@+id/noOfItemsid"
+            android:hint="no"
+            android:textColor="@color/antiquewhite"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_alignBottom="@+id/itemNameid"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+        </TextView>
+
+    </RelativeLayout>
+
+
+
+    <!-- show total price and no of items ordered -->
+
+
+</LinearLayout>

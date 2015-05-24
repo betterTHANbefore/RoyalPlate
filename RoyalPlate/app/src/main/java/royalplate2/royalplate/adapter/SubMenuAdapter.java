@@ -31,25 +31,11 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
     List<ParseObject> menuItems;
     SubMenuActivity subMenuActivity;
 
-    double itemcost_db;
-    String itemcost_st;
     String tableNo;
     List<OrderedItem> orderedList;
-    TextView itemIdTextView;
-    TextView itemNameTextView;
-    TextView initialPriceTextView;
-    TextView itemCostTextView;
-    EditText noOfItemsEditText;
-    NumberPicker np;
-    String itemName;
-    String noofItem;
+
     String itemcost;
-    int noofitems;
-    double price;
-    // EditText noOfItemEditText;
 
-
-    //Map<String, Ordered> noOfItems = new HashMap<String, Ordered>();
 
     /**********************************************************************************************
      *
@@ -75,7 +61,9 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
 //        TextView itemNameTextView;
 //        TextView initialPriceTextView;
 //        TextView itemCostTextView;
-
+        final String getItemPrice;
+        String getItemID;
+        final TextView itemNameTextView;
 
         View view = convertView;
 
@@ -88,31 +76,31 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
         /***********************************************
          * Item ID appears in TextView
          **********************************************/
-        itemIdTextView = (TextView) view.findViewById(R.id.itemId);
+       final TextView itemIdTextView = (TextView) view.findViewById(R.id.itemId);
 
-            String getItemID = Integer.toString(((SubMenuData) (menuItems.get(position))).getID());
+            getItemID = Integer.toString(((SubMenuData) (menuItems.get(position))).getID());
             itemIdTextView.setText(getItemID);
 
 
         /***********************************************
          * Item Name appears in TextView
          **********************************************/
-         itemNameTextView = (TextView) view.findViewById((R.id.itemNameid));
+            itemNameTextView = (TextView) view.findViewById((R.id.itemNameid));
 
             itemNameTextView.setText(((SubMenuData) (menuItems.get(position))).getName());
 
         /***********************************************
          * Item initial price appears in TextView
          **********************************************/
-         initialPriceTextView= (TextView) view.findViewById(R.id.itemPriceid);
-           String getItemPrice = Double.toString(((SubMenuData) (menuItems.get(position))).getPrice());
-           initialPriceTextView.setText(getItemPrice);
+       final TextView initialPriceTextView= (TextView) view.findViewById(R.id.itemPriceid);
+            getItemPrice = Double.toString(((SubMenuData) (menuItems.get(position))).getPrice());
+            initialPriceTextView.setText(getItemPrice);
 
 
         /************************************************
          * select no of items from the number picker
          ************************************************/
-        np = (NumberPicker) view.findViewById(R.id.numberPickerid);
+       NumberPicker np = (NumberPicker) view.findViewById(R.id.numberPickerid);
 
             np.setMinValue(0);
             np.setMaxValue(20);
@@ -124,32 +112,32 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
 
-                noOfItemsEditText = (EditText) finalView.findViewById(R.id.noOfitem_edittextid);
+                final EditText noOfItemsEditText = (EditText) finalView.findViewById(R.id.noOfitem_edittextid);
                 noOfItemsEditText.setText(String.valueOf(newVal));
 
                 /*******************************************************************************
                  * get the no of items from the edittext and convert from string to int
                  *******************************************************************************/
-                 noofitems = Integer.parseInt(noOfItemsEditText.getText().toString());
+                 int noofitems = Integer.parseInt(noOfItemsEditText.getText().toString());
                 /*******************************************************************************
                  * get each item initial price from the inititialTextview. Convet to double.
                  *******************************************************************************/
-                price = Double.parseDouble(initialPriceTextView.getText().toString());
+                double price = Double.parseDouble(initialPriceTextView.getText().toString());
 
 
                 /***********************************************************************************
                  * To view the how much each item ordered cost
                  * set the item price = (price * no of items)
                  **********************************************************************************/
-                itemCostTextView = (TextView) finalView.findViewById(R.id.itemcost_textviewid);
+                final TextView itemCostTextView = (TextView) finalView.findViewById(R.id.itemcost_textviewid);
 
                 double eachItemcost = price * noofitems;
 
                 /***********************************************************************************
                  * Format the cost into 2 decimal place. Display the cost in itemCostTextview.
                  ************************************************************************************/
-                final String cost = String.format("%.2f", eachItemcost);
-                itemCostTextView.setText(cost);
+                //final String cost = String.format("%.2f", eachItemcost);
+                itemCostTextView.setText(String.format("%.2f", eachItemcost));
 
 
                 noOfItemsEditText.addTextChangedListener(new TextWatcher() {
@@ -166,15 +154,15 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
 
                         if (!s.toString().equals(null) | !s.toString().equals("0")){
 
-                            itemName = itemNameTextView.getText().toString();
-                            noofItem = s.toString();
-                            itemcost =  itemCostTextView.getText().toString();
+                           String  itemName = itemNameTextView.getText().toString();
+                           String noofItem = s.toString();
+                           String  eachitemcost =  itemCostTextView.getText().toString();
 
                             Log.i("tag" , "SubAdapter-->   " + noofItem  + "    " + itemName+ "  " + itemcost);
                             /***************************************************************************
                              * send noofItem, itemName and itemcost to subMenuActivity
                              **************************************************************************/
-                            subMenuActivity.saveOrderedList( noofItem, itemName, itemcost);
+                            subMenuActivity.saveOrderedList( noofItem, itemName, eachitemcost);
 
                         }
                     }

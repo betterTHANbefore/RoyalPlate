@@ -24,7 +24,7 @@ public class ChefSideOrderListAdapter extends ArrayAdapter<ParseObject> {
     List<ParseObject> orderedList;
 
     public ChefSideOrderListAdapter(Context context, List<ParseObject> objects) {
-        super( context, R.layout.listview_item, objects);
+        super( context, R.layout.listview_chef_item, objects);
         this.context = context;
         this.orderedList = objects;
     }
@@ -37,7 +37,7 @@ public class ChefSideOrderListAdapter extends ArrayAdapter<ParseObject> {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            view = inflater.inflate(R.layout.listview_item, parent, false);
+            view = inflater.inflate(R.layout.listview_chef_item, parent, false);
         }
         TextView textView = (TextView) view.findViewById((R.id.itemNameid)); // itemName
         textView.setText(((TableItemData) (orderedList.get(position))).getName());

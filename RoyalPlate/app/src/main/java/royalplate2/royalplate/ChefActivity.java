@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -30,6 +32,7 @@ public class ChefActivity extends ActionBarActivity  {
 
     ListView listview;
     Button doneBtn;
+    String tableno;
 
     ChefSideOrderListAdapter chefSideOrderListAdapter;
     @Override
@@ -49,6 +52,7 @@ public class ChefActivity extends ActionBarActivity  {
             public void onClick(View v) {
 
                 SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+               tableno = sharedPref.getString("chefTableClicked", "");
                 final String tableNumToDestroy = sharedPref.getString("chefTableClicked", "");
 
                 final ParseQuery query =  new ParseQuery("WaiterTable");
@@ -73,6 +77,8 @@ public class ChefActivity extends ActionBarActivity  {
                 });
             }
         });
+        TextView tablenoTextview = (TextView) findViewById(R.id.chef_tablenoid);
+        tablenoTextview.setText(tableno);
 
         ImageView previousBtn = (ImageView) findViewById(R.id.previousImageviewid);
         previousBtn.setOnClickListener(new View.OnClickListener() {
