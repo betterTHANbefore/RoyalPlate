@@ -240,6 +240,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             public void done(List<MainMenuData> mainMenuItems, ParseException e) {
                 mainMenuAdapter = new MainMenuAdapter(MenuActivity.this, mainMenuItems);
                 gridview.setAdapter(mainMenuAdapter);
+                Log.i("menuparseloading?", "Yeah?");
 
             }
         });

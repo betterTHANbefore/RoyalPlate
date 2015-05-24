@@ -79,6 +79,8 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(TableItemData7.class);
         ParseObject.registerSubclass(TableItemData8.class);
         ParseObject.registerSubclass(TableItemData9.class);
+        ParseObject.registerSubclass(OrderedListData.class);
+
 
         Log.i("Application", "Initialized");
     }
