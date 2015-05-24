@@ -44,7 +44,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
     String noOfItems;
     String title;
     String itemCost;
-//    String submenutitle;
+    //    String submenutitle;
 //    TextView subMenuTitle;
     TextView tableNoTextview;
     Intent intent;
@@ -153,7 +153,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 //        final SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
 //        subMenutitle = shared.getString("title", "");
 //        subMenuTitle.setText( subMenutitle);
-     //   tableNo = getIntent().getExtras().getString("tableNo"); // pass table no to adapter
+        //   tableNo = getIntent().getExtras().getString("tableNo"); // pass table no to adapter
 
         ImageView icon_right = (ImageView) findViewById(R.id.imageRight_icon);
         ImageView icon_left = (ImageView) findViewById(R.id.imageLeft_icon);
@@ -389,13 +389,13 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
     }
 
     private void loadItems(String str) {
-      //  final int itemCost = getIntent().getExtras().getInt("iniPrice");
+        //  final int itemCost = getIntent().getExtras().getInt("iniPrice");
 
         final ParseQuery<ParseObject> items = ParseQuery.getQuery(str);
         items.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> items, ParseException e) {
-               // menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items, itemCost, tableNumber );
+                // menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items, itemCost, tableNumber );
 //                menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items, itemCost, tableNo, SubMenuActivity.this );
                 menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items,  tableNo, SubMenuActivity.this );
 
@@ -420,7 +420,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
 
         SharedPreferences.Editor editor = orderedlistSharedPreferences.edit();
-     //   editor.putString("tableNo", tableno);
+        //   editor.putString("tableNo", tableno);
         editor.putString("No of Items", noOfItems);
         editor.putString("Item Name", itemName);
         editor.putString("Item Cost", itemcost);
@@ -499,7 +499,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
     //}
 
 
-   // }
+    // }
 
     private void addItemToSet(JSONObject jsonObject) {
 //        orderedItemList.add(jsonObject);
@@ -533,5 +533,4 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
     }
 
 }
-
 

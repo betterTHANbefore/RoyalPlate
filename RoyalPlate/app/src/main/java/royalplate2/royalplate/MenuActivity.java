@@ -44,7 +44,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
     String itemCost;
     String username;
     String tableno;
-   // SharedPreferences shared;// = PreferenceManager.getDefaultSharedPreferences(this);
+    // SharedPreferences shared;// = PreferenceManager.getDefaultSharedPreferences(this);
     //Intent intent;
 
     private SimpleGestureFilter detector;
@@ -78,7 +78,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
         if (direction == SimpleGestureFilter.SWIPE_LEFT) {
 
-          Intent  intent = new Intent(this, SubMenuActivity.class);
+            Intent  intent = new Intent(this, SubMenuActivity.class);
             // putExtra params need to be set up correctly accordingly what we need to pass
             intent.putExtra("title", "menuItemName");
             intent.putExtra("tableNo", "tableno");
@@ -100,7 +100,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainmenu_activity);
 
-       // tableNumView = (TextView) findViewById(R.id.table_num_view);
+        // tableNumView = (TextView) findViewById(R.id.table_num_view);
 
         /******************************************************************************************
          * Loads MainMenu Items name from parse using MenuAdapter
@@ -116,10 +116,10 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
 
         SharedPreferences orderedlistSharedPreferences = getSharedPreferences(ORDEREDLISTSHARED, mode);
-            noOfItems = orderedlistSharedPreferences.getString("No of Items", "");
-            itemName = orderedlistSharedPreferences.getString("Item Name", "");
-            itemCost = orderedlistSharedPreferences.getString("Item Cost","");
-          //  tableNum = orderedlistSharedPreferences.getString("tableNo", "");
+        noOfItems = orderedlistSharedPreferences.getString("No of Items", "");
+        itemName = orderedlistSharedPreferences.getString("Item Name", "");
+        itemCost = orderedlistSharedPreferences.getString("Item Cost","");
+        //  tableNum = orderedlistSharedPreferences.getString("tableNo", "");
 
 
         Log.i("Tag", "MenuActivity  "   + itemName + "   "+ noOfItems + " " + itemCost);
@@ -132,9 +132,9 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-            Button listBtn  = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
+                Button listBtn  = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
                 menuItemName = listBtn.getText().toString();
-               // tableNum = getIntent().getExtras().getString("tableNo");
+                // tableNum = getIntent().getExtras().getString("tableNo");
 
 //                itemName = getIntent().getExtras().getString("Item Name");
 //                noOfItems = getIntent().getExtras().getString("No of Items");
@@ -146,7 +146,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 //                gridviewIntent.putExtra("Item Cost", itemCost);
 
                 //startActivity(gridviewIntent);
-             //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(MenuActivity.this);
+                //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(MenuActivity.this);
 
 //                SharedPreferences.Editor editor = shared.edit();
 //                editor.putString("title", menuItemName);
@@ -160,7 +160,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
 
                 intent.putExtra("title", menuItemName);
-              //  intent.putExtra("tableNo", tableno);
+                //  intent.putExtra("tableNo", tableno);
 //                intent.putExtra("tableNo", tableNum);
 
 
@@ -201,9 +201,9 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             }
         });
 
-    /**********************************************************************************************
-     * Next Image Icon go back to Submeuactivity.
-     **********************************************************************************************/
+        /**********************************************************************************************
+         * Next Image Icon go back to Submeuactivity.
+         **********************************************************************************************/
 
 //        nextImageview = (ImageView) findViewById(R.id.nextImageviewid);
 //
@@ -240,6 +240,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             public void done(List<MainMenuData> mainMenuItems, ParseException e) {
                 mainMenuAdapter = new MainMenuAdapter(MenuActivity.this, mainMenuItems);
                 gridview.setAdapter(mainMenuAdapter);
+                Log.i("menuparseloading?", "Yeah?");
 
             }
         });
@@ -249,12 +250,12 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
 
 
-        /**********************************************
-         * if user clicks on the RoyalPlate_logo, it will
-         * activate the SelectActivity.
-         *************************************************/
+/**********************************************
+ * if user clicks on the RoyalPlate_logo, it will
+ * activate the SelectActivity.
+ *************************************************/
 
-        //     final ImageView  royalplate = (ImageView) findViewById(R.id.royalplate_logo);
+//     final ImageView  royalplate = (ImageView) findViewById(R.id.royalplate_logo);
 //        royalplate.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -262,7 +263,6 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 //                startActivity(royalplateIntent);
 //            }
 //        });
-
 
 
 

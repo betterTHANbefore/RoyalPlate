@@ -109,79 +109,79 @@
 
 
 
-        <!-- for Ordered Items Litview -->
+    <!-- for Ordered Items Litview -->
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_margin="20dp"
-            android:orientation="horizontal"
+            android:layout_weight="3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_weight="3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <ListView
-                android:id="@+id/bill_listviewid"
-                android:layout_width="377dp"
-                android:layout_height="280dp">
+        <ListView
+            android:id="@+id/bill_listviewid"
+            android:layout_width="377dp"
+            android:layout_height="280dp">
 
-            </ListView>
-            <LinearLayout
-                android:layout_weight="3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </LinearLayout>
-
+        </ListView>
+        <LinearLayout
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         </LinearLayout>
 
 
-        <RelativeLayout
-            android:layout_weight="2"
+    </LinearLayout>
 
-            android:layout_margin="20dp"
+
+    <RelativeLayout
+        android:layout_weight="2"
+
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Textview to show subtotal and tax -->
+
+        <!-- subtotal -->
+
+        <TextView
+            android:id="@+id/subotalid"
+            android:hint="subtotal"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/marron"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" />
 
-            <!-- Textview to show subtotal and tax -->
+        <!-- tax -->
+        <TextView
+            android:id="@+id/taxid"
+            android:layout_below="@+id/subotalid"
+            android:hint="tax"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/marron"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-            <!-- subtotal -->
+        <!-- grand total -->
 
-            <TextView
-                android:id="@+id/subotalid"
-                android:hint="subtotal"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="@color/marron"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/grandtotalid"
+            android:layout_below="@+id/taxid"
+            android:hint="grand total"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/marron"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-            <!-- tax -->
-            <TextView
-                android:id="@+id/taxid"
-                android:layout_below="@+id/subotalid"
-                android:hint="tax"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="@color/marron"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- grand total -->
-
-            <TextView
-                android:id="@+id/grandtotalid"
-                android:layout_below="@+id/taxid"
-                android:hint="grand total"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="@color/marron"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
+    </RelativeLayout>
 
 </LinearLayout>

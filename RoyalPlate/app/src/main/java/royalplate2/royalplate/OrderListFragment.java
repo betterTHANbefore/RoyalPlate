@@ -55,7 +55,7 @@ public class OrderListFragment extends Fragment {
 //    String itemName;
 //    String noOfItems;
 
-//    String itemName;
+    //    String itemName;
 //    String noOfItems;
 //    String itemCost;
     String itemName;
@@ -76,7 +76,7 @@ public class OrderListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_orderlist, container, false);
-      //  shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        //  shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         ordereditemslistview = (ListView) v.findViewById(R.id.ordereditems_listview);
 
@@ -169,10 +169,10 @@ public class OrderListFragment extends Fragment {
 //         * Set Table No as a title in Ordered item list
 //         ******************************************************************************************/
 //
-          //  tv = (TextView) v.findViewById(R.id.tableNo_textview);
-           //   tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
+        //  tv = (TextView) v.findViewById(R.id.tableNo_textview);
+        //   tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
         //tableNumStr = shared.getString("tableNo", "");
-              //  tv.setText(tableNumStr);
+        //  tv.setText(tableNumStr);
 
 //        tv.setText(tableno);
         RetrieveSharedData();
@@ -249,7 +249,7 @@ public class OrderListFragment extends Fragment {
 //        itemName = getActivity().getIntent().getExtras().getString("tableNo");
 //        noOfItems = getActivity().getIntent().getExtras().getString("title");
 
-       // Log.i("OF", itemName + "  "+ noOfItems + " "+  itemCost);
+        // Log.i("OF", itemName + "  "+ noOfItems + " "+  itemCost);
 
 //        noOfitemsTextview.setText(noOfItems);
 //        listOfitemsTextview.setText(itemName);
@@ -280,10 +280,11 @@ public class OrderListFragment extends Fragment {
                  */
 
                 // temporaly going back to MenuActivity
-              //  Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
-              //  Intent orderBtnIntent = new Intent(v.getContext(), ChefActivity.class);
-            // temporaly going back to MenuActivity
-            Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
+                //  Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
+                //  Intent orderBtnIntent = new Intent(v.getContext(), ChefActivity.class);
+                // temporaly going back to MenuActivity
+                Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
+
 
             orderBtnIntent.putExtra("tableNo", tableno);
 
@@ -294,7 +295,16 @@ public class OrderListFragment extends Fragment {
 //
 //                orderBtnIntent.putExtra("table no", tableNum);
 
-            startActivity(orderBtnIntent);
+                //orderBtnIntent.putExtra("tableNo", tableNumStr);
+
+//                orderBtnIntent.putExtra("table no", 1);
+
+                String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
+                //String tableNum = shared.getString("tableNo","");
+
+                orderBtnIntent.putExtra("table no", tableNum);
+
+                startActivity(orderBtnIntent);
             }
         });
         /*******************************************************************************************
@@ -417,7 +427,7 @@ public class OrderListFragment extends Fragment {
 
 
         super.onCreate(savedInstanceState);
-      //  SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        //  SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
 //
