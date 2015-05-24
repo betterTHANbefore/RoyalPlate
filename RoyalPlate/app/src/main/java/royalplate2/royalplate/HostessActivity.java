@@ -369,9 +369,12 @@ public class HostessActivity extends Activity implements OnClickListener{
                 /*****************************************
                  * Store data on WaiterTable class on parse
                  *****************************************/
-                waitertable = new WaiterTableData();
-                waitertable.setWaiter(waitername);
+                waitertable.setGuestName(guestname);
+                waitertable.setNoOfGuest(noofguest);
                 waitertable.setTable(tableno);
+                waitertable.setWaiter(waitername);
+                waitertable.setDate(dateFormat.format(date));
+                waitertable.setTime(timeFormat.format(time));
                 waitertable.saveInBackground();
 
                 guestBillData = new GuestBillData();
