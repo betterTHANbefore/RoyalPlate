@@ -59,7 +59,7 @@ public class AccountActivity extends Activity {
 
         guestname = guestInfoSharedPreferences.getString("guestName", "");
         noofguest = guestInfoSharedPreferences.getString("noOfGuest", "");
-        tableno = guestInfoSharedPreferences.getString("tableNo", "");
+       // tableno = guestInfoSharedPreferences.getString("tableNo", "");
         waitername = guestInfoSharedPreferences.getString("userName", "");
         date = guestInfoSharedPreferences.getString("date", "");
         time = guestInfoSharedPreferences.getString("time", "");
@@ -76,10 +76,48 @@ public class AccountActivity extends Activity {
         dateTextview = (TextView) findViewById(R.id.bill_dateid);
         timeTextview = (TextView) findViewById(R.id.bill_timeid);
 
-        final ParseQuery query = new ParseQuery("GuestBillParse");
+        String tableno = getIntent().getExtras().getString("tableNo","");
+        String waitername = getIntent().getExtras().getString("waiterName","");
+//        final ParseQuery query = new ParseQuery("GuestBillParse");
+//        query.whereEqualTo("TableNo", tableno);
+////        query.whereEqualTo("GuestName", guestname);
+////        query.whereEqualTo("WaiterName", waitername);
+//
+//        query.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> guestlist, ParseException e) {
+//
+//                if(e ==null && guestlist.size()>0){
+//
+//                    for(int i =0; i<guestlist.size(); i++){
+//
+//                        ParseObject guestinfo = guestlist.get(i);
+//
+//                        Log.i("guest",guestname+" "+noofguest+" "+tableno+" "+waitername+" "+date+" "+time);
+//
+//                        guestNameTextview.setText("Guest: " + "fasdas");
+//
+//
+//
+//
+//
+//                    }
+//                }
+//
+//
+//
+//            }
+//
+//
+//        });
+//
+
+
+
+        final ParseQuery query = new ParseQuery("WaiterTable");
         query.whereEqualTo("TableNo", tableno);
-//        query.whereEqualTo("GuestName", guestname);
-//        query.whereEqualTo("WaiterName", waitername);
+       // query.whereEqualTo("GuestName", guestname);
+        query.whereEqualTo("WaiterName", waitername);
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -91,12 +129,14 @@ public class AccountActivity extends Activity {
 
                         ParseObject guestinfo = guestlist.get(i);
 
-                        Log.i("guest",guestname+" "+noofguest+" "+tableno+" "+waitername+" "+date+" "+time);
+                     //   Log.i("guest",guestname+" "+noofguest+" "+tableno+" "+waitername+" "+date+" "+time);
 
-                        guestNameTextview.setText("Guest: " + "fasdas");
-
-
-
+                        guestNameTextview.setText("Guest: " + guestinfo.getString("GuestName"));
+                        noOfGuestTextview.setText("No: "+ guestinfo.getString("NoOfGuest"));
+                        tablenoTextview.setText("Table: " + guestinfo.getString("TableNo").charAt(5));
+                        waiternameTextview.setText("Waiter: " + guestinfo.getString("WaiterName"));
+                        dateTextview.setText("Date: "+ guestinfo.getString("Date"));
+                        timeTextview.setText("Time: " + guestinfo.get("Time"));
 
 
                     }

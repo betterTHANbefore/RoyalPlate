@@ -429,6 +429,7 @@ public class HostessActivity extends Activity implements OnClickListener{
 
                 sharedwaiter.edit().clear().apply();
                 sharedtable.edit().clear().apply();
+                guestInfoSharedPreferences.edit().apply();
 
             }
 

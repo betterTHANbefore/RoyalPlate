@@ -32,13 +32,14 @@ import royalplate2.royalplate.data.WaiterTableData;
  */
 public class AssignedTableActivity extends Activity {
 
-    String username;
+    String waitername;
     TextView usernameTextView;
     ImageButton refreshbutton;
     Button signoutbutton;
     GridView assignedtableGridview;
     WaiterTableAdapter waiterTableAdapter;
     Intent intent;
+    String tableno;
     public static final String LOGINSHARED = "loginSharedPreferences";
 
     public static final String ASSIGNEDTABLESHARED = "assignedtablesSharedPreferences";
@@ -57,7 +58,7 @@ public class AssignedTableActivity extends Activity {
 
         int mode = Activity.MODE_PRIVATE;
         SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
-        username = loginSharedPreferences.getString("userName", "");
+        waitername = loginSharedPreferences.getString("userName", "");
 
 
         // final SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
@@ -65,7 +66,7 @@ public class AssignedTableActivity extends Activity {
 //        username = shared.getString("userName", "");
         //   username = getIntent().getExtras().getString("userName");
         usernameTextView = (TextView) findViewById(R.id.waiternametextviewid);
-        usernameTextView.setText(username);
+        usernameTextView.setText(waitername);
 
         /*******************************************************************************************
          * Load assignd tables
@@ -83,7 +84,7 @@ public class AssignedTableActivity extends Activity {
 
                 Button assignedtableBtn = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
 
-                String tableno = assignedtableBtn.getText().toString();
+                final String tableno = assignedtableBtn.getText().toString();
 
                 int mode = Activity.MODE_PRIVATE;
                 SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
@@ -124,7 +125,8 @@ public class AssignedTableActivity extends Activity {
                     public void onClick(View v) {
                         intent = new Intent(AssignedTableActivity.this, AccountActivity.class);
 
-                        // tablegridIntent.putExtra("tableNo", tableno);
+                         intent.putExtra("tableNo", tableno);
+                        intent.putExtra("waiterName", waitername);
 
                         startActivity(intent);
 
@@ -193,7 +195,7 @@ public class AssignedTableActivity extends Activity {
                 Toast.makeText(AssignedTableActivity.this, "You are signed out!",Toast.LENGTH_LONG).show();
 
                 final ParseQuery query =  new ParseQuery("WaiterParse");
-                query.whereEqualTo("WaiterName", username);
+                query.whereEqualTo("WaiterName", waitername);
                 query.findInBackground(new FindCallback<ParseObject>() {
                     @Override
                     public void done(List<ParseObject> waiterData, ParseException e) {
@@ -244,7 +246,7 @@ public class AssignedTableActivity extends Activity {
 
         final ParseQuery<WaiterTableData> waitertables = ParseQuery.getQuery("WaiterTable");
 
-        waitertables.whereEqualTo("WaiterName", username);
+        waitertables.whereEqualTo("WaiterName", waitername);
         waitertables.findInBackground(new FindCallback<WaiterTableData>() {
 
             @Override
