@@ -13,6 +13,7 @@ public class WaiterTableData extends ParseObject {
 
 
 
+
     public String getGuestName(){return getString("GuestName");}
     public void setGuestName(String guestname){
         put("GuestName", guestname);

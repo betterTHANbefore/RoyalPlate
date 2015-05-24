@@ -1,10 +1,18 @@
 package royalplate2.royalplate;
 
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -18,6 +26,7 @@ import java.util.List;
 public class ChefActivity extends ActionBarActivity  {
 
     ListView listview;
+    Button doneBtn;
 
     ChefSideOrderListAdapter chefSideOrderListAdapter;
     @Override
@@ -29,6 +38,38 @@ public class ChefActivity extends ActionBarActivity  {
         // this contains OrderListFragment class
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.fragmentContainer_chef, new ChefQueueFragment()).commit();
+
+
+        doneBtn = (Button) findViewById(R.id.doneButton);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                final String tableNumToDestroy = sharedPref.getString("chefTableClicked", "");
+
+                final ParseQuery query =  new ParseQuery("WaiterTable");
+                query.whereEqualTo("TableNo", tableNumToDestroy);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> waiterData, ParseException e) {
+                        if(e == null || waiterData.size() >0){
+                            for (int i=0; i<waiterData.size(); i++){
+
+                                ParseObject tableNo = waiterData.get(i);
+                                try {
+                                    tableNo.delete();
+                                } catch (ParseException e1) {
+                                }
+                            }
+                        }
+                        else{
+
+                        }
+                    }
+                });
+            }
+        });
     }
 
     public void updateTableInfo(String tableNum) {
