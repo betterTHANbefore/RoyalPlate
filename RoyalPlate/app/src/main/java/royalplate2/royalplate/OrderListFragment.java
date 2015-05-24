@@ -293,7 +293,6 @@ public class OrderListFragment extends Fragment {
                 //String tableNum = shared.getString("tableNo","");
 
                 orderBtnIntent.putExtra("table no", tableNum);
-
                 startActivity(orderBtnIntent);
             }
         });
