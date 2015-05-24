@@ -175,7 +175,6 @@ public class HostessActivity extends Activity implements OnClickListener{
                     assignedButton.setBackgroundResource(R.drawable.checkbox_background);
                     assignedButton.setPadding(80,0,80,0);
                     gutestNoedit.setEnabled(true);
-
                 }
 
             }

@@ -40,6 +40,7 @@
     </ListView>
 
 
+<<<<<<< HEAD
 
     <!--<Button-->
         <!--android:id="@+id/refreshBtn"-->
@@ -48,5 +49,14 @@
         <!--android:text="Refresh"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content" />-->
+=======
+    <Button
+        android:id="@+id/refreshBtn"
+        android:layout_below="@id/table_queue"
+        android:textSize="20dp"
+        android:text="Refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+>>>>>>> 85d697dbfecf5d587f7c0f64d95b004914d72807
 
 </RelativeLayout>

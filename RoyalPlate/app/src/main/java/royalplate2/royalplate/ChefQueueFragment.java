@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import android.widget.ListView;
 import android.widget.TextView;
 import com.parse.FindCallback;
@@ -30,7 +31,9 @@ public class ChefQueueFragment extends Fragment {
     View view;
     ListView listView;
     TableListAdapter tableListAdapter;
+
     ImageView refreshBtn;
+//    Button refreshBtn;
 
     @Nullable
     @Override
@@ -57,7 +60,10 @@ public class ChefQueueFragment extends Fragment {
             }
         });
 
+
         refreshBtn = (ImageView) view.findViewById(R.id.refreshBtn);
+
+       // refreshBtn = (Button) view.findViewById(R.id.refreshBtn);
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

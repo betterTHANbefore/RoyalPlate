@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import android.widget.ListView;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -72,7 +73,6 @@ public class ChefActivity extends ActionBarActivity  {
                 });
             }
         });
-
 
         ImageView previousBtn = (ImageView) findViewById(R.id.previousImageviewid);
         previousBtn.setOnClickListener(new View.OnClickListener() {

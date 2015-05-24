@@ -11,6 +11,13 @@ public class WaiterTableData extends ParseObject {
 
         public WaiterTableData(){}
 
+<<<<<<< HEAD
+
+        public String getWaiter() {
+            return getString("WaiterName");
+        }
+=======
+>>>>>>> 9edd7f6851d6f4931a6c7d177bcf230f3122836a
 
 
 
