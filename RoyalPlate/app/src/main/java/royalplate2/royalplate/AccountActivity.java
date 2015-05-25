@@ -80,7 +80,8 @@ public class AccountActivity extends Activity {
         dateTextview = (TextView) findViewById(R.id.bill_dateid);
         timeTextview = (TextView) findViewById(R.id.bill_timeid);
 
-        String tableno = getIntent().getExtras().getString("tableNo","");
+//        String tableno = getIntent().getExtras().getString("tableNo","");
+        tableno = getIntent().getExtras().getString("tableNo","");
         String waitername = getIntent().getExtras().getString("waiterName","");
 //        final ParseQuery query = new ParseQuery("GuestBillParse");
 //        query.whereEqualTo("TableNo", tableno);
@@ -159,6 +160,33 @@ public class AccountActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),AssignedTableActivity.class);
                 startActivity(intent);
+
+
+                // Below code deletes from parse -> we don't want it happen!
+                String tableNumToDestroy = tableno;
+                final ParseQuery query =  new ParseQuery("WaiterTable");
+                query.whereEqualTo("TableNo", tableNumToDestroy);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> waiterData, ParseException e) {
+                        if(e == null || waiterData.size() >0){
+                            for (int i=0; i<waiterData.size(); i++){
+
+                                ParseObject tableNo = waiterData.get(i);
+                                try {
+                                    tableNo.delete();
+                                } catch (ParseException e1) {
+                                }
+                            }
+                        }
+                        else{
+
+                        }
+                    }
+                });
+                // Above code deletes from parse -> we don't want it happen!
+
+
             }
         });
 
