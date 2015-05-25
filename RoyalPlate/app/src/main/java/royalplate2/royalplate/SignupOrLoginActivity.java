@@ -16,6 +16,7 @@ public class SignupOrLoginActivity extends Activity {
     private Button hostessButton;
     private Button waiterButton;
     private Button chefButton;
+    private Button managerButton;
     Intent intent;
 
     @Override
@@ -77,6 +78,14 @@ public class SignupOrLoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getApplicationContext(), ChefActivity.class);
+                startActivity(intent);
+            }
+        });
+        managerButton = (Button) findViewById(R.id.m_managerbtn);
+        managerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), ManagerActivity.class);
                 startActivity(intent);
             }
         });

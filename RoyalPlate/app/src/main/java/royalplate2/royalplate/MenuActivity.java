@@ -100,8 +100,6 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainmenu_activity);
 
-        // tableNumView = (TextView) findViewById(R.id.table_num_view);
-
         /******************************************************************************************
          * Loads MainMenu Items name from parse using MenuAdapter
          ******************************************************************************************/
@@ -119,10 +117,6 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
         noOfItems = orderedlistSharedPreferences.getString("No of Items", "");
         itemName = orderedlistSharedPreferences.getString("Item Name", "");
         itemCost = orderedlistSharedPreferences.getString("Item Cost","");
-        //  tableNum = orderedlistSharedPreferences.getString("tableNo", "");
-
-
-        Log.i("Tag", "MenuActivity  "   + itemName + "   "+ noOfItems + " " + itemCost);
 
         gridview = (GridView) findViewById(R.id.menulist_right);
 
@@ -145,37 +139,10 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 //                gridviewIntent.putExtra("No of Items", noOfItems);
 //                gridviewIntent.putExtra("Item Cost", itemCost);
 
-                //startActivity(gridviewIntent);
-                //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(MenuActivity.this);
 
-//                SharedPreferences.Editor editor = shared.edit();
-//                editor.putString("title", menuItemName);
-//                editor.putString("tableNo", tableNum);
-//                editor.putString("Item Name", itemName);
-//                editor.putString("No of Items", noOfItems);
-//                editor.putString("Item Cost", itemCost);
-
-//                editor.apply();
                 Intent    intent = new Intent(MenuActivity.this, SubMenuActivity.class);
-
-
                 intent.putExtra("title", menuItemName);
-                //  intent.putExtra("tableNo", tableno);
-//                intent.putExtra("tableNo", tableNum);
-
-
-//                intent.putExtra("Item Name", itemName);
-//                intent.putExtra("No of Items", noOfItems);
-//                intent.putExtra("Item Cost", itemCost);
-//                noOfItems = shared.getString("No of Items", "");
-//
-//                itemName = shared.getString("Item Name", "");
-//                itemCost = shared.getString("Item Cost","");
-//                tableNum = shared.getString("tableNo", "");
-
-
-                startActivity(intent);
-//                Log.i("Tag", "MenuActivit_2  "    + itemName + "   "+ noOfItems + " " + itemCost);
+                 startActivity(intent);
 
 
             }
@@ -201,20 +168,6 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
             }
         });
 
-        /**********************************************************************************************
-         * Next Image Icon go back to Submeuactivity.
-         **********************************************************************************************/
-
-//        nextImageview = (ImageView) findViewById(R.id.nextImageviewid);
-//
-//        nextImageview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MenuActivity.this, SubMenuActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
     }
 
     @Override
@@ -222,9 +175,6 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
         this.detector.onTouchEvent(ev);
         return super.dispatchTouchEvent(ev);
     }
-
-
-
 
 
     /***********************************************************************************************
@@ -248,21 +198,6 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 }
 
 
-
-
-/**********************************************
- * if user clicks on the RoyalPlate_logo, it will
- * activate the SelectActivity.
- *************************************************/
-
-//     final ImageView  royalplate = (ImageView) findViewById(R.id.royalplate_logo);
-//        royalplate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent royalplateIntent = new Intent(getApplicationContext(), SelectActivity.class);
-//                startActivity(royalplateIntent);
-//            }
-//        });
 
 
 

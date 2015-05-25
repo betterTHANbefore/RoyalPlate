@@ -37,9 +37,10 @@
             android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <Button
                 android:id="@+id/h_hostessbtn"
-                android:textColor="@color/marron"
+                android:textColor="@color/darkOrange"
                 android:text="H"
                 android:textStyle="bold"
                 android:textSize="20dp"
@@ -52,7 +53,7 @@
             <Button
                 android:id="@+id/w_waitersbtn"
                 android:layout_below="@+id/h_hostessbtn"
-                android:textColor="@color/marron"
+                android:textColor="@color/darkOrange"
                 android:text="W"
                 android:textStyle="bold"
                 android:textSize="20dp"
@@ -61,7 +62,8 @@
                 android:layout_height="wrap_content" />
             <Button
                 android:id="@+id/c_chefbtn"
-                android:textColor="@color/marron"
+                android:textColor="@color/darkOrange"
+
                 android:text="C"
                 android:textStyle="bold"
                 android:textSize="20dp"
@@ -69,6 +71,16 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/w_waitersbtn" />
+            <Button
+                android:id="@+id/m_managerbtn"
+                android:textColor="@color/darkOrange"
+                android:text="M"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:background="@drawable/simpleborader"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/c_chefbtn" />
 
         </RelativeLayout>
 

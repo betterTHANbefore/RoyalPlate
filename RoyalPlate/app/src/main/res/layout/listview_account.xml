@@ -11,10 +11,11 @@ android:layout_height="match_parent">
         android:hint="Noofitems"
         android:id="@+id/noofitemsid"
         android:textSize="20dp"
-        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:layout_margin="15dp"
         android:focusable="false"
         android:clickable="false"
-        android:textColor="@color/antiquewhite"
+        android:textColor="@color/marron"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -26,7 +27,7 @@ android:layout_height="match_parent">
         android:layout_toRightOf="@id/noofitemsid"
         android:layout_centerHorizontal="true"
         android:textSize="20dp"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:focusable="false"
         android:clickable="false"
         android:textColor="@color/marron"
@@ -45,10 +46,10 @@ android:layout_height="match_parent">
         android:textColor="@color/marron"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="96dp"
+        android:layout_marginRight="20dp"
         android:layout_alignTop="@+id/itemnameid"
-        android:layout_toRightOf="@+id/itemnameid"
-        android:layout_toEndOf="@+id/itemnameid">
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
     </TextView>
 

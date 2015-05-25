@@ -90,11 +90,11 @@ public class AssignedTableActivity extends Activity {
 
                 View popupView = getLayoutInflater().inflate(R.layout.order_pay_popup, null);
 
-                    final PopupWindow popupwindow = new PopupWindow(popupView, 330, 300, true);
-                    popupwindow.showAtLocation(view, Gravity.CENTER,0,0);
-                    popupwindow.setFocusable(true);
-                    popupwindow.setOutsideTouchable(true);
-                    popupwindow.setContentView(popupView);
+                final PopupWindow popupwindow = new PopupWindow(popupView, 330, 300, true);
+                popupwindow.showAtLocation(view, Gravity.CENTER,0,0);
+                popupwindow.setFocusable(true);
+                popupwindow.setOutsideTouchable(true);
+                popupwindow.setContentView(popupView);
 
                 /***********************************************************************************
                  * Ordered Button leads to Main Menu Activity to start taking order.
@@ -212,7 +212,7 @@ public class AssignedTableActivity extends Activity {
     /*********************************************************************
      * Refresh Button will relaod all the tables from the Parse
      *******************************************************************/
-     private void refreshActivity() {
+    private void refreshActivity() {
         loadtables();
     }
 

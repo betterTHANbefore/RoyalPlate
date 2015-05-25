@@ -44,5 +44,8 @@ public class GuestBillData extends ParseObject {
     public void setName(String itemName) {
         put("ItemName", itemName);
     }
+
+    public String getPayment(){ return getString("Payment");}
+    public void setPayment(String payment){ put("Payment", payment);}
 }
 

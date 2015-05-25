@@ -35,6 +35,7 @@ public class LoginActivity extends Activity {
     private Button hostessButton;
     private Button waiterButton;
     private Button chefButton;
+    private Button managerButton;
     Intent intent;
     public static final String LOGINSHARED = "loginSharedPreferences";
 
@@ -209,6 +210,16 @@ public class LoginActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        managerButton = (Button) findViewById(R.id.m_managerbtn);
+        managerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), ManagerActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private boolean isEmpty(EditText etText) {

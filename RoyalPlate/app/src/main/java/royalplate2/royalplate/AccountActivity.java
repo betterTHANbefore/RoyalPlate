@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.parse.FindCallback;
@@ -15,6 +16,7 @@ import com.parse.ParseQuery;
 import java.util.List;
 
 import royalplate2.royalplate.adapter.AccountBillAdapter;
+import royalplate2.royalplate.data.GuestBillData;
 import royalplate2.royalplate.data.OrderedListData;
 
 /**
@@ -33,6 +35,7 @@ public class AccountActivity extends Activity {
     String waitername;
     String date;
     String time;
+    float total;
 
     TextView guestNameTextview;
     TextView noOfGuestTextview;
@@ -46,9 +49,13 @@ public class AccountActivity extends Activity {
     TextView taxTextView;
     TextView grandtotalTextView;
 
-    Button finishedbutton;
+    ImageView previousImageview;
+
+    Button donebutton;
+    Button okbutton;
     AccountBillAdapter accountBillAdapter;
     ListView ordereditemslistview;
+    GuestBillData guestdata;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -62,7 +69,7 @@ public class AccountActivity extends Activity {
          ******************************************************************************************/
 
         int mode = Activity.MODE_PRIVATE;
-        SharedPreferences guestInfoSharedPreferences = getSharedPreferences(GUESTINFOSHARED, mode);
+        final SharedPreferences guestInfoSharedPreferences = getSharedPreferences(GUESTINFOSHARED, mode);
 
         guestname = guestInfoSharedPreferences.getString("guestName", "");
         noofguest = guestInfoSharedPreferences.getString("noOfGuest", "");
@@ -70,11 +77,7 @@ public class AccountActivity extends Activity {
         date = guestInfoSharedPreferences.getString("date", "");
         time = guestInfoSharedPreferences.getString("time", "");
 
-        /*******************************************************************************************
-         * Load Ordered Item List from the OrderedListParse.
-         ******************************************************************************************/
 
-        loadOrderedItemsList();
         /*******************************************************************************************
          * Textviews to display Guest info in Billing statement
          ******************************************************************************************/
@@ -92,7 +95,7 @@ public class AccountActivity extends Activity {
 
         tableno = getIntent().getExtras().getString("tableNo","");
 
-        String waitername = getIntent().getExtras().getString("waiterName","");
+        final String waitername = getIntent().getExtras().getString("waiterName","");
         /*******************************************************************************************
          * Make a query to WaiterTable to display Guest info in the Billing statement
          ******************************************************************************************/
@@ -127,22 +130,62 @@ public class AccountActivity extends Activity {
 
         displayPayment();
 
+        guestdata = new GuestBillData();
+        okbutton = (Button) findViewById(R.id.okbtnid);
+        okbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                final ParseQuery guestquery = new ParseQuery("GuestBillParse");
+                guestquery.whereEqualTo("GuestName", guestname);
+                guestquery.whereEqualTo("TableNo", tableno);
+                guestquery.whereEqualTo("WaiterName", waitername);
+
+                guestquery.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> guestlist, ParseException e) {
+                        if(e == null){
+                            for(int i =0; i<guestlist.size(); i++) {
+                                if(guestlist.get(i).equals(guestname)
+                                        & guestlist.get(i).equals(tableno)
+                                        & guestlist.get(i).equals(waitername)) {
+
+
+
+
+
+                                }
+                            }
+
+                        }
+
+                    }
+
+
+                });
+
+            }
+        });
+
+
         /*******************************************************************************************
-         *  Finished button will delete the table entry from the database on Parse.
+         *  Done button will delete the table entry from the database on Parse.
          *  Also send back to Waiter Assigned Table Activity.
          *******************************************************************************************/
 
-        finishedbutton = (Button) findViewById(R.id.finisedbtnid);
-        finishedbutton.setOnClickListener(new View.OnClickListener() {
+
+        donebutton = (Button) findViewById(R.id.finisedbtnid);
+        donebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
 
                 Intent intent = new Intent(getApplicationContext(),AssignedTableActivity.class);
                 startActivity(intent);
 
-
-                // Below code deletes from parse -> we want this!
-
+                // Below code deletes from parse -> we don't want it happen!
                 String tableNumToDestroy = tableno;
                 final ParseQuery query =  new ParseQuery("WaiterTable");
                 query.whereEqualTo("TableNo", tableNumToDestroy);
@@ -164,7 +207,19 @@ public class AccountActivity extends Activity {
                         }
                     }
                 });
+            }
+        });
 
+
+        /*******************************************************************************************
+         * Go back to AccountActivity.
+         ******************************************************************************************/
+        previousImageview = (ImageView) findViewById(R.id.previousImageviewid);
+        previousImageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent previousIntent = new Intent(getApplicationContext(), AssignedTableActivity.class);
+                startActivity(previousIntent);
             }
         });
     }
@@ -177,12 +232,11 @@ public class AccountActivity extends Activity {
         subtotalSharedPreferences = getSharedPreferences(SUBTOTALSHARED, Activity.MODE_PRIVATE);
 
         float  subtotal = subtotalSharedPreferences.getFloat("SubTotal",0);
-        float total = (float)(subtotal + subtotal* (.15));
+        total = (float)(subtotal + subtotal* (.15));
 
         subtotalTextview.setText("SubTotal:  " +String.format("%.2f",subtotal));
         taxTextView.setText("Tax: " + "15%");
         grandtotalTextView.setText("Total: "+ String.format("%.2f",total));
-        subtotalSharedPreferences.edit().clear().apply();
 
     }
 
@@ -204,11 +258,11 @@ public class AccountActivity extends Activity {
 
                 accountBillAdapter = new AccountBillAdapter(AccountActivity.this, orderedItems, AccountActivity.this);
                 ordereditemslistview.setAdapter(accountBillAdapter);
-
             }
 
         });
     }
+
     /*******************************************************************************************
      * Contstructor
      *******************************************************************************************/
@@ -228,4 +282,5 @@ public class AccountActivity extends Activity {
         editor.apply();
 
     }
+
 }
