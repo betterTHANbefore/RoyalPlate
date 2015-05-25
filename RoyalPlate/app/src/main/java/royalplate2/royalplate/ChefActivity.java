@@ -48,7 +48,6 @@ public class ChefActivity extends ActionBarActivity  {
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.fragmentContainer_chef, new ChefQueueFragment()).commit();
 
-
         doneBtn = (Button) findViewById(R.id.doneButton);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,13 +55,15 @@ public class ChefActivity extends ActionBarActivity  {
 
                 SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
                tableno = sharedPref.getString("chefTableClicked", "");
-                String tableToDestroy = sharedPref.getString("chefTableClicked", "");
+                String tableToDestroy = tableno;
 
 //                final ArrayList<String> tableNumsToDestroy = new ArrayList<String>();
                 tableNumsToDestroy.add(tableToDestroy);
                 // Needs to be done in ChefQueueFragment
                 ChefQueueFragment fragment = (ChefQueueFragment) getFragmentManager().findFragmentById(R.id.fragmentContainer_chef);
                 fragment.updateTableInQueue(tableNumsToDestroy);
+
+                clearItemList();
 
                 // Below code deletes from parse -> we don't want it happen!
 //                final ParseQuery query =  new ParseQuery("WaiterTable");
@@ -100,6 +101,10 @@ public class ChefActivity extends ActionBarActivity  {
             }
         });
 
+    }
+
+    private void clearItemList(){
+        listview.setAdapter(null);
     }
 
     public void updateTableInfo(String tableNum) {
