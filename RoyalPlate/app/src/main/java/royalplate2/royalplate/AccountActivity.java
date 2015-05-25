@@ -103,8 +103,11 @@ public class AccountActivity extends Activity {
 //        String tableno = getIntent().getExtras().getString("tableNo","");
         tableno = getIntent().getExtras().getString("tableNo","");
 
+<<<<<<< HEAD
        tableno = getIntent().getExtras().getString("tableNo","");
 
+=======
+>>>>>>> e73d615e56a652d869b206f731091c6860d821f7
         String waitername = getIntent().getExtras().getString("waiterName","");
 
         final ParseQuery query = new ParseQuery("WaiterTable");
