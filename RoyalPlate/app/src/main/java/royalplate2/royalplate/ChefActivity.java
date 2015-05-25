@@ -22,6 +22,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import royalplate2.royalplate.adapter.ChefSideOrderListAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,6 +35,7 @@ public class ChefActivity extends ActionBarActivity  {
     ListView listview;
     Button doneBtn;
     String tableno;
+    final ArrayList<String> tableNumsToDestroy = new ArrayList<String>();
 
     ChefSideOrderListAdapter chefSideOrderListAdapter;
     @Override
@@ -53,28 +56,36 @@ public class ChefActivity extends ActionBarActivity  {
 
                 SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
                tableno = sharedPref.getString("chefTableClicked", "");
-                final String tableNumToDestroy = sharedPref.getString("chefTableClicked", "");
+                String tableToDestroy = sharedPref.getString("chefTableClicked", "");
 
-                final ParseQuery query =  new ParseQuery("WaiterTable");
-                query.whereEqualTo("TableNo", tableNumToDestroy);
-                query.findInBackground(new FindCallback<ParseObject>() {
-                    @Override
-                    public void done(List<ParseObject> waiterData, ParseException e) {
-                        if(e == null || waiterData.size() >0){
-                            for (int i=0; i<waiterData.size(); i++){
+//                final ArrayList<String> tableNumsToDestroy = new ArrayList<String>();
+                tableNumsToDestroy.add(tableToDestroy);
+                // Needs to be done in ChefQueueFragment
+                ChefQueueFragment fragment = (ChefQueueFragment) getFragmentManager().findFragmentById(R.id.fragmentContainer_chef);
+                fragment.updateTableInQueue(tableNumsToDestroy);
 
-                                ParseObject tableNo = waiterData.get(i);
-                                try {
-                                    tableNo.delete();
-                                } catch (ParseException e1) {
-                                }
-                            }
-                        }
-                        else{
-
-                        }
-                    }
-                });
+                // Below code deletes from parse -> we don't want it happen!
+//                final ParseQuery query =  new ParseQuery("WaiterTable");
+//                query.whereEqualTo("TableNo", tableNumToDestroy);
+//                query.findInBackground(new FindCallback<ParseObject>() {
+//                    @Override
+//                    public void done(List<ParseObject> waiterData, ParseException e) {
+//                        if(e == null || waiterData.size() >0){
+//                            for (int i=0; i<waiterData.size(); i++){
+//
+//                                ParseObject tableNo = waiterData.get(i);
+//                                try {
+//                                    tableNo.delete();
+//                                } catch (ParseException e1) {
+//                                }
+//                            }
+//                        }
+//                        else{
+//
+//                        }
+//                    }
+//                });
+                // Above code deletes from parse -> we don't want it happen!
             }
         });
         TextView tablenoTextview = (TextView) findViewById(R.id.chef_tablenoid);

@@ -17,9 +17,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import java.util.ArrayList;
 import java.util.List;
 import royalplate2.royalplate.adapter.TableListAdapter;
 
@@ -33,7 +36,6 @@ public class ChefQueueFragment extends Fragment {
     TableListAdapter tableListAdapter;
 
     ImageView refreshBtn;
-//    Button refreshBtn;
 
     @Nullable
     @Override
@@ -63,7 +65,6 @@ public class ChefQueueFragment extends Fragment {
 
         refreshBtn = (ImageView) view.findViewById(R.id.refreshBtn);
 
-       // refreshBtn = (Button) view.findViewById(R.id.refreshBtn);
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,9 +74,29 @@ public class ChefQueueFragment extends Fragment {
         return view;
     }
 
-    private void loadTables() {
+    public void updateTableInQueue(ArrayList<String> tableNumsToDestroy){
+        loadTables(tableNumsToDestroy);
+    }
+
+    // overloading with string argument
+    private void loadTables(final ArrayList<String> exceptThese){
         final ParseQuery<ParseObject> tables = ParseQuery.getQuery("WaiterTable");
 
+        for (int i=0; i<exceptThese.size(); i++)
+            Log.i(String.valueOf(i), exceptThese.get(i).toString());
+
+        tables.whereNotContainedIn("TableNo", exceptThese);
+        tables.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> tables, ParseException e) {
+                tableListAdapter = new TableListAdapter(getActivity(), tables);
+                listView.setAdapter(tableListAdapter);
+            }
+        });
+    }
+
+    private void loadTables() {
+        final ParseQuery<ParseObject> tables = ParseQuery.getQuery("WaiterTable");
         tables.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> tables, ParseException e) {
