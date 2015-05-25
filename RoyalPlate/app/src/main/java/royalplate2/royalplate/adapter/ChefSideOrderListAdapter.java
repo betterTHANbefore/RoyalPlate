@@ -13,17 +13,18 @@ import com.parse.ParseObject;
 import java.util.List;
 
 import royalplate2.royalplate.R;
+import royalplate2.royalplate.data.OrderedListData;
 import royalplate2.royalplate.data.TableItemData;
 
 /**
  * Created by sh on 5/17/15.
  */
-public class ChefSideOrderListAdapter extends ArrayAdapter<ParseObject> {
+public class ChefSideOrderListAdapter extends ArrayAdapter<OrderedListData> {
 
     Context context;
-    List<ParseObject> orderedList;
+    List<OrderedListData> orderedList;
 
-    public ChefSideOrderListAdapter(Context context, List<ParseObject> objects) {
+    public ChefSideOrderListAdapter(Context context, List<OrderedListData> objects) {
         super( context, R.layout.listview_chef_item, objects);
         this.context = context;
         this.orderedList = objects;
@@ -39,8 +40,11 @@ public class ChefSideOrderListAdapter extends ArrayAdapter<ParseObject> {
 
             view = inflater.inflate(R.layout.listview_chef_item, parent, false);
         }
-        TextView textView = (TextView) view.findViewById((R.id.itemNameid)); // itemName
-        textView.setText(((TableItemData) (orderedList.get(position))).getName());
+        TextView itemnametextView = (TextView) view.findViewById((R.id.itemNameid)); // itemName
+        itemnametextView.setText(orderedList.get(position).getItemName());
+
+        TextView noofitemTextview = (TextView) view.findViewById(R.id.noOfItemsid);
+        noofitemTextview.setText(orderedList.get(position).getNoOfItems());
 
         return view;
     }

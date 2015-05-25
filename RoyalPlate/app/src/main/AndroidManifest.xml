@@ -36,7 +36,7 @@
         <activity android:name=".SelectActivity" ></activity>
         <activity android:name=".ServingtableActivity"></activity>
         <activity android:name=".SignupOrLoginActivity"></activity>
-
+        <activity android:name=".ManagerActivity"></activity>
         <activity android:name=".SubMenuActivity"></activity>
 
 

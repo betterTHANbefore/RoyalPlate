@@ -182,35 +182,41 @@ public class OrderListFragment extends Fragment {
             public void onClick(View v) {
 
 
-                /*******
-                 * tableno is comming from assignedtablesharedpreference table from AssignedTableActivity
-                 */
+            /*******
+             * tableno is comming from assignedtablesharedpreference table from AssignedTableActivity
+             */
 
-                // temporaly going back to MenuActivity
-                //  Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
-                //  Intent orderBtnIntent = new Intent(v.getContext(), ChefActivity.class);
-                // temporaly going back to MenuActivity
-                Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
+            // temporaly going back to MenuActivity
+            //  Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
+            //  Intent orderBtnIntent = new Intent(v.getContext(), ChefActivity.class);
+            // temporaly going back to MenuActivity
 
-
-            orderBtnIntent.putExtra("tableNo", tableno);
-
-//                orderBtnIntent.putExtra("table no", 1);
-
-//            String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
+//             Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
+//                orderBtnIntent.putExtra("tableNo", tableno);
+//
+////                orderBtnIntent.putExtra("table no", 1);
+//
+////            String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
+////                //String tableNum = shared.getString("tableNo","");
+////
+////                orderBtnIntent.putExtra("table no", tableNum);
+//
+//                //orderBtnIntent.putExtra("tableNo", tableNumStr);
+//
+////                orderBtnIntent.putExtra("table no", 1);
+//
+//                String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
 //                //String tableNum = shared.getString("tableNo","");
 //
 //                orderBtnIntent.putExtra("table no", tableNum);
+//                startActivity(orderBtnIntent);
 
-                //orderBtnIntent.putExtra("tableNo", tableNumStr);
+                Intent orderBtnIntent = new Intent(v.getContext(), AssignedTableActivity.class);
 
-//                orderBtnIntent.putExtra("table no", 1);
-
-                String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
-                //String tableNum = shared.getString("tableNo","");
-
-                orderBtnIntent.putExtra("table no", tableNum);
                 startActivity(orderBtnIntent);
+
+
+
             }
         });
         /*******************************************************************************************

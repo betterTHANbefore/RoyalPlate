@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.parse.ParseObject;
+
+import java.text.ParseException;
 import java.util.List;
 
 import royalplate2.royalplate.AccountActivity;
@@ -44,19 +48,26 @@ public class AccountBillAdapter extends ArrayAdapter<OrderedListData> {
             view = inflater.inflate(R.layout.listview_account, parent, false);
         }
 
-       final TextView noofitemsTextView = (TextView) view.findViewById((R.id.noofitemsid));
-        noofitemsTextView.setText(orderedItems.get(position).getNoOfItems().toString());
 
-        TextView itemnamesTextView = (TextView) view.findViewById((R.id.itemnameid));
-        itemnamesTextView.setText(orderedItems.get(position).getItemName());
 
-        TextView itempriceTextView = (TextView) view.findViewById((R.id.itempriceid));
-        itempriceTextView.setText(orderedItems.get(position).getItemPrice());
+                final TextView noofitemsTextView = (TextView) view.findViewById((R.id.noofitemsid));
+                noofitemsTextView.setText(orderedItems.get(position).getNoOfItems().toString());
 
-        subtotal += Float.parseFloat(orderedItems.get(position).getItemPrice());
+                TextView itemnamesTextView = (TextView) view.findViewById((R.id.itemnameid));
+                itemnamesTextView.setText(orderedItems.get(position).getItemName());
 
-        accountActivity.saveSubtotal(subtotal);
+                TextView itempriceTextView = (TextView) view.findViewById((R.id.itempriceid));
+                itempriceTextView.setText(orderedItems.get(position).getItemPrice());
 
+                subtotal += Float.parseFloat(orderedItems.get(position).getItemPrice());
+
+                accountActivity.saveSubtotal(subtotal);
+
+
+
+//            Toast.makeText(getContext(), " OrderedItem list is Empty!", Toast.LENGTH_LONG)
+//                    .show();
+//
 
         return view;
     }

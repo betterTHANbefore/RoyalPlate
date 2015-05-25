@@ -13,8 +13,8 @@
 
     <gradient
         android:startColor="@color/chocolate"
-        android:centerColor="@color/orange"
-        android:endColor="@color/orange"
+        android:centerColor="@color/transOrange"
+        android:endColor="@color/transOrange"
         android:angle="90"/>
 
     <corners

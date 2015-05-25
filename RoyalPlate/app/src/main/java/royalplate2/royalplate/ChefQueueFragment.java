@@ -4,20 +4,17 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import android.widget.ListView;
 import android.widget.TextView;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -43,17 +40,19 @@ public class ChefQueueFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_chef_table_queue, container, false);
         listView = (ListView) view.findViewById(R.id.list_view);
+
         loadTables();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView tableNumText = (TextView) parent.getChildAt(position).findViewById(R.id.tableNum);
                 String tableNumStr = tableNumText.getText().toString();
                 ((ChefActivity) getActivity()).updateTableInfo(tableNumStr);
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putString("chefTableClicked", tableNumStr);
-
+//                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+////                SharedPreferences.Editor editor = sharedPreferences.edit();
+////                editor.putString("chefTableClicked", tableNumStr);
+//
 
                 SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
@@ -62,7 +61,9 @@ public class ChefQueueFragment extends Fragment {
             }
         });
 
-
+        /*******************************************************************************************
+         * Refresh Button will reload all the tables
+         *******************************************************************************************/
         refreshBtn = (ImageView) view.findViewById(R.id.refreshBtn);
 
         refreshBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +74,9 @@ public class ChefQueueFragment extends Fragment {
         });
         return view;
     }
+    /*******************************************************************************************
+     *TABLES COMES IN QUEUE TO CHEF TO FINISH THE ORDER.
+     *******************************************************************************************/
 
     public void updateTableInQueue(ArrayList<String> tableNumsToDestroy){
         loadTables(tableNumsToDestroy);
@@ -94,6 +98,9 @@ public class ChefQueueFragment extends Fragment {
             }
         });
     }
+    /*******************************************************************************************
+     * Load All Assigned tables from the WaiterTable class from Parse.
+     *******************************************************************************************/
 
     private void loadTables() {
         final ParseQuery<ParseObject> tables = ParseQuery.getQuery("WaiterTable");

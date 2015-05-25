@@ -39,7 +39,7 @@ public class AssignedTableActivity extends Activity {
     GridView assignedtableGridview;
     WaiterTableAdapter waiterTableAdapter;
     Intent intent;
-    String tableno;
+
     public static final String LOGINSHARED = "loginSharedPreferences";
 
     public static final String ASSIGNEDTABLESHARED = "assignedtablesSharedPreferences";
@@ -49,22 +49,14 @@ public class AssignedTableActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.assigned_tables_activity);
 
-
         /******************************************************************************************
+         * Retrieve Waiter Name from LoginActivity thruough loginSHaredPreferences.
          * Waiter UserName appear into usernameTextview after login to account
          ******************************************************************************************/
-        //  username = "cs";
-
-
         int mode = Activity.MODE_PRIVATE;
         SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
         waitername = loginSharedPreferences.getString("userName", "");
 
-
-        // final SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
-
-//        username = shared.getString("userName", "");
-        //   username = getIntent().getExtras().getString("userName");
         usernameTextView = (TextView) findViewById(R.id.waiternametextviewid);
         usernameTextView.setText(waitername);
 
@@ -88,21 +80,25 @@ public class AssignedTableActivity extends Activity {
 
                 int mode = Activity.MODE_PRIVATE;
                 SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
-
-
-                //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                 SharedPreferences.Editor editor = assignedtablesSharedPreferences.edit();
                 editor.putString("tableNo", tableno);
                 editor.apply();
 
+                /***********************************************************************************
+                 * Popup window will display Order Button, Pay Button and Cancle Button.
+                 ***********************************************************************************/
+
                 View popupView = getLayoutInflater().inflate(R.layout.order_pay_popup, null);
 
-                final PopupWindow popupwindow = new PopupWindow(popupView, 330, 300, true);
-                popupwindow.showAtLocation(view, Gravity.CENTER,0,0);
-                popupwindow.setFocusable(true);
-                popupwindow.setOutsideTouchable(true);
-                popupwindow.setContentView(popupView);
+                    final PopupWindow popupwindow = new PopupWindow(popupView, 330, 300, true);
+                    popupwindow.showAtLocation(view, Gravity.CENTER,0,0);
+                    popupwindow.setFocusable(true);
+                    popupwindow.setOutsideTouchable(true);
+                    popupwindow.setContentView(popupView);
 
+                /***********************************************************************************
+                 * Ordered Button leads to Main Menu Activity to start taking order.
+                 ***********************************************************************************/
 
                 Button orderButton = (Button) popupView.findViewById(R.id.orderbuttonid);
 
@@ -110,13 +106,13 @@ public class AssignedTableActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         intent = new Intent(AssignedTableActivity.this, MenuActivity.class);
-
-                        //  intent.putExtra("tableNo", tableno);
-
                         startActivity(intent);
 
                     }
                 });
+                /***********************************************************************************
+                 * Pay Button will pass table no and waitername to AccountActivity.
+                 ***********************************************************************************/
 
                 Button payButton = (Button) popupView.findViewById(R.id.paybuttonid);
 
@@ -133,10 +129,9 @@ public class AssignedTableActivity extends Activity {
                     }
                 });
 
-                /******************************************************************************
-                 * Cancle Button listener from the PopupWindow. Goes back to
-                 * Assigned Activity.
-                 ******************************************************************************/
+                /***********************************************************************************
+                 * Cancle Button listener from the PopupWindow. Goes back to Assigned Activity.
+                 ***********************************************************************************/
                 Button cancleButton = (Button) popupView.findViewById(R.id.canclebuttonid);
 
                 cancleButton.setOnClickListener(new View.OnClickListener() {
@@ -144,15 +139,8 @@ public class AssignedTableActivity extends Activity {
                     public void onClick(View v) {
                         popupwindow.dismiss();
 
-
-
-                        //                        sharedwaiter.edit().clear().apply();
-                        //                        sharedtable.edit().clear().apply();
                     }
                 });
-
-
-
 
             }
         });
@@ -170,9 +158,9 @@ public class AssignedTableActivity extends Activity {
             }
         });
 
-        /*********************************************************************
+        /*******************************************************************************************
          * Refresh (ImageButton) will refresh the current activity
-         *******************************************************************/
+         *******************************************************************************************/
 
         refreshbutton = (ImageButton) findViewById(R.id.refreshBtn);
         refreshbutton.setOnClickListener(new View.OnClickListener() {
@@ -183,10 +171,10 @@ public class AssignedTableActivity extends Activity {
             }
         });
 
-        /*********************************************************************
+        /*******************************************************************************************
          * Sign Out button will not display waiter's name in the serving list in
          * Hostess Activity.(means waiter is done for the day or on break)
-         *******************************************************************/
+         *******************************************************************************************/
         signoutbutton = (Button) findViewById(R.id.signoutBtn);
         signoutbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,7 +197,6 @@ public class AssignedTableActivity extends Activity {
                                     Log.e("TAG", e1.getMessage(), e1);
                                 }
                             }
-
                         }
                         else{
                             Log.d("Tag", "Error: "+ e.getMessage());
@@ -225,7 +212,7 @@ public class AssignedTableActivity extends Activity {
     /*********************************************************************
      * Refresh Button will relaod all the tables from the Parse
      *******************************************************************/
-    private void refreshActivity() {
+     private void refreshActivity() {
         loadtables();
     }
 
@@ -268,26 +255,6 @@ public class AssignedTableActivity extends Activity {
     public AssignedTableActivity() {
 
     }
-
-    /**
-     * *********************************************************
-     * Retrieve data values from the TableAdapter class
-     * ********************************************************
-     */
-//    public void saveTableNumber(String tablelist){
-//
-//
-////       sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
-//        sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
-//
-//
-//        SharedPreferences.Editor tableeditor = sharedtable.edit();
-//     //   tableeditor = sharedtable.edit();
-//        tableeditor.putString("TableNo", tablelist);
-//
-//        tableeditor.apply();
-//    }
-
 
 
 }
