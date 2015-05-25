@@ -99,12 +99,10 @@ public class AccountActivity extends Activity {
         taxTextView = (TextView) findViewById(R.id.bill_taxid);
         grandtotalTextView = (TextView) findViewById(R.id.bill_grandtotalid);
 
-<<<<<<< HEAD
+
 //        String tableno = getIntent().getExtras().getString("tableNo","");
         tableno = getIntent().getExtras().getString("tableNo","");
-=======
-       tableno = getIntent().getExtras().getString("tableNo","");
->>>>>>> 207ea64510d855fcc3943dc73ad36d2a2a0a89ca
+
         String waitername = getIntent().getExtras().getString("waiterName","");
 
         final ParseQuery query = new ParseQuery("WaiterTable");
