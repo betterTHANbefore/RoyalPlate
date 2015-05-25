@@ -48,6 +48,7 @@ public class TableListAdapter extends ArrayAdapter<ParseObject> {
 //        Log.i("Table", "Table");
 //        textView.setText(((ParseObject) (tableList.get(position))).getString("TableNo"));
 //        textView.setText(((TablesData) (tableList.get(position))).getTable());
+
         textView.setText(((WaiterTableData) (tableList.get(position))).getTable());
 //        Log.i("Table", "Table2");
         return view;
