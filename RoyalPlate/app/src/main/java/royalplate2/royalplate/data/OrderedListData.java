@@ -19,21 +19,23 @@ public class OrderedListData extends ParseObject
     public void setItemName( String itemname){
         put("ItemName", itemname);
     }
-    public String getItemPrice(){
-        return getString("ItemPrice");
 
-    }
+
+    public String getItemPrice(){
+        return getString("ItemPrice"); }
+
     public void setItemPrice(String itemprice)
     {
         put("ItemPrice", itemprice);
     }
-    public String getNoOfItems(){
 
-        return getString("NoOfItems");
-    }
+
+    public String getNoOfItems(){  return getString("NoOfItems"); }
+
     public void setNoOfItems(String noofitems){
         put("NoOfItems", noofitems);
     }
+
     public String getTableNo(){
         return getString("TableNo");
 

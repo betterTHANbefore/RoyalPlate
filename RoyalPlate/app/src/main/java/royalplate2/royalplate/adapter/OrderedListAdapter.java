@@ -70,62 +70,39 @@ public class OrderedListAdapter extends ArrayAdapter<OrderedListData> {
             @Override
             public void onClick(View view) {
 
-                //remove item
-                Log.i("Remove", "Cancle clicked");
-//
-//
-//                Integer index = (Integer) view.getTag();
-                orderedItemsList.remove(position); // just remove from that position
-                notifyDataSetChanged();
+                // when i click first retrieve that item name
+                String itemToremove = orderedItemsList.get(position).getItemName();
 
-
-                // orderedItemsList.set(position, orderedItemsList.remove(index.intValue()));
-                //  orderedItemsList.remove(index.intValue());
-
-
+              Log.i("Tag", "REMOVE  "+ itemToremove);
                 final ParseQuery query = new ParseQuery("OrderedListParse");
-//
+                query.whereEqualTo("ItemName", itemToremove);
                 query.whereEqualTo("TableNo", tableno);
-                query.whereEqualTo("ItemName", itemName);
-                //query.whereEqualTo("NoOfItem", noofitem);
 
                 query.findInBackground(new FindCallback<ParseObject>() {
                     @Override
                     public void done(List<ParseObject> orderedlist, ParseException e) {
                         if (e == null || orderedlist.size() > 0) {
+                            for (int i = 0; i < orderedlist.size(); i++) {
 
-// iterate over all messages and delete them
-                            for (ParseObject ol : orderedlist) {
+                                ParseObject item = orderedlist.get(i);
                                 try {
-                                    ol.delete();
+                                    item.delete();
                                 } catch (ParseException e1) {
-                                    e1.printStackTrace();
+                                    Log.i("Tag", e1.getMessage());
                                 }
+
+
                             }
-                        } else {
-                            Log.e("TAG", e.getMessage(), e);
                         }
+
                     }
                 });
+
+                orderedItemsList.remove(position); // just remove from that position
+                notifyDataSetChanged();
+
             }
         });
-//
-//
-//
-//                            //for (int i=0; i<orderedlist.size(); i++) {
-//
-////                                ParseObject itemName = orderedlist.get(i);
-////                                //ParseObject tableNo = orderedlist.get(i);
-//////                                try {
-////                                    itemName.deleteInBackground();
-////                                    //tableNo.delete();
-////
-//////                                } catch (ParseException e1) {
-//////                                    Log.e("TAG", e1.getMessage(), e1);
-//////                                }
-//
-//                          // }
-
 
         return view;
     }

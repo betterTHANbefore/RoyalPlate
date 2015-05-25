@@ -49,23 +49,6 @@ public class WaiterTableAdapter extends ArrayAdapter<WaiterTableData> {
 
         assignedtableBtn.setText((waitertables.get(position)).getTable());
 
-//
-//        assignedtableBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String tableno =  assignedtableBtn.getText().toString();
-//                assignedTableActivity.saveTableNumber(tableno);
-//
-//
-//
-//            }
-//        });
-//
-
-
-
-
         return view;
     }
 }
