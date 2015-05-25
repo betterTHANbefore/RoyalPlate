@@ -53,19 +53,18 @@ public class ChefActivity extends ActionBarActivity  {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-               tableno = sharedPref.getString("chefTableClicked", "");
-                String tableToDestroy = tableno;
+            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+            tableno = sharedPref.getString("chefTableClicked", "");
+            String tableToDestroy = tableno;
 
-//                final ArrayList<String> tableNumsToDestroy = new ArrayList<String>();
-                tableNumsToDestroy.add(tableToDestroy);
-                // Needs to be done in ChefQueueFragment
-                ChefQueueFragment fragment = (ChefQueueFragment) getFragmentManager().findFragmentById(R.id.fragmentContainer_chef);
-                fragment.updateTableInQueue(tableNumsToDestroy);
+            tableNumsToDestroy.add(tableToDestroy);
+            // table destroy needs to be done in ChefQueueFragment
+            ChefQueueFragment fragment = (ChefQueueFragment) getFragmentManager().findFragmentById(R.id.fragmentContainer_chef);
+            fragment.updateTableInQueue(tableNumsToDestroy);
 
-                clearItemList();
+            clearItemList();
 
-                // Below code deletes from parse -> we don't want it happen!
+            // Below code deletes from parse -> we don't want it happen!
 //                final ParseQuery query =  new ParseQuery("WaiterTable");
 //                query.whereEqualTo("TableNo", tableNumToDestroy);
 //                query.findInBackground(new FindCallback<ParseObject>() {
@@ -86,7 +85,7 @@ public class ChefActivity extends ActionBarActivity  {
 //                        }
 //                    }
 //                });
-                // Above code deletes from parse -> we don't want it happen!
+            // Above code deletes from parse -> we don't want it happen!
             }
         });
         TextView tablenoTextview = (TextView) findViewById(R.id.chef_tablenoid);
@@ -100,7 +99,6 @@ public class ChefActivity extends ActionBarActivity  {
                 startActivity(intent);
             }
         });
-
     }
 
     private void clearItemList(){
@@ -117,8 +115,8 @@ public class ChefActivity extends ActionBarActivity  {
 
             @Override
             public void done(List<ParseObject> orderedItems, ParseException e) {
-                chefSideOrderListAdapter = new ChefSideOrderListAdapter(ChefActivity.this,  orderedItems);
-                listview.setAdapter(chefSideOrderListAdapter);
+            chefSideOrderListAdapter = new ChefSideOrderListAdapter(ChefActivity.this,  orderedItems);
+            listview.setAdapter(chefSideOrderListAdapter);
             }
         });
     }

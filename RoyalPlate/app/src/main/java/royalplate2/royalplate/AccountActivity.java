@@ -99,12 +99,12 @@ public class AccountActivity extends Activity {
         taxTextView = (TextView) findViewById(R.id.bill_taxid);
         grandtotalTextView = (TextView) findViewById(R.id.bill_grandtotalid);
 
-<<<<<<< HEAD
+
 //        String tableno = getIntent().getExtras().getString("tableNo","");
         tableno = getIntent().getExtras().getString("tableNo","");
-=======
+
        tableno = getIntent().getExtras().getString("tableNo","");
->>>>>>> 207ea64510d855fcc3943dc73ad36d2a2a0a89ca
+
         String waitername = getIntent().getExtras().getString("waiterName","");
 
         final ParseQuery query = new ParseQuery("WaiterTable");
@@ -126,8 +126,6 @@ public class AccountActivity extends Activity {
                         waiternameTextview.setText("Waiter: " + guestinfo.getString("WaiterName"));
                         dateTextview.setText("Date: "+ guestinfo.getString("Date"));
                         timeTextview.setText("Time: " + guestinfo.get("Time"));
-
-
                     }
                 }
 
@@ -146,7 +144,7 @@ public class AccountActivity extends Activity {
                 startActivity(intent);
 
 
-                // Below code deletes from parse -> we don't want it happen!
+                // Below code deletes from parse -> we want this!
                 String tableNumToDestroy = tableno;
                 final ParseQuery query =  new ParseQuery("WaiterTable");
                 query.whereEqualTo("TableNo", tableNumToDestroy);
@@ -168,14 +166,9 @@ public class AccountActivity extends Activity {
                         }
                     }
                 });
-                // Above code deletes from parse -> we don't want it happen!
-
-
+                // Above code deletes from parse
             }
         });
-
-
-
     }
 
     private void displayPayment() {
@@ -232,11 +225,9 @@ public class AccountActivity extends Activity {
                 accountBillAdapter = new AccountBillAdapter(AccountActivity.this, orderedItems, AccountActivity.this);
                 ordereditemslistview.setAdapter(accountBillAdapter);
                 Log.i("Test", "Yeah?");
-
             }
 
         });
-
     }
     public AccountActivity(){}
 
@@ -249,10 +240,5 @@ public class AccountActivity extends Activity {
         editor.apply();
 
         Log.i("tag" , "AccountAc   " + subtotal);
-
-
     }
-
-
-
 }

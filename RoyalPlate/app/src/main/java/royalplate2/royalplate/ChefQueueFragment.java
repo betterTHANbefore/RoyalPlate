@@ -34,7 +34,6 @@ public class ChefQueueFragment extends Fragment {
     View view;
     ListView listView;
     TableListAdapter tableListAdapter;
-
     ImageView refreshBtn;
 
     @Nullable
@@ -47,24 +46,19 @@ public class ChefQueueFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView tableNumText = (TextView) parent.getChildAt(position).findViewById(R.id.tableNum);
-                String tableNumStr = tableNumText.getText().toString();
-                ((ChefActivity) getActivity()).updateTableInfo(tableNumStr);
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putString("chefTableClicked", tableNumStr);
+            TextView tableNumText = (TextView) parent.getChildAt(position).findViewById(R.id.tableNum);
+            String tableNumStr = tableNumText.getText().toString();
+            ((ChefActivity) getActivity()).updateTableInfo(tableNumStr);
 
-
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("chefTableClicked", tableNumStr);
-                editor.commit();
+            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("chefTableClicked", tableNumStr);
+            editor.commit();
             }
         });
 
-
+        // this refreshBtn loads table list from parse without destroying tables
         refreshBtn = (ImageView) view.findViewById(R.id.refreshBtn);
-
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +72,7 @@ public class ChefQueueFragment extends Fragment {
         loadTables(tableNumsToDestroy);
     }
 
-    // overloading with string argument
+    // overloading with stringlist argument
     private void loadTables(final ArrayList<String> exceptThese){
         final ParseQuery<ParseObject> tables = ParseQuery.getQuery("WaiterTable");
 
@@ -100,8 +94,8 @@ public class ChefQueueFragment extends Fragment {
         tables.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> tables, ParseException e) {
-                tableListAdapter = new TableListAdapter(getActivity(), tables);
-                listView.setAdapter(tableListAdapter);
+            tableListAdapter = new TableListAdapter(getActivity(), tables);
+            listView.setAdapter(tableListAdapter);
             }
         });
     }

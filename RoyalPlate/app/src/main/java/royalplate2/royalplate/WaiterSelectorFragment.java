@@ -14,7 +14,7 @@ import android.widget.Button;
  * Created by operamac on 4/29/15.
  */
 
-// This class belongs to SubMenuActivity
+// Not being used. Double check, and decide to delete it
 public class WaiterSelectorFragment extends Fragment {
 
     View v;
@@ -30,12 +30,12 @@ public class WaiterSelectorFragment extends Fragment {
         orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // temporaly going back to MenuActivity
-                Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
+            // temporaly going back to MenuActivity
+            Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
 //                orderBtnIntent.putExtra("table no", 1);
-                String tableNum = getActivity().getIntent().getExtras().getString("table no");
-                orderBtnIntent.putExtra("table no", tableNum);
-                startActivity(orderBtnIntent);
+            String tableNum = getActivity().getIntent().getExtras().getString("table no");
+            orderBtnIntent.putExtra("table no", tableNum);
+            startActivity(orderBtnIntent);
             }
         });
         return v;
