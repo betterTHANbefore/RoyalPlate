@@ -141,8 +141,6 @@ public class HostessActivity extends Activity implements OnClickListener{
         assignedButton.setBackgroundColor(Color.DKGRAY);
         assignedButton.setPadding(80,0,80,0);
 
-
-
         // assignedButton.setBackgroundColor(Color.DKGRAY);
         /************************************************************
          * EditText to enter guest name and no of guest
@@ -152,7 +150,6 @@ public class HostessActivity extends Activity implements OnClickListener{
         guestNameedit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -176,7 +173,6 @@ public class HostessActivity extends Activity implements OnClickListener{
                     assignedButton.setPadding(80,0,80,0);
                     gutestNoedit.setEnabled(true);
                 }
-
             }
         });
         assignedButton.setOnClickListener(this);
@@ -189,8 +185,6 @@ public class HostessActivity extends Activity implements OnClickListener{
          *  Assigned Button will bring up the Popup Window with
          *  all guest info.
          **********************************************************/
-
-
 
 
         /************************************************************
@@ -220,7 +214,6 @@ public class HostessActivity extends Activity implements OnClickListener{
             @Override
             public void done(List<WaiterData> waiters, ParseException e) {
                 waiterAdapter = new WaiterAdapter(getBaseContext(), waiters, HostessActivity.this);
-
                 waiterlistview.setAdapter(waiterAdapter);
 
             }
@@ -236,9 +229,8 @@ public class HostessActivity extends Activity implements OnClickListener{
 
             @Override
             public void done(List<TablesData> tables, ParseException e) {
-                tableAdapter = new TableAdapter(getBaseContext(), tables, HostessActivity.this);
-                tablelistview.setAdapter(tableAdapter);
-
+            tableAdapter = new TableAdapter(getBaseContext(), tables, HostessActivity.this);
+            tablelistview.setAdapter(tableAdapter);
             }
 
         });

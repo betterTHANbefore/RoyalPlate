@@ -38,7 +38,6 @@ public class LoginActivity extends Activity {
     Intent intent;
     public static final String LOGINSHARED = "loginSharedPreferences";
 
-
     WaiterData waitertables;
 
     String username;
@@ -72,110 +71,108 @@ public class LoginActivity extends Activity {
 
         findViewById(R.id.action_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                // Validate the log in data
-                boolean validationError = false;
-                StringBuilder validationErrorMessage =
-                        new StringBuilder(getResources().getString(R.string.error_intro));
-                if (isEmpty(usernameView)) {
-                    validationError = true;
-                    validationErrorMessage.append(getResources().getString(R.string.error_blank_username));
-                }
-                if (isEmpty(passwordView)) {
-                    if (validationError) {
-                        validationErrorMessage.append(getResources().getString(R.string.error_join));
-                    }
-                    validationError = true;
-                    validationErrorMessage.append(getResources().getString(R.string.error_blank_password));
-                }
-                validationErrorMessage.append(getResources().getString(R.string.error_end));
-
-                /***************************************************************************
-                 * If there is a validation error, display the error
-                 **************************************************************************/
-
+            // Validate the log in data
+            boolean validationError = false;
+            StringBuilder validationErrorMessage =
+                    new StringBuilder(getResources().getString(R.string.error_intro));
+            if (isEmpty(usernameView)) {
+                validationError = true;
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_username));
+            }
+            if (isEmpty(passwordView)) {
                 if (validationError) {
-                    Toast.makeText(LoginActivity.this, validationErrorMessage.toString(), Toast.LENGTH_LONG)
-                            .show();
-                    return;
+                    validationErrorMessage.append(getResources().getString(R.string.error_join));
                 }
-                /***************************************************************************
-                 * Set up progress dialog
-                 **************************************************************************/
+                validationError = true;
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_password));
+            }
+            validationErrorMessage.append(getResources().getString(R.string.error_end));
 
-                final ProgressDialog dlg = new ProgressDialog(LoginActivity.this);
-                dlg.setTitle("Please wait.");
-                dlg.setMessage("Logging in.  Please wait.");
-                dlg.show();
+            /***************************************************************************
+             * If there is a validation error, display the error
+             **************************************************************************/
 
-                /***************************************************************************
-                 * Call the Parse login method
-                 **************************************************************************/
+            if (validationError) {
+                Toast.makeText(LoginActivity.this, validationErrorMessage.toString(), Toast.LENGTH_LONG)
+                        .show();
+                return;
+            }
+            /***************************************************************************
+             * Set up progress dialog
+             **************************************************************************/
 
-                ParseUser.logInInBackground(usernameView.getText().toString(), passwordView.getText()
-                        .toString(), new LogInCallback() {
+            final ProgressDialog dlg = new ProgressDialog(LoginActivity.this);
+            dlg.setTitle("Please wait.");
+            dlg.setMessage("Logging in.  Please wait.");
+            dlg.show();
 
-                    @Override
-                    public void done(ParseUser user, ParseException e) {
-                        dlg.dismiss();
-                        if (e != null) {
-                            // Show the error message
-                            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        } else {
-                            // Start an intent for the dispatch activity
-                            // Below is for without table assignment
+            /***************************************************************************
+             * Call the Parse login method
+             **************************************************************************/
+
+            ParseUser.logInInBackground(usernameView.getText().toString(), passwordView.getText()
+                    .toString(), new LogInCallback() {
+
+                @Override
+                public void done(ParseUser user, ParseException e) {
+                    dlg.dismiss();
+                    if (e != null) {
+                        // Show the error message
+                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    } else {
+                        // Start an intent for the dispatch activity
+                        // Below is for without table assignment
 //                            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
 
-                          username = usernameView.getText().toString();
-                        /***************************************************************************
-                         * If Username exists on WaiterParse Class then only it will add to
-                         * WaiterTable Class on parse.
-                         **************************************************************************/
+                      username = usernameView.getText().toString();
+                    /***************************************************************************
+                     * If Username exists on WaiterParse Class then only it will add to
+                     * WaiterTable Class on parse.
+                     **************************************************************************/
 
-                        ParseQuery<ParseObject> query = ParseQuery.getQuery("WaiterParse");
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("WaiterParse");
 
-                        query.whereEqualTo("WaiterName", username);
+                    query.whereEqualTo("WaiterName", username);
 
-                        query.findInBackground(new FindCallback<ParseObject>() {
+                    query.findInBackground(new FindCallback<ParseObject>() {
 
-                            @Override
-                            public void done(List<ParseObject> waiternamelist, ParseException e) {
+                        @Override
+                        public void done(List<ParseObject> waiternamelist, ParseException e) {
 
-                                if(e!= null || waiternamelist.size()==0) {
-
-                                    waitertables = new WaiterData();
-                                    waitertables.setWaiter(username);
-                                    waitertables.saveInBackground();
-                                    Toast.makeText(LoginActivity.this, username + " added!", Toast.LENGTH_LONG).show();
-                                }
-
-                            }
-
-                        });
-
-
-
-                            Intent intent = new Intent(LoginActivity.this, AssignedTableActivity.class);
-                          //  intent.putExtra("userName", username);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-
-                            int mode = Activity.MODE_PRIVATE;
-                            SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
-
-
-                            //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-                            SharedPreferences.Editor editor = loginSharedPreferences.edit();
-                            editor.putString("userName", username);
-
-                            editor.apply();
-
-
-
-
+                        if(e!= null || waiternamelist.size()==0) {
+                            waitertables = new WaiterData();
+                            waitertables.setWaiter(username);
+                            waitertables.saveInBackground();
+                            Toast.makeText(LoginActivity.this, username + " added!", Toast.LENGTH_LONG).show();
                         }
-                    }
+                        }
 
-                });
+                    });
+
+
+
+                    Intent intent = new Intent(LoginActivity.this, AssignedTableActivity.class);
+                  //  intent.putExtra("userName", username);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+
+                    int mode = Activity.MODE_PRIVATE;
+                    SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
+
+
+                    //   SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                    SharedPreferences.Editor editor = loginSharedPreferences.edit();
+                    editor.putString("userName", username);
+
+                    editor.apply();
+
+
+
+
+                    }
+                }
+
+            });
             }
         });
 

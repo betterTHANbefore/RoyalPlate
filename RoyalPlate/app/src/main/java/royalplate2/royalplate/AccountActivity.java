@@ -140,7 +140,9 @@ public class AccountActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(),AssignedTableActivity.class);
                 startActivity(intent);
 
-                // Below code deletes from parse -> we don't want it happen!
+
+                // Below code deletes from parse -> we want this!
+
                 String tableNumToDestroy = tableno;
                 final ParseQuery query =  new ParseQuery("WaiterTable");
                 query.whereEqualTo("TableNo", tableNumToDestroy);
@@ -162,6 +164,7 @@ public class AccountActivity extends Activity {
                         }
                     }
                 });
+
             }
         });
     }
@@ -201,6 +204,7 @@ public class AccountActivity extends Activity {
 
                 accountBillAdapter = new AccountBillAdapter(AccountActivity.this, orderedItems, AccountActivity.this);
                 ordereditemslistview.setAdapter(accountBillAdapter);
+
             }
 
         });
@@ -224,5 +228,4 @@ public class AccountActivity extends Activity {
         editor.apply();
 
     }
-
 }

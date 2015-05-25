@@ -103,14 +103,6 @@ public class SignUpActivity extends Activity {
             }
         });
 
-//        Button loginBtn = (Button) findViewById(R.id.LoginButton);
-//        loginBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent loginBtnIntent = new Intent(getApplicationContext(), LoginActivity.class);
-//                startActivity(loginBtnIntent);
-//            }
-//        });
 
         /*******************************************************************************************
          *  H = Hostess, W= Waiter, C= Chef nevigate buttons

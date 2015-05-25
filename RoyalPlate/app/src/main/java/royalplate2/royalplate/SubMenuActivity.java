@@ -305,8 +305,8 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         // Detect touched area
         detector = new SimpleGestureFilter(this,this);
 
-//        Intent backIntent = new Intent(this, OrderListFragment.class);
 
+        // Below is for trying, not being used for core functionality
         JSONObject tempJSON = new JSONObject();
         try {
             tempJSON.put("itemName", itemName);
@@ -315,16 +315,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
             e.printStackTrace();
         }
         addItemToSet(tempJSON);
-
-//        JSONObject tempJSON = new JSONObject();
-//        try {
-//            tempJSON.put("itemName", "Sue");
-//            tempJSON.put("itemPrice", 2.99);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
-
 
         JSONObject tempJSON2 = new JSONObject();
         try {
@@ -336,56 +326,14 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
         addItemToSet(tempJSON2);
         updateOrderedList();
+        // Above is for trying, not being used for core functionality
     }
 
-    void updateOrderedList() {
-//        private void addItemToSet(Pair pair) {
-//            try {
-//                tempJsonObj.put("itemName", "Barley Juice" );
-//                tempJsonObj.put("itemPrice", 2.99);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-////            orderedItemList.add(pair);
-//        }
-//
-//        private void removeItemFromSet(Pair pair) {
-//            orderedItemList.remove(pair);
-//        }
+    private void updateOrderedList() {
 
-//        JSONObject tempJsonObj = new JSONObject(
-//
-//        );
-
-//        @Override
-//        protected String doInBackground(String... params) {
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-//            SharedPreferences preferences = getSharedPreferences("OrderedItemSet", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-//        editor.put
-//            JSONObject tempJsonObj = new JSONObject();
-
-//            try {
-//                tempJsonObj.put("itemName", "Barley Juice" );
-//                tempJsonObj.put("itemPrice", 2.99);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-////            }
-//            orderedItemList.add("Sue");
-//            orderedItemList.add("jeong");
-//            orderedItemList.add("ha");
-//            orderedItemList.add("what");
-//            editor.putStringSet("Item Set", orderedItemList.toString());
         editor.putStringSet("OrderedItemSet", orderedItemList);
-//            editor.putString
         editor.apply();
-
-//            Set<String> test = shared.getStringSet("OrderedItemSet", new HashSet<String>());
-//            Log.i("OrderedItemSet", test.toString());
-//            Log.i("Item Name", itemName);
-//            Log.i("No of Items", noOfItems);
-//            return null;
-//        }
     }
 
 //
@@ -417,10 +365,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         items.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> items, ParseException e) {
-                // menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items, itemCost, tableNumber );
-//                menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items, itemCost, tableNo, SubMenuActivity.this );
                 menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items,  tableno, SubMenuActivity.this );
-
                 listview.setAdapter(menuAdapter);
             }
         });
@@ -428,7 +373,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
 
     // empty constructor
-
     public SubMenuActivity(){}
 
 
@@ -467,13 +411,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
 
     private void addItemToSet(JSONObject jsonObject) {
-//        orderedItemList.add(jsonObject);
-//        try {
-//            tempJsonObj.put("itemName", "Barley Juice" );
-//            tempJsonObj.put("itemPrice", 2.99);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
         orderedItemList.add(jsonObject.toString());
         Log.i("JSON", orderedItemList.toString());
     }

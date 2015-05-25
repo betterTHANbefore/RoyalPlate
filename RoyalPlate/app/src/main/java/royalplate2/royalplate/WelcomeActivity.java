@@ -31,7 +31,6 @@ public class WelcomeActivity extends ActionBarActivity {
 //        getSupportActionBar().setLogo(R.mipmap.ic_royalplate);
 //        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-
 //        anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.welcome_animation);
 //
 //        anim.setAnimationListener(this);
@@ -58,8 +57,6 @@ public class WelcomeActivity extends ActionBarActivity {
 ////            .setIcon(R.drawable.ic_royalplate).setTitle("RoyalPlate");
 //        return super.onCreateOptionsMenu(menu);
 //    }
-
-
 }
 
 

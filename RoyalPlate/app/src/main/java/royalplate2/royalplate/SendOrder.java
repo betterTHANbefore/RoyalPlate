@@ -16,31 +16,11 @@ import java.util.List;
 /**
  * Created by operamac on 4/28/15.
  */
+// Is this class being used? If not, delete it.
 public class SendOrder extends Activity {
-
 
     MenuAdapter menuAdapter;
     ListView listview;
-//    ArrayList<ParseObject> tableOrderedList[] = new ArrayList<ParseObject>;
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-//        super.onCreate(savedInstanceState, persistentState);
-//
-////        ParseObject orderedList[] = new ParseObject[];
-////        ArrayList<ParseObject> tableOrderedList[];
-//
-//        Log.i("HELLOOOOO", "SUEEEEEEE");
-//        Intent prevIntent = getIntent();
-//        int tableNum = prevIntent.getExtras().getInt("table no");
-////        ParseObject orderedList = new ParseObject("Table1");
-////        tableOrderedList[tableNum].
-//        object.put("title", "hello");
-//        object.put("passed value", Integer.toString(tableNum));
-//        tables.put("parent", object);
-//        tables.saveInBackground();
-//
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +29,6 @@ public class SendOrder extends Activity {
         ParseObject object = new ParseObject("1");
         ParseObject tables = new ParseObject("Tables");
 
-        Log.i("HELLOOOOO", "SUEEEEEEE");
         Intent prevIntent = getIntent();
         int tableNum = prevIntent.getExtras().getInt("table no");
 //        ParseObject orderedList = new ParseObject("Table1");
@@ -69,6 +48,5 @@ public class SendOrder extends Activity {
             }
         });
 
-        Log.i("HELLOOOOO", "SUEEEEEEE");
     }
 }
