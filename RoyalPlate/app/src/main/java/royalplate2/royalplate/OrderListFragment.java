@@ -40,36 +40,23 @@ import royalplate2.royalplate.data.OrderedListData;
  * Created by operamac on 4/29/15.
  */
 
-// This class belongs to SubMenuActivity
 public class OrderListFragment extends Fragment {
 
     private View v;
     private TextView tv;
-    private TextView displayList;
     ImageView refreshImageview;
     ListView ordereditemslistview;
     OrderedListAdapter orderedListAdapter;
     SharedPreferences shared;
 
-    //String tableNumStr;
-//    String itemName;
-//    String noOfItems;
-
-    //    String itemName;
-//    String noOfItems;
-//    String itemCost;
     String itemName;
     String noofItem;
     String itemcost;
 
-    private String tableNumStr;
     private String tableno;
     private String privous = null;
     public static final String ASSIGNEDTABLESHARED = "assignedtablesSharedPreferences";
     public static final String ORDEREDLISTSHARED = "orderedlistSharedPreferences";
-
-    OrderedListData orderedListData;
-    SharedPreferences orderedlistSharedPreferences;
 
 
     @Nullable
@@ -93,42 +80,11 @@ public class OrderListFragment extends Fragment {
         SharedPreferences assignedtablesSharedPreferences = getActivity().getSharedPreferences(ASSIGNEDTABLESHARED, mode);
         tableno = assignedtablesSharedPreferences.getString("tableNo", "");
 
-//        SharedPreferences orderedlistSharedPreferences = getActivity().getSharedPreferences(ORDEREDLISTSHARED, mode);
-//        noofItem = orderedlistSharedPreferences.getString("No of Items", "");
-//        itemName = orderedlistSharedPreferences.getString("Item Name", "");
-//        itemcost = orderedlistSharedPreferences.getString("Item Cost","");
-
-
-
         tv = (TextView) v.findViewById(R.id.tableNo_textview);
         tv.setText(tableno);
 
 
-        /*******************************************************************************************
-         * Retrieving data values from MenuActivity through SharedPreferences and Intent.
-         ******************************************************************************************/
 
-//
-//        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        noOfItems = shared.getString("No of Items", "");
-//        itemName = shared.getString("Item Name", "");
-//        itemCost = shared.getString("Item Cost","");
-//
-//        tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
-//        itemName = getActivity().getIntent().getExtras().getString("Item Name");
-//        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
-//        itemCost =  getActivity().getIntent().getExtras().getString("Item Cost");
-
-//        /*******************************************************************************************
-//         * Set Table No as a title in Ordered item list
-//         ******************************************************************************************/
-//
-        //  tv = (TextView) v.findViewById(R.id.tableNo_textview);
-        //   tableNumStr = getActivity().getIntent().getExtras().getString("tableNo");
-        //tableNumStr = shared.getString("tableNo", "");
-        //  tv.setText(tableNumStr);
-
-//        tv.setText(tableno);
         RetrieveSharedData();
         storeDataOnParse(); // Store data values on Parse in OrderListParse
 
@@ -140,10 +96,6 @@ public class OrderListFragment extends Fragment {
         /*******************************************************************************************
          * Set Data values to Parse Class(OrderedListParse) through OrderListData java class
          ******************************************************************************************/
-
-        // storeDataOnParse();
-
-
 
 
 //
