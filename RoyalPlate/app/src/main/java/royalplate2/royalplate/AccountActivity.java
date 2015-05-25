@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -16,7 +17,13 @@ import com.parse.ParseQuery;
 
 import java.util.List;
 
+import royalplate2.royalplate.adapter.AccountBillAdapter;
+import royalplate2.royalplate.adapter.MainMenuAdapter;
+import royalplate2.royalplate.adapter.WaiterTableAdapter;
 import royalplate2.royalplate.data.GuestBillData;
+import royalplate2.royalplate.data.MainMenuData;
+import royalplate2.royalplate.data.OrderedListData;
+import royalplate2.royalplate.data.WaiterTableData;
 
 /**
  * Created by hetu on 4/20/15.
@@ -28,6 +35,8 @@ public class AccountActivity extends Activity {
     public static final String ASSIGNEDTABLESHARED = "assignedtablesSharedPreferences";
     public static final String LOGINSHARED = "loginSharedPreferences";
     public static final String GUESTINFOSHARED = "guestInfoSharedPreferences";
+    SharedPreferences subtotalSharedPreferences;
+    public static final String SUBTOTALSHARED = "subtotalSharedPreferences";
 
     String tableno;
     String guestname;
@@ -47,13 +56,20 @@ public class AccountActivity extends Activity {
     TextView dateTextview;
     TextView timeTextview;
 
-    Button finishedbutton;
+    TextView subtotalTextview;
+    TextView taxTextView;
+    TextView grandtotalTextView;
 
+    Button finishedbutton;
+    AccountBillAdapter accountBillAdapter;
+    ListView ordereditemslistview;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_activity);
+
+        ordereditemslistview = (ListView) findViewById(R.id.bill_listviewid);
 
         /*********************
          * Retrieve GuestInfo
@@ -68,7 +84,7 @@ public class AccountActivity extends Activity {
         date = guestInfoSharedPreferences.getString("date", "");
         time = guestInfoSharedPreferences.getString("time", "");
 
-
+        loadOrderedItemsList();
         /***************************************
          * Display Guest info in Billing statement
          ***************************************/
@@ -79,48 +95,15 @@ public class AccountActivity extends Activity {
         waiternameTextview = (TextView) findViewById(R.id.bill_waiternameid);
         dateTextview = (TextView) findViewById(R.id.bill_dateid);
         timeTextview = (TextView) findViewById(R.id.bill_timeid);
+        subtotalTextview = (TextView) findViewById(R.id.bill_subotalid);
+        taxTextView = (TextView) findViewById(R.id.bill_taxid);
+        grandtotalTextView = (TextView) findViewById(R.id.bill_grandtotalid);
 
-        String tableno = getIntent().getExtras().getString("tableNo","");
+       tableno = getIntent().getExtras().getString("tableNo","");
         String waitername = getIntent().getExtras().getString("waiterName","");
-//        final ParseQuery query = new ParseQuery("GuestBillParse");
-//        query.whereEqualTo("TableNo", tableno);
-////        query.whereEqualTo("GuestName", guestname);
-////        query.whereEqualTo("WaiterName", waitername);
-//
-//        query.findInBackground(new FindCallback<ParseObject>() {
-//            @Override
-//            public void done(List<ParseObject> guestlist, ParseException e) {
-//
-//                if(e ==null && guestlist.size()>0){
-//
-//                    for(int i =0; i<guestlist.size(); i++){
-//
-//                        ParseObject guestinfo = guestlist.get(i);
-//
-//                        Log.i("guest",guestname+" "+noofguest+" "+tableno+" "+waitername+" "+date+" "+time);
-//
-//                        guestNameTextview.setText("Guest: " + "fasdas");
-//
-//
-//
-//
-//
-//                    }
-//                }
-//
-//
-//
-//            }
-//
-//
-//        });
-//
-
-
 
         final ParseQuery query = new ParseQuery("WaiterTable");
         query.whereEqualTo("TableNo", tableno);
-       // query.whereEqualTo("GuestName", guestname);
         query.whereEqualTo("WaiterName", waitername);
 
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -132,9 +115,6 @@ public class AccountActivity extends Activity {
                     for(int i =0; i<guestlist.size(); i++){
 
                         ParseObject guestinfo = guestlist.get(i);
-
-                     //   Log.i("guest",guestname+" "+noofguest+" "+tableno+" "+waitername+" "+date+" "+time);
-
                         guestNameTextview.setText("Guest: " + guestinfo.getString("GuestName"));
                         noOfGuestTextview.setText("No: "+ guestinfo.getString("NoOfGuest"));
                         tablenoTextview.setText("Table: " + guestinfo.getString("TableNo").charAt(5));
@@ -146,12 +126,12 @@ public class AccountActivity extends Activity {
                     }
                 }
 
-
-
             }
-
-
         });
+
+        loadOrderedItemsList();
+
+        displayPayment();
 
         finishedbutton = (Button) findViewById(R.id.finisedbtnid);
         finishedbutton.setOnClickListener(new View.OnClickListener() {
@@ -162,34 +142,84 @@ public class AccountActivity extends Activity {
             }
         });
 
+
+
     }
 
-        /* Make a query from GuestBillParse class from Parse through GuestBillData */
+    private void displayPayment() {
+
+        subtotalSharedPreferences = getSharedPreferences(SUBTOTALSHARED, Activity.MODE_PRIVATE);
+
+        float  subtotal = subtotalSharedPreferences.getFloat("SubTotal",0);
+        float total = (float)(subtotal + subtotal* (.15));
+        subtotalTextview.setText("SubTotal:  " + Float.toString(subtotal));
+        taxTextView.setText("Tax: " + "15%");
+        grandtotalTextView.setText("Total: "+ Float.toString(total));
+
+//        subtotalTextview.setText("SubTotal:  " + String.format("%.2f",Float.toString(subtotal)));
+//        taxTextView.setText("Tax: " + "15%");
+//        grandtotalTextView.setText("Total: "+ String.format("%.2f",Float.toString(total)));
+
+    }
 
 
-    //  guestNameTextview.setText("Guest: " + guestname);
+    /***********************************************************************************************
+     * This function loads the data from the parse, where the class is
+     * called "OrderedListParse". It uses AccountBillAdapter. And Listview to
+     * display the orderedlist iteams.
+     **********************************************************************************************/
+
+//
+//    private void loadOrderedItemsList()  {
+//        final ParseQuery query = new ParseQuery("OrderedListParse");
+//
+//      //  final ParseQuery<OrderedListData> orderedItems = ParseQuery.getQuery("OrderedListParse");
+//        query.whereEqualTo("TableNo", tableno);
+//        query.findInBackground(new FindCallback<ParseObject>() {
+//
+//            @Override
+//            public void done(List<ParseObject> orderedItems, ParseException e) {
+//                accountBillAdapter = new AccountBillAdapter(AccountActivity.this, orderedItems);
+//                ordereditemslistview.setAdapter(accountBillAdapter);
+//                Log.i("menuparseloading?", "Yeah?");
+//
+//            }
+//        });
+//    }
+
+    private void loadOrderedItemsList() {
+        final ParseQuery<OrderedListData> orderedItems = ParseQuery.getQuery("OrderedListParse");
+
+        orderedItems.whereEqualTo("TableNo", tableno);
+
+        orderedItems.findInBackground(new FindCallback<OrderedListData>() {
+
+            @Override
+            public void done(List<OrderedListData> orderedItems, ParseException e) {
+
+                accountBillAdapter = new AccountBillAdapter(AccountActivity.this, orderedItems, AccountActivity.this);
+                ordereditemslistview.setAdapter(accountBillAdapter);
+                Log.i("Test", "Yeah?");
+
+            }
+
+        });
+
+    }
+    public AccountActivity(){}
+
+    public void saveSubtotal(float subtotal){
+
+        subtotalSharedPreferences = getSharedPreferences(SUBTOTALSHARED, Activity.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = subtotalSharedPreferences.edit();
+        editor.putFloat("SubTotal", subtotal);
+        editor.apply();
+
+        Log.i("tag" , "AccountAc   " + subtotal);
 
 
-    //noOfGuestTextview.setText("No:  "+ noofguest);
-
-    //  tablenoTextview.setText("Table:  " +          tableno.charAt(5));
-
-
-//        SharedPreferences loginSharedPreferences = getSharedPreferences(LOGINSHARED, mode);
-//        username = loginSharedPreferences.getString("userName", "");
-
-    // waiternameTextview.setText("Waiter: " + username.toUpperCase());
-
-    // dateTextview.setText("Date: "+ date);
-
-//        timeTextview.setText("Time: " + time);
-
-//        SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
-//        tableno = assignedtablesSharedPreferences.getString("tableNo", "");
-
-
-    //DELETE GUESTINFOSHARED here
-
+    }
 
 
 

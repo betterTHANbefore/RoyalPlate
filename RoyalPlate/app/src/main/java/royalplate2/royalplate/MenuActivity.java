@@ -45,7 +45,7 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
     String username;
     String tableno;
     // SharedPreferences shared;// = PreferenceManager.getDefaultSharedPreferences(this);
-    //Intent intent;
+
 
     private SimpleGestureFilter detector;
     private boolean leftSwipeFlag = false;

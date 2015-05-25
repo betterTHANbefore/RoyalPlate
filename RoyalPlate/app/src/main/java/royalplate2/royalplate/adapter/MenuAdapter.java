@@ -43,11 +43,11 @@ public class MenuAdapter extends ArrayAdapter<ParseObject> {
             view = inflater.inflate(R.layout.listview_item, parent, false);
 
         }
-        TextView itemTextView = (TextView) view.findViewById((R.id.itemName));
+        TextView itemTextView = (TextView) view.findViewById((R.id.itemNameid));
 
         itemTextView.setText(((MenuData) (menuItems.get(position))).getName());
 
-        TextView priceTextView = (TextView) view.findViewById(R.id.itemPrice);
+        TextView priceTextView = (TextView) view.findViewById(R.id.itemPriceid);
         itemPriceStr = Double.toString(((MenuData) (menuItems.get(position))).getPrice());
         priceTextView.setText(itemPriceStr);
         return view;

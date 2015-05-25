@@ -1,30 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_margin="20dp"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
 
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!-- #of Items -->
-    <TextureView
-        android:id="@+id/noOfItems"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <TextView
+        android:hint="Noofitems"
+        android:id="@+id/noofitemsid"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
+        android:focusable="false"
+        android:clickable="false"
+        android:textColor="@color/antiquewhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <!-- Item Name -->
-    <TextureView
-        android:id="@+id/itemName"
-        android:layout_alignRight="@+id/noOfItems"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    </TextView>
 
-    <!-- Price -->
-    <TextureView
-        android:id="@+id/itemPrice"
-        android:layout_alignRight="@+id/itemName"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <TextView
+        android:hint="ItemName"
+        android:id="@+id/itemnameid"
+        android:layout_toRightOf="@id/noofitemsid"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
+        android:focusable="false"
+        android:clickable="false"
+        android:textColor="@color/marron"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+    </TextView>
 
+    <TextView
+        android:hint="price"
+        android:id="@+id/itempriceid"
+        android:gravity="right"
+        android:textSize="20dp"
+        android:focusable="false"
+        android:clickable="false"
+        android:textColor="@color/marron"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="96dp"
+        android:layout_alignTop="@+id/itemnameid"
+        android:layout_toRightOf="@+id/itemnameid"
+        android:layout_toEndOf="@+id/itemnameid">
+
+    </TextView>
 
 </RelativeLayout>

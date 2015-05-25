@@ -125,7 +125,7 @@ public class AssignedTableActivity extends Activity {
                     public void onClick(View v) {
                         intent = new Intent(AssignedTableActivity.this, AccountActivity.class);
 
-                         intent.putExtra("tableNo", tableno);
+                        intent.putExtra("tableNo", tableno);
                         intent.putExtra("waiterName", waitername);
 
                         startActivity(intent);

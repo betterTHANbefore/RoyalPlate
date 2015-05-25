@@ -69,6 +69,7 @@ public class OrderListFragment extends Fragment {
     public static final String ORDEREDLISTSHARED = "orderedlistSharedPreferences";
 
     OrderedListData orderedListData;
+    SharedPreferences orderedlistSharedPreferences;
 
 
     @Nullable
@@ -76,63 +77,16 @@ public class OrderListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_orderlist, container, false);
-        //  shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+          shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         ordereditemslistview = (ListView) v.findViewById(R.id.ordereditems_listview);
 
-        ordereditemslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-//
-//                final ParseQuery query = new ParseQuery("OrderedListParse");
-//
-//                query.whereEqualTo("TableNo", tableno);
-//                query.whereEqualTo("ItemName",itemName );
-////                //query.whereEqualTo("NoOfItem", noofitem);
-//
-//                query.findInBackground(new FindCallback<ParseObject>() {
-//                    @Override
-//                    public void done(List<ParseObject> orderedlist, ParseException e) {
-//                        if(e == null || orderedlist.size() >0){
-//
-//// iterate over all messages and delete them
-//                            for(ParseObject ol : orderedlist)
-//                            {
-//                                ol.deleteInBackground();
-//                            }
-//                        }
-//                        else {
-//                                    Log.e("TAG", e.getMessage(), e);
-//                        }
-//
-//
-//
-//                            //for (int i=0; i<orderedlist.size(); i++) {
-//
-////                                ParseObject itemName = orderedlist.get(i);
-////                                //ParseObject tableNo = orderedlist.get(i);
-//////                                try {
-////                                    itemName.deleteInBackground();
-////                                    //tableNo.delete();
-////
-//////                                } catch (ParseException e1) {
-//////                                    Log.e("TAG", e1.getMessage(), e1);
-//////                                }
-//
-//                          // }
-//                        }
-//
-//                    //}
-//
-//                });
-//
-//
+//        ordereditemslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //
 //            }
-
-            }
-        });
+//        });
 
 
         int mode = Activity.MODE_PRIVATE;
@@ -176,7 +130,8 @@ public class OrderListFragment extends Fragment {
 
 //        tv.setText(tableno);
         RetrieveSharedData();
-        storeDataOnParse();
+        storeDataOnParse(); // Store data values on Parse in OrderListParse
+
         /*******************************************************************************************
          * OrderedList gets loaded
          ******************************************************************************************/
@@ -330,9 +285,16 @@ public class OrderListFragment extends Fragment {
 
 
         SharedPreferences orderedlistSharedPreferences = getActivity().getSharedPreferences(ORDEREDLISTSHARED, Activity.MODE_PRIVATE);
+       // orderedlistSharedPreferences = getActivity().getSharedPreferences(ORDEREDLISTSHARED, Activity.MODE_PRIVATE);
+
+        //tableno = orderedlistSharedPreferences.getString("TableNo", "");
         noofItem = orderedlistSharedPreferences.getString("No of Items", "");
         itemName = orderedlistSharedPreferences.getString("Item Name", "");
         itemcost = orderedlistSharedPreferences.getString("Item Cost","");
+        Log.i("OF1",tableno+ " "+ itemName + "  " + noofItem + " " + itemcost);
+
+        // clear the orderedlistSharedPreferenes.
+       orderedlistSharedPreferences.edit().clear().apply();
 
     }
 
@@ -343,21 +305,9 @@ public class OrderListFragment extends Fragment {
         /*******************************************************************************************
          * Set Table No as a title in Ordered item list
          ******************************************************************************************/
-//        ShardPreferences shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-//        tableNumStr = shared.getString("tableNo","");
-//        noofItem = shared.getString("No of Items", "");
-//        itemName = shared.getString("Item Name", "");
-//        itemcost = shared.getString("Item Cost","");
-
-//        itemName = getActivity().getIntent().getExtras().getString("Item Name");
-//        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
-//        itemCost =  getActivity().getIntent().getExtras().getString("Item Cost");
-//          RetrieveSharedData();
 
         OrderedListData orderedListData = new OrderedListData();
-
-//        orderedListData.setTableNo(tableNumStr);
         orderedListData.setTableNo( tableno);
         orderedListData.setNoOfItems(noofItem);
         orderedListData.setItemName(itemName);
@@ -365,7 +315,7 @@ public class OrderListFragment extends Fragment {
         orderedListData.saveInBackground();
 
         Log.i("OF2",tableno+ " "+ itemName + "  " + noofItem + " " + itemcost);
-        //  shared.edit().clear().apply();
+      //  orderedlistSharedPreferences.edit().clear().apply();
 
     }
 
@@ -377,6 +327,8 @@ public class OrderListFragment extends Fragment {
 
         final ParseQuery<OrderedListData> orderedlist = ParseQuery.getQuery("OrderedListParse");
         orderedlist.whereEqualTo("TableNo",tableno);
+        //orderedlist.whereGreaterThan("NoOfItems", Integer.toString(0));
+//        orderedlist.whereGreaterThan("NoOfItems", 0);
 //        orderedlist.whereEqualTo("TableNo",tableNumStr);
 
 
@@ -390,7 +342,7 @@ public class OrderListFragment extends Fragment {
         });
 
 
-
+       // orderedlistSharedPreferences.edit().clear().apply();
 
     }
 
@@ -433,8 +385,5 @@ public class OrderListFragment extends Fragment {
 //        Bundle arg = getArguments();
 //        Log.i("ARGUMENT", arg.toString() );
     }
-
-
-
 
 }
