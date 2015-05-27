@@ -59,10 +59,10 @@ public class AccountBillAdapter extends ArrayAdapter<OrderedListData> {
         TextView itempriceTextView = (TextView) view.findViewById((R.id.itempriceid));
         itempriceTextView.setText(orderedItems.get(position).getItemPrice());
 
-        subtotal += Float.parseFloat(orderedItems.get(position).getItemPrice());
+        subtotal = Float.parseFloat(orderedItems.get(position).getItemPrice());
 
         accountActivity.saveSubtotal(subtotal);
-
+//subtotal =0;
 
         return view;
     }

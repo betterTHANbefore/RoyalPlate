@@ -106,7 +106,7 @@ public class SignUpActivity extends Activity {
 
 
         /*******************************************************************************************
-         *  H = Hostess, W= Waiter, C= Chef nevigate buttons
+         *  H = Hostess, W= Waiter, C= Chef,  M = Manager
          /******************************************************************************************/
 
         hostessButton = (Button) findViewById(R.id.h_hostessbtn);

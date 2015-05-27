@@ -76,7 +76,7 @@ public class AssignedTableActivity extends Activity {
 
                 Button assignedtableBtn = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
 
-                final String tableno = assignedtableBtn.getText().toString();
+                final String tableno = assignedtableBtn.getText().toString().substring(0,6); // get the first 6 chars from the string, which is tableno.
 
                 int mode = Activity.MODE_PRIVATE;
                 SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
@@ -238,9 +238,15 @@ public class AssignedTableActivity extends Activity {
 
             @Override
             public void done(List<WaiterTableData> waitertables, ParseException e) {
+//                if(e == null) {
+//                    for(int i =0; i<waitertables.size(); i++) {
+//                        ParseObject ob = waitertables.get(i);
+//                        String guestname = ob.getString("GuestName");
 
-                waiterTableAdapter = new WaiterTableAdapter(AssignedTableActivity.this, waitertables, AssignedTableActivity.this);
-                assignedtableGridview.setAdapter(waiterTableAdapter);
+                        waiterTableAdapter = new WaiterTableAdapter(AssignedTableActivity.this, waitertables,AssignedTableActivity.this);
+                        assignedtableGridview.setAdapter(waiterTableAdapter);
+//                    }
+//                }
 
             }
 

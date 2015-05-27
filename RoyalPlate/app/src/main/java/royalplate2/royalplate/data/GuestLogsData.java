@@ -7,10 +7,10 @@ import com.parse.ParseObject;
 /**
  * Created by sh on 5/17/15.
  */
-@ParseClassName("GuestBillParse")
+@ParseClassName("GuestLogsParse")
 
-public class GuestBillData extends ParseObject {
-    public GuestBillData() {}
+public class GuestLogsData extends ParseObject {
+    public GuestLogsData() {}
 
     public String getGuestName(){return getString("GuestName");}
     public void setGuestName(String guestname){
@@ -45,7 +45,7 @@ public class GuestBillData extends ParseObject {
         put("ItemName", itemName);
     }
 
-//    public String getPayment(){ return getString("Payment");}
-//    public void setPayment(String payment){ put("Payment", payment);}
+    public String getPayment(){ return getString("Payment");}
+    public void setPayment(String payment){ put("Payment", payment);}
 }
 

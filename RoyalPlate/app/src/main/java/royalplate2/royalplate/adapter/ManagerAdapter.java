@@ -41,6 +41,8 @@ public class ManagerAdapter extends ArrayAdapter<GuestBillData> {
         TextView timeTextView;
         TextView waiterTextView;
         TextView tableTextView;
+        TextView guestnameTextView;
+        TextView noofguestTextView;
         TextView paymentTextView;
 
         dateTextView = (TextView) view.findViewById(R.id.manager_dateid);
@@ -55,8 +57,14 @@ public class ManagerAdapter extends ArrayAdapter<GuestBillData> {
         tableTextView = (TextView) view.findViewById(R.id.manager_tablenoid);
         tableTextView.setText(guestdata.get(position).getTableNo());
 
-        paymentTextView = (TextView) view.findViewById(R.id.manager_totalid);
-        paymentTextView.setText(guestdata.get(position).getPayment());
+        guestnameTextView = (TextView) view.findViewById(R.id.manager_guestnameid);
+        guestnameTextView.setText(guestdata.get(position).getGuestName());
+
+        noofguestTextView = (TextView) view.findViewById(R.id.manager_noguestid);
+        noofguestTextView.setText(guestdata.get(position).getNoGuest());
+
+//        paymentTextView = (TextView) view.findViewById(R.id.manager_totalid);
+//        paymentTextView.setText(guestdata.get(position).getPayment());
 
 
 

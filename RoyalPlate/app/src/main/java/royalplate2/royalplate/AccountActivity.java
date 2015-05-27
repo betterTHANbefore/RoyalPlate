@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import royalplate2.royalplate.adapter.AccountBillAdapter;
 import royalplate2.royalplate.data.GuestBillData;
+import royalplate2.royalplate.data.GuestLogsData;
 import royalplate2.royalplate.data.OrderedListData;
 
 /**
@@ -55,7 +57,7 @@ public class AccountActivity extends Activity {
     Button okbutton;
     AccountBillAdapter accountBillAdapter;
     ListView ordereditemslistview;
-    GuestBillData guestdata;
+    GuestLogsData guestlogsdata;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -97,7 +99,7 @@ public class AccountActivity extends Activity {
 
         final String waitername = getIntent().getExtras().getString("waiterName","");
         /*******************************************************************************************
-         * Make a query to WaiterTable to display Guest info in the Billing statement
+         * Make a query to WaiterTable to display Guest info in Billing statement
          ******************************************************************************************/
 
         final ParseQuery query = new ParseQuery("WaiterTable");
@@ -130,43 +132,17 @@ public class AccountActivity extends Activity {
 
         displayPayment();
 
-        guestdata = new GuestBillData();
+
+
         okbutton = (Button) findViewById(R.id.okbtnid);
-        okbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-                final ParseQuery guestquery = new ParseQuery("GuestBillParse");
-                guestquery.whereEqualTo("GuestName", guestname);
-                guestquery.whereEqualTo("TableNo", tableno);
-                guestquery.whereEqualTo("WaiterName", waitername);
-
-                guestquery.findInBackground(new FindCallback<ParseObject>() {
-                    @Override
-                    public void done(List<ParseObject> guestlist, ParseException e) {
-                        if(e == null){
-                            for(int i =0; i<guestlist.size(); i++) {
-                                if(guestlist.get(i).equals(guestname)
-                                        & guestlist.get(i).equals(tableno)
-                                        & guestlist.get(i).equals(waitername)) {
-
-
-
-
-
-                                }
-                            }
-
-                        }
-
-                    }
-
-
-                });
-
-            }
-        });
+//        okbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                guestlogsdata = new GuestLogsData();
+//
+//            }
+//        });
 
 
         /*******************************************************************************************
@@ -185,7 +161,26 @@ public class AccountActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(),AssignedTableActivity.class);
                 startActivity(intent);
 
-                // Below code deletes from parse -> we don't want it happen!
+                /**********************************************************************************
+                 * Store Guest Logs on Parse after Payment made.
+                 * For Manager
+                 **********************************************************************************/
+                guestlogsdata = new GuestLogsData();
+                guestlogsdata.setDate(date);
+                guestlogsdata.setTime(time);
+                guestlogsdata.setGuestName(guestname);
+                guestlogsdata.setNoOfGuest(noofguest);
+                guestlogsdata.setWaiterName(waitername);
+                guestlogsdata.setTableNo(tableno);
+                guestlogsdata.setPayment(String.format("%.2f",total));
+                guestlogsdata.saveInBackground();
+
+
+                /**********************************************************************************
+                 * Delete the Table entry from WaiterTable on Parse. Waiter wont be able to
+                 * view that tableno.
+                 **********************************************************************************/
+
                 String tableNumToDestroy = tableno;
                 final ParseQuery query =  new ParseQuery("WaiterTable");
                 query.whereEqualTo("TableNo", tableNumToDestroy);
@@ -196,6 +191,30 @@ public class AccountActivity extends Activity {
                             for (int i=0; i<waiterData.size(); i++){
 
                                 ParseObject tableNo = waiterData.get(i);
+                                try {
+                                    tableNo.delete();
+                                } catch (ParseException e1) {
+                                }
+                            }
+                        }
+                        else{
+
+                        }
+                    }
+                });
+                /**********************************************************************************
+                 * Deletes the table entry from the parse after payment.
+                 **********************************************************************************/
+
+                final ParseQuery query2 =  new ParseQuery("OrderedListParse");
+                query2.whereEqualTo("TableNo", tableNumToDestroy);
+                query2.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> tableData, ParseException e) {
+                        if(e == null || tableData.size() >0){
+                            for (int i=0; i<tableData.size(); i++){
+
+                                ParseObject tableNo = tableData.get(i);
                                 try {
                                     tableNo.delete();
                                 } catch (ParseException e1) {
@@ -226,17 +245,57 @@ public class AccountActivity extends Activity {
     /*******************************************************************************************
      * Display Subtotal, tax, and total in 2 decimal point format.
      *******************************************************************************************/
-
+    float subtotal =0;
     private void displayPayment() {
 
-        subtotalSharedPreferences = getSharedPreferences(SUBTOTALSHARED, Activity.MODE_PRIVATE);
+        // subtotalSharedPreferences = getSharedPreferences(SUBTOTALSHARED, Activity.MODE_PRIVATE);
+        /**********************************************************************************
+         * get the price from orderedlistparse class for tableno and guestname
+         * Get the items ordered by table no and calcluate the total with tax.
+         **********************************************************************************/
 
-        float  subtotal = subtotalSharedPreferences.getFloat("SubTotal",0);
-        total = (float)(subtotal + subtotal* (.15));
+        final ParseQuery querycost = new ParseQuery("OrderedListParse");
+        querycost.whereEqualTo("TableNo", tableno);
+        querycost.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
 
-        subtotalTextview.setText("SubTotal:  " +String.format("%.2f",subtotal));
-        taxTextView.setText("Tax: " + "15%");
-        grandtotalTextView.setText("Total: "+ String.format("%.2f",total));
+                if(e == null & list.size()>0){
+
+                    for(int i = 0; i<list.size(); i++){
+
+                        ParseObject ob = list.get(i);
+                        String cost = ob.getString("ItemPrice");
+                        subtotal += Float.parseFloat(cost);
+
+                        total = (float)(subtotal + subtotal* (.15));
+
+                        subtotalTextview.setText("SubTotal:  " +String.format("%.2f",subtotal));
+                        taxTextView.setText("Tax: " + "15%");
+                        grandtotalTextView.setText("Total: "+ String.format("%.2f",total));
+
+                    }
+                }
+
+            }
+        });
+
+
+//        float sub = subtotalSharedPreferences.getFloat("SubTotal",0);
+//       subtotal += subtotal + sub;
+//        total = (float)(subtotal + subtotal* (.15));
+//
+//        subtotalTextview.setText("SubTotal:  " +String.format("%.2f",subtotal));
+//        taxTextView.setText("Tax: " + "15%");
+//        grandtotalTextView.setText("Total: "+ String.format("%.2f",total));
+
+
+    }
+
+    private void clearPayment() {
+        subtotalSharedPreferences.edit().clear().apply();
+        subtotalTextview.setText("");
+        grandtotalTextView.setText("");
 
     }
 

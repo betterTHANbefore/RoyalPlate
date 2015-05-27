@@ -33,6 +33,7 @@ import java.util.List;
 
 import royalplate2.royalplate.adapter.MainMenuAdapter;
 import royalplate2.royalplate.adapter.OrderedListAdapter;
+import royalplate2.royalplate.adapter.SubMenuAdapter;
 import royalplate2.royalplate.data.MainMenuData;
 import royalplate2.royalplate.data.OrderedListData;
 
@@ -272,9 +273,28 @@ public class OrderListFragment extends Fragment {
         orderedListData.setItemPrice(itemcost);
         orderedListData.saveInBackground();
 
+       // storeEachTable(tableno);
         Log.i("OF2",tableno+ " "+ itemName + "  " + noofItem + " " + itemcost);
       //  orderedlistSharedPreferences.edit().clear().apply();
 
+    }
+
+    private void storeEachTable(String tableno) {
+
+
+
+     //   private void loadItems(String str) {
+            //  final int itemCost = getIntent().getExtras().getInt("iniPrice");
+
+//            final ParseQuery<ParseObject> items = ParseQuery.getQuery(tableno);
+//            items.findInBackground(new FindCallback<ParseObject>() {
+//                @Override
+//                public void done(List<ParseObject> items, ParseException e) {
+//                    menuAdapter = new SubMenuAdapter(SubMenuActivity.this, items,  tableno, SubMenuActivity.this );
+//                    listview.setAdapter(menuAdapter);
+//                }
+//            });
+       // }
     }
 
     /***********************************************************************************************

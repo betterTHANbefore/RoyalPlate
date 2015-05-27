@@ -16,7 +16,7 @@
 
         <TextView
             android:hint="Date"
-            android:id="@+id/manager_dateid"
+            android:id="@+id/guest_dateid"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
@@ -29,8 +29,8 @@
 
         <TextView
             android:hint="Time"
-            android:id="@+id/manager_timeid"
-            android:layout_toRightOf="@id/manager_dateid"
+            android:id="@+id/guest_timeid"
+            android:layout_toRightOf="@id/guest_dateid"
             android:layout_centerHorizontal="true"
             android:textSize="20dp"
             android:layout_margin="5dp"
@@ -43,10 +43,10 @@
 
         <TextView
             android:hint="waiter"
-            android:id="@+id/manager_waiterid"
+            android:id="@+id/guest_waiterid"
 
             android:textSize="20dp"
-            android:layout_toRightOf="@id/manager_timeid"
+            android:layout_toRightOf="@id/guest_timeid"
             android:layout_margin="5dp"
             android:textColor="@color/darkOrange"
             android:layout_width="wrap_content"
@@ -56,10 +56,10 @@
 
         </TextView>
         <TextView
-            android:id="@+id/manager_tablenoid"
+            android:id="@+id/guest_tablenoid"
 android:hint="TableNo"
             android:textSize="20dp"
-            android:layout_toRightOf="@id/manager_waiterid"
+            android:layout_toRightOf="@id/guest_waiterid"
             android:layout_margin="5dp"
             android:textColor="@color/darkOrange"
             android:layout_width="wrap_content"
@@ -68,10 +68,10 @@ android:hint="TableNo"
 
         </TextView>
         <TextView
-            android:id="@+id/manager_guestnameid"
+            android:id="@+id/guest_guestnameid"
 android:hint="GuestName"
             android:textSize="20dp"
-            android:layout_toRightOf="@id/manager_tablenoid"
+            android:layout_toRightOf="@id/guest_tablenoid"
             android:layout_margin="5dp"
             android:textColor="@color/darkOrange"
             android:layout_width="wrap_content"
@@ -80,10 +80,10 @@ android:hint="GuestName"
 
         </TextView>
         <TextView
-            android:id="@+id/manager_noguestid"
+            android:id="@+id/guest_noguestid"
 android:hint="No of Guest"
             android:textSize="20dp"
-            android:layout_toRightOf="@id/manager_guestnameid"
+            android:layout_toRightOf="@id/guest_guestnameid"
             android:layout_margin="5dp"
             android:textColor="@color/darkOrange"
             android:layout_width="wrap_content"
@@ -91,19 +91,19 @@ android:hint="No of Guest"
             android:layout_marginRight="20dp">
 
         </TextView>
-        <!--<TextView-->
-            <!--android:hint="Payment"-->
-            <!--android:id="@+id/manager_totalid"-->
+        <TextView
+            android:hint="Payment"
+            android:id="@+id/guest_totalid"
 
-            <!--android:textSize="20dp"-->
-            <!--android:layout_toRightOf="@id/manager_tablenoid"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:textColor="@color/darkOrange"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginRight="20dp" >-->
+            android:textSize="20dp"
+            android:layout_toRightOf="@id/guest_noguestid"
+            android:layout_margin="5dp"
+            android:textColor="@color/darkOrange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp" >
 
-        <!--</TextView>-->
+        </TextView>
     </TableRow>
 
 </TableLayout>

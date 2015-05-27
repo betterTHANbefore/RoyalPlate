@@ -73,7 +73,6 @@ public class OrderedListAdapter extends ArrayAdapter<OrderedListData> {
                 // when i click first retrieve that item name
                 String itemToremove = orderedItemsList.get(position).getItemName();
 
-              Log.i("Tag", "REMOVE  "+ itemToremove);
                 final ParseQuery query = new ParseQuery("OrderedListParse");
                 query.whereEqualTo("ItemName", itemToremove);
                 query.whereEqualTo("TableNo", tableno);

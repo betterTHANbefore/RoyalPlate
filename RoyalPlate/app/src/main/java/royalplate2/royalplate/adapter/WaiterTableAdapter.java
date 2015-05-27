@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import java.util.List;
 
 import royalplate2.royalplate.AssignedTableActivity;
@@ -22,6 +27,7 @@ public class WaiterTableAdapter extends ArrayAdapter<WaiterTableData> {
 
     Context context;
     Button assignedtableBtn;
+    String guestname;
 
     List<WaiterTableData> waitertables;
     AssignedTableActivity assignedTableActivity;
@@ -47,7 +53,29 @@ public class WaiterTableAdapter extends ArrayAdapter<WaiterTableData> {
         }
         final Button assignedtableBtn = (Button) view.findViewById(R.id.mainmenu);
 
-        assignedtableBtn.setText((waitertables.get(position)).getTable());
+        String tableno = waitertables.get(position).getTable();
+
+        final ParseQuery queryguestname = new ParseQuery("WaiterTable");
+        queryguestname.whereEqualTo("TableNo", tableno);
+
+        queryguestname.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if(e == null){
+                   for(int i=0; i<list.size(); i++){
+                       ParseObject ob = list.get(i);
+                       String guestname = ob.getString("GuestName");
+                       assignedtableBtn.setText((waitertables.get(position)).getTable() + "  ("+ guestname+ ") ");
+
+
+                   }
+                }
+
+            }
+
+        });
+
+//        assignedtableBtn.setText((waitertables.get(position)).getTable());
 
         return view;
     }
