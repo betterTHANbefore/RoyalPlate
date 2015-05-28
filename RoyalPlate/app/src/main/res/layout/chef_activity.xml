@@ -7,82 +7,95 @@
     android:layout_height="match_parent">
 
     <!-- topbar -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_weight="8"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_weight="8"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
         <!-- Icon 1 -->
-        <ImageView
-            android:id="@+id/previousImageviewid"
-            android:src="@drawable/previous_icon2"
-            android:maxHeight="@dimen/abc_text_size_display_3_material"
-            android:adjustViewBounds="true"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
+        <!--<ImageView-->
+            <!--android:id="@+id/previousImageviewid"-->
+            <!--android:src="@drawable/previous_icon2"-->
+            <!--android:maxHeight="@dimen/abc_text_size_display_3_material"-->
+            <!--android:adjustViewBounds="true"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp" />-->
 
-        <LinearLayout
-            android:layout_margin="20dp"
-            android:layout_weight="2"
+        <!--<LinearLayout-->
+            <!--android:layout_margin="20dp"-->
+            <!--android:layout_weight="2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+
+        <RelativeLayout
+            android:layout_weight="8"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageLeft_icon"
-                android:layout_weight="2"
-                android:layout_gravity="center_horizontal"
-
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-        <!--<Button-->
-            <!--android:id="@+id/doneButton"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="DONE"-->
-            <!--android:textSize="10dp"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <LinearLayout
-            android:layout_margin="20dp"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!--<TextView-->
-                <!--android:id="@+id/orderedList"-->
+            <!--<ImageView-->
+                <!--android:id="@+id/imageLeft_icon"-->
+                <!--android:layout_weight="2"-->
                 <!--android:layout_gravity="center_horizontal"-->
-                <!--android:gravity="center"-->
-                <!--android:textSize="65sp"-->
-                <!--android:layout_width="match_parent"-->
+
+                <!--android:scaleType="fitCenter"-->
+                <!--android:adjustViewBounds="true"-->
+                <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content" />-->
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/previousImageviewid"
+                android:src="@drawable/previous_icon2"
+                android:adjustViewBounds="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+                <Button
+                    android:id="@+id/h_hostessbtn"
+                    android:textColor="@color/darkOrange"
+                    android:text="H"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:background="@drawable/simpleborader"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/previousImageviewid"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="23dp" />
+                <Button
+                    android:id="@+id/w_waitersbtn"
+                    android:layout_below="@+id/h_hostessbtn"
+                    android:textColor="@color/darkOrange"
+                    android:text="W"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:background="@drawable/simpleborader"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/m_managerbtn"
+                    android:textColor="@color/darkOrange"
+                    android:text="M"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:background="@drawable/simpleborader"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/w_waitersbtn" />
+
+            </RelativeLayout>
+
+
+        <!--</LinearLayout>-->
+
 
         <!-- Icon 2 -->
-        <LinearLayout
-            android:layout_margin="20dp"
-            android:layout_weight="2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageRight_icon"
-                android:scaleType="fitCenter"
-                android:layout_gravity="center_horizontal"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
     <!-- Big Paten - list of items and ordered item panels - 3 panels-->
     <LinearLayout
@@ -157,42 +170,6 @@
 
         </RelativeLayout>
 
-        <!--Right Side:  table numbers here -->
-        <!--<RelativeLayout-->
-        <!--android:layout_weight="2"-->
-        <!--android:layout_margin="20dp"-->
-        <!--android:background="@drawable/draw_background"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-
-
-        <!--<TextView-->
-        <!--android:text="Orders In Queue"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:textAlignment="center"-->
-        <!--android:gravity="center"-->
-        <!--android:textColor="@color/antiquewhite"-->
-        <!--android:textSize="35sp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-
-        <!--<Button-->
-        <!--android:id="@+id/btn1"-->
-        <!--android:text="1"-->
-        <!--android:textSize="20dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-        <!--<Button-->
-        <!--android:text="2"-->
-        <!--android:id="@+id/btn2"-->
-        <!--android:textSize="20dp"-->
-        <!--android:layout_below="@id/btn1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-
-        <!--</RelativeLayout>-->
 
     </LinearLayout>
 

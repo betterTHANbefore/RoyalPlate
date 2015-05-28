@@ -10,13 +10,16 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.List;
 
+import royalplate2.royalplate.adapter.GuestLogsAdapter;
 import royalplate2.royalplate.adapter.ManagerAdapter;
 import royalplate2.royalplate.adapter.TableAdapter;
 import royalplate2.royalplate.data.GuestBillData;
+import royalplate2.royalplate.data.GuestLogsData;
 import royalplate2.royalplate.data.TablesData;
 
 /**
@@ -26,15 +29,17 @@ public class ManagerActivity extends Activity{
 
     ImageView previousimageview;
     Button reservationlogButton;
-    ListView reservationlistview;
+    Button guestlogsButton;
+    ListView logslistview;
 
     ManagerAdapter managerAdapter;
+    GuestLogsAdapter guestLogsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager_activity);
 
-        reservationlistview = (ListView) findViewById(R.id.reservationloglistviewid);
+        logslistview = (ListView) findViewById(R.id.reservationloglistviewid);
 
         previousimageview = (ImageView) findViewById(R.id.previousImageviewid);
         previousimageview.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +59,28 @@ public class ManagerActivity extends Activity{
             }
         });
 
+        guestlogsButton = (Button) findViewById(R.id.guestlogsbuttonid);
+        guestlogsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                loadGuestLogs();
+            }
+        });
+
+    }
+
+    private void loadGuestLogs() {
+
+        final ParseQuery<GuestLogsData> guestlogs = ParseQuery.getQuery("GuestLogsParse");
+        guestlogs.findInBackground(new FindCallback<GuestLogsData>() {
+            @Override
+            public void done(List<GuestLogsData> guestLogsDatas, ParseException e) {
+                guestLogsAdapter = new GuestLogsAdapter(getApplicationContext(), guestLogsDatas);
+               logslistview.setAdapter(guestLogsAdapter);
+            }
+        });
+
     }
 
     private void loadReservationLogs() {
@@ -63,7 +90,7 @@ public class ManagerActivity extends Activity{
             @Override
             public void done(List<GuestBillData> guestBillDatas, ParseException e) {
                 managerAdapter = new ManagerAdapter(getApplicationContext(), guestBillDatas);
-                reservationlistview.setAdapter(managerAdapter);
+                logslistview.setAdapter(managerAdapter);
 
 
             }

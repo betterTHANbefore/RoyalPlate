@@ -86,8 +86,8 @@ public class OrderListFragment extends Fragment {
 
 
 
-        RetrieveSharedData();
-        storeDataOnParse(); // Store data values on Parse in OrderListParse
+//        RetrieveSharedData();
+//        storeDataOnParse(); // Store data values on Parse in OrderListParse
 
         /*******************************************************************************************
          * OrderedList gets loaded
@@ -112,20 +112,6 @@ public class OrderListFragment extends Fragment {
 
 
 
-        Log.i("Tag", "Load Ordered List");
-//        ParseObject poTest = new ParseObject("Table1");
-//        poTest.put("Test", "Mange Juice");
-//        poTest.put("Test", "Mil Juice");
-//        poTest.put("Test", "other Juice");
-//        poTest.put("Test", "barley Juice");
-
-//        poTest.saveInBackground();
-
-//        TextView tv = (TextView) v.findViewById(R.id.tableNo_textview);
-//        tv.setText("Table " + tableNumStr);
-
-//        TextView listOfitems = (TextView) v.findViewById(R.id.orderedlist);
-//
 //        Log.i("OF", itemName + "   "+ noOfItems);
 //        listOfitems.setText(itemName + " " + noOfItems);
 
@@ -148,30 +134,6 @@ public class OrderListFragment extends Fragment {
 //        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
 //
 
-
-
-
-
-
-
-//        itemName = getActivity().getIntent().getExtras().getString("tableNo");
-//        noOfItems = getActivity().getIntent().getExtras().getString("title");
-
-        // Log.i("OF", itemName + "  "+ noOfItems + " "+  itemCost);
-
-//        noOfitemsTextview.setText(noOfItems);
-//        listOfitemsTextview.setText(itemName);
-
-
-//
-
-//        SharedPreferences sharedPreferences;
-//
-
-//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        Set<String> orderedItemList = sharedPreferences.getStringSet("OrderedItemList", new HashSet<String>());
-
-//        JSONArray jsonArray = (JSONArray) orderedItemList;
 //
         /*******************************************************************************************
          * OrderBtn will confirm the orderlist and then send it Parse for Chef to load
@@ -183,34 +145,6 @@ public class OrderListFragment extends Fragment {
             public void onClick(View v) {
 
 
-            /*******
-             * tableno is comming from assignedtablesharedpreference table from AssignedTableActivity
-             */
-
-            // temporaly going back to MenuActivity
-            //  Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
-            //  Intent orderBtnIntent = new Intent(v.getContext(), ChefActivity.class);
-            // temporaly going back to MenuActivity
-
-//             Intent orderBtnIntent = new Intent(v.getContext(), OrderSucceedActivity.class);
-//                orderBtnIntent.putExtra("tableNo", tableno);
-//
-////                orderBtnIntent.putExtra("table no", 1);
-//
-////            String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
-////                //String tableNum = shared.getString("tableNo","");
-////
-////                orderBtnIntent.putExtra("table no", tableNum);
-//
-//                //orderBtnIntent.putExtra("tableNo", tableNumStr);
-//
-////                orderBtnIntent.putExtra("table no", 1);
-//
-//                String tableNum = getActivity().getIntent().getExtras().getString("tableNo");
-//                //String tableNum = shared.getString("tableNo","");
-//
-//                orderBtnIntent.putExtra("table no", tableNum);
-//                startActivity(orderBtnIntent);
 
                 Intent orderBtnIntent = new Intent(v.getContext(), AssignedTableActivity.class);
 
@@ -250,7 +184,6 @@ public class OrderListFragment extends Fragment {
         noofItem = orderedlistSharedPreferences.getString("No of Items", "");
         itemName = orderedlistSharedPreferences.getString("Item Name", "");
         itemcost = orderedlistSharedPreferences.getString("Item Cost","");
-        Log.i("OF1",tableno+ " "+ itemName + "  " + noofItem + " " + itemcost);
 
         // clear the orderedlistSharedPreferenes.
        orderedlistSharedPreferences.edit().clear().apply();

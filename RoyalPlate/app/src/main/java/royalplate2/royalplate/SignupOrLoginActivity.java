@@ -67,7 +67,7 @@ public class SignupOrLoginActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                intent = new Intent(getApplicationContext(),  SignupOrLoginActivity.class);
+                intent = new Intent(getApplicationContext(),  LoginActivity.class);
                 startActivity(intent);
 
             }

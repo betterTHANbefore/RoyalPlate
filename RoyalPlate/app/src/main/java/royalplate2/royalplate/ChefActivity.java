@@ -29,6 +29,11 @@ import java.util.List;
 public class ChefActivity extends ActionBarActivity  {
 
     ListView listview;
+    private Button hostessButton;
+    private Button waiterButton;
+    private Button chefButton;
+    private Button managerButton;
+    Intent intent;
     Button doneBtn;
     String tableno;
     final ArrayList<String> tableNumsToDestroy = new ArrayList<String>();
@@ -94,6 +99,51 @@ public class ChefActivity extends ActionBarActivity  {
                 startActivity(intent);
             }
         });
+
+
+
+        /*******************************************************************************************
+         *  H = Hostess, W= Waiter, C= Chef nevigate  M = Manager buttons
+         /******************************************************************************************/
+
+        hostessButton = (Button) findViewById(R.id.h_hostessbtn);
+        hostessButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                intent = new Intent(getApplicationContext(), HostessActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        waiterButton = (Button) findViewById(R.id.w_waitersbtn);
+        waiterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                intent = new Intent(getApplicationContext(),  AssignedTableActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+//        chefButton = (Button) findViewById(R.id.c_chefbtn);
+//        chefButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                intent = new Intent(getApplicationContext(), ChefActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
+        managerButton = (Button) findViewById(R.id.m_managerbtn);
+        managerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), ManagerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void clearItemList(){
@@ -140,4 +190,7 @@ public class ChefActivity extends ActionBarActivity  {
             }
         });
     }
+
+
+
 }

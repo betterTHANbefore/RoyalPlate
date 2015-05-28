@@ -268,10 +268,13 @@ public class AccountActivity extends Activity {
                         String cost = ob.getString("ItemPrice");
                         subtotal += Float.parseFloat(cost);
 
-                        total = (float)(subtotal + subtotal* (.15));
+                        float tax = (float)(subtotal * .08);
+//                        total = (float)(subtotal + subtotal* (.08));
+                        total = (float)(subtotal + tax);
+
 
                         subtotalTextview.setText("SubTotal:  " +String.format("%.2f",subtotal));
-                        taxTextView.setText("Tax: " + "15%");
+                        taxTextView.setText("Tax: " + String.format("%.2f",tax));
                         grandtotalTextView.setText("Total: "+ String.format("%.2f",total));
 
                     }

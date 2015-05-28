@@ -119,16 +119,16 @@ public class SignUpActivity extends Activity {
             }
         });
 
-        waiterButton = (Button) findViewById(R.id.w_waitersbtn);
-        waiterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                intent = new Intent(getApplicationContext(),  SignupOrLoginActivity.class);
-                startActivity(intent);
-
-            }
-        });
+//        waiterButton = (Button) findViewById(R.id.w_waitersbtn);
+//        waiterButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                intent = new Intent(getApplicationContext(),  SignupOrLoginActivity.class);
+//                startActivity(intent);
+//
+//            }
+//        });
 
         chefButton = (Button) findViewById(R.id.c_chefbtn);
         chefButton.setOnClickListener(new View.OnClickListener() {
