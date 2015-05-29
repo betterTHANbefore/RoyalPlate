@@ -80,35 +80,8 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
             tableno = getIntent().getExtras().getString("tableNo");
 
 
-//            itemName = getIntent().getExtras().getString("Item Name");
-//            noOfItems = getIntent().getExtras().getString("No of Items");
-//            itemCost = getIntent().getExtras().getString("Item Cost");
-
-
-
-
-
-
-//
-//            noOfItems = orderedlistSharedPreferences.getString("No of Items", "");
-//            itemName = orderedlistSharedPreferences.getString("Item Name", "");
-//            itemCost = orderedlistSharedPreferences.getString("Item Cost", " ");
-//            tableno = orderedlistSharedPreferences.getString("tableNo", "");
-
-
-
-
-
-
-
-
             intent = new Intent(this, MenuActivity.class);
             intent.putExtra("tableNo", tableno);
-//            intent.putExtra("iniPrice" , 0);
-//            intent.putExtra("iniNoOfItem", 0);
-//            intent.putExtra("No of Items", noOfItems);
-//            intent.putExtra("Item Name", itemName );
-//            intent.putExtra("Item Cost", itemCost);
 
             Log.i("LOG", tableno+ " " +itemName +  "   " + noOfItems  + " "+ itemCost);
 
@@ -136,18 +109,18 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
          */
 
         int mode = Activity.MODE_PRIVATE;
-       orderedlistSharedPreferences = getSharedPreferences(ORDEREDLISTSHARED, mode);
+        orderedlistSharedPreferences = getSharedPreferences(ORDEREDLISTSHARED, mode);
 
-            noOfItems = orderedlistSharedPreferences.getString("No of Items", "");
-            itemName = orderedlistSharedPreferences.getString("Item Name", "");
-            itemCost = orderedlistSharedPreferences.getString("Item Cost", "");
-            tableno = orderedlistSharedPreferences.getString("tableNo", "");
+        noOfItems = orderedlistSharedPreferences.getString("No of Items", "");
+        itemName = orderedlistSharedPreferences.getString("Item Name", "");
+        itemCost = orderedlistSharedPreferences.getString("Item Cost", "");
+        tableno = orderedlistSharedPreferences.getString("tableNo", "");
 
 
 
 
         //shared = PreferenceManager.getDefaultSharedPreferences(this);
-       preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         TextView subMenuTitle;
         TextView tableNoTextview;
@@ -175,27 +148,6 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         /***************************************************************
          * get the value from shared SharedPreference.
          ***************************************************************/
-//        tableno = shared.getString("TableNo", "");
-//        noOfItems = shared.getString("No of Items", "");
-//        itemName = shared.getString("Item Name", "");
-//        itemCost = shared.getString("Item Cost", " ");
-//
-
-//
-//
-//        noOfItems = orderedlistSharedPreferences.getString("No of Items", "");
-//        itemName = orderedlistSharedPreferences.getString("Item Name", "");
-//        itemCost = orderedlistSharedPreferences.getString("Item Cost", " ");
-//        tableno = orderedlistSharedPreferences.getString("tableNo", "");
-//
-
-
-
-        // saveOrderedList("hello", "2","2.00");
-//        noOfItems = shared.getString("No of Items", null);
-//        itemName = shared.getString("Item Name",null);
-//        itemCost = shared.getString("Item Cost", null);
-//
 
 //        shared.edit().clear().apply();
 
@@ -218,22 +170,22 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
         switch (title) {
             case "APPETIZER":
                 // Image appears in ImageView widgets from the source file
-                icon_right.setImageResource(R.drawable.fries);
-                icon_left.setImageResource(R.drawable.chocolatemilk);
+//                icon_right.setImageResource(R.drawable.fries);
+//                icon_left.setImageResource(R.drawable.chocolatemilk);
                 loadItems("AppetizerMenuParse");
                 break;
 
             case "BEVERAGES":
                 // Image appears in ImageView widgets from the source file
-                icon_right.setImageResource(R.drawable.fries);
-                icon_left.setImageResource(R.drawable.chocolatemilk);
+//                icon_right.setImageResource(R.drawable.fries);
+//                icon_left.setImageResource(R.drawable.chocolatemilk);
                 loadItems("DrinkMenuParse");
                 break;
 
             case "BURGERS":
                 // Image appears in ImageView widgets from the source file
-                icon_right.setImageResource(R.drawable.fries);
-                icon_left.setImageResource(R.drawable.chocolatemilk);
+//                icon_right.setImageResource(R.drawable.fries);
+//                icon_left.setImageResource(R.drawable.chocolatemilk);
                 loadItems("BurgerMenuParse");
                 break;
 
@@ -251,16 +203,16 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
             case "FRESH SALADS":
                 // Image appears in ImageView widgets from the source file
-                icon_right.setImageResource(R.drawable.gardensalad);
-                icon_left.setImageResource(R.drawable.spinachsalad);
+//                icon_right.setImageResource(R.drawable.gardensalad);
+//                icon_left.setImageResource(R.drawable.spinachsalad);
                 loadItems("FreshSaladsParse");
                 break;
 
             case "HAVE IT ALL":
                 // Image appears in ImageView widgets from the source file
-
-                icon_right.setImageResource(R.drawable.springrolls);
-                icon_left.setImageResource(R.drawable.springrolls);
+//
+//                icon_right.setImageResource(R.drawable.springrolls);
+//                icon_left.setImageResource(R.drawable.springrolls);
                 loadItems("HaveitallMenuParse");
                 break;
 
@@ -279,16 +231,16 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
                 break;
 
             case "SANDWICHES":
-                // Image appears in ImageView widgets from the source file
-                icon_right.setImageResource(R.drawable.fries);
-                icon_left.setImageResource(R.drawable.chocolatemilk);
+//                // Image appears in ImageView widgets from the source file
+//                icon_right.setImageResource(R.drawable.fries);
+//                icon_left.setImageResource(R.drawable.chocolatemilk);
                 loadItems("SandwichMenuParse");
                 break;
 
             case "2 FOR $20":
                 // Image appears in ImageView widgets from the source file
-                icon_right.setImageResource(R.drawable.fries);
-                icon_left.setImageResource(R.drawable.chocolatemilk);
+//                icon_right.setImageResource(R.drawable.fries);
+//                icon_left.setImageResource(R.drawable.chocolatemilk);
                 loadItems("TwoTwenty");
                 break;
 
@@ -386,11 +338,11 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 //
 
         SharedPreferences.Editor editor = orderedlistSharedPreferences.edit();
-            editor.putString("TableNo", tableno);
-            editor.putString("No of Items", noOfItems);
-            editor.putString("Item Name", itemName);
-            editor.putString("Item Cost", itemcost);
-            editor.apply();
+        editor.putString("TableNo", tableno);
+        editor.putString("No of Items", noOfItems);
+        editor.putString("Item Name", itemName);
+        editor.putString("Item Cost", itemcost);
+        editor.apply();
 
 //        SharedPreferences.Editor editor = shared.edit();
 ////      editor.put

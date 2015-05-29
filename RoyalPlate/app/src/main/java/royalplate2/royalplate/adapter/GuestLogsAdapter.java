@@ -61,7 +61,7 @@ public class GuestLogsAdapter extends ArrayAdapter<GuestLogsData> {
         noofguestTextView.setText(guestlogsdata.get(position).getNoGuest());
 
         paymentTextView = (TextView) view.findViewById(R.id.guest_totalid);
-        paymentTextView.setText(guestlogsdata.get(position).getPayment());
+        paymentTextView.setText("$" + guestlogsdata.get(position).getPayment());
 
 
 

@@ -23,7 +23,7 @@ import royalplate2.royalplate.data.OrderedListData;
 /**
  * Created by hetu on 4/23/15.
  */
-public class ChefTablesAdapter extends ArrayAdapter<OrderedListData> {
+public class OrderedItemsAdapter extends ArrayAdapter<OrderedListData> {
 
     Context context;
     List<OrderedListData> orderedItemsList;
@@ -37,7 +37,7 @@ public class ChefTablesAdapter extends ArrayAdapter<OrderedListData> {
     // Context is the SubMenuActivity
     // objects is the list of items
 
-    public ChefTablesAdapter(Context context, List<OrderedListData> ordereditemsList, String tableno) {
+    public OrderedItemsAdapter(Context context, List<OrderedListData> ordereditemsList, String tableno) {
         super(context, R.layout.listview_ordereditems, ordereditemsList);
         this.context = context;
         this.orderedItemsList = ordereditemsList;

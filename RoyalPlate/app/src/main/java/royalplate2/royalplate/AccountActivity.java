@@ -20,6 +20,7 @@ import royalplate2.royalplate.adapter.AccountBillAdapter;
 import royalplate2.royalplate.data.GuestBillData;
 import royalplate2.royalplate.data.GuestLogsData;
 import royalplate2.royalplate.data.OrderedListData;
+import royalplate2.royalplate.data.OrderedListLogsData;
 
 /**
  * Created by hetu on 4/20/15.
@@ -132,17 +133,17 @@ public class AccountActivity extends Activity {
 
         displayPayment();
 
-
-
-        okbutton = (Button) findViewById(R.id.okbtnid);
-
-//        okbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                guestlogsdata = new GuestLogsData();
 //
-//            }
-//        });
+//
+//        okbutton = (Button) findViewById(R.id.okbtnid);
+//
+////        okbutton.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                guestlogsdata = new GuestLogsData();
+////
+////            }
+////        });
 
 
         /*******************************************************************************************
@@ -206,7 +207,7 @@ public class AccountActivity extends Activity {
                  * Deletes the table entry from the parse after payment.
                  **********************************************************************************/
 
-                final ParseQuery query2 =  new ParseQuery("OrderedListParse");
+                final ParseQuery query2 =  new ParseQuery("OrderedListLogsParse");
                 query2.whereEqualTo("TableNo", tableNumToDestroy);
                 query2.findInBackground(new FindCallback<ParseObject>() {
                     @Override
@@ -254,7 +255,9 @@ public class AccountActivity extends Activity {
          * Get the items ordered by table no and calcluate the total with tax.
          **********************************************************************************/
 
-        final ParseQuery querycost = new ParseQuery("OrderedListParse");
+//        final ParseQuery querycost = new ParseQuery("OrderedListParse");
+        final ParseQuery querycost = new ParseQuery("OrderedListLogsParse");
+
         querycost.whereEqualTo("TableNo", tableno);
         querycost.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -269,7 +272,6 @@ public class AccountActivity extends Activity {
                         subtotal += Float.parseFloat(cost);
 
                         float tax = (float)(subtotal * .08);
-//                        total = (float)(subtotal + subtotal* (.08));
                         total = (float)(subtotal + tax);
 
 
@@ -307,16 +309,33 @@ public class AccountActivity extends Activity {
      * called "OrderedListParse". It uses AccountBillAdapter. And Listview to
      * display the orderedlist iteams.
      **********************************************************************************************/
+//
+//    private void loadOrderedItemsList() {
+//        final ParseQuery<OrderedListData> orderedItems = ParseQuery.getQuery("OrderedListParse");
+//
+//        orderedItems.whereEqualTo("TableNo", tableno);
+//
+//        orderedItems.findInBackground(new FindCallback<OrderedListData>() {
+//
+//            @Override
+//            public void done(List<OrderedListData> orderedItems, ParseException e) {
+//
+//                accountBillAdapter = new AccountBillAdapter(AccountActivity.this, orderedItems, AccountActivity.this);
+//                ordereditemslistview.setAdapter(accountBillAdapter);
+//            }
+//
+//        });
+//    }
 
     private void loadOrderedItemsList() {
-        final ParseQuery<OrderedListData> orderedItems = ParseQuery.getQuery("OrderedListParse");
+        final ParseQuery<OrderedListLogsData> orderedItems = ParseQuery.getQuery("OrderedListLogsParse");
 
         orderedItems.whereEqualTo("TableNo", tableno);
 
-        orderedItems.findInBackground(new FindCallback<OrderedListData>() {
+        orderedItems.findInBackground(new FindCallback<OrderedListLogsData>() {
 
             @Override
-            public void done(List<OrderedListData> orderedItems, ParseException e) {
+            public void done(List<OrderedListLogsData> orderedItems, ParseException e) {
 
                 accountBillAdapter = new AccountBillAdapter(AccountActivity.this, orderedItems, AccountActivity.this);
                 ordereditemslistview.setAdapter(accountBillAdapter);

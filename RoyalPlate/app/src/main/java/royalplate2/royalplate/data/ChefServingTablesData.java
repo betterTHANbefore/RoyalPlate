@@ -14,13 +14,13 @@ public class ChefServingTablesData extends ParseObject {
 
 
 
-    public String getItemName(){
-        return getString("ItemName");
-
-    }
-    public void setItemName( String itemname){
-        put("ItemName", itemname);
-    }
+//    public String getItemName(){
+//        return getString("ItemName");
+//
+//    }
+//    public void setItemName( String itemname){
+//        put("ItemName", itemname);
+//    }
 
 //
 //    public String getItemPrice(){
@@ -38,16 +38,6 @@ public class ChefServingTablesData extends ParseObject {
         put("NoOfItems", noofitems);
     }
 
-    public String getTableNo(){
-        return getString("TableNo");
-
-    }
-    public void setTableNo(String tableno){
-        put("TableNo", tableno);
-    }
-
-
-
 
 
 
@@ -64,12 +54,12 @@ public class ChefServingTablesData extends ParseObject {
         put("TableNo", table);
     }
 
-    public String getWaiter() {
-        return getString("WaiterName");
-    }
-    public void setWaiter(String waiterName) {
-        put("WaiterName",waiterName);
-    }
+//    public String getWaiter() {
+//        return getString("WaiterName");
+//    }
+//    public void setWaiter(String waiterName) {
+//        put("WaiterName",waiterName);
+//    }
 //
 //    public String getDate(){return getString("Date");}
 //    public void setDate(String date){

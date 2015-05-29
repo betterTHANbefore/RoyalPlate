@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import royalplate2.royalplate.adapter.ChefSideOrderListAdapter;
 import royalplate2.royalplate.data.OrderedListData;
@@ -66,27 +67,53 @@ public class ChefActivity extends ActionBarActivity  {
             clearItemList();
 
             // Below code deletes from parse -> we don't want it happen!
-//                final ParseQuery query =  new ParseQuery("WaiterTable");
-//                query.whereEqualTo("TableNo", tableNumToDestroy);
-//                query.findInBackground(new FindCallback<ParseObject>() {
-//                    @Override
-//                    public void done(List<ParseObject> waiterData, ParseException e) {
-//                        if(e == null || waiterData.size() >0){
-//                            for (int i=0; i<waiterData.size(); i++){
-//
-//                                ParseObject tableNo = waiterData.get(i);
-//                                try {
-//                                    tableNo.delete();
-//                                } catch (ParseException e1) {
-//                                }
-//                            }
-//                        }
-//                        else{
-//
-//                        }
-//                    }
-//                });
-            // Above code deletes from parse -> we don't want it happen!
+                final ParseQuery query =  new ParseQuery("ChefServingTablesParse");
+                query.whereEqualTo("TableNo", tableToDestroy);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> tableData, ParseException e) {
+                        if(e == null || tableData.size() >0){
+                            for (int i=0; i<tableData.size(); i++){
+
+                                ParseObject tableNo = tableData.get(i);
+                                try {
+                                    tableNo.delete();
+                                } catch (ParseException e1) {
+                                }
+                            }
+                        }
+                        else{
+
+                        }
+                    }
+                });
+
+                /**********************************************************************************
+                 * Deletes the table entry from the parse after payment.
+                 **********************************************************************************/
+
+                final ParseQuery query2 =  new ParseQuery("OrderedListParse");
+                query2.whereEqualTo("TableNo", tableno);
+                query2.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> tableData, ParseException e) {
+                        if(e == null || tableData.size() >0){
+                            for (int i=0; i<tableData.size(); i++){
+
+                                ParseObject tableNo = tableData.get(i);
+                                try {
+                                    tableNo.delete();
+                                } catch (ParseException e1) {
+                                }
+                            }
+                        }
+                        else{
+
+                        }
+                    }
+                });
+
+                // Above code deletes from parse -> we don't want it happen!
             }
         });
 

@@ -12,11 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseObject;
 import royalplate2.royalplate.OrderedItem;
 import royalplate2.royalplate.R;
 import royalplate2.royalplate.SubMenuActivity;
+import royalplate2.royalplate.data.OrderedListData;
 import royalplate2.royalplate.data.SubMenuData;
 
 import java.util.List;
@@ -31,10 +33,7 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
     List<ParseObject> menuItems;
     SubMenuActivity subMenuActivity;
 
-    String tableNo;
-    List<OrderedItem> orderedList;
-
-    String itemcost;
+    String tableno;
 
 
     /**********************************************************************************************
@@ -51,7 +50,7 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
         super(context, R.layout.listview_item, objects);
         this.context = context;
         this.menuItems = objects;
-        this.tableNo = tableNo;
+        this.tableno = tableNo;
         this.subMenuActivity = subMenuActivity;
     }
 
@@ -152,18 +151,25 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
                         String  eachitemprice =  itemCostTextView.getText().toString();
                         String noofitems_st = noOfItemsEditText.getText().toString();
 
-                        if (!s.toString().equals(null) | !s.toString().equals("0") ){
+//                        try {
+//
+//
+//                        if (noofitems>0){
+                            if (!s.toString().equals(null) || !s.toString().equals("0")) {
 
-                           String  itemName = itemNameTextView.getText().toString();
-                           String noofItem = s.toString();
+                                String itemName = itemNameTextView.getText().toString();
+                                //                           String noofItem = s.toString();
+//
+//
+                                subMenuActivity.saveOrderedList(tableno, noofitems_st, itemName, eachitemprice);
 
-                            Log.i("tag" , "SubAdapter-->   " + noofItem  + "    " + itemName+ "  " + eachitemprice);
-                            /***************************************************************************
-                             * send noofItem, itemName and itemcost to subMenuActivity
-                             **************************************************************************/
-                            subMenuActivity.saveOrderedList( tableNo,noofitems_st, itemName, eachitemprice);
 
-                        }
+                                Log.i("tag", "SAdap " + tableno+  "  " + noofitems_st + "  " + " " + itemName + " "+ eachitemprice);
+                            }
+//                        }
+//                        catch (Exception e){
+//                            Toast.makeText(context, "Item not selected!", Toast.LENGTH_SHORT);
+//                        }
                     }
                 });
             }

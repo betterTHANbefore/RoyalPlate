@@ -77,6 +77,7 @@ public class HostessActivity extends Activity implements OnClickListener{
     TextView displayWaiterName;
     EditText guestNameedit;
     EditText gutestNoedit;
+    Button reservationBtn;
     String getguestname;
     String getnoOfguest;
 
@@ -108,7 +109,7 @@ public class HostessActivity extends Activity implements OnClickListener{
         time = new Date();
 
         dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        timeFormat = new SimpleDateFormat("hh:mm:ss");
+        timeFormat = new SimpleDateFormat("hh:mm");
 
         sharedwaiter = PreferenceManager.getDefaultSharedPreferences(this);
         sharedtable = PreferenceManager.getDefaultSharedPreferences(this);
@@ -176,6 +177,21 @@ public class HostessActivity extends Activity implements OnClickListener{
             }
         });
         assignedButton.setOnClickListener(this);
+
+        reservationBtn = (Button) findViewById(R.id.reservationBtnid);
+        reservationBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               // display reservationlogs here
+
+
+
+
+
+
+            }
+        });
 
         gutestNoedit = (EditText) findViewById(R.id.guestnoEdit);
         //noofguest = gutestNoedit.getText().toString();

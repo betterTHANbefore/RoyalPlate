@@ -37,19 +37,9 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
         this.hostessActivity = hostessActivity;
     }
 
-//    public WatierAdapter(Context context, List<WaiterData> objects) {
-//         super(context, R.layout.listview_waiter, objects);
-    //    this.context = context;
-//    this.waiterslist = objects;
-//    }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent){
-
-
-      //  final ArrayList<String> waitername = new ArrayList<String>();
-
-     // waiternameSet = new HashSet<String>();
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -58,7 +48,7 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
             waiterListview = (ListView) view.findViewById(R.id.waiterslist);
 
             final CheckBox waitercheckbox = (CheckBox) view.findViewById((R.id.waiterchkbox));
-           waitercheckbox.setText(waiterslist.get(position).getWaiter());
+           waitercheckbox.setText(waiterslist.get(position).getWaiter().toUpperCase());
 //        waitercheckbox.setText(waiterslist.get(position).getUser());
 
 
@@ -69,16 +59,10 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
                     if(isChecked) {
 
                       String waiter = waitercheckbox.getText().toString();
-                     //   waiternameSet.add(waitername);
                         waitername = waiter;
-                        hostessActivity.saveWaiterName(waitercheckbox.getText().toString());
-
+                        hostessActivity.saveWaiterName(waitercheckbox.getText().toString().toLowerCase());
 
                     }
-//                    hostessActivity.saveWaiterName(waitername);
-
-
-                    //    hostessActivity.saveWaiterName((HashSet<String>) waiternameSet);
 
                 }
             });

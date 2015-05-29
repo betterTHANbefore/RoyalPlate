@@ -27,6 +27,7 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,8 +35,10 @@ import java.util.List;
 import royalplate2.royalplate.adapter.MainMenuAdapter;
 import royalplate2.royalplate.adapter.OrderedListAdapter;
 import royalplate2.royalplate.adapter.SubMenuAdapter;
+import royalplate2.royalplate.data.ChefServingTablesData;
 import royalplate2.royalplate.data.MainMenuData;
 import royalplate2.royalplate.data.OrderedListData;
+import royalplate2.royalplate.data.OrderedListLogsData;
 
 /**
  * Created by operamac on 4/29/15.
@@ -69,13 +72,6 @@ public class OrderListFragment extends Fragment {
 
         ordereditemslistview = (ListView) v.findViewById(R.id.ordereditems_listview);
 
-//        ordereditemslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
-
 
         int mode = Activity.MODE_PRIVATE;
         SharedPreferences assignedtablesSharedPreferences = getActivity().getSharedPreferences(ASSIGNEDTABLESHARED, mode);
@@ -94,46 +90,6 @@ public class OrderListFragment extends Fragment {
          ******************************************************************************************/
         loadOrderedList();
 
-        /*******************************************************************************************
-         * Set Data values to Parse Class(OrderedListParse) through OrderListData java class
-         ******************************************************************************************/
-
-
-//
-//        OrderedListData orderedListData = new OrderedListData();
-//            orderedListData.setItemName(itemName);
-//            orderedListData.setItemPrice(itemCost);
-//            orderedListData.setTableNo(tableNumStr);
-//            orderedListData.setNoOfItems(noOfItems);
-//            orderedListData.saveInBackground();
-//
-//        Log.i("OF2", itemName + "  " + noOfItems + " " + itemCost);
-//      //  shared.edit().clear().apply();
-
-
-
-//        Log.i("OF", itemName + "   "+ noOfItems);
-//        listOfitems.setText(itemName + " " + noOfItems);
-
-
-        /**************************************************************************
-         * getting itemName and noOfItems from Submenu Activity
-         *
-         * Go to SubMenuAdapter where actual data values are passed thru INTENT
-         **************************************************************************/
-
-
-//        TextView noOfitemsTextview = (TextView) v.findViewById(R.id.orderednoOfItems);
-//        TextView listOfitemsTextview = (TextView) v.findViewById(R.id.orderedItemName);
-
-//      String  itemName = getActivity().getIntent().getExtras().getString("Item Name");
-//     String   noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
-//        Bundle arg = getArguments();
-//        Log.i("ARGUMENT", arg.toString() );
-//        itemName = getActivity().getIntent().getExtras().getString("Item Name");
-//        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
-//
-
 //
         /*******************************************************************************************
          * OrderBtn will confirm the orderlist and then send it Parse for Chef to load
@@ -149,6 +105,36 @@ public class OrderListFragment extends Fragment {
                 Intent orderBtnIntent = new Intent(v.getContext(), AssignedTableActivity.class);
 
                 startActivity(orderBtnIntent);
+
+
+                ChefServingTablesData chefServingTablesData = new ChefServingTablesData();
+                chefServingTablesData.setTable(tableno);
+                chefServingTablesData.saveInBackground();
+
+//                /**********************************************************************************
+//                 * Deletes the table entry from the parse after payment.
+//                 **********************************************************************************/
+//
+//                final ParseQuery query2 =  new ParseQuery("OrderedListParse");
+//                query2.whereEqualTo("TableNo", tableno);
+//                query2.findInBackground(new FindCallback<ParseObject>() {
+//                    @Override
+//                    public void done(List<ParseObject> tableData, ParseException e) {
+//                        if(e == null || tableData.size() >0){
+//                            for (int i=0; i<tableData.size(); i++){
+//
+//                                ParseObject tableNo = tableData.get(i);
+//                                try {
+//                                    tableNo.delete();
+//                                } catch (ParseException e1) {
+//                                }
+//                            }
+//                        }
+//                        else{
+//
+//                        }
+//                    }
+//                });
 
 
 
@@ -194,22 +180,25 @@ public class OrderListFragment extends Fragment {
      * Set Data values to Parse Class(OrderedListParse) through OrderListData java class
      ******************************************************************************************/
     private void storeDataOnParse() {
-        /*******************************************************************************************
-         * Set Table No as a title in Ordered item list
-         ******************************************************************************************/
+//
+//        /*******************************************************************************************
+//         * Set Data values to Parse Class(OrderedListParse) through OrderListData java class
+//         ******************************************************************************************/
+//
 
-
-        OrderedListData orderedListData = new OrderedListData();
+        final OrderedListData orderedListData = new OrderedListData();
         orderedListData.setTableNo( tableno);
         orderedListData.setNoOfItems(noofItem);
         orderedListData.setItemName(itemName);
         orderedListData.setItemPrice(itemcost);
         orderedListData.saveInBackground();
 
-       // storeEachTable(tableno);
-        Log.i("OF2",tableno+ " "+ itemName + "  " + noofItem + " " + itemcost);
-      //  orderedlistSharedPreferences.edit().clear().apply();
-
+        final OrderedListLogsData orderedListLogsData = new OrderedListLogsData();
+        orderedListLogsData.setTableNo( tableno);
+        orderedListLogsData.setNoOfItems(noofItem);
+        orderedListLogsData.setItemName(itemName);
+        orderedListLogsData.setItemPrice(itemcost);
+        orderedListLogsData.saveInBackground();
     }
 
     private void storeEachTable(String tableno) {
@@ -238,10 +227,6 @@ public class OrderListFragment extends Fragment {
 
         final ParseQuery<OrderedListData> orderedlist = ParseQuery.getQuery("OrderedListParse");
         orderedlist.whereEqualTo("TableNo",tableno);
-        //orderedlist.whereGreaterThan("NoOfItems", Integer.toString(0));
-//        orderedlist.whereGreaterThan("NoOfItems", 0);
-//        orderedlist.whereEqualTo("TableNo",tableNumStr);
-
 
         orderedlist.findInBackground(new FindCallback<OrderedListData>() {
             @Override
@@ -252,49 +237,14 @@ public class OrderListFragment extends Fragment {
             }
         });
 
-
-       // orderedlistSharedPreferences.edit().clear().apply();
-
     }
-
-
-
-
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//
-//        TextView noOfitemsTextview = (TextView) v.findViewById(R.id.orderednoOfItems);
-//        TextView listOfitemsTextview = (TextView) v.findViewById(R.id.orderedItemName);
-//
-//        /**************************************************************************
-//         * getting itemName and noOfItems from Submenu Activity
-//         **************************************************************************/
-//        itemName = getActivity().getIntent().getExtras().getString("Item Name");
-//        noOfItems = getActivity().getIntent().getExtras().getString("No of Items");
-//
-//        Log.i("OF", itemName + "   "+ noOfItems);
-//
-//        noOfitemsTextview.setText(noOfItems);
-//        listOfitemsTextview.setText(itemName);
-//    }
-//
-//    public void setText(){
-//        TextView tv = (TextView) getActivity().findViewById(R.id.ordertitle);
-//        tv.setText(tableNumStr);
-//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
-        //  SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-
-//
-//        Bundle arg = getArguments();
-//        Log.i("ARGUMENT", arg.toString() );
     }
 
 }

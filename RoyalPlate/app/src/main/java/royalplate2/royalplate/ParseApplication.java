@@ -7,8 +7,10 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import royalplate2.royalplate.data.AppertizerMenuData;
 import royalplate2.royalplate.data.BurgerMenuData;
+import royalplate2.royalplate.data.ChefServingTablesData;
 import royalplate2.royalplate.data.GuestBillData;
 import royalplate2.royalplate.data.GuestLogsData;
+import royalplate2.royalplate.data.OrderedListLogsData;
 import royalplate2.royalplate.data.TableItemData;
 import royalplate2.royalplate.data.DessertsMenuData;
 import royalplate2.royalplate.data.DrinkMenuData;
@@ -55,6 +57,7 @@ public class ParseApplication extends Application {
 
         ParseObject.registerSubclass(AppertizerMenuData.class);
         ParseObject.registerSubclass(BurgerMenuData.class);
+        ParseObject.registerSubclass(ChefServingTablesData.class);
         ParseObject.registerSubclass(DessertsMenuData.class);
         ParseObject.registerSubclass(DrinkMenuData.class);
         ParseObject.registerSubclass(EntreesMenuData.class);
@@ -82,6 +85,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(TableItemData8.class);
         ParseObject.registerSubclass(TableItemData9.class);
         ParseObject.registerSubclass(OrderedListData.class);
+        ParseObject.registerSubclass(OrderedListLogsData.class);
 
 
         Log.i("Application", "Initialized");

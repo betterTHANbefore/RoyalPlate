@@ -77,6 +77,28 @@ public class ChefQueueFragment extends Fragment {
     /*******************************************************************************************
      *TABLES COMES IN QUEUE TO CHEF TO FINISH THE ORDER.
      *******************************************************************************************/
+//
+//    public void updateTableInQueue(ArrayList<String> tableNumsToDestroy){
+//        loadTables(tableNumsToDestroy);
+//    }
+//
+//    // overloading with string argument
+//    private void loadTables(final ArrayList<String> exceptThese){
+//        final ParseQuery<ParseObject> tables = ParseQuery.getQuery("WaiterTable");
+//
+//        for (int i=0; i<exceptThese.size(); i++)
+//            Log.i(String.valueOf(i), exceptThese.get(i).toString());
+//
+//        tables.whereNotContainedIn("TableNo", exceptThese);
+//        tables.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> tables, ParseException e) {
+//                tableListAdapter = new TableListAdapter(getActivity(), tables);
+//                listView.setAdapter(tableListAdapter);
+//            }
+//        });
+//    }
+
 
     public void updateTableInQueue(ArrayList<String> tableNumsToDestroy){
         loadTables(tableNumsToDestroy);
@@ -84,7 +106,7 @@ public class ChefQueueFragment extends Fragment {
 
     // overloading with string argument
     private void loadTables(final ArrayList<String> exceptThese){
-        final ParseQuery<ParseObject> tables = ParseQuery.getQuery("WaiterTable");
+        final ParseQuery<ParseObject> tables = ParseQuery.getQuery("ChefServingTablesParse");
 
         for (int i=0; i<exceptThese.size(); i++)
             Log.i(String.valueOf(i), exceptThese.get(i).toString());
@@ -102,8 +124,19 @@ public class ChefQueueFragment extends Fragment {
      * Load All Assigned tables from the WaiterTable class from Parse.
      *******************************************************************************************/
 
+//    private void loadTables() {
+//        final ParseQuery<ParseObject> tables = ParseQuery.getQuery("WaiterTable");
+//        tables.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> tables, ParseException e) {
+//                tableListAdapter = new TableListAdapter(getActivity(), tables);
+//                listView.setAdapter(tableListAdapter);
+//            }
+//        });
+//    }
+
     private void loadTables() {
-        final ParseQuery<ParseObject> tables = ParseQuery.getQuery("WaiterTable");
+        final ParseQuery<ParseObject> tables = ParseQuery.getQuery("ChefServingTablesParse");
         tables.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> tables, ParseException e) {

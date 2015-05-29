@@ -18,19 +18,24 @@ import java.util.List;
 import royalplate2.royalplate.AccountActivity;
 import royalplate2.royalplate.R;
 import royalplate2.royalplate.data.OrderedListData;
+import royalplate2.royalplate.data.OrderedListLogsData;
 
 /**
  * Created by hetu on 4/23/15.
  */
 
-public class AccountBillAdapter extends ArrayAdapter<OrderedListData> {
+//public class AccountBillAdapter extends ArrayAdapter<OrderedListData> {
+    public class AccountBillAdapter extends ArrayAdapter<OrderedListLogsData> {
 
-    Context context;
-    List<OrderedListData> orderedItems;
+
+        Context context;
+//    List<OrderedListData> orderedItems;
+        List<OrderedListLogsData> orderedItems;
+
     AccountActivity accountActivity;
     float subtotal = 0;
 
-    public AccountBillAdapter(Context context, List<OrderedListData> objects, AccountActivity accountActivity) {
+    public AccountBillAdapter(Context context, List<OrderedListLogsData> objects, AccountActivity accountActivity) {
         super(context, R.layout.listview_account, objects);
         this.context = context;
         this.orderedItems = objects;

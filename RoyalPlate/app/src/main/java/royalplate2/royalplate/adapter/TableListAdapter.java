@@ -12,6 +12,7 @@ import com.parse.ParseObject;
 import java.util.List;
 
 import royalplate2.royalplate.R;
+import royalplate2.royalplate.data.ChefServingTablesData;
 import royalplate2.royalplate.data.WaiterTableData;
 
 /**
@@ -45,12 +46,12 @@ public class TableListAdapter extends ArrayAdapter<ParseObject> {
 
         // R.id.mainmenu is really "table number", this confusion causes due to reuse of existing listview_table_button.xml
         TextView textView = (TextView) view.findViewById((R.id.tableNum));
-//        Log.i("Table", "Table");
-//        textView.setText(((ParseObject) (tableList.get(position))).getString("TableNo"));
-//        textView.setText(((TablesData) (tableList.get(position))).getTable());
 
-        textView.setText(((WaiterTableData) (tableList.get(position))).getTable());
-//        Log.i("Table", "Table2");
+//        textView.setText(((WaiterTableData) (tableList.get(position))).getTable());
+
+        textView.setText(tableList.get(position).getString("TableNo"));
+        textView.setText(((ChefServingTablesData)(tableList.get(position))).getTable());
+
         return view;
     }
 }
