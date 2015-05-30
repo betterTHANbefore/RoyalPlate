@@ -286,16 +286,10 @@ public class AssignedTableActivity extends Activity {
 
             @Override
             public void done(List<WaiterTableData> waitertables, ParseException e) {
-//                if(e == null) {
-//                    for(int i =0; i<waitertables.size(); i++) {
-//                        ParseObject ob = waitertables.get(i);
-//                        String guestname = ob.getString("GuestName");
-
-                        waiterTableAdapter = new WaiterTableAdapter(AssignedTableActivity.this, waitertables,AssignedTableActivity.this);
-                        assignedtableGridview.setAdapter(waiterTableAdapter);
-//                    }
-//                }
-
+//
+            waiterTableAdapter = new WaiterTableAdapter(AssignedTableActivity.this, waitertables,AssignedTableActivity.this);
+            assignedtableGridview.setAdapter(waiterTableAdapter);
+//
             }
 
         });

@@ -99,6 +99,33 @@ public class OrderedListAdapter extends ArrayAdapter<OrderedListData> {
 
                 orderedItemsList.remove(position); // just remove from that position
                 notifyDataSetChanged();
+                /***********************************************************************************
+                 * Delete the specified item from the list on OrderedListLogsParse.(when delete button
+                 * got listen from the OrderListFragment.
+                 **********************************************************************************/
+
+                final ParseQuery queryforlogs = new ParseQuery("OrderedListLogsParse");
+                queryforlogs.whereEqualTo("ItemName", itemToremove);
+                queryforlogs.whereEqualTo("TableNo", tableno);
+
+                queryforlogs.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> orderedlist, ParseException e) {
+                        if (e == null || orderedlist.size() > 0) {
+                            for (int i = 0; i < orderedlist.size(); i++) {
+
+                                ParseObject item = orderedlist.get(i);
+                                try {
+                                    item.delete();
+                                } catch (ParseException e2) {
+                                    Log.i("Tag", e2.getMessage());
+                                }
+
+                            }
+                        }
+
+                    }
+                });
 
             }
         });

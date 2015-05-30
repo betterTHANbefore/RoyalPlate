@@ -66,7 +66,7 @@ import royalplate2.royalplate.data.OrderedListLogsData;
 
         subtotal = Float.parseFloat(orderedItems.get(position).getItemPrice());
 
-        accountActivity.saveSubtotal(subtotal);
+      //  accountActivity.saveSubtotal(subtotal);
 //subtotal =0;
 
         return view;

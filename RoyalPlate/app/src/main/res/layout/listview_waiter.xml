@@ -9,9 +9,9 @@
 
     <CheckBox
         android:id="@+id/waiterchkbox"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:textAlignment="center"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:textColor="@color/antiquewhite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

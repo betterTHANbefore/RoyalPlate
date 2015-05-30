@@ -259,6 +259,7 @@ public class AccountActivity extends Activity {
         final ParseQuery querycost = new ParseQuery("OrderedListLogsParse");
 
         querycost.whereEqualTo("TableNo", tableno);
+        querycost.whereNotEqualTo("ItemPrice", "");
         querycost.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e) {

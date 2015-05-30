@@ -90,7 +90,6 @@ public class OrderListFragment extends Fragment {
          ******************************************************************************************/
         loadOrderedList();
 
-//
         /*******************************************************************************************
          * OrderBtn will confirm the orderlist and then send it Parse for Chef to load
          ******************************************************************************************/
@@ -101,9 +100,7 @@ public class OrderListFragment extends Fragment {
             public void onClick(View v) {
 
 
-
                 Intent orderBtnIntent = new Intent(v.getContext(), AssignedTableActivity.class);
-
                 startActivity(orderBtnIntent);
 
 
@@ -111,34 +108,7 @@ public class OrderListFragment extends Fragment {
                 chefServingTablesData.setTable(tableno);
                 chefServingTablesData.saveInBackground();
 
-//                /**********************************************************************************
-//                 * Deletes the table entry from the parse after payment.
-//                 **********************************************************************************/
-//
-//                final ParseQuery query2 =  new ParseQuery("OrderedListParse");
-//                query2.whereEqualTo("TableNo", tableno);
-//                query2.findInBackground(new FindCallback<ParseObject>() {
-//                    @Override
-//                    public void done(List<ParseObject> tableData, ParseException e) {
-//                        if(e == null || tableData.size() >0){
-//                            for (int i=0; i<tableData.size(); i++){
-//
-//                                ParseObject tableNo = tableData.get(i);
-//                                try {
-//                                    tableNo.delete();
-//                                } catch (ParseException e1) {
-//                                }
-//                            }
-//                        }
-//                        else{
-//
-//                        }
-//                    }
-//                });
-
-
-
-            }
+       }
         });
         /*******************************************************************************************
          * Refresh Button will load again updated orderedlist from Parse
@@ -164,9 +134,7 @@ public class OrderListFragment extends Fragment {
 
 
         SharedPreferences orderedlistSharedPreferences = getActivity().getSharedPreferences(ORDEREDLISTSHARED, Activity.MODE_PRIVATE);
-       // orderedlistSharedPreferences = getActivity().getSharedPreferences(ORDEREDLISTSHARED, Activity.MODE_PRIVATE);
 
-        //tableno = orderedlistSharedPreferences.getString("TableNo", "");
         noofItem = orderedlistSharedPreferences.getString("No of Items", "");
         itemName = orderedlistSharedPreferences.getString("Item Name", "");
         itemcost = orderedlistSharedPreferences.getString("Item Cost","");
@@ -177,14 +145,13 @@ public class OrderListFragment extends Fragment {
     }
 
     /*******************************************************************************************
-     * Set Data values to Parse Class(OrderedListParse) through OrderListData java class
+     * Set Data values to Parse Class(OrderedListParse and OrderedListLogsParse)
+     * through OrderListData java class
+     * If item already exist on database, then overwrite
      ******************************************************************************************/
     private void storeDataOnParse() {
-//
-//        /*******************************************************************************************
-//         * Set Data values to Parse Class(OrderedListParse) through OrderListData java class
-//         ******************************************************************************************/
-//
+
+
 
         final OrderedListData orderedListData = new OrderedListData();
         orderedListData.setTableNo( tableno);
@@ -199,6 +166,7 @@ public class OrderListFragment extends Fragment {
         orderedListLogsData.setItemName(itemName);
         orderedListLogsData.setItemPrice(itemcost);
         orderedListLogsData.saveInBackground();
+
     }
 
     private void storeEachTable(String tableno) {

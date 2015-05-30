@@ -109,70 +109,63 @@ public class SubMenuAdapter extends ArrayAdapter<ParseObject>  {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
 
-                final EditText noOfItemsEditText = (EditText) finalView.findViewById(R.id.noOfitem_edittextid);
-                noOfItemsEditText.setText(String.valueOf(newVal));
+                        final EditText noOfItemsEditText = (EditText) finalView.findViewById(R.id.noOfitem_edittextid);
+                        noOfItemsEditText.setText(String.valueOf(newVal));
 
-                noOfItemsEditText.addTextChangedListener(new TextWatcher() {
+                        noOfItemsEditText.addTextChangedListener(new TextWatcher() {
 
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                    //
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) { }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-
-                        /*******************************************************************************
-                         * get the no of items from the edittext and convert from string to int
-                         *******************************************************************************/
-                        int noofitems = Integer.parseInt(noOfItemsEditText.getText().toString());
-                        /*******************************************************************************
-                         * get each item initial price from the inititialTextview. Convet to double.
-                         *******************************************************************************/
-                        double price = Double.parseDouble(initialPriceTextView.getText().toString());
-
-
-                        /***********************************************************************************
-                         * To view the how much each item ordered cost
-                         * set the item price = (price * no of items)
-                         **********************************************************************************/
-                        final TextView itemCostTextView = (TextView) finalView.findViewById(R.id.itemcost_textviewid);
-
-                        final double eachItemcost = price * noofitems;
-
-                        /***********************************************************************************
-                         * Format the cost into 2 decimal place. Display the cost in itemCostTextview.
-                         ************************************************************************************/
-                        itemCostTextView.setText(String.format("%.2f", eachItemcost));
-
-
-                        String  eachitemprice =  itemCostTextView.getText().toString();
-                        String noofitems_st = noOfItemsEditText.getText().toString();
-
-//                        try {
-//
-//
-//                        if (noofitems>0){
-                            if (!s.toString().equals(null) || !s.toString().equals("0")) {
-
-                                String itemName = itemNameTextView.getText().toString();
-                                //                           String noofItem = s.toString();
-//
-//
-                                subMenuActivity.saveOrderedList(tableno, noofitems_st, itemName, eachitemprice);
-
-
-                                Log.i("tag", "SAdap " + tableno+  "  " + noofitems_st + "  " + " " + itemName + " "+ eachitemprice);
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                             }
-//                        }
-//                        catch (Exception e){
-//                            Toast.makeText(context, "Item not selected!", Toast.LENGTH_SHORT);
-//                        }
-                    }
-                });
-            }
+
+                            //
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+
+
+                                /*******************************************************************************
+                                 * get the no of items from the edittext and convert from string to int
+                                 *******************************************************************************/
+                                int noofitems = Integer.parseInt(noOfItemsEditText.getText().toString());
+                                /*******************************************************************************
+                                 * get each item initial price from the inititialTextview. Convet to double.
+                                 *******************************************************************************/
+                                double price = Double.parseDouble(initialPriceTextView.getText().toString());
+
+
+                                /***********************************************************************************
+                                 * To view the how much each item ordered cost
+                                 * set the item price = (price * no of items)
+                                 **********************************************************************************/
+                                final TextView itemCostTextView = (TextView) finalView.findViewById(R.id.itemcost_textviewid);
+
+                                final double eachItemcost = price * noofitems;
+
+                                /***********************************************************************************
+                                 * Format the cost into 2 decimal place. Display the cost in itemCostTextview.
+                                 ************************************************************************************/
+                                itemCostTextView.setText(String.format("%.2f", eachItemcost));
+
+                                String itemName;
+
+                                if (!s.toString().equals(null) || !s.toString().equals("0")) {
+
+                                    itemName = itemNameTextView.getText().toString();
+                                    String eachitemprice = itemCostTextView.getText().toString();
+                                    String noofitems_st = noOfItemsEditText.getText().toString();
+                                    subMenuActivity.saveOrderedList(tableno, noofitems_st, itemName, eachitemprice);
+
+
+                                }
+
+                            }
+                        });
+
+                }
 
         });
 

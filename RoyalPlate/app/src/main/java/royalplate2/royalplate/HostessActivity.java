@@ -33,9 +33,14 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import royalplate2.royalplate.adapter.GuestLogsAdapter;
+import royalplate2.royalplate.adapter.ReservationLogsAdapter;
 import royalplate2.royalplate.adapter.TableAdapter;
 import royalplate2.royalplate.adapter.WaiterAdapter;
 import royalplate2.royalplate.data.GuestBillData;
+import royalplate2.royalplate.data.GuestLogsData;
+import royalplate2.royalplate.data.ReservationLogsData;
 import royalplate2.royalplate.data.TableItemData1;
 import royalplate2.royalplate.data.TableItemData2;
 import royalplate2.royalplate.data.TablesData;
@@ -62,7 +67,10 @@ public class HostessActivity extends Activity implements OnClickListener{
 
     GridView tablelistview;
     ListView waiterlistview;
-
+    ListView reservationListView;
+GuestLogsAdapter guestLogsAdapter;
+    ReservationLogsAdapter reservationLogsAdapter;
+    ReservationLogsData reservationLogsData;
     TableAdapter tableAdapter;
     WaiterAdapter waiterAdapter;
     Button assignedButton;
@@ -78,8 +86,6 @@ public class HostessActivity extends Activity implements OnClickListener{
     EditText guestNameedit;
     EditText gutestNoedit;
     Button reservationBtn;
-    String getguestname;
-    String getnoOfguest;
 
     private String tableno;
     private String waitername;
@@ -108,7 +114,7 @@ public class HostessActivity extends Activity implements OnClickListener{
         date = new Date();
         time = new Date();
 
-        dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        dateFormat = new SimpleDateFormat("yy/MM/dd");
         timeFormat = new SimpleDateFormat("hh:mm");
 
         sharedwaiter = PreferenceManager.getDefaultSharedPreferences(this);
@@ -131,6 +137,7 @@ public class HostessActivity extends Activity implements OnClickListener{
          **********************************************************/
         waiterlistview = (ListView) findViewById(R.id.waiterslist_right);
         //  waiterlistview.setEnabled(false);
+        reservationListView = (ListView) findViewById(R.id.reservationlistviewid);
 
         assignedButton = (Button) findViewById(R.id.assignedBtn);
 
@@ -160,18 +167,17 @@ public class HostessActivity extends Activity implements OnClickListener{
             @Override
             public void afterTextChanged(Editable s) {
 
-                if (s.length()==0) {
+                if (s.length() == 0) {
                     assignedButton.setEnabled(false);
                     assignedButton.setBackgroundColor(Color.DKGRAY);
                     assignedButton.setPadding(80, 0, 80, 0);
 
                     guestNameedit.setFocusable(true);
                     gutestNoedit.setEnabled(false);
-                }
-                else {
+                } else {
                     assignedButton.setEnabled(true);
                     assignedButton.setBackgroundResource(R.drawable.checkbox_background);
-                    assignedButton.setPadding(80,0,80,0);
+                    assignedButton.setPadding(80, 0, 80, 0);
                     gutestNoedit.setEnabled(true);
                 }
             }
@@ -183,11 +189,40 @@ public class HostessActivity extends Activity implements OnClickListener{
             @Override
             public void onClick(View v) {
 
-               // display reservationlogs here
+//
+//               // display reservationlogs here
+//
+//
+//
+//
+//                /**************************************************************
+//                 * Popup Window display new assigned guest information
+//                 **************************************************************/
+//
+//                final View popupView = getLayoutInflater().inflate(R.layout.reservationlogs_popup, null);
+//                final PopupWindow popupwindow = new PopupWindow(popupView, 630, 400, true);
+//                popupwindow.setContentView(popupView);
+
+                final ParseQuery<ReservationLogsData> guestlogs = ParseQuery.getQuery("ReservationLogsParse");
+                guestlogs.findInBackground(new FindCallback<ReservationLogsData>() {
+                    @Override
+                    public void done(List<ReservationLogsData> guestLogs, ParseException e) {
 
 
+                        reservationLogsAdapter = new ReservationLogsAdapter(getApplicationContext(), guestLogs);
 
+                        reservationListView.setAdapter(reservationLogsAdapter);
+                    }
+                });
 
+//                popupwindow.showAtLocation(v, Gravity.NO_GRAVITY, 0, 0);
+//                popupwindow.setFocusable(true);
+//                popupwindow.setOutsideTouchable(true);
+//                popupwindow.showAsDropDown(popupView);
+//
+//
+//
+//
 
 
             }
@@ -365,6 +400,15 @@ public class HostessActivity extends Activity implements OnClickListener{
                 guestBillData.setDate(dateFormat.format(date));
                 guestBillData.setTime(timeFormat.format(time));
                 guestBillData.saveInBackground();
+
+                reservationLogsData = new ReservationLogsData();
+                reservationLogsData.setGuestName(guestname);
+                reservationLogsData.setNoOfGuest(noofguest);
+                reservationLogsData.setTableNo(tableno);
+                reservationLogsData.setWaiterName(waitername);
+                reservationLogsData.setDate(dateFormat.format(date));
+                reservationLogsData.setTime(timeFormat.format(time));
+                reservationLogsData.saveInBackground();
 
                 int mode = Activity.MODE_PRIVATE;
 

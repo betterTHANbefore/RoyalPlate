@@ -43,5 +43,4 @@ public class ReservationLogsData extends ParseObject
     public void setName(String itemName) {
         put("ItemName", itemName);
     }
-
 }

@@ -11,6 +11,7 @@ import royalplate2.royalplate.data.ChefServingTablesData;
 import royalplate2.royalplate.data.GuestBillData;
 import royalplate2.royalplate.data.GuestLogsData;
 import royalplate2.royalplate.data.OrderedListLogsData;
+import royalplate2.royalplate.data.ReservationLogsData;
 import royalplate2.royalplate.data.TableItemData;
 import royalplate2.royalplate.data.DessertsMenuData;
 import royalplate2.royalplate.data.DrinkMenuData;
@@ -74,6 +75,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(WaiterData.class);
         ParseObject.registerSubclass(GuestBillData.class);
         ParseObject.registerSubclass(GuestLogsData.class);
+        ParseObject.registerSubclass(ReservationLogsData.class);
         ParseObject.registerSubclass(WaiterTableData.class);
         ParseObject.registerSubclass(TableItemData1.class);
         ParseObject.registerSubclass(TableItemData2.class);

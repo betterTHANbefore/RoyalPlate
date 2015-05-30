@@ -6,20 +6,19 @@
 
 
         <CheckBox
+
                 android:id="@+id/tableBtn"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_margin="5dp"
                 android:textStyle="bold"
-                 android:gravity="center"
-                android:padding="5dp"
+                android:gravity="center"
+                android:padding="30dp"
                 android:textColor="@color/darkOrange"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="90dp">
 
          </CheckBox>
-
-
 
 </LinearLayout>
 
