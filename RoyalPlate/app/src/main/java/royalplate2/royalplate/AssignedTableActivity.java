@@ -80,7 +80,7 @@ public class AssignedTableActivity extends Activity {
 
                 Button assignedtableBtn = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
 
-                final String tableno = assignedtableBtn.getText().toString().substring(0,6); // get the first 6 chars from the string, which is tableno.
+                final String tableno = assignedtableBtn.getText().toString(); // get the first 6 chars from the string, which is tableno.
 
                 int mode = Activity.MODE_PRIVATE;
                 SharedPreferences assignedtablesSharedPreferences = getSharedPreferences(ASSIGNEDTABLESHARED, mode);
@@ -94,7 +94,7 @@ public class AssignedTableActivity extends Activity {
 
                 View popupView = getLayoutInflater().inflate(R.layout.order_pay_popup, null);
 
-                final PopupWindow popupwindow = new PopupWindow(popupView, 330, 300, true);
+                final PopupWindow popupwindow = new PopupWindow(popupView, 330, 350, true);
                 popupwindow.showAtLocation(view, Gravity.CENTER,0,0);
                 popupwindow.setFocusable(true);
                 popupwindow.setOutsideTouchable(true);
@@ -125,7 +125,7 @@ public class AssignedTableActivity extends Activity {
                     public void onClick(View v) {
                         intent = new Intent(AssignedTableActivity.this, AccountActivity.class);
 
-                        intent.putExtra("tableNo", tableno);
+                        intent.putExtra("tableNo", tableno.substring(0,2));
                         intent.putExtra("waiterName", waitername);
 
                         startActivity(intent);

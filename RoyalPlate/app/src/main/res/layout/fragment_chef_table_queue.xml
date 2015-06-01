@@ -6,12 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+
+    <ImageButton
         android:src="@drawable/refresh_icon1"
         android:id="@+id/refreshBtn"
         android:layout_alignParentLeft="true"
-        android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_corner"
+        android:layout_width="55dp"
+        android:layout_height="55dp"/>
+
     <TextView
         android:text="Tables in Queue"
         android:id="@+id/table_queue"

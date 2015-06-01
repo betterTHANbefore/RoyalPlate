@@ -75,7 +75,7 @@ public class OrderListFragment extends Fragment {
 
         int mode = Activity.MODE_PRIVATE;
         SharedPreferences assignedtablesSharedPreferences = getActivity().getSharedPreferences(ASSIGNEDTABLESHARED, mode);
-        tableno = assignedtablesSharedPreferences.getString("tableNo", "");
+        tableno = assignedtablesSharedPreferences.getString("tableNo", "").substring(0,2);
 
         tv = (TextView) v.findViewById(R.id.tableNo_textview);
         tv.setText(tableno);
@@ -154,14 +154,14 @@ public class OrderListFragment extends Fragment {
 
 
         final OrderedListData orderedListData = new OrderedListData();
-        orderedListData.setTableNo( tableno);
+        orderedListData.setTableNo( tableno.substring(0,2));
         orderedListData.setNoOfItems(noofItem);
         orderedListData.setItemName(itemName);
         orderedListData.setItemPrice(itemcost);
         orderedListData.saveInBackground();
 
         final OrderedListLogsData orderedListLogsData = new OrderedListLogsData();
-        orderedListLogsData.setTableNo( tableno);
+        orderedListLogsData.setTableNo( tableno.substring(0,2));
         orderedListLogsData.setNoOfItems(noofItem);
         orderedListLogsData.setItemName(itemName);
         orderedListLogsData.setItemPrice(itemcost);

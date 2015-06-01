@@ -8,14 +8,14 @@
         <CheckBox
 
                 android:id="@+id/tableBtn"
-                android:textSize="25dp"
+                android:textSize="30dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_margin="5dp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:padding="30dp"
+                android:padding="20dp"
                 android:textColor="@color/darkOrange"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="90dp">
 
          </CheckBox>

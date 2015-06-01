@@ -145,14 +145,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
         ImageView icon_right = (ImageView) findViewById(R.id.imageRight_icon);
         ImageView icon_left = (ImageView) findViewById(R.id.imageLeft_icon);
-        /***************************************************************
-         * get the value from shared SharedPreference.
-         ***************************************************************/
 
-//        shared.edit().clear().apply();
-
-
-        Log.i("Tag", " SubActivity  ++" +  tableno + " "+ itemName + "   "+ noOfItems + " "+ itemCost);
 
         final ListView list = (ListView) findViewById(R.id.itemlist);
         list.post(new Runnable() {
@@ -218,7 +211,7 @@ public class SubMenuActivity extends FragmentActivity implements SimpleGestureFi
 
             case "KIDS":
                 // Image appears in ImageView widgets from the source file
-                icon_right.setImageResource(R.drawable.fries);
+//                icon_right.setImageResource(R.drawable.fries);
                 loadItems("KidsMenuParse");
                 break;
 

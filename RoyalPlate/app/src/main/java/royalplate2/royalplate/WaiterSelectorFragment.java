@@ -46,6 +46,5 @@ public class WaiterSelectorFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
 
-        Log.i("onCreate", "WURKING");
     }
 }

@@ -24,7 +24,6 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
     HostessActivity hostessActivity;
     String tablenolist = null;
 
-
 //    public TableAdapter(Context context, List<TablesData> objects) {
 //        super(context, R.layout.listview_tablescheckbox, objects);
 //        this.context = context;
@@ -63,6 +62,8 @@ public class TableAdapter extends ArrayAdapter<TablesData> {
 
                     tablenolist= tableno;
                     hostessActivity.saveTableNumber(tablecheckbox.getText().toString());
+
+
 
                 }
             }

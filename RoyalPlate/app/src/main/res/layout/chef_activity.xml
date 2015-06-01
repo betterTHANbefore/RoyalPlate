@@ -49,8 +49,8 @@
                 android:id="@+id/previousImageviewid"
                 android:src="@drawable/previous_icon2"
                 android:adjustViewBounds="true"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
+                android:layout_width="45dp"
+                android:layout_height="45dp" />
 
                 <Button
                     android:id="@+id/h_hostessbtn"

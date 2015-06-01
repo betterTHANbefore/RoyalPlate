@@ -118,7 +118,9 @@ public class AccountActivity extends Activity {
                         ParseObject guestinfo = guestlist.get(i);
                         guestNameTextview.setText("Guest: " + guestinfo.getString("GuestName"));
                         noOfGuestTextview.setText("No: "+ guestinfo.getString("NoOfGuest"));
-                        tablenoTextview.setText("Table: " + guestinfo.getString("TableNo").charAt(5));
+//                        tablenoTextview.setText("Table: " + guestinfo.getString("TableNo").charAt(5));
+
+                        tablenoTextview.setText("Table: " + guestinfo.getString("TableNo").charAt(1));
                         waiternameTextview.setText("Waiter: " + guestinfo.getString("WaiterName"));
                         dateTextview.setText("Date: "+ guestinfo.getString("Date"));
                         timeTextview.setText("Time: " + guestinfo.get("Time"));
@@ -273,7 +275,7 @@ public class AccountActivity extends Activity {
                         subtotal += Float.parseFloat(cost);
 
                         float tax = (float)(subtotal * .08);
-                        total = (float)(subtotal + tax);
+                        total = (subtotal + tax);
 
 
                         subtotalTextview.setText("SubTotal:  " +String.format("%.2f",subtotal));

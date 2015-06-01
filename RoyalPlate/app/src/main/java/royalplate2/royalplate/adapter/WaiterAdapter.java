@@ -45,7 +45,7 @@ public class WaiterAdapter extends ArrayAdapter<WaiterData> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.listview_waiter, parent, false);
-            waiterListview = (ListView) view.findViewById(R.id.waiterslist);
+           // waiterListview = (ListView) view.findViewById(R.id.waiterslist);
 
             final CheckBox waitercheckbox = (CheckBox) view.findViewById((R.id.waiterchkbox));
            waitercheckbox.setText(waiterslist.get(position).getWaiter().toUpperCase());

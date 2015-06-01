@@ -52,7 +52,7 @@ public class ReservationLogsAdapter extends ArrayAdapter<ReservationLogsData> {
         waiterTextView.setText(reservationlogsdata.get(position).getWaiterName().toUpperCase());
 
         tableTextView = (TextView) view.findViewById(R.id.guest_tablenoid);
-        tableTextView.setText("T" + reservationlogsdata.get(position).getTableNo().substring(5,6));
+        tableTextView.setText( reservationlogsdata.get(position).getTableNo());
 
         guestnameTextView = (TextView) view.findViewById(R.id.guest_guestnameid);
         guestnameTextView.setText(reservationlogsdata.get(position).getGuestName());

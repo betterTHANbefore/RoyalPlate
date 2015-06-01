@@ -9,6 +9,8 @@
     <TextView
         android:id="@+id/tableNum"
         android:textSize="20dp"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:background="@drawable/rounded_corner"
         android:layout_margin="10dp"
         android:focusable="false"

@@ -128,17 +128,6 @@ public class MenuActivity extends Activity implements SimpleGestureFilter.Simple
 
                 Button listBtn  = (Button) parent.getChildAt(position).findViewById(R.id.mainmenu);
                 menuItemName = listBtn.getText().toString();
-                // tableNum = getIntent().getExtras().getString("tableNo");
-
-//                itemName = getIntent().getExtras().getString("Item Name");
-//                noOfItems = getIntent().getExtras().getString("No of Items");
-
-//                gridviewIntent.putExtra("title", menuItemName);
-//                gridviewIntent.putExtra("tableNo", tableNum);
-//                gridviewIntent.putExtra("Item Name", itemName);
-//                gridviewIntent.putExtra("No of Items", noOfItems);
-//                gridviewIntent.putExtra("Item Cost", itemCost);
-
 
                 Intent    intent = new Intent(MenuActivity.this, SubMenuActivity.class);
                 intent.putExtra("title", menuItemName);
